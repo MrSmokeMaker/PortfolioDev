@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS AI — Платформа автономных нейросетевых агентов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/saas.css">
+</head>
+<body class="saas-theme">
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="saas-ambient-glow-1"></div>
+  <div class="saas-ambient-glow-2"></div>
+
+  <!-- Quick Hub Navigation Bar -->
+  <div class="hub-back-banner">
+    <a href="index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      К портфолио разработчика
+    </a>
+    <span>Проект 4 из 4: SaaS AI-платформа (Mobbi Bento Dark Pattern)</span>
+    <div style="display: flex; gap: 12px;">
+      <a href="craft.html">← Крафт-магазин</a>
+      <a href="index.html">Все 4 проекта →</a>
+    </div>
+  </div>
+
+  <!-- Floating Glass Navbar -->
+  <div class="saas-header-wrap">
+    <nav class="saas-floating-navbar">
+      <a href="saas.html" class="saas-logo">
+        <span class="saas-logo-pulse"></span>
+        NEXUS.AI
+      </a>
+      <ul class="saas-nav-links">
+        <li><a href="#features">Архитектура</a></li>
+        <li><a href="#bento">Возможности</a></li>
+        <li><a href="#pricing">Тарифные планы</a></li>
+        <li><a href="#docs">API & SDK</a></li>
+      </ul>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button class="btn-lime-glow" onclick="showToast('Доступ к ранней Developer Sandbox активирован!')">
+          Get Started Free
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="saas-hero">
+    <div class="mobbi-container">
+      <div class="release-badge">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--saas-lime);"></span>
+        v2.4 Live: Внедрен протокол параллельного синтеза агентов →
+      </div>
+
+      <h1 class="saas-hero-title">
+        Автономные AI-агенты нового поколения <span class="gradient-text-lime">для mission-critical задач</span>
+      </h1>
+
+      <p class="saas-hero-desc">
+        Развертывайте отказоустойчивые мультиагентные кластеры с мгновенной верификацией кода, динамическим контекстом и нулевой задержкой в распределенной сети Edge.
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 56px; flex-wrap: wrap;">
+        <button class="btn-lime-glow" style="padding: 14px 28px; font-size: 15px;" onclick="showToast('Запуск тестового кластера в US-East...')">
+          Развернуть первый агент
+        </button>
+        <button class="btn-dark-outline" onclick="showToast('Демо-терминал готов к тестированию!')">
+          Запустить интерактивное демо
+        </button>
+      </div>
+
+      <!-- Platform Console Mockup -->
+      <div class="mockup-container" data-tilt data-tilt-max="3">
+        <div class="mockup-header-bar">
+          <div class="window-dots">
+            <span class="window-dot" style="background: #EF4444;"></span>
+            <span class="window-dot" style="background: #F59E0B;"></span>
+            <span class="window-dot" style="background: #10B981;"></span>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: #94A3B8;">nexus-agent-runner — terminal@cluster-01 (latency: 14ms)</div>
+        </div>
+        <div class="code-console-body">
+          <div><span class="code-keyword">import</span> { AgentCluster, NeuralRouter } <span class="code-keyword">from</span> <span class="code-str">'@nexus-ai/runtime'</span>;</div>
+          <br>
+          <div class="code-comment">// Инициализация отказоустойчивого ансамбля агентов</div>
+          <div><span class="code-keyword">const</span> cluster = <span class="code-keyword">new</span> <span class="code-fn">AgentCluster</span>({</div>
+          <div>&nbsp;&nbsp;models: [<span class="code-str">'gemini-3.8-flash'</span>, <span class="code-str">'claude-3.5-sonnet'</span>],</div>
+          <div>&nbsp;&nbsp;consensusStrategy: <span class="code-str">'majority-vote-weighted'</span>,</div>
+          <div>&nbsp;&nbsp;verificationLoop: <span class="code-keyword">true</span></div>
+          <div>});</div>
+          <br>
+          <div><span class="code-keyword">const</span> result = <span class="code-keyword">await</span> cluster.<span class="code-fn">execute</span>({ goal: <span class="code-str">'Audit Smart Contract & Fix Gas Leaks'</span> });</div>
+          <div><span class="code-lime">✔ [Nexus Engine] Status: 0 vulnerabilities found · 42% Gas Optimized in 312ms.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid Showcase -->
+  <section id="bento" class="bento-section">
+    <div class="mobbi-container">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <span style="font-size: 12px; font-weight: 700; color: var(--saas-lime); text-transform: uppercase; letter-spacing: 0.06em;">Инженерия платформы</span>
+        <h2 style="font-family: var(--font-tech); font-size: 40px; font-weight: 700; color: #FFFFFF; margin-top: 8px;">
+          Архитектурное превосходство в деталях
+        </h2>
+      </div>
+
+      <div class="bento-grid" data-spotlight-group>
+        <!-- Bento 1: Large Span 7 -->
+        <div class="bento-card bento-span-7" data-spotlight-card data-tilt data-tilt-max="4">
+          <div class="bento-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="bento-title">Динамическая оркестрация ролей</h3>
+          <p class="bento-desc">
+            Система автоматически декомпозирует высокоуровневые бизнес-цели на цепочки подзадач, распределяя роли исследователя, системного архитектора и тестировщика между специализированными моделями.
+          </p>
+          <div style="margin-top: 24px; padding: 16px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); display: flex; gap: 16px; align-items: center;">
+            <span style="color: var(--saas-lime); font-size: 13px; font-weight: 700;">Синхронный консенсус:</span>
+            <div style="flex-grow: 1; height: 6px; background: #334155; border-radius: 3px; overflow: hidden;">
+              <div style="width: 94%; height: 100%; background: var(--saas-lime);"></div>
+            </div>
+            <span class="tabular-nums" style="font-size: 13px; font-weight: 700;">99.4% точности</span>
+          </div>
+        </div>
+
+        <!-- Bento 2: Span 5 Latency -->
+        <div class="bento-card bento-span-5" data-spotlight-card data-tilt data-tilt-max="4">
+          <div class="bento-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+          </div>
+          <h3 class="bento-title">Суб-миллисекундный Edge</h3>
+          <p class="bento-desc">
+            Выполнение на границе сети в 320 регионах мира без холодных стартов.
+          </p>
+          <div style="margin-top: 36px; text-align: center;">
+            <div id="live-ping-counter" class="tabular-nums" style="font-family: var(--font-tech); font-size: 54px; font-weight: 800; color: var(--saas-lime);">14 ms</div>
+            <div style="font-size: 13px; color: var(--saas-text-muted);">Средняя глобальная задержка TTFT</div>
+          </div>
+        </div>
+
+        <!-- Bento 3: Span 4 Sandbox -->
+        <div class="bento-card bento-span-4" data-spotlight-card data-tilt data-tilt-max="4">
+          <div class="bento-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="bento-title">Изолированный eBPF Sandbox</h3>
+          <p class="bento-desc">
+            Каждый сгенерированный скрипт выполняется в герметичном виртуальном окружении с ограничением доступа к файловой системе и сети.
+          </p>
+        </div>
+
+        <!-- Bento 4: Span 8 Scale -->
+        <div class="bento-card bento-span-8" data-spotlight-card data-tilt data-tilt-max="4">
+          <div class="bento-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="bento-title">Масштабирование от 1 до 100 000 параллельных агентов</h3>
+          <p class="bento-desc">
+            Эластичная очередь с авто-балансировкой нагрузки. Интеграция с GitHub Actions, Kubernetes и корпоративными шинами данных через единый gRPC API.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Plans -->
+  <section id="pricing" class="pricing-section">
+    <div class="mobbi-container">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <h2 style="font-family: var(--font-tech); font-size: 38px; font-weight: 700; color: #FFFFFF;">
+          Прозрачные тарифы без скрытых переплат
+        </h2>
+        <p style="color: var(--saas-text-muted); font-size: 16px; margin-top: 8px;">Выберите масштаб для вашей инженерной команды</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1 -->
+        <div class="pricing-card" data-tilt data-tilt-max="4">
+          <h3 style="font-size: 20px; font-weight: 700;">Developer Starter</h3>
+          <p style="color: var(--saas-text-muted); font-size: 14px; margin-top: 4px;">Для индивидуальных инженеров</p>
+          <div class="price-num tabular-nums">$0 <span style="font-size: 16px; font-weight: 500; color: var(--saas-text-muted);">/ мес</span></div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin: 24px 0; color: #CBD5E1;">
+            <li>✔ До 5 активных AI-агентов</li>
+            <li>✔ 10 000 выполнений команд / мес</li>
+            <li>✔ Доступ к Gemini 3.8 Flash</li>
+            <li>✔ Базовая поддержка в Discord</li>
+          </ul>
+          <button class="btn-dark-outline" style="margin-top: auto;" onclick="showToast('Тариф Starter подключен!')">
+            Подключить бесплатно
+          </button>
+        </div>
+
+        <!-- Plan 2: Featured -->
+        <div class="pricing-card featured" data-tilt data-tilt-max="4">
+          <span class="pricing-badge">Рекомендовано</span>
+          <h3 style="font-size: 20px; font-weight: 700; color: #FFFFFF;">Team Professional</h3>
+          <p style="color: var(--saas-text-muted); font-size: 14px; margin-top: 4px;">Для продуктовых стартапов</p>
+          <div class="price-num tabular-nums" style="color: var(--saas-lime);">$99 <span style="font-size: 16px; font-weight: 500; color: var(--saas-text-muted);">/ мес</span></div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin: 24px 0; color: #FFFFFF;">
+            <li>✔ Неограниченное число агентов</li>
+            <li>✔ 500 000 операций в песочнице</li>
+            <li>✔ Приоритетная маршрутизация без очереди</li>
+            <li>✔ Командные воркспейсы и аудит логов</li>
+            <li>✔ Выделенный SLA 99.9%</li>
+          </ul>
+          <button class="btn-lime-glow" style="margin-top: auto; justify-content: center;" onclick="showToast('Переход к оформлению подписки Pro...')">
+            Начать 14-дневный триал
+          </button>
+        </div>
+
+        <!-- Plan 3 -->
+        <div class="pricing-card" data-tilt data-tilt-max="4">
+          <h3 style="font-size: 20px; font-weight: 700;">Enterprise Scale</h3>
+          <p style="color: var(--saas-text-muted); font-size: 14px; margin-top: 4px;">Для корпораций с On-premise</p>
+          <div class="price-num tabular-nums" style="font-size: 38px;">Custom</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin: 24px 0; color: #CBD5E1;">
+            <li>✔ Развертывание в вашем VPC / On-Prem</li>
+            <li>✔ Кастомное дообучение моделей</li>
+            <li>✔ SOC2 Type II & HIPAA комплаенс</li>
+            <li>✔ Выделенный архитектор и 24/7 саппорт</li>
+          </ul>
+          <button class="btn-dark-outline" style="margin-top: auto;" onclick="showToast('Запрос в отдел Enterprise передан!')">
+            Связаться с архитектором
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Access Form & Footer -->
+  <footer style="border-top: 1px solid var(--saas-border); padding: 60px 0 40px 0; background: #141418;">
+    <div class="mobbi-container">
+      <div style="background: var(--saas-card); border-radius: 24px; padding: 48px; border: 1px solid var(--saas-border); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; margin-bottom: 48px;">
+        <div style="max-width: 500px;">
+          <h3 style="font-family: var(--font-tech); font-size: 26px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">
+            Получите ранний доступ к Nexus v3.0
+          </h3>
+          <p style="color: var(--saas-text-muted); font-size: 15px;">
+            Присоединяйтесь к 4 500+ ведущих инженеров. Приглашения высылаются еженедельно.
+          </p>
+        </div>
+        <form onsubmit="handleEmailSubmit(event)" style="display: flex; gap: 12px; flex-grow: 1; max-width: 440px;">
+          <input type="email" id="invite-email" placeholder="dev@company.com" required style="flex-grow: 1; background: #1A1A20; border: 1px solid var(--saas-border); color: white; padding: 12px 18px; border-radius: 10px; font-size: 14px;">
+          <button type="submit" class="btn-lime-glow">Request Invite</button>
+        </form>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--saas-text-muted);">
+        <div>© 2026 NEXUS.AI Systems. Часть инженерного портфолио разработчика.</div>
+        <a href="index.html" style="color: var(--saas-lime); font-weight: 600;">← Вернуться на главную портфолио</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/tilt.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Live ping simulation
+    setInterval(() => {
+      const ping = Math.floor(12 + Math.random() * 5);
+      const el = document.getElementById('live-ping-counter');
+      if (el) el.textContent = `${ping} ms`;
+    }, 2500);
+
+    function handleEmailSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('invite-email').value;
+      showToast(`Приглашение успешно отправлено на ${email}!`);
+      document.getElementById('invite-email').value = '';
+    }
+  </script>
+</body>
+</html>

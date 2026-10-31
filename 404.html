@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Страница не найдена | Портфолио</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .error-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .error-card {
+      background: white;
+      border: 1px solid var(--hub-border);
+      border-radius: 24px;
+      padding: 60px 40px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+    .error-code {
+      font-size: 72px;
+      font-weight: 800;
+      color: var(--hub-blue);
+      line-height: 1;
+      margin-bottom: 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="hub-theme">
+  <div class="error-wrapper">
+    <div class="error-card">
+      <div class="error-code">404</div>
+      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--hub-navy);">Страница не найдена</h1>
+      <p style="color: var(--hub-text-muted); font-size: 15px; margin-bottom: 28px; line-height: 1.6;">
+        Запрашиваемый раздел портфолио был перемещен или адрес указан неверно. Все 4 промо-сайта доступны на главной странице.
+      </p>
+      <a href="index.html" class="btn-open-project" style="margin: 0 auto;">
+        ← Вернуться на главную портфолио
+      </a>
+    </div>
+  </div>
+</body>
+</html>

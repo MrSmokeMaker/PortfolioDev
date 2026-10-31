@@ -1,0 +1,311 @@
+/* ==========================================================================
+   DEVELOPER HUB & PORTFOLIO "ABOUT ME" (SLATE / NAVY PROFESSIONAL)
+   ========================================================================== */
+
+:root {
+  --hub-bg: #F8FAFC;
+  --hub-card: #FFFFFF;
+  --hub-navy: #0F172A;
+  --hub-text-muted: #64748B;
+  --hub-blue: #2563EB;
+  --hub-blue-light: #EFF6FF;
+  --hub-border: #E2E8F0;
+}
+
+body.hub-theme {
+  background-color: var(--hub-bg);
+  color: var(--hub-navy);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+/* Hub Hero Card */
+.profile-card {
+  background: var(--hub-card);
+  border: 1px solid var(--hub-border);
+  border-radius: var(--radius-2xl);
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  margin-top: 48px;
+  margin-bottom: 40px;
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.avatar-frame {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  flex-shrink: 0;
+  background-color: #E2E8F0;
+}
+
+.avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--hub-navy);
+  margin-bottom: 4px;
+}
+
+.profile-role {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--hub-blue);
+  margin-bottom: 12px;
+}
+
+.profile-bio {
+  font-size: 15px;
+  color: var(--hub-text-muted);
+  max-width: 640px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.skills-pills-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.skill-pill {
+  background-color: var(--hub-blue-light);
+  color: var(--hub-blue);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Metric Achievement Grid */
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.achievement-card {
+  background: var(--hub-card);
+  border: 1px solid var(--hub-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+  transition: transform 0.2s ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+}
+
+.achievement-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--hub-navy);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.achievement-label {
+  font-size: 14px;
+  color: var(--hub-text-muted);
+  line-height: 1.4;
+}
+
+/* Project Showcase Cards (Split 50/50) */
+.project-card-split {
+  background: var(--hub-card);
+  border: 1px solid var(--hub-border);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  margin-bottom: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-split:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.project-preview-side {
+  position: relative;
+  overflow: hidden;
+  background-color: #0F172A;
+  min-height: 320px;
+}
+
+.project-preview-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.project-card-split:hover .project-preview-side img {
+  transform: scale(1.04);
+}
+
+.project-info-side {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-tag-accent {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.project-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--hub-navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.project-desc {
+  font-size: 15px;
+  color: var(--hub-text-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.tech-tag {
+  background: #F1F5F9;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.btn-open-project {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--hub-navy);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.btn-open-project:hover {
+  background: var(--hub-blue);
+  transform: translateX(3px);
+}
+
+/* Contact Availability Bar */
+.availability-bar {
+  background: var(--hub-navy);
+  color: #FFFFFF;
+  border-radius: var(--radius-2xl);
+  padding: 40px;
+  margin: 64px 0 80px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.status-beacon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #10B981;
+}
+
+.beacon-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 12px #10B981;
+  animation: pulseBeacon 2s infinite;
+}
+
+@keyframes pulseBeacon {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.contact-pill-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.contact-pill-btn:hover {
+  background: #FFFFFF;
+  color: var(--hub-navy);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .project-card-split {
+    grid-template-columns: 1fr;
+  }
+  .achievement-grid {
+    grid-template-columns: 1fr;
+  }
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .skills-pills-row {
+    justify-content: center;
+  }
+  .profile-card::after {
+    display: none;
+  }
+}
