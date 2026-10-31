@@ -1,61 +1,75 @@
-# 🚀 Developer Portfolio & 4 Premium Promo Websites (Mobbi Engine)
+# 🚀 Senior UI/UX Developer Portfolio (Mobbi Design Engine)
 
-Интерактивное портфолио Senior UI/UX разработчика и системного архитектора, включающее 4 полнофункциональных промо-сайта в разных стилях, спроектированных по дизайн-системе Mobbi.
+Репозиторий: [MrSmokeMaker/PortfolioDev](https://github.com/MrSmokeMaker/PortfolioDev)
 
----
-
-## 🌟 Состав проекта
-
-1. **`index.html`** — Главный хаб разработчика («Обо мне», 3 ключевых метрики, витрина 4 проектов, NDA-режим, контакты).
-2. **`gallery.html`** — Проект 1: Арт-галерея **LUMEN Gallery** (*Воздушный минимализм + крупные фото, Scroll-driven параллакс, Shrinking Header*).
-3. **`fintech.html`** — Проект 2: Финтех **VERTEX Capital** (*Строгий корпоративный, Data-Heavy, живые SVG графики, Data Table, модальное окно клиринга*).
-4. **`craft.html`** — Проект 3: Магазин керамики **CLAY & OCHRE** (*Органический тактильный e-commerce, 3D Tilt изделий, Slide-over чекаут-корзина*).
-5. **`saas.html`** — Проект 4: SaaS AI **NEXUS AI** (*Dark Bento Grid, курсорный Spotlight, неоновый лаймовый Mesh Glow, кодовый терминал*).
-6. **`404.html`** — Страница ошибки с возвратом на главную.
-7. **`.nojekyll`** — Файл конфигурации для корректной работы GitHub Pages.
+Интерактивное веб-портфолио и 4 полноценных промо-сайта в принципиально разных дизайн-стилях, спроектированных по методологии **Mobbi** с применением аппаратных анимаций CSS3, многослойного параллакса, 3D Tilt-эффектов и реальных фото-ассетов Unsplash.
 
 ---
 
-## 📦 Быстрый деплой на GitHub Pages
+## 🌟 Состав проектов
 
-### Вариант 1. Через GitHub Actions (Автоматический, рекомендовано)
-1. Создайте новый репозиторий на GitHub (например, `portfolio`).
-2. В терминале папки выполните:
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: initial commit of developer portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<ваш-логин>/<имя-репозитория>.git
-   git push -u origin main
-   ```
-3. Откройте репозиторий на GitHub: **Settings** → **Pages** → в блоке **Build and deployment** выберите **Source: GitHub Actions**.
-4. Готово! Автоматический workflow `.github/workflows/deploy.yml` соберет и опубликует сайт по адресу:
-   `https://<ваш-логин>.github.io/<имя-репозитория>/`
-
-### Вариант 2. Стандартный Deploy from a branch
-1. В **Settings** → **Pages** выберите **Source: Deploy from a branch**.
-2. Укажите ветку `main` и папку `/ (root)`.
-3. Нажмите **Save**.
+1. **[`index.html`](index.html)** — Главный хаб разработчика («Обо мне», 3 метрики эффективности, 4 карточки кейсов, режим коммерческой тайны NDA, форма контактов).
+2. **[`gallery.html`](gallery.html)** — Проект 1: Арт-галерея **LUMEN Gallery** (*Воздушный минимализм + макро-фото, Scroll-driven параллакс, Shrinking Header*).
+3. **[`fintech.html`](fintech.html)** — Проект 2: Финтех **VERTEX Capital** (*Строгий корпоративный, Data-Heavy, живые SVG графики, Data Table, модальное окно клиринга*).
+4. **[`craft.html`](craft.html)** — Проект 3: Магазин керамики **CLAY & OCHRE** (*Органический тактильный e-commerce, 3D Tilt изделий, Slide-over чекаут-корзина*).
+5. **[`saas.html`](saas.html)** — Проект 4: SaaS AI-платформа **NEXUS AI** (*Dark Bento Grid, курсорный Spotlight, неоновый лаймовый Mesh Glow, терминал кода*).
+6. **[`404.html`](404.html)** — Оформленная страница ошибки с возвратом в хаб.
 
 ---
 
-## ☁️ Деплой на Cloudflare Pages
+## ⚙️ Настройка и автоматический деплой в GitHub Pages
 
-1. Зайдите в панель [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create application** → **Pages**.
-2. Подключите репозиторий GitHub.
-3. В параметрах сборки укажите:
-   * **Framework preset**: `None`
-   * **Build command**: *(оставить пустым)*
-   * **Build output directory**: `/`
-4. Нажмите **Save and Deploy**. Сайт будет доступен на сверхбыстром CDN с бесплатным SSL.
+### Из какой ветки включать деплой?
+Деплой настраивается для ветки **`main`**.
+
+### Пошаговая активация автоматического деплоя (1 минута):
+1. Откройте репозиторий на GitHub: **[https://github.com/MrSmokeMaker/PortfolioDev](https://github.com/MrSmokeMaker/PortfolioDev)**.
+2. Перейдите во вкладку **Settings** (Настройки) → слева выберите раздел **Pages**.
+3. В блоке **Build and deployment** в выпадающем списке **Source** выберите:
+   👉 **`GitHub Actions`** *(Рекомендовано)*.
+   *(В репозитории уже настроен workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), который будет автоматически пересобирать и публиковать сайт при каждом `git push` / коммите в ветку `main`).*
+4. **Альтернативный вариант (Deploy from a branch)**:
+   Если вы хотите использовать классический деплой из ветки:
+   - Выберите **Source**: `Deploy from a branch`.
+   - В поле **Branch**: выберите **`main`**, папку **`/ (root)`** и нажмите **Save**.
+
+После этого сайт станет доступен по адресу:
+🌐 **`https://mrsmokemaker.github.io/PortfolioDev/`**
 
 ---
 
-## 💻 Локальный просмотр
+## 💻 Локальный запуск
 
-В любой момент вы можете запустить проект локально через встроенный сервер Python:
+Проект не требует сборщиков (Node.js/Webpack). Достаточно запустить локальный статический сервер:
+
 ```bash
+# Через Python:
 python -m http.server 8080
+
+# Или через Node.js npx:
+npx serve .
 ```
-И перейти по адресу: `http://localhost:8080`
+
+Открыть в браузере: `http://localhost:8080`
+
+---
+
+## 📁 Структура репозитория
+
+```
+PortfolioDev/
+├── .github/workflows/deploy.yml  # Автоматический CI/CD воркфлоу деплоя на Pages
+├── .gitignore                    # Исключение .env, системных файлов и логов
+├── .env                          # Локальные переменные окружения
+├── .env.example                  # Шаблон переменных окружения
+├── .nojekyll                     # Отключение парсинга Jekyll для GitHub Pages
+├── index.html                    # Главный хаб портфолио
+├── gallery.html                  # Проект 1: Арт-галерея
+├── fintech.html                  # Проект 2: Финтех
+├── craft.html                    # Проект 3: Крафт-магазин
+├── saas.html                     # Проект 4: SaaS AI
+├── 404.html                      # Страница 404
+└── assets/
+    ├── css/                      # Дизайн-токены Mobbi и стили всех проектов
+    └── js/                       # Модули 3D-Tilt, Spotlight и Drawer-контроллер
+```
