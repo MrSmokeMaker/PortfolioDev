@@ -59,32 +59,6 @@
 <body class="hub-theme">
   <div class="noise-overlay"></div>
 
-  <!-- Top Design Concept Switcher Bar -->
-  <div class="concept-switcher-bar">
-    <div class="concept-pills-row">
-      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--theme-text-muted); text-transform: uppercase;">Концепты хаба:</span>
-      <a href="index.html" class="concept-btn active">
-        <span>💎 V1: Slate Glass OS</span>
-      </a>
-      <a href="index-v2.html" class="concept-btn">
-        <span>⚡ V2: Cyber HUD Matrix</span>
-      </a>
-      <a href="index-v3.html" class="concept-btn" style="color: #00F0FF; border-color: rgba(0, 240, 255, 0.4);">
-        <span>👑 V3: Apex Studio</span>
-      </a>
-      <button class="concept-btn" onclick="openCompareModal()" style="color: var(--theme-accent);">
-        <span>⚖ Сравнить версии V1 vs V2</span>
-      </button>
-    </div>
-
-    <div style="display: flex; gap: 12px; align-items: center;">
-      <a href="https://www.figma.com/design/NkmANyDIpsrxlzj6FTj2WA" target="_blank" class="concept-btn" style="color: #A855F7;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
-        <span>Figma Проект →</span>
-      </a>
-    </div>
-  </div>
-
   <!-- 1. Floating Dynamic Island Navbar -->
   <div class="hub-floating-dock-wrap">
     <header class="hub-floating-dock" role="banner">
@@ -193,10 +167,10 @@
               <h1 data-i18n="dev_name">Коровин Сергей</h1>
               <div class="hero-role-badge">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                <span data-i18n="hero_role">Senior UI/UX Engineer & Lead Design Systems Architect</span>
+                <span data-i18n="hero_role">Фронтенд-разработчик & Инженер интерфейсов</span>
               </div>
               <p class="hero-bio" data-i18n="hero_bio">
-                Проектирую цифровые продукты мирового уровня (Awwwards / Mobbin Elite). Объединяю строгую модульную архитектуру дизайн-систем, 60 FPS аппаратные анимации, Web Audio API, Canvas телеметрию и бескомпромиссную скорость загрузки.
+                Разрабатываю современные веб-приложения и дизайн-системы. Создаю удобные интерфейсы с понятной логикой, плавной работой на 60 FPS, чистым кодом и быстрой загрузкой без лишних зависимостей.
               </p>
             </div>
           </div>
@@ -724,61 +698,9 @@
     </footer>
   </div>
 
-  <!-- Side-by-Side Comparison Modal (V1 vs V2) -->
-  <div id="compare-modal" class="compare-modal">
-    <div class="compare-dialog">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF;">Сравнение дизайн-концептов: V1 vs V2</h3>
-        <button onclick="closeCompareModal()" class="close-icon-btn">&times;</button>
-      </div>
-
-      <div class="compare-grid">
-        <div class="compare-col" style="border-color: var(--theme-accent); box-shadow: 0 0 20px var(--theme-accent-glow);">
-          <div style="color: #3B82F6; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Концепт 1 (Текущий)</div>
-          <h4 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 12px;">Slate Glassmorphism OS</h4>
-          <ul style="font-size: 13.5px; color: var(--theme-text-muted); line-height: 1.6; list-style: none; display: flex; flex-direction: column; gap: 8px;">
-            <li>✔ Стеклянный остров Dynamic Island (Apple/macOS стиль)</li>
-            <li>✔ 3D вращающийся икосаэдр с созвездием частиц</li>
-            <li>✔ Bento Grid и раздельные сплит-карточки кейсов</li>
-            <li>✔ Мягкая палитра Charcoal & Slate 950</li>
-          </ul>
-          <button class="btn-primary-action" style="margin-top: 18px; width: 100%; justify-content: center;" onclick="closeCompareModal()">
-            Остаться в концепте V1
-          </button>
-        </div>
-
-        <div class="compare-col">
-          <div style="color: #00F0FF; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Концепт 2</div>
-          <h4 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 12px;">Cyber-Architect HUD Matrix</h4>
-          <ul style="font-size: 13.5px; color: var(--theme-text-muted); line-height: 1.6; list-style: none; display: flex; flex-direction: column; gap: 8px;">
-            <li>✔ Футуристичный командный HUD-центр и лазерные линии</li>
-            <li>✔ Интерактивный 60 FPS круговой сканирующий радар</li>
-            <li>✔ Моноширинные метки и индикаторы кибер-готовности</li>
-            <li>✔ Неоновые градиенты Cyan, Emerald, Purple</li>
-          </ul>
-          <a href="index-v2.html" class="btn-cyber-primary" style="margin-top: 18px; width: 100%; justify-content: center;">
-            Перейти к концепту V2 →
-          </a>
-        </div>
-      </div>
-
-      <div style="text-align: center; font-size: 12px; color: var(--theme-text-muted);">
-        Обе версии дизайна полностью поддерживают быстрый просмотр всех 6 сайтов-примеров без ухода со страницы.
-      </div>
-    </div>
-  </div>
-
   <script src="assets/js/tilt.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/webgl-core.js"></script>
   <script src="assets/js/main.js"></script>
-  <script>
-    function openCompareModal() {
-      document.getElementById('compare-modal').classList.add('is-active');
-    }
-    function closeCompareModal() {
-      document.getElementById('compare-modal').classList.remove('is-active');
-    }
-  </script>
 </body>
 </html>

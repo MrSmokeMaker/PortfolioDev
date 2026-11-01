@@ -1841,9 +1841,24 @@
     padding: 5px 8px;
     font-size: 11px;
   }
+  .dock-btn kbd {
+    display: none;
+  }
   .metrics-row { grid-template-columns: 1fr; }
   .skills-matrix-grid { grid-template-columns: 1fr; }
   .hero-titles h1 { font-size: 26px; }
   .hero-header-row { flex-direction: column; }
   .est-options-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .hub-floating-dock .dock-version-pill {
+    display: none;
+  }
+  .dock-brand span {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

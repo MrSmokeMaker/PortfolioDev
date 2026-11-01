@@ -39,7 +39,7 @@
     </div>
   </header>
 
-  <!-- Audio Header -->
+  <!-- Audio Header (Relative, never covers page content) -->
   <header class="audio-header">
     <div class="mobbi-container">
       <nav class="audio-nav">
@@ -48,134 +48,345 @@
           <div>AETHER AUDIO LAB</div>
         </div>
         <div style="font-size: 13px; color: var(--au-text-muted);">
-          Реальный полифонический Web Audio API движок
+          Полноценный полифонический Web Audio API движок
         </div>
       </nav>
     </div>
   </header>
 
+  <!-- Navigation Tabs -->
+  <div class="mobbi-container">
+    <div class="audio-tabs-bar" role="tablist">
+      <button class="audio-tab-btn active" data-tab="synth" onclick="switchAudioTab('synth')">
+        🎛️ Синтезатор & FFT
+      </button>
+      <button class="audio-tab-btn" data-tab="spatial" onclick="switchAudioTab('spatial')">
+        🎧 3D Бинауральный микшер
+      </button>
+      <button class="audio-tab-btn" data-tab="presets" onclick="switchAudioTab('presets')">
+        🎹 Банк пресетов & ADSR
+      </button>
+      <button class="audio-tab-btn" data-tab="architecture" onclick="switchAudioTab('architecture')">
+        📊 Web Audio граф
+      </button>
+    </div>
+  </div>
+
   <!-- Main Workspace -->
   <main class="mobbi-container">
-    <div class="audio-workspace">
 
-      <!-- Synthesizer & Realtime FFT Visualizer -->
-      <section class="synth-station-card">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
-          <div>
-            <h2 style="font-size: 22px; font-weight: 800;">Аудио-визуализатор и Синтезатор</h2>
-            <p style="font-size: 14px; color: var(--au-text-muted); margin-top: 2px;">Нажимайте на клавиши или клавиатуру (A S D F G H J K)</p>
-          </div>
-          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--au-accent);">
-            44.1 kHz / 32-bit Float
-          </div>
-        </div>
-
-        <div class="visualizer-canvas-frame">
-          <canvas id="audio-canvas"></canvas>
-        </div>
-
-        <!-- Interactive Keyboard -->
-        <div class="synth-keys-bar">
-          <div class="piano-key" data-note="261.63" data-key="a">
-            <span>C4</span>
-            <span class="key-shortcut">A</span>
-          </div>
-          <div class="piano-key" data-note="293.66" data-key="s">
-            <span>D4</span>
-            <span class="key-shortcut">S</span>
-          </div>
-          <div class="piano-key" data-note="329.63" data-key="d">
-            <span>E4</span>
-            <span class="key-shortcut">D</span>
-          </div>
-          <div class="piano-key" data-note="349.23" data-key="f">
-            <span>F4</span>
-            <span class="key-shortcut">F</span>
-          </div>
-          <div class="piano-key" data-note="392.00" data-key="g">
-            <span>G4</span>
-            <span class="key-shortcut">G</span>
-          </div>
-          <div class="piano-key" data-note="440.00" data-key="h">
-            <span>A4</span>
-            <span class="key-shortcut">H</span>
-          </div>
-          <div class="piano-key" data-note="493.88" data-key="j">
-            <span>B4</span>
-            <span class="key-shortcut">J</span>
-          </div>
-          <div class="piano-key" data-note="523.25" data-key="k">
-            <span>C5</span>
-            <span class="key-shortcut">K</span>
-          </div>
-        </div>
-
-        <div class="synth-controls-row">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 13px; color: var(--au-text-muted);">Форма волны:</span>
-            <div class="synth-wave-picker">
-              <button class="wave-btn active" onclick="setWaveType('sine', this)">Sine</button>
-              <button class="wave-btn" onclick="setWaveType('triangle', this)">Triangle</button>
-              <button class="wave-btn" onclick="setWaveType('sawtooth', this)">Sawtooth</button>
-              <button class="wave-btn" onclick="setWaveType('square', this)">Square</button>
+    <!-- TAB 1: SYNTHESIZER & FFT -->
+    <div id="tab-synth" class="audio-view-panel active">
+      <div class="audio-workspace">
+        <!-- Synthesizer & Realtime FFT Visualizer -->
+        <section class="synth-station-card">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <h2 style="font-size: 22px; font-weight: 800;">Визуализатор спектра и Синтезатор</h2>
+              <p style="font-size: 14px; color: var(--au-text-muted); margin-top: 2px;">Нажимайте на клавиши мыши или клавиатуру (A S D F G H J K)</p>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--au-accent);">
+              44.1 kHz / 32-bit Float
             </div>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <button class="btn-audio-action" onclick="playDemoArpeggio()">
-              ▶ Демо-арпеджио
-            </button>
+          <div class="visualizer-canvas-frame">
+            <canvas id="audio-canvas"></canvas>
           </div>
-        </div>
-      </section>
 
-      <!-- Vinyl Turntable Station -->
-      <aside class="vinyl-deck-card">
-        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--au-text-muted);">Аналоговый Дэк</span>
-          <span id="rpm-indicator" style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">33 RPM</span>
-        </div>
+          <!-- Interactive Keyboard -->
+          <div class="synth-keys-bar">
+            <div class="piano-key" data-note="261.63" data-key="a">
+              <span>C4</span>
+              <span class="key-shortcut">A</span>
+            </div>
+            <div class="piano-key" data-note="293.66" data-key="s">
+              <span>D4</span>
+              <span class="key-shortcut">S</span>
+            </div>
+            <div class="piano-key" data-note="329.63" data-key="d">
+              <span>E4</span>
+              <span class="key-shortcut">D</span>
+            </div>
+            <div class="piano-key" data-note="349.23" data-key="f">
+              <span>F4</span>
+              <span class="key-shortcut">F</span>
+            </div>
+            <div class="piano-key" data-note="392.00" data-key="g">
+              <span>G4</span>
+              <span class="key-shortcut">G</span>
+            </div>
+            <div class="piano-key" data-note="440.00" data-key="h">
+              <span>A4</span>
+              <span class="key-shortcut">H</span>
+            </div>
+            <div class="piano-key" data-note="493.88" data-key="j">
+              <span>B4</span>
+              <span class="key-shortcut">J</span>
+            </div>
+            <div class="piano-key" data-note="523.25" data-key="k">
+              <span>C5</span>
+              <span class="key-shortcut">K</span>
+            </div>
+          </div>
 
-        <div class="vinyl-record-wrap">
-          <div id="vinyl-disc" class="vinyl-disc">
-            <div class="vinyl-center-label">
-              <div>
-                <div>AETHER</div>
-                <div style="font-size: 9px; opacity: 0.8;">SIDE A • 2026</div>
+          <div class="synth-controls-row">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span style="font-size: 13px; color: var(--au-text-muted);">Форма волны:</span>
+              <div class="synth-wave-picker">
+                <button class="wave-btn active" onclick="setWaveType('sine', this)">Sine</button>
+                <button class="wave-btn" onclick="setWaveType('triangle', this)">Triangle</button>
+                <button class="wave-btn" onclick="setWaveType('sawtooth', this)">Sawtooth</button>
+                <button class="wave-btn" onclick="setWaveType('square', this)">Square</button>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <button class="btn-audio-action" onclick="playDemoArpeggio()">
+                ▶ Демо-арпеджио
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vinyl Turntable Station -->
+        <aside class="vinyl-deck-card">
+          <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--au-text-muted);">Аналоговый Дэк</span>
+            <span id="rpm-indicator" style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">33 RPM</span>
+          </div>
+
+          <div class="vinyl-record-wrap">
+            <div id="vinyl-disc" class="vinyl-disc">
+              <div class="vinyl-center-label">
+                <div>
+                  <div>AETHER</div>
+                  <div style="font-size: 9px; opacity: 0.8;">SIDE A • 2026</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="vinyl-controls">
-          <button id="vinyl-toggle-btn" class="btn-audio-action primary" onclick="toggleVinylSpin()">
-            Запустить винил
-          </button>
-          <button class="btn-audio-action" onclick="cycleRpm()">
-            Скорость RPM
-          </button>
-        </div>
-      </aside>
+          <div class="vinyl-controls">
+            <button id="vinyl-toggle-btn" class="btn-audio-action primary" onclick="toggleVinylSpin()">
+              Запустить винил
+            </button>
+            <button class="btn-audio-action" onclick="cycleRpm()">
+              Скорость RPM
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
 
-      <!-- Spatial Soundstage 2D Canvas -->
-      <section class="spatial-stage-card">
-        <div>
-          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Бинауральное позиционирование (HRTF)</h3>
-          <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.5; margin-bottom: 16px;">
-            Двигайте бирюзовый маркер источника звука для симуляции панорамирования в трехмерном акустическом пространстве.
-          </p>
-          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--au-cyan);" id="pan-val-display">
-            Панорама: 0.00 (Центр)
+    <!-- TAB 2: SPATIAL BINAURAL 3D MIXER -->
+    <div id="tab-spatial" class="audio-view-panel">
+      <section class="spatial-stage-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
+          <div style="max-width: 600px;">
+            <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">Бинауральное позиционирование звука</h2>
+            <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.5;">
+              Двигайте бирюзовый маркер источника звука для моделирования панорамы и расстояния в стереонаушниках через Web Audio StereoPannerNode.
+            </p>
+          </div>
+          <div style="background: rgba(0,0,0,0.3); padding: 12px 18px; border-radius: 12px; border: 1px solid var(--au-border);">
+            <div style="font-size: 11px; color: var(--au-text-muted);">ТЕКУЩИЙ БАЛАНС ПАНОРАМЫ</div>
+            <div style="font-family: var(--font-mono); font-size: 15px; font-weight: 700; color: var(--au-cyan);" id="pan-val-display">
+              0.00 (Центр)
+            </div>
           </div>
         </div>
 
         <div class="spatial-radar-box" id="spatial-radar">
           <div id="spatial-marker" class="spatial-puck"></div>
-          <div style="position: absolute; bottom: 8px; font-size: 11px; color: #4B5563;">Слушатель: 🎧 Центр сцены</div>
+          <div style="position: absolute; top: 12px; left: 16px; font-size: 11px; color: #64748B;">◀ Левый канал (-1.0)</div>
+          <div style="position: absolute; top: 12px; right: 16px; font-size: 11px; color: #64748B;">Правый канал (+1.0) ▶</div>
+          <div style="position: absolute; bottom: 12px; font-size: 12px; color: #94A3B8; font-weight: 600;">🎧 Слушатель: Центр звукового поля</div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; align-items: center;">
+          <button class="btn-audio-action primary" onclick="startSpatialOrbit()">
+            🔄 Запустить круговое движение источника
+          </button>
+          <button class="btn-audio-action" onclick="playSpatialPulse()">
+            🔊 Тестовый звуковой импульс
+          </button>
+          <button class="btn-audio-action" onclick="resetSpatialCenter()">
+            Сбросить в центр
+          </button>
         </div>
       </section>
-
     </div>
+
+    <!-- TAB 3: PRESETS & ADSR ENVELOPE -->
+    <div id="tab-presets" class="audio-view-panel">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+        <!-- Preset 1 -->
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-cyan);">PRESET 01</span>
+              <span style="font-size: 11px; color: var(--au-text-muted);">Синусоида / Мягкий</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Ambient Pad</h3>
+            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Воздушный теплый пад с плавным нарастанием Attack (1.2s) и затяжным затуханием. Идеален для фоновой текстуры.
+            </p>
+          </div>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('ambient')">
+            ▶ Воспроизвести аккорд
+          </button>
+        </div>
+
+        <!-- Preset 2 -->
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); color: #F59E0B;">PRESET 02</span>
+              <span style="font-size: 11px; color: var(--au-text-muted);">Пилообразная / Плотный</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Cyber Sub Bass</h3>
+            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Мощный глубокий бас с мгновенным панчем и низкочастотной компрессией для саундтреков и кинематографа.
+            </p>
+          </div>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('bass')">
+            ▶ Воспроизвести бас
+          </button>
+        </div>
+
+        <!-- Preset 3 -->
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); color: #10B981;">PRESET 03</span>
+              <span style="font-size: 11px; color: var(--au-text-muted);">Меандр / Ретро</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">8-Bit Chiptune Lead</h3>
+            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Аутентичный тембр игровых автоматов 80-х годов с ярким гармоническим спектром и резкой атакой.
+            </p>
+          </div>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('retro')">
+            ▶ Воспроизвести фразу
+          </button>
+        </div>
+
+        <!-- Preset 4 -->
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-accent);">PRESET 04</span>
+              <span style="font-size: 11px; color: var(--au-text-muted);">Треугольник / Кристалл</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Cosmic Glass Pluck</h3>
+            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Чистые колокольные щипковые звуки с быстрым спадом Decay и ощущением кристальной акустической глубины.
+            </p>
+          </div>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('pluck')">
+            ▶ Воспроизвести перебор
+          </button>
+        </div>
+      </div>
+
+      <!-- ADSR Envelope Station -->
+      <section style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 24px;">
+        <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Огибающая амплитуды (ADSR Envelope)</h3>
+        <p style="font-size: 13px; color: var(--au-text-muted); margin-bottom: 20px;">
+          Параметры формирования звука во времени через Web Audio AudioParam.linearRampToValueAtTime
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span style="color: var(--au-text-muted);">Attack (Нарастание)</span>
+              <span id="adsr-a-val" style="color: var(--au-cyan); font-weight: 700;">0.05s</span>
+            </div>
+            <input type="range" min="0.01" max="1" step="0.01" value="0.05" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-a-val').textContent = this.value + 's'">
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span style="color: var(--au-text-muted);">Decay (Спад)</span>
+              <span id="adsr-d-val" style="color: var(--au-cyan); font-weight: 700;">0.20s</span>
+            </div>
+            <input type="range" min="0.05" max="1.5" step="0.05" value="0.2" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-d-val').textContent = this.value + 's'">
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span style="color: var(--au-text-muted);">Sustain (Удержание)</span>
+              <span id="adsr-s-val" style="color: var(--au-cyan); font-weight: 700;">60%</span>
+            </div>
+            <input type="range" min="0" max="100" value="60" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-s-val').textContent = this.value + '%'">
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
+              <span style="color: var(--au-text-muted);">Release (Затухание)</span>
+              <span id="adsr-r-val" style="color: var(--au-cyan); font-weight: 700;">0.40s</span>
+            </div>
+            <input type="range" min="0.05" max="2" step="0.05" value="0.4" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-r-val').textContent = this.value + 's'">
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 4: WEB AUDIO ARCHITECTURE GRAPH -->
+    <div id="tab-architecture" class="audio-view-panel">
+      <section style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 28px; margin-bottom: 24px;">
+        <h2 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">Схема конвейера обработки сигналов</h2>
+        <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.6; max-width: 800px; margin-bottom: 28px;">
+          Архитектура аудио-стека построена на нативном стандарте W3C Web Audio API. Вся генерация, фильтрация, пространственное позиционирование и расчет БПФ (Fast Fourier Transform) выполняются в выделенном системном аудиопотоке с нулевой задержкой.
+        </p>
+
+        <!-- Signal Flow Chain Cards -->
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(168, 85, 247, 0.2); color: #C084FC; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">01</div>
+            <div style="flex: 1; min-width: 220px;">
+              <div style="font-weight: 700; color: #FFFFFF;">OscillatorNode (Источник частоты)</div>
+              <div style="font-size: 13px; color: var(--au-text-muted);">Генерирует периодический звуковой сигнал заданной частоты и формы (Sine, Triangle, Sawtooth, Square).</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">f: 20Hz – 20kHz</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(6, 182, 212, 0.2); color: #22D3EE; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">02</div>
+            <div style="flex: 1; min-width: 220px;">
+              <div style="font-weight: 700; color: #FFFFFF;">GainNode (ADSR Модулятор громкости)</div>
+              <div style="font-size: 13px; color: var(--au-text-muted);">Управляет динамикой громкости, предотвращает клиппинг (щелчки) за счет гладкой экспоненциальной интерполяции.</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">gain: 0.0 – 1.0</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #34D399; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">03</div>
+            <div style="flex: 1; min-width: 220px;">
+              <div style="font-weight: 700; color: #FFFFFF;">StereoPannerNode (Пространственное распределение)</div>
+              <div style="font-size: 13px; color: var(--au-text-muted);">Рассчитывает фазовый сдвиг и баланс каналов для создания трехмерного позиционирования в наушниках.</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">pan: -1.0 ⇄ +1.0</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(245, 158, 11, 0.2); color: #FBBF24; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">04</div>
+            <div style="flex: 1; min-width: 220px;">
+              <div style="font-weight: 700; color: #FFFFFF;">AnalyserNode (FFT Спектральный анализ)</div>
+              <div style="font-size: 13px; color: var(--au-text-muted);">Извлекает частотные спектрограммы для отрисовки 60 FPS эквалайзера на Canvas без просадки основного потока.</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">fftSize: 64</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
+            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(239, 68, 68, 0.2); color: #F87171; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">05</div>
+            <div style="flex: 1; min-width: 220px;">
+              <div style="font-weight: 700; color: #FFFFFF;">AudioDestinationNode (ЦАП и Динамики устройства)</div>
+              <div style="font-size: 13px; color: var(--au-text-muted);">Финальный выход на физическую звуковую карту слушателя через драйвер аудиосистемы ОС.</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">Hardware DAC</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <script>
@@ -234,6 +445,29 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
+    // Tab Switcher Router
+    function switchAudioTab(tabId) {
+      document.querySelectorAll('.audio-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.audio-view-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-${tabId}`);
+      });
+      if (window.location.hash !== `#${tabId}`) {
+        history.replaceState(null, '', `#${tabId}`);
+      }
+      if (tabId === 'synth') {
+        setTimeout(resizeVis, 50);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(`tab-${hash}`)) {
+        switchAudioTab(hash);
+      }
+    });
+
     // Piano Keys binding
     const keys = document.querySelectorAll('.piano-key');
     keys.forEach(k => {
@@ -255,6 +489,7 @@
     };
 
     window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       const k = e.key.toLowerCase();
       if (keyMap[k]) {
         playTone(keyMap[k]);
@@ -283,6 +518,33 @@
       });
     }
 
+    // Preset player
+    function playPresetTone(preset) {
+      initAudio();
+      if (preset === 'ambient') {
+        const chord = [261.63, 329.63, 392.00, 493.88];
+        chord.forEach(f => playTone(f, 1.2));
+      } else if (preset === 'bass') {
+        const oldWave = waveType;
+        waveType = 'sawtooth';
+        playTone(65.41, 0.6);
+        setTimeout(() => playTone(73.42, 0.6), 250);
+        setTimeout(() => { waveType = oldWave; }, 800);
+      } else if (preset === 'retro') {
+        const oldWave = waveType;
+        waveType = 'square';
+        const riff = [523.25, 659.25, 783.99, 1046.50];
+        riff.forEach((f, i) => setTimeout(() => playTone(f, 0.12), i * 110));
+        setTimeout(() => { waveType = oldWave; }, 600);
+      } else if (preset === 'pluck') {
+        const oldWave = waveType;
+        waveType = 'triangle';
+        const notes = [329.63, 392.00, 493.88, 659.25, 987.77];
+        notes.forEach((f, i) => setTimeout(() => playTone(f, 0.3), i * 90));
+        setTimeout(() => { waveType = oldWave; }, 700);
+      }
+    }
+
     // ------------------------------------------------------------------------
     // Real-Time Canvas FFT Wave Visualizer
     // ------------------------------------------------------------------------
@@ -291,6 +553,7 @@
     let cWidth, cHeight;
 
     function resizeVis() {
+      if (!canvas || !canvas.parentElement) return;
       cWidth = canvas.parentElement.clientWidth;
       cHeight = canvas.parentElement.clientHeight;
       canvas.width = cWidth * window.devicePixelRatio;
@@ -303,34 +566,34 @@
     const dataArray = new Uint8Array(32);
 
     function renderVis() {
-      ctx.clearRect(0, 0, cWidth, cHeight);
+      if (cWidth && cHeight) {
+        ctx.clearRect(0, 0, cWidth, cHeight);
 
-      if (analyserNode) {
-        analyserNode.getByteFrequencyData(dataArray);
-      } else {
-        // Subtle ambient oscillation
-        for (let i = 0; i < 32; i++) {
-          dataArray[i] = Math.max(0, 15 + Math.sin(Date.now() / 300 + i * 0.4) * 10);
+        if (analyserNode) {
+          analyserNode.getByteFrequencyData(dataArray);
+        } else {
+          for (let i = 0; i < 32; i++) {
+            dataArray[i] = Math.max(0, 15 + Math.sin(Date.now() / 300 + i * 0.4) * 10);
+          }
+        }
+
+        const barCount = 32;
+        const barWidth = (cWidth / barCount) - 4;
+
+        for (let i = 0; i < barCount; i++) {
+          const val = dataArray[i];
+          const barHeight = (val / 255) * (cHeight * 0.85) + 4;
+          const x = i * (barWidth + 4);
+          const y = cHeight - barHeight;
+
+          const grad = ctx.createLinearGradient(0, y, 0, cHeight);
+          grad.addColorStop(0, '#A855F7');
+          grad.addColorStop(1, '#06B6D4');
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(x, y, barWidth, barHeight);
         }
       }
-
-      const barCount = 32;
-      const barWidth = (cWidth / barCount) - 4;
-
-      for (let i = 0; i < barCount; i++) {
-        const val = dataArray[i];
-        const barHeight = (val / 255) * (cHeight * 0.85) + 4;
-        const x = i * (barWidth + 4);
-        const y = cHeight - barHeight;
-
-        const grad = ctx.createLinearGradient(0, y, 0, cHeight);
-        grad.addColorStop(0, '#A855F7');
-        grad.addColorStop(1, '#06B6D4');
-
-        ctx.fillStyle = grad;
-        ctx.fillRect(x, y, barWidth, barHeight);
-      }
-
       requestAnimationFrame(renderVis);
     }
     requestAnimationFrame(renderVis);
@@ -372,17 +635,21 @@
     const radar = document.getElementById('spatial-radar');
     const marker = document.getElementById('spatial-marker');
     let isDraggingPuck = false;
+    let orbitInterval = null;
 
-    radar.addEventListener('mousedown', (e) => {
-      isDraggingPuck = true;
-      updatePuckPos(e);
-    });
+    if (radar) {
+      radar.addEventListener('mousedown', (e) => {
+        isDraggingPuck = true;
+        clearInterval(orbitInterval);
+        updatePuckPos(e);
+      });
 
-    window.addEventListener('mousemove', (e) => {
-      if (isDraggingPuck) updatePuckPos(e);
-    });
+      window.addEventListener('mousemove', (e) => {
+        if (isDraggingPuck) updatePuckPos(e);
+      });
 
-    window.addEventListener('mouseup', () => { isDraggingPuck = false; });
+      window.addEventListener('mouseup', () => { isDraggingPuck = false; });
+    }
 
     function updatePuckPos(e) {
       const rect = radar.getBoundingClientRect();
@@ -396,11 +663,53 @@
       marker.style.top = `${y}px`;
 
       const pan = ((x / rect.width) - 0.5) * 2;
-      document.getElementById('pan-val-display').textContent = `Панорама: ${pan.toFixed(2)} (${pan < -0.1 ? 'Левый' : pan > 0.1 ? 'Правый' : 'Центр'})`;
+      document.getElementById('pan-val-display').textContent = `${pan.toFixed(2)} (${pan < -0.1 ? 'Левый' : pan > 0.1 ? 'Правый' : 'Центр'})`;
 
-      if (pannerNode) {
+      if (pannerNode && audioCtx) {
         pannerNode.pan.setValueAtTime(pan, audioCtx.currentTime);
       }
+    }
+
+    function resetSpatialCenter() {
+      clearInterval(orbitInterval);
+      const rect = radar.getBoundingClientRect();
+      marker.style.left = `${rect.width / 2}px`;
+      marker.style.top = `${rect.height / 2}px`;
+      document.getElementById('pan-val-display').textContent = '0.00 (Центр)';
+      if (pannerNode && audioCtx) {
+        pannerNode.pan.setValueAtTime(0, audioCtx.currentTime);
+      }
+    }
+
+    function playSpatialPulse() {
+      playTone(440, 0.4);
+    }
+
+    function startSpatialOrbit() {
+      clearInterval(orbitInterval);
+      let angle = 0;
+      orbitInterval = setInterval(() => {
+        const rect = radar.getBoundingClientRect();
+        const rx = rect.width / 2 - 24;
+        const ry = rect.height / 2 - 24;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+
+        angle += 0.04;
+        const x = cx + Math.cos(angle) * rx;
+        const y = cy + Math.sin(angle) * ry;
+
+        marker.style.left = `${x}px`;
+        marker.style.top = `${y}px`;
+
+        const pan = Math.cos(angle);
+        document.getElementById('pan-val-display').textContent = `${pan.toFixed(2)} (Орбита)`;
+
+        if (pannerNode && audioCtx) {
+          pannerNode.pan.setValueAtTime(pan, audioCtx.currentTime);
+        }
+      }, 30);
+      playTone(330, 0.3);
     }
   </script>
 </body>

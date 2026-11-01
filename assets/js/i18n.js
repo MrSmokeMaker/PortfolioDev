@@ -21,9 +21,9 @@
       nav_theme_tip: 'Сменить тему (Light/Dark/OLED)',
       nav_sound_tip: 'Звуки интерфейса',
 
-      hero_role: 'Senior UI/UX Engineer & Lead Design Systems Architect',
-      hero_bio: 'Проектирую цифровые продукты мирового уровня (Awwwards / Mobbin Elite). Объединяю строгую модульную архитектуру дизайн-систем, 60 FPS аппаратные анимации, Web Audio API, Canvas телеметрию и бескомпромиссную скорость загрузки.',
-      hero_explore: 'Исследовать 6 проектов',
+      hero_role: 'Фронтенд-разработчик & Инженер интерфейсов',
+      hero_bio: 'Разрабатываю современные веб-приложения и дизайн-системы. Создаю удобные интерфейсы с понятной логикой, плавной работой на 60 FPS, чистым кодом и быстрой загрузкой без лишних зависимостей.',
+      hero_explore: 'Смотреть проекты',
       hero_qr_btn: 'Показать QR Telegram',
       hero_versions_btn: 'Хроника версий v3.1',
 
@@ -45,12 +45,12 @@
       showcase_title: 'Избранные проекты экосистемы',
       showcase_subtitle: '6 архитектурных направлений: от финтеха и медтеха до Web Audio синтезаторов',
       tab_all: 'Все (6)',
+      tab_edtech: 'EdTech & AI',
       tab_fintech: 'Финтех',
       tab_saas: 'AI & SaaS',
       tab_medtech: 'MedTech',
       tab_audio: 'Web Audio',
       tab_art: 'Галерея',
-      tab_craft: 'Крафт',
       btn_quick_view: 'Быстрый просмотр',
       btn_open_site: 'Открыть сайт →',
 
@@ -90,9 +90,9 @@
       nav_theme_tip: 'Switch Theme (Light/Dark/OLED)',
       nav_sound_tip: 'Interface Sounds',
 
-      hero_role: 'Senior UI/UX Engineer & Lead Design Systems Architect',
-      hero_bio: 'Crafting world-class digital products (Awwwards / Mobbin Elite grade). Bridging strict design system tokens, 60 FPS hardware animations, Web Audio API, Canvas real-time telemetry, and uncompromising zero-bundle load speeds.',
-      hero_explore: 'Explore 6 Showcases',
+      hero_role: 'Frontend Developer & UI Engineer',
+      hero_bio: 'Building modern web applications and design systems. Focused on intuitive interfaces, 60 FPS performance, clean code architecture, and fast load times with zero dependency bloat.',
+      hero_explore: 'View Projects',
       hero_qr_btn: 'Telegram QR Code',
       hero_versions_btn: 'Changelog v3.1',
 
@@ -114,12 +114,12 @@
       showcase_title: 'Featured Production Showcases',
       showcase_subtitle: '6 unique architectural styles: from Institutional FinTech to Web Audio Synthesizers',
       tab_all: 'All (6)',
+      tab_edtech: 'EdTech & AI',
       tab_fintech: 'FinTech',
       tab_saas: 'AI & SaaS',
       tab_medtech: 'MedTech',
       tab_audio: 'Web Audio',
       tab_art: 'Editorial Art',
-      tab_craft: 'Craft Shop',
       btn_quick_view: 'Quick Preview',
       btn_open_site: 'Launch App →',
 

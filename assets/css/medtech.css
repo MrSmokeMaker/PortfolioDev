@@ -60,11 +60,65 @@ body.medtech-theme {
 .med-header {
   border-bottom: 1px solid var(--med-border);
   background: rgba(14, 22, 38, 0.85);
-  backdrop-filter: blur(16px);
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  position: relative;
+  z-index: 20;
   padding: 14px 0;
+}
+
+/* MedTech Navigation Tabs & Views */
+.med-tabs-bar {
+  display: flex;
+  gap: 8px;
+  background: var(--med-surface);
+  border: 1px solid var(--med-border);
+  border-radius: 12px;
+  padding: 6px;
+  margin: 16px auto 24px;
+  max-width: 860px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.med-tabs-bar::-webkit-scrollbar { display: none; }
+
+.med-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--med-text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.med-tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+.med-tab-btn.active {
+  background: linear-gradient(135deg, #0EA5E9, #0284C7);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.35);
+}
+
+.med-view-panel {
+  display: none;
+  animation: medFadeIn 0.25s ease forwards;
+}
+.med-view-panel.active {
+  display: block;
+}
+
+@keyframes medFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .med-nav {

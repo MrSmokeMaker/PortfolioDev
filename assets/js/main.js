@@ -548,27 +548,22 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
   }
 
   const CMD_COMMANDS = [
-    { label: '💎 Финтех V1: VERTEX Capital (Mobbi)', category: 'Проекты V1', action: () => openDevicePreview('fintech.html', 'VERTEX Capital V1') },
-    { label: '⚡ Финтех V2: VERTEX Terminal (Figma Edition)', category: 'Проекты V2', action: () => openDevicePreview('fintech-v2.html', 'VERTEX Terminal V2') },
-    { label: '💎 SaaS V1: NEXUS AI (Mobbi Bento)', category: 'Проекты V1', action: () => openDevicePreview('saas.html', 'NEXUS AI V1') },
-    { label: '⚡ SaaS V2: NEXUS Studio (Linear Multi-Agent DAG)', category: 'Проекты V2', action: () => openDevicePreview('saas-v2.html', 'NEXUS Studio V2') },
-    { label: '💎 MedTech V1: PULSE Telemetry (Canvas ECG)', category: 'Проекты V1', action: () => openDevicePreview('medtech.html', 'PULSE Health V1') },
-    { label: '⚡ MedTech V2: PULSE ICU (Mayo Clinic Suite)', category: 'Проекты V2', action: () => openDevicePreview('medtech-v2.html', 'PULSE ICU V2') },
-    { label: '💎 Audio V1: AETHER Synth (Mobbi Lab)', category: 'Проекты V1', action: () => openDevicePreview('audio.html', 'AETHER Synth V1') },
-    { label: '⚡ Audio V2: AETHER Workstation (16-Step Sequencer)', category: 'Проекты V2', action: () => openDevicePreview('audio-v2.html', 'AETHER Workstation V2') },
-    { label: '💎 Галерея V1: LUMEN Archive (Editorial)', category: 'Проекты V1', action: () => openDevicePreview('gallery.html', 'LUMEN Gallery V1') },
-    { label: '⚡ Галерея V2: LUMEN Salon (Sotheby\'s Loupe & Bidding)', category: 'Проекты V2', action: () => openDevicePreview('gallery-v2.html', 'LUMEN Salon V2') },
-    { label: '⭐ Флагман: Методист (Генератор уроков YandexGPT)', category: 'Проекты', action: () => openDevicePreview('metodist.html', 'Методист — AI Lesson Planner') },
+    { label: '⭐ 1. Методист (AI EdTech Флагман & YandexGPT)', category: 'Проекты', action: () => openDevicePreview('metodist.html', 'Методист — AI Lesson Planner') },
+    { label: '💎 2. Финтех: VERTEX Capital (Институциональный фонд)', category: 'Проекты', action: () => openDevicePreview('fintech.html', 'VERTEX Capital') },
+    { label: '⚡ 3. AI SaaS: NEXUS AI (Оркестрация агентов)', category: 'Проекты', action: () => openDevicePreview('saas.html', 'NEXUS AI') },
+    { label: '❤️ 4. MedTech: PULSE Telemetry (Реанимационный монитор)', category: 'Проекты', action: () => openDevicePreview('medtech.html', 'PULSE Telemetry') },
+    { label: '🎛️ 5. Web Audio: AETHER Synth (Синтезатор & Микшер)', category: 'Проекты', action: () => openDevicePreview('audio.html', 'AETHER Synth Lab') },
+    { label: '🖼️ 6. Галерея: LUMEN Archive (Архитектурная фотография)', category: 'Проекты', action: () => openDevicePreview('gallery.html', 'LUMEN Gallery') },
     { label: '🚀 Открыть приложение Методист (Live Web)', category: 'Внешние ссылки', action: () => window.open('https://mrsmokemaker.github.io/annmetodist/', '_blank') },
     { label: '🎨 Открыть Figma Design File (Коровин Сергей)', category: 'Figma', action: () => window.open('https://www.figma.com/design/NkmANyDIpsrxlzj6FTj2WA', '_blank') },
     { label: '📐 Открыть FigJam Architecture Board', category: 'Figma', action: () => window.open('https://www.figma.com/board/Zh0VIksvdMkhhxIm7RTABv', '_blank') },
-    { label: 'Новости и хроника версий (Changelog v3.2)', category: 'Система', action: () => toggleChangelog() },
+    { label: 'Хроника обновлений и релизов (Changelog)', category: 'Система', action: () => toggleChangelog() },
     { label: 'Связаться в Telegram (+7 939 474-89-99)', category: 'Контакты', action: () => openTelegramModal() },
     { label: 'Сменить тему оформления (Light / Dark / OLED)', category: 'Вид', action: () => cycleTheme() },
     { label: 'Переключить язык (RU ⇄ EN Localization)', category: 'Вид', action: () => window.toggleLanguage && window.toggleLanguage() },
     { label: 'Включить / выключить звуки интерфейса', category: 'Настройки', action: () => toggleSound() },
-    { label: 'Калькулятор стоимости проекта (Scope Estimator)', category: 'Инструменты', action: () => {
-      document.getElementById('estimator-section')?.scrollIntoView({ behavior: 'smooth' });
+    { label: 'Интерактивная оценка скоупа (Калькулятор от 50 000 ₽)', category: 'Инструменты', action: () => {
+      document.getElementById('estimator')?.scrollIntoView({ behavior: 'smooth' });
     }}
   ];
 

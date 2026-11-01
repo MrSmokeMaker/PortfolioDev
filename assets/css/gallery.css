@@ -44,12 +44,67 @@ body.gallery-theme {
   color: #60A5FA;
 }
 
-/* Gallery Header (Shrinking Header on Scroll) */
+/* Gallery Navigation Tabs & Multi-page Views */
+.gallery-tabs-bar {
+  display: flex;
+  gap: 8px;
+  background: var(--gl-surface);
+  border: 1px solid var(--gl-border);
+  border-radius: 12px;
+  padding: 6px;
+  margin: 16px auto 24px;
+  max-width: 860px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gallery-tabs-bar::-webkit-scrollbar { display: none; }
+
+.gallery-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--gl-text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+.gallery-tab-btn:hover {
+  color: var(--gl-text);
+  background: rgba(0, 0, 0, 0.04);
+}
+.gallery-tab-btn.active {
+  background: var(--gl-accent);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(217, 78, 58, 0.3);
+}
+
+.gallery-view-panel {
+  display: none;
+  animation: glFadeIn 0.25s ease forwards;
+}
+.gallery-view-panel.active {
+  display: block;
+}
+
+@keyframes glFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gallery Header (Relative, non-colliding) */
 .gallery-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  height: 84px;
+  position: relative;
+  z-index: 20;
+  min-height: 70px;
   background-color: rgba(245, 245, 245, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -475,17 +530,25 @@ body.gallery-theme {
   }
   .gallery-actions-wrap {
     width: 100%;
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
     gap: 6px;
   }
-  .gallery-actions-wrap button,
-  .gallery-actions-wrap .btn-outline-minimal,
-  .gallery-actions-wrap .btn-terracotta {
-    flex: 1 1 auto;
-    padding: 7px 8px;
-    font-size: 11.5px;
+  .gallery-actions-wrap .btn-outline-minimal {
+    flex: 1 1 calc(50% - 4px);
+    padding: 7px 6px;
+    font-size: 11px;
     white-space: nowrap;
     text-align: center;
+    box-sizing: border-box;
+  }
+  .gallery-actions-wrap .btn-terracotta {
+    flex: 1 1 100%;
+    padding: 9px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    text-align: center;
+    box-sizing: border-box;
   }
   .mobbi-grid-12 {
     display: flex;

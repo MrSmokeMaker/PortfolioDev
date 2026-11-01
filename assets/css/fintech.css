@@ -26,6 +26,48 @@ body.fintech-theme {
   flex-direction: column;
 }
 
+/* Multi-page views in Fintech */
+.fintech-view-panel {
+  display: none;
+  animation: ftFadeIn 0.25s ease forwards;
+}
+.fintech-view-panel.active {
+  display: block;
+}
+@keyframes ftFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stream-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.stream-filters-wrap {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .stream-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .stream-filters-wrap {
+    width: 100%;
+  }
+  .stream-filters-wrap .theme-pill-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
 /* Fintech App Shell (Sidebar + Main Workspace) */
 .fintech-app-shell {
   display: flex;

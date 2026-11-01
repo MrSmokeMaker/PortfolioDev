@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PULSE — Медицинская телеметрия и нейро-диагностика</title>
+  <title>PULSE Telemetry — Клинический монитор реанимации и телеметрии</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/medtech.css">
 </head>
-<body class="medtech-theme">
+<body class="med-theme">
 
   <!-- Universal Project Navigation Bar -->
   <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
@@ -39,22 +39,22 @@
     </div>
   </header>
 
-  <!-- Clinical App Header -->
+  <!-- Clinical App Header (Relative, non-sticky) -->
   <header class="med-header">
     <div class="mobbi-container">
-      <nav class="med-nav">
+      <nav class="med-nav" style="flex-wrap: wrap; gap: 12px;">
         <div class="med-brand">
           <div class="med-brand-icon">P</div>
           <div>
-            <div>PULSE NEURO-TELEMETRY</div>
-            <div style="font-size: 11px; color: var(--med-text-muted); font-weight: 500;">Clinical Intensive Care OS v4.2</div>
+            <div>PULSE TELEMETRY</div>
+            <div style="font-size: 11px; color: var(--med-text-muted); font-weight: 500;">Клинический монитор палаты интенсивной терапии</div>
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
           <div class="med-patient-badge">
             <span class="status-pulse-dot" style="background: var(--med-cyan); box-shadow: 0 0 6px var(--med-cyan);"></span>
-            <span>Пациент: ICU-8492 (Стабилен)</span>
+            <span id="patient-status-label">Пациент: ICU-8492 (Стабилен)</span>
           </div>
           <button class="btn-med-alert-toggle" id="triage-alert-btn" onclick="toggleEmergencyAlert()">
             Симуляция Аритмии
@@ -64,120 +64,135 @@
     </div>
   </header>
 
+  <!-- Navigation Tabs -->
+  <div class="mobbi-container">
+    <div class="med-tabs-bar" role="tablist">
+      <button class="med-tab-btn active" data-tab="monitor" onclick="switchMedTab('monitor')">
+        ❤️ ЭКГ Монитор 60 FPS
+      </button>
+      <button class="med-tab-btn" data-tab="trends" onclick="switchMedTab('trends')">
+        📈 Тренды показателей (24ч)
+      </button>
+      <button class="med-tab-btn" data-tab="triage" onclick="switchMedTab('triage')">
+        📋 Протокол триажа ABCDE
+      </button>
+      <button class="med-tab-btn" data-tab="specs" onclick="switchMedTab('specs')">
+        ⚙️ Спецификации датчиков
+      </button>
+    </div>
+  </div>
+
   <!-- Main Telemetry Workspace -->
   <main class="mobbi-container">
-    <div class="med-telemetry-grid">
 
-      <!-- 60 FPS Real-time ECG Monitor -->
-      <section class="ecg-monitor-card">
-        <div class="ecg-card-header">
+    <!-- TAB 1: ECG MONITOR -->
+    <div id="tab-monitor" class="med-view-panel active">
+      <div class="med-telemetry-grid">
+
+        <!-- 60 FPS Real-time ECG Monitor -->
+        <section class="ecg-monitor-card">
+          <div class="ecg-card-header">
+            <div>
+              <div class="ecg-channel-tag">
+                <span style="color: var(--med-cyan); font-weight: 700;">LEAD II</span>
+                <span>• Электрокардиограмма высокой частоты (25 мм/с)</span>
+              </div>
+              <h2 style="font-size: 20px; font-weight: 800; margin-top: 4px;">Мониторинг сердечного ритма в реальном времени</h2>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 11px; color: var(--med-text-muted);">ЧСС ТЕКУЩИЙ</div>
+              <div id="live-bpm-display" class="vital-metric-val" style="color: var(--med-cyan);">72 <span class="vital-metric-unit">BPM</span></div>
+            </div>
+          </div>
+
+          <div class="ecg-canvas-wrap">
+            <div class="ecg-grid-overlay"></div>
+            <canvas id="ecg-canvas"></canvas>
+          </div>
+
+          <div class="ecg-controls-bar">
+            <div class="bpm-slider-box">
+              <span style="color: var(--med-text-muted);">Частота пульса:</span>
+              <input type="range" id="bpm-slider" min="45" max="150" value="72" oninput="updateBpm(this.value)">
+              <span id="bpm-slider-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--med-cyan);">72 BPM</span>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn-med-action" onclick="resetEcg()">Сброс калибровки</button>
+              <button class="btn-med-action" style="background: rgba(255,255,255,0.1); color: white;" onclick="toggleAudioPulse()">
+                <span id="audio-pulse-label">Звук пульсометра (Выкл)</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Key Vitals Stack -->
+        <aside class="vitals-summary-card">
           <div>
-            <div class="ecg-channel-tag">
-              <span style="color: var(--med-cyan); font-weight: 700;">LEAD II</span>
-              <span>• Электрокардиограмма высокой частоты (25 мм/с)</span>
+            <div style="font-size: 12px; font-weight: 700; color: var(--med-text-muted); text-transform: uppercase; margin-bottom: 12px;">
+              Жизненно важные показатели
             </div>
-            <h2 style="font-size: 20px; font-weight: 800; margin-top: 4px;">Мониторинг сердечного ритма в реальном времени</h2>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 11px; color: var(--med-text-muted);">ЧСС ТЕКУЩИЙ</div>
-            <div id="live-bpm-display" class="vital-metric-val" style="color: var(--med-cyan);">72 <span class="vital-metric-unit">BPM</span></div>
-          </div>
-        </div>
-
-        <div class="ecg-canvas-wrap">
-          <div class="ecg-grid-overlay"></div>
-          <canvas id="ecg-canvas"></canvas>
-        </div>
-
-        <div class="ecg-controls-bar">
-          <div class="bpm-slider-box">
-            <span style="color: var(--med-text-muted);">Частота пульса:</span>
-            <input type="range" id="bpm-slider" min="45" max="150" value="72" oninput="updateBpm(this.value)">
-            <span id="bpm-slider-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--med-cyan);">72 BPM</span>
-          </div>
-
-          <div style="display: flex; gap: 10px;">
-            <button class="btn-med-action" onclick="resetEcg()">Сброс калибровки</button>
-            <button class="btn-med-action" style="background: rgba(255,255,255,0.1); color: white;" onclick="toggleAudioPulse()">
-              <span id="audio-pulse-label">Звук пульсометра (Выкл)</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Key Vitals Stack -->
-      <aside class="vitals-summary-card">
-        <div>
-          <div style="font-size: 12px; font-weight: 700; color: var(--med-text-muted); text-transform: uppercase; margin-bottom: 12px;">
-            Жизненно важные показатели
-          </div>
-          <div class="vitals-stack">
-            <div class="vital-metric-card">
-              <div>
-                <div class="vital-metric-name">Сатурация кислорода SpO₂</div>
-                <div style="font-size: 11px; color: var(--med-emerald);">В пределах нормы</div>
+            <div class="vitals-stack">
+              <div class="vital-metric-card">
+                <div>
+                  <div class="vital-metric-name">Сатурация кислорода SpO₂</div>
+                  <div style="font-size: 11px; color: var(--med-emerald);">В пределах нормы</div>
+                </div>
+                <div class="vital-metric-val" style="color: var(--med-emerald);">98.4 <span class="vital-metric-unit">%</span></div>
               </div>
-              <div class="vital-metric-val" style="color: var(--med-emerald);">98.4 <span class="vital-metric-unit">%</span></div>
-            </div>
 
-            <div class="vital-metric-card">
-              <div>
-                <div class="vital-metric-name">Артериальное давление (НИАД)</div>
-                <div style="font-size: 11px; color: var(--med-text-muted);">Систола / Диастола</div>
+              <div class="vital-metric-card">
+                <div>
+                  <div class="vital-metric-name">Артериальное давление (NIBP)</div>
+                  <div style="font-size: 11px; color: var(--med-cyan);">Систолическое / Диаст.</div>
+                </div>
+                <div class="vital-metric-val" style="color: var(--med-cyan);">118/76 <span class="vital-metric-unit">mmHg</span></div>
               </div>
-              <div class="vital-metric-val">118/76 <span class="vital-metric-unit">mmHg</span></div>
-            </div>
 
-            <div class="vital-metric-card">
-              <div>
-                <div class="vital-metric-name">Нейро-синхронный индекс</div>
-                <div style="font-size: 11px; color: var(--med-cyan);">Высокая активность коры</div>
+              <div class="vital-metric-card">
+                <div>
+                  <div class="vital-metric-name">Температура тела</div>
+                  <div style="font-size: 11px; color: #94A3B8;">Термодатчик Core Temp</div>
+                </div>
+                <div class="vital-metric-val">36.7 <span class="vital-metric-unit">°C</span></div>
               </div>
-              <div class="vital-metric-val" style="color: var(--med-cyan);">94.1 <span class="vital-metric-unit">NSI</span></div>
-            </div>
 
-            <div class="vital-metric-card">
-              <div>
-                <div class="vital-metric-name">Температура тела</div>
-                <div style="font-size: 11px; color: var(--med-text-muted);">Датчик плечевой артерии</div>
+              <div class="vital-metric-card">
+                <div>
+                  <div class="vital-metric-name">Частота дыхания (RR)</div>
+                  <div style="font-size: 11px; color: var(--med-emerald);">Ритмичное</div>
+                </div>
+                <div class="vital-metric-val" style="color: var(--med-emerald);">15 <span class="vital-metric-unit">вдох/мин</span></div>
               </div>
-              <div class="vital-metric-val">36.7 <span class="vital-metric-unit">°C</span></div>
             </div>
+          </div>
+
+          <div style="margin-top: 20px; padding: 12px; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 10px; font-size: 12px; color: var(--med-text-muted);">
+            ⚡ BLE Канал 4 · Сенсор Schiller Bio-5 · Погрешность измерения &lt;0.5%
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Systems Detail Interactive Tabs -->
+      <section class="systems-detail-card" style="margin-top: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <h3 style="font-size: 18px; font-weight: 700;">Детализированный органно-функциональный срез</h3>
+          <div class="systems-tabs">
+            <button class="system-tab-btn active" onclick="switchSystem('cardio', this)">Сердечно-сосудистая</button>
+            <button class="system-tab-btn" onclick="switchSystem('neuro', this)">Неврологическая</button>
+            <button class="system-tab-btn" onclick="switchSystem('respiratory', this)">Респираторная</button>
           </div>
         </div>
 
-        <div style="padding-top: 16px; border-top: 1px solid var(--med-border); font-size: 12px; color: var(--med-text-muted);">
-          Телеметрия передается по стандарту DICOM/HL7 в реальном времени. Задержка шины: &lt; 2 мс.
-        </div>
-      </aside>
-
-      <!-- Organ & Clinical Systems Selector -->
-      <section class="systems-selector-card">
-        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px;">Системный диагностический анализ</h3>
-        
-        <div class="systems-tabs-row">
-          <button class="system-tab-btn active" onclick="switchSystem('cardio', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Кардиоваскулярный контур
-          </button>
-          <button class="system-tab-btn" onclick="switchSystem('neuro', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-            ЦНС и Мозговая активность
-          </button>
-          <button class="system-tab-btn" onclick="switchSystem('respiratory', this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            Респираторный газообмен
-          </button>
-        </div>
-
-        <div id="system-details-grid" class="system-data-grid">
+        <div class="systems-grid" id="system-details-grid">
           <div class="sys-info-box">
             <div class="sys-info-title">Ударный объем левого желудочка</div>
             <div class="sys-info-val">74.2 мл / удар</div>
           </div>
           <div class="sys-info-box">
             <div class="sys-info-title">Фракция выброса (EF)</div>
-            <div class="sys-info-val" style="color: var(--med-emerald);">62.8% (Оптимально)</div>
+            <div class="sys-info-val">62.8% (Оптимально)</div>
           </div>
           <div class="sys-info-box">
             <div class="sys-info-title">Вариабельность сердечного ритма (HRV)</div>
@@ -185,13 +200,163 @@
           </div>
         </div>
       </section>
-
     </div>
+
+    <!-- TAB 2: 24H TRENDS & HISTORY -->
+    <div id="tab-trends" class="med-view-panel">
+      <section style="background: var(--med-surface); border: 1px solid var(--med-border); border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">Динамика витальных параметров за сутки</h2>
+            <p style="font-size: 13px; color: var(--med-text-muted); margin-top: 2px;">Запись показателей каждые 15 минут в локальный кольцевой буфер</p>
+          </div>
+          <div style="display: flex; gap: 6px;">
+            <button class="system-tab-btn" onclick="filterTrends('1h', this)">1 Час</button>
+            <button class="system-tab-btn" onclick="filterTrends('6h', this)">6 Часов</button>
+            <button class="system-tab-btn active" onclick="filterTrends('24h', this)">24 Часа</button>
+          </div>
+        </div>
+
+        <!-- Metric Trend Card 1: SpO2 -->
+        <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); border-radius: 12px; padding: 18px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-weight: 700; color: #FFFFFF;">Сатурация SpO₂ (%) — Тренд стабилен</span>
+            <span style="font-family: var(--font-mono); color: var(--med-emerald); font-weight: 700;">Среднее: 98.2%</span>
+          </div>
+          <div style="height: 48px; display: flex; align-items: flex-end; gap: 4px; padding: 4px 0;">
+            <div style="flex:1; height: 95%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="00:00 - 98%"></div>
+            <div style="flex:1; height: 96%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="04:00 - 98%"></div>
+            <div style="flex:1; height: 94%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="08:00 - 97%"></div>
+            <div style="flex:1; height: 98%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="12:00 - 99%"></div>
+            <div style="flex:1; height: 97%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="16:00 - 98%"></div>
+            <div style="flex:1; height: 99%; background: var(--med-emerald); opacity: 0.85; border-radius: 2px;" title="20:00 - 99%"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--med-text-muted); margin-top: 8px;">
+            <span>00:00</span>
+            <span>06:00</span>
+            <span>12:00</span>
+            <span>18:00</span>
+            <span>Сейчас</span>
+          </div>
+        </div>
+
+        <!-- Metric Trend Card 2: BP -->
+        <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); border-radius: 12px; padding: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-weight: 700; color: #FFFFFF;">Артериальное давление (Систола / Диастола)</span>
+            <span style="font-family: var(--font-mono); color: var(--med-cyan); font-weight: 700;">118/76 mmHg</span>
+          </div>
+          <div style="height: 48px; display: flex; align-items: flex-end; gap: 4px; padding: 4px 0;">
+            <div style="flex:1; height: 75%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+            <div style="flex:1; height: 78%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+            <div style="flex:1; height: 72%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+            <div style="flex:1; height: 80%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+            <div style="flex:1; height: 76%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+            <div style="flex:1; height: 75%; background: var(--med-cyan); opacity: 0.85; border-radius: 2px;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--med-text-muted); margin-top: 8px;">
+            <span>00:00</span>
+            <span>06:00</span>
+            <span>12:00</span>
+            <span>18:00</span>
+            <span>Сейчас</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 3: TRIAGE PROTOCOL & CHECKLIST -->
+    <div id="tab-triage" class="med-view-panel">
+      <section style="background: var(--med-surface); border: 1px solid var(--med-border); border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF;">Клинический протокол первичной оценки (ABCDE)</h2>
+            <p style="font-size: 13px; color: var(--med-text-muted);">Международный стандарт экстренной оценки состояния пациента</p>
+          </div>
+          <div id="triage-status-badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--med-emerald); color: var(--med-emerald); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;">
+            ✔ Все этапы пройдены (5/5)
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <label style="display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); padding: 14px 18px; border-radius: 10px; cursor: pointer;">
+            <input type="checkbox" checked onchange="updateTriageCheck()" style="accent-color: var(--med-cyan); width: 18px; height: 18px;">
+            <div>
+              <div style="font-weight: 700; color: #FFFFFF;">A (Airway) — Проходимость дыхательных путей</div>
+              <div style="font-size: 12px; color: var(--med-text-muted);">Дыхательные пути свободны, обструкция отсутствует, рефлексы сохранены.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); padding: 14px 18px; border-radius: 10px; cursor: pointer;">
+            <input type="checkbox" checked onchange="updateTriageCheck()" style="accent-color: var(--med-cyan); width: 18px; height: 18px;">
+            <div>
+              <div style="font-weight: 700; color: #FFFFFF;">B (Breathing) — Оценка дыхания и оксигенации</div>
+              <div style="font-size: 12px; color: var(--med-text-muted);">ЧДД 15/мин, экскурсия грудной клетки симметричная, SpO₂ &gt; 98%.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); padding: 14px 18px; border-radius: 10px; cursor: pointer;">
+            <input type="checkbox" checked onchange="updateTriageCheck()" style="accent-color: var(--med-cyan); width: 18px; height: 18px;">
+            <div>
+              <div style="font-weight: 700; color: #FFFFFF;">C (Circulation) — Гемодинамика и пульс</div>
+              <div style="font-size: 12px; color: var(--med-text-muted);">Пульс на периферических артериях отчетливый, АД 118/76 mmHg, симптом пятна &lt; 2с.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); padding: 14px 18px; border-radius: 10px; cursor: pointer;">
+            <input type="checkbox" checked onchange="updateTriageCheck()" style="accent-color: var(--med-cyan); width: 18px; height: 18px;">
+            <div>
+              <div style="font-weight: 700; color: #FFFFFF;">D (Disability) — Неврологический статус (Шкала Глазго)</div>
+              <div style="font-size: 12px; color: var(--med-text-muted);">Ясное сознание (GCS 15), зрачки D=S, фотореакция содружественная.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); padding: 14px 18px; border-radius: 10px; cursor: pointer;">
+            <input type="checkbox" checked onchange="updateTriageCheck()" style="accent-color: var(--med-cyan); width: 18px; height: 18px;">
+            <div>
+              <div style="font-weight: 700; color: #FFFFFF;">E (Exposure) — Температурный контроль и осмотр кожных покровов</div>
+              <div style="font-size: 12px; color: var(--med-text-muted);">Температура 36.7 °C, высыпаний и кровоизлияний нет, нормотермия.</div>
+            </div>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 4: HARDWARE & SENSOR SPECS -->
+    <div id="tab-specs" class="med-view-panel">
+      <section style="background: var(--med-surface); border: 1px solid var(--med-border); border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+        <h2 style="font-size: 20px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">Инженерные спецификации телеметрического блока</h2>
+        <p style="font-size: 13px; color: var(--med-text-muted); margin-bottom: 24px; max-width: 760px;">
+          Интерфейс спроектирован в соответствии с медицинскими стандартами надежности IEC 60601-1 и протоколами обмена клиническими данными HL7 FHIR Release 4.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); border-radius: 12px; padding: 18px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--med-cyan); margin-bottom: 4px;">СЕНСОРНЫЙ ВХОД</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">АЦП высокой разрядности (24-bit)</div>
+            <div style="font-size: 13px; color: var(--med-text-muted);">Частота дискретизации 500 Гц с подавлением сетевой помехи 50/60 Гц. Гальваническая изоляция до 4 кВ.</div>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); border-radius: 12px; padding: 18px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--med-emerald); margin-bottom: 4px;">БЕСПРОВОДНОЙ КАНАЛ</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Bluetooth Low Energy 5.3 (BLE)</div>
+            <div style="font-size: 13px; color: var(--med-text-muted);">Шифрование AES-128 CCM. Радиус действия в палате до 30 метров. Автоматическое переподключение без потери пакетов.</div>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid var(--med-border); border-radius: 12px; padding: 18px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: #F59E0B; margin-bottom: 4px;">КЛИНИЧЕСКИЙ СТАНДАРТ</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Интеграция HL7 / FHIR v4</div>
+            <div style="font-size: 13px; color: var(--med-text-muted);">Экспорт кардиограмм и витальных показателей в МИС больницы в формате структурированных Observation JSON.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
   </main>
 
   <script>
     // ------------------------------------------------------------------------
-    // 60 FPS HTML5 Canvas Real-Time ECG Generator
+    // Real-Time Canvas 60 FPS ECG Monitor
     // ------------------------------------------------------------------------
     const canvas = document.getElementById('ecg-canvas');
     const ctx = canvas.getContext('2d');
@@ -202,6 +367,7 @@
     let audioCtx = null;
 
     function resizeCanvas() {
+      if (!canvas || !canvas.parentElement) return;
       width = canvas.parentElement.clientWidth;
       height = canvas.parentElement.clientHeight;
       canvas.width = width * window.devicePixelRatio;
@@ -211,31 +377,48 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
+    // Tab Router
+    function switchMedTab(tabId) {
+      document.querySelectorAll('.med-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.med-view-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-${tabId}`);
+      });
+      if (window.location.hash !== `#${tabId}`) {
+        history.replaceState(null, '', `#${tabId}`);
+      }
+      if (tabId === 'monitor') {
+        setTimeout(resizeCanvas, 50);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(`tab-${hash}`)) {
+        switchMedTab(hash);
+      }
+    });
+
     let points = [];
     const maxPoints = 300;
     let phase = 0;
 
     function getEcgY(t) {
-      // Normal P-Q-R-S-T wave model
       const cycle = t % 1;
       let y = 0;
       if (cycle > 0.15 && cycle < 0.25) {
-        // P-wave
         y = Math.sin((cycle - 0.15) * Math.PI / 0.1) * 8;
       } else if (cycle >= 0.28 && cycle < 0.30) {
-        // Q-drop
         y = -6;
       } else if (cycle >= 0.30 && cycle < 0.34) {
-        // R-spike
         y = (1 - Math.abs((cycle - 0.32) / 0.02)) * (isAlert ? 65 : 45);
         if (cycle >= 0.31 && cycle <= 0.33 && audioPulseActive) {
           beepPulse();
         }
       } else if (cycle >= 0.34 && cycle < 0.37) {
-        // S-drop
         y = -12;
       } else if (cycle > 0.48 && cycle < 0.65) {
-        // T-wave
         y = Math.sin((cycle - 0.48) * Math.PI / 0.17) * 14;
       }
       return y;
@@ -263,46 +446,46 @@
     }
 
     function animate(time) {
-      const dt = (time - lastTime) / 1000;
-      lastTime = time;
+      if (width && height) {
+        const dt = (time - lastTime) / 1000;
+        lastTime = time;
 
-      const cyclesPerSec = bpm / 60;
-      phase += dt * cyclesPerSec;
+        const cyclesPerSec = bpm / 60;
+        phase += dt * cyclesPerSec;
 
-      const yVal = getEcgY(phase);
-      points.push(yVal);
-      if (points.length > maxPoints) {
-        points.shift();
-      }
+        const yVal = getEcgY(phase);
+        points.push(yVal);
+        if (points.length > maxPoints) {
+          points.shift();
+        }
 
-      ctx.clearRect(0, 0, width, height);
+        ctx.clearRect(0, 0, width, height);
 
-      const midY = height / 2;
-      const stepX = width / maxPoints;
+        const midY = height / 2;
+        const stepX = width / maxPoints;
 
-      // Draw trace line with glow
-      ctx.lineWidth = 2.5;
-      ctx.strokeStyle = isAlert ? '#EF4444' : '#00F0FF';
-      ctx.shadowColor = isAlert ? 'rgba(239, 68, 68, 0.8)' : 'rgba(0, 240, 255, 0.8)';
-      ctx.shadowBlur = 10;
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = isAlert ? '#EF4444' : '#00F0FF';
+        ctx.shadowColor = isAlert ? 'rgba(239, 68, 68, 0.8)' : 'rgba(0, 240, 255, 0.8)';
+        ctx.shadowBlur = 10;
 
-      ctx.beginPath();
-      for (let i = 0; i < points.length; i++) {
-        const x = i * stepX;
-        const y = midY - points[i];
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // Lead cursor point
-      if (points.length > 0) {
-        const headX = (points.length - 1) * stepX;
-        const headY = midY - points[points.length - 1];
-        ctx.fillStyle = '#FFFFFF';
         ctx.beginPath();
-        ctx.arc(headX, headY, 4, 0, Math.PI * 2);
-        ctx.fill();
+        for (let i = 0; i < points.length; i++) {
+          const x = i * stepX;
+          const y = midY - points[i];
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+
+        if (points.length > 0) {
+          const headX = (points.length - 1) * stepX;
+          const headY = midY - points[points.length - 1];
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(headX, headY, 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       requestAnimationFrame(animate);
@@ -322,6 +505,7 @@
       isAlert = false;
       document.getElementById('triage-alert-btn').classList.remove('is-alerting');
       document.getElementById('triage-alert-btn').textContent = 'Симуляция Аритмии';
+      document.getElementById('patient-status-label').textContent = 'Пациент: ICU-8492 (Стабилен)';
     }
 
     function toggleEmergencyAlert() {
@@ -332,11 +516,13 @@
         btn.textContent = 'КРИТИЧЕСКИЙ АЛЕРТ: ВЫКЛ';
         updateBpm(138);
         document.getElementById('bpm-slider').value = 138;
+        document.getElementById('patient-status-label').textContent = 'Пациент: ICU-8492 (Тахикардия / Алерт!)';
       } else {
         btn.classList.remove('is-alerting');
         btn.textContent = 'Симуляция Аритмии';
         updateBpm(72);
         document.getElementById('bpm-slider').value = 72;
+        document.getElementById('patient-status-label').textContent = 'Пациент: ICU-8492 (Стабилен)';
       }
     }
 
@@ -375,6 +561,27 @@
           <div class="sys-info-val">${item.val}</div>
         </div>
       `).join('');
+    }
+
+    function updateTriageCheck() {
+      const checks = document.querySelectorAll('#tab-triage input[type="checkbox"]');
+      let count = 0;
+      checks.forEach(c => { if (c.checked) count++; });
+      const badge = document.getElementById('triage-status-badge');
+      if (count === checks.length) {
+        badge.textContent = `✔ Все этапы пройдены (${count}/${checks.length})`;
+        badge.style.color = 'var(--med-emerald)';
+        badge.style.borderColor = 'var(--med-emerald)';
+      } else {
+        badge.textContent = `⚠ Требует внимания (${count}/${checks.length})`;
+        badge.style.color = '#F59E0B';
+        badge.style.borderColor = '#F59E0B';
+      }
+    }
+
+    function filterTrends(range, btn) {
+      document.querySelectorAll('#tab-trends .system-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
     }
   </script>
 </body>

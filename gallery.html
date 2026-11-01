@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMEN Gallery — Воздушный минимализм и фотография</title>
+  <title>LUMEN Archive — Галерея современной архитектурной и природной фотографии</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/gallery.css">
 </head>
@@ -39,26 +39,20 @@
     </div>
   </header>
 
-  <!-- Shrinking Sticky Header -->
-  <header class="gallery-header" data-shrinking-header>
+  <!-- Gallery Header (Relative, non-sticky) -->
+  <header class="gallery-header">
     <div class="mobbi-container">
       <nav class="gallery-nav">
         <a href="gallery.html" class="gallery-logo">
           <span class="gallery-logo-dot"></span>
           LUMEN ARCHIVE
         </a>
-        <ul class="gallery-links">
-          <li><a href="#exhibition" class="active">Экспозиция</a></li>
-          <li><a href="#series">Кураторский манифест</a></li>
-          <li><a href="#prints">Коллекционные принты</a></li>
-          <li><a href="#about">О галерее</a></li>
-        </ul>
         <div class="gallery-actions-wrap">
           <button class="btn-outline-minimal" onclick="cycleGalleryLighting()">
             <span id="lighting-mode-label">💡 Свет: Дневной</span>
           </button>
           <button class="btn-outline-minimal" onclick="toggleDemoState()">Демо состояний</button>
-          <button class="btn-terracotta" onclick="showToast('Запрос на получение каталога отпечатков отправлен куратору')">
+          <button class="btn-terracotta" onclick="switchGalleryTab('prints')">
             Заказать отпечаток
           </button>
         </div>
@@ -66,181 +60,312 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="gallery-hero">
-    <div class="mobbi-container">
-      <div class="mobbi-grid-12">
-        <!-- Left: 5 Columns Editorial Text -->
-        <div class="hero-editorial" style="grid-column: span 5;">
-          <div class="hero-pill-badge">Выставка сезона 2026 / Монохром</div>
-          <h1 class="hero-title">Геометрия света и тишины</h1>
-          <p class="hero-text">
-            Кураторская подборка архитектурной и природной фотографии. Исследование формы, негативного пространства и осязаемой тишины в работах современных мастеров аналоговой печати.
-          </p>
-          <div style="display: flex; gap: 16px; align-items: center;">
-            <a href="#exhibition" class="btn-terracotta">
-              Смотреть экспозицию
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <span style="font-size: 13px; color: var(--gl-text-muted);">24 работы в залах</span>
-          </div>
-        </div>
+  <!-- Navigation Tabs -->
+  <div class="mobbi-container">
+    <div class="gallery-tabs-bar" role="tablist">
+      <button class="gallery-tab-btn active" data-tab="exhibition" onclick="switchGalleryTab('exhibition')">
+        🖼️ Экспозиция 2026
+      </button>
+      <button class="gallery-tab-btn" data-tab="manifesto" onclick="switchGalleryTab('manifesto')">
+        📜 Кураторский манифест
+      </button>
+      <button class="gallery-tab-btn" data-tab="prints" onclick="switchGalleryTab('prints')">
+        🎨 Конфигуратор отпечатков
+      </button>
+      <button class="gallery-tab-btn" data-tab="contact" onclick="switchGalleryTab('contact')">
+        ✉️ Запрос куратору
+      </button>
+    </div>
+  </div>
 
-        <!-- Right: 7 Columns Dominant Photo with Parallax -->
-        <div style="grid-column: span 7;">
-          <div class="hero-photo-frame" data-tilt data-tilt-max="4">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=85" alt="Минималистичная геометрия света" loading="eager">
-            <div class="hero-photo-caption">
-              <div>
-                <strong>«Структура утреннего луча», № 04</strong>
-                <div style="opacity: 0.75; font-size: 12px;">Серебряно-желатиновая печать, 90 × 120 см</div>
+  <!-- Main Content Views -->
+  <main class="mobbi-container">
+
+    <!-- TAB 1: EXHIBITION & MASONRY -->
+    <div id="tab-exhibition" class="gallery-view-panel active">
+      <!-- Hero Section -->
+      <section class="gallery-hero">
+        <div class="mobbi-grid-12">
+          <!-- Left: 5 Columns Editorial Text -->
+          <div class="hero-editorial" style="grid-column: span 5;">
+            <div class="hero-pill-badge">Выставка сезона 2026 / Монохром</div>
+            <h1 class="hero-title">Геометрия света и тишины</h1>
+            <p class="hero-text">
+              Кураторская подборка архитектурной и природной фотографии. Исследование формы, негативного пространства и осязаемой тишины в работах современных мастеров аналоговой печати.
+            </p>
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <button onclick="document.getElementById('exhibition-gallery').scrollIntoView({ behavior: 'smooth' })" class="btn-terracotta">
+                Смотреть работы в залах
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <span style="font-size: 13px; color: var(--gl-text-muted);">24 работы в залах</span>
+            </div>
+          </div>
+
+          <!-- Right: 7 Columns Dominant Photo with Parallax -->
+          <div style="grid-column: span 7;">
+            <div class="hero-photo-frame" data-tilt data-tilt-max="4" onclick="openLightbox('«Структура утреннего луча», № 04', 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=85', 'Hasselblad 907X · XCD 45mm f/4 · 1/250s · ISO 64')">
+              <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=85" alt="Минималистичная геометрия света" loading="eager">
+              <div class="hero-photo-caption">
+                <div>
+                  <strong>«Структура утреннего луча», № 04</strong>
+                  <div style="opacity: 0.75; font-size: 12px;">Серебряно-желатиновая печать, 90 × 120 см</div>
+                </div>
+                <span class="card-tag">Зал 1</span>
               </div>
-              <span class="card-tag">Зал 1</span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Catalog Section with Filter Pills -->
+      <section id="exhibition-gallery" style="padding: var(--space-12) 0;">
+        <div class="catalog-controls">
+          <div>
+            <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 700; margin-bottom: 4px;">Основная экспозиция</h2>
+            <p style="color: var(--gl-text-muted); font-size: 15px;">Асимметричная витрина с переменным ритмом кадрирования (кликните для EXIF-лупы)</p>
+          </div>
+          <div class="filter-pills">
+            <button class="filter-btn active" onclick="filterGallery('all', this)">Все залы (18)</button>
+            <button class="filter-btn" onclick="filterGallery('architecture', this)">Архитектура</button>
+            <button class="filter-btn" onclick="filterGallery('nature', this)">Природа</button>
+            <button class="filter-btn" onclick="filterGallery('portrait', this)">Портреты</button>
+          </div>
+        </div>
+
+        <!-- Masonry Editorial Grid -->
+        <div id="gallery-container" class="gallery-grid">
+          <!-- Card 1: Vertical Portrait 3:4 -->
+          <div class="gallery-card col-portrait" data-tilt data-category="architecture" onclick="openLightbox('Пассаж теней', 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80', 'Leica M11 Monochrom · 35mm f/1.4 · 1/500s · ISO 100')">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Пассаж теней" loading="lazy">
+            </div>
+            <div class="card-content">
+              <div>
+                <div class="card-title">Пассаж теней</div>
+                <div class="card-meta">Киото, 2025 · Серия «Медитация бетона»</div>
+              </div>
+              <span class="card-tag">3:4</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Landscape Pan 16:10 -->
+          <div class="gallery-card col-landscape" data-tilt data-category="nature" onclick="openLightbox('Линия горизонта в дымке', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80', 'Fujifilm GFX 100 II · GF 23mm f/4 · 1/125s · ISO 80')">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Горизонт" loading="lazy">
+            </div>
+            <div class="card-content">
+              <div>
+                <div class="card-title">Линия горизонта в дымке</div>
+                <div class="card-meta">Норвежские фьорды · Панорамный кадр</div>
+              </div>
+              <span class="card-tag">Панорама</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Square Detail 1:1 -->
+          <div class="gallery-card col-square" data-tilt data-category="portrait" onclick="openLightbox('Взгляд сквозь дождь', 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', 'Rolleiflex 2.8F · Carl Zeiss Planar 80mm · Kodak Tri-X 400')">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Взгляд" loading="lazy">
+            </div>
+            <div class="card-content">
+              <div>
+                <div class="card-title">Взгляд сквозь дождь</div>
+                <div class="card-meta">Студийный отпечаток № 12</div>
+              </div>
+              <span class="card-tag">1:1</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Landscape 16:10 -->
+          <div class="gallery-card col-landscape" data-tilt data-category="architecture" onclick="openLightbox('Фрагмент фасада Баухаус', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80', 'Canon EOS R5 · RF 24-70mm f/2.8 · 1/640s · ISO 100')">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Баухаус" loading="lazy">
+            </div>
+            <div class="card-content">
+              <div>
+                <div class="card-title">Фрагмент фасада Баухаус</div>
+                <div class="card-meta">Дессау · Ритм оконных проемов</div>
+              </div>
+              <span class="card-tag">16:10</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Vertical Portrait -->
+          <div class="gallery-card col-portrait" data-tilt data-category="nature" onclick="openLightbox('Монолит на закате', 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80', 'Sony A7R V · FE 70-200mm f/2.8 GM II · 1/320s · ISO 125')">
+            <div class="card-img-wrap">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Монолит" loading="lazy">
+            </div>
+            <div class="card-content">
+              <div>
+                <div class="card-title">Монолит на закате</div>
+                <div class="card-meta">Доломиты · Естественный свет</div>
+              </div>
+              <span class="card-tag">3:4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- State Demo Placeholder -->
+        <div id="demo-state-container" style="display: none; padding: 60px 0;">
+          <div style="background: white; border-radius: 24px; padding: 48px; text-align: center; max-width: 600px; margin: 0 auto; box-shadow: 0 8px 30px rgba(0,0,0,0.06);">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(217, 78, 58, 0.1); color: var(--gl-accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 22px; margin-bottom: 8px;">Экспозиция временно обновляется</h3>
+            <p style="color: var(--gl-text-muted); font-size: 15px; margin-bottom: 24px;">
+              Куратор проводит ротацию кадров. Полный архив из 42 работ доступен по закрытой аккредитации.
+            </p>
+            <button class="btn-terracotta" onclick="toggleDemoState()">Вернуться к витрине</button>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
 
-  <!-- Catalog Section with Filter Pills -->
-  <section id="exhibition" style="padding: var(--space-12) 0;">
-    <div class="mobbi-container">
-      <div class="catalog-controls">
-        <div>
-          <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 700; margin-bottom: 4px;">Основная экспозиция</h2>
-          <p style="color: var(--gl-text-muted); font-size: 15px;">Асимметричная витрина с переменным ритмом кадрирования</p>
-        </div>
-        <div class="filter-pills">
-          <button class="filter-btn active" onclick="filterGallery('all', this)">Все залы (18)</button>
-          <button class="filter-btn" onclick="filterGallery('architecture', this)">Архитектура</button>
-          <button class="filter-btn" onclick="filterGallery('nature', this)">Природа</button>
-          <button class="filter-btn" onclick="filterGallery('portrait', this)">Портреты</button>
-        </div>
-      </div>
+    <!-- TAB 2: CURATORIAL MANIFESTO -->
+    <div id="tab-manifesto" class="gallery-view-panel">
+      <section style="background: white; border-radius: 20px; padding: 48px 36px; border: 1px solid var(--gl-border); max-width: 900px; margin: 0 auto 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        <span style="font-family: var(--font-mono); font-size: 12px; color: var(--gl-accent); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">Манифест куратора</span>
+        <h2 style="font-family: var(--font-display); font-size: 36px; font-weight: 700; color: #1E1E24; margin: 12px 0 24px;">
+          Эстетика паузы в эпоху избыточных образов
+        </h2>
 
-      <!-- Masonry Editorial Grid -->
-      <div id="gallery-container" class="gallery-grid">
-        <!-- Card 1: Vertical Portrait 3:4 -->
-        <div class="gallery-card col-portrait" data-tilt data-category="architecture" onclick="showToast('Открыт детальный просмотр: «Пассаж теней»')">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Пассаж теней" loading="lazy">
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="card-title">Пассаж теней</div>
-              <div class="card-meta">Киото, 2025 · Серия «Медитация бетона»</div>
-            </div>
-            <span class="card-tag">3:4</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Landscape Pan 16:10 -->
-        <div class="gallery-card col-landscape" data-tilt data-category="nature" onclick="showToast('Открыт детальный просмотр: «Линия горизонта в дымке»')">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Горизонт" loading="lazy">
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="card-title">Линия горизонта в дымке</div>
-              <div class="card-meta">Норвежские фьорды · Панорамный кадр</div>
-            </div>
-            <span class="card-tag">Панорама</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Square Detail 1:1 -->
-        <div class="gallery-card col-square" data-tilt data-category="portrait" onclick="showToast('Открыт детальный просмотр: «Взгляд сквозь дождь»')">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Взгляд" loading="lazy">
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="card-title">Взгляд сквозь дождь</div>
-              <div class="card-meta">Студийный отпечаток № 12</div>
-            </div>
-            <span class="card-tag">1:1</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Landscape 16:10 -->
-        <div class="gallery-card col-landscape" data-tilt data-category="architecture" onclick="showToast('Открыт детальный просмотр: «Фрагмент фасада Баухаус»')">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Баухаус" loading="lazy">
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="card-title">Фрагмент фасада Баухаус</div>
-              <div class="card-meta">Дессау · Ритм оконных проемов</div>
-            </div>
-            <span class="card-tag">16:10</span>
-          </div>
-        </div>
-
-        <!-- Card 5: Vertical Portrait -->
-        <div class="gallery-card col-portrait" data-tilt data-category="nature" onclick="showToast('Открыт детальный просмотр: «Монолит на закате»')">
-          <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Монолит" loading="lazy">
-          </div>
-          <div class="card-content">
-            <div>
-              <div class="card-title">Монолит на закате</div>
-              <div class="card-meta">Доломиты · Естественный свет</div>
-            </div>
-            <span class="card-tag">3:4</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- State Demo Placeholder (Hidden by default) -->
-      <div id="demo-state-container" style="display: none; padding: 60px 0;">
-        <div style="background: white; border-radius: 24px; padding: 48px; text-align: center; max-width: 600px; margin: 0 auto; box-shadow: 0 8px 30px rgba(0,0,0,0.06);">
-          <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(217, 78, 58, 0.1); color: var(--gl-accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <h3 style="font-family: var(--font-display); font-size: 22px; margin-bottom: 8px;">Экспозиция временно обновляется</h3>
-          <p style="color: var(--gl-text-muted); font-size: 15px; margin-bottom: 24px;">
-            Куратор проводит ротацию кадров. Полный архив из 42 работ доступен по закрытой аккредитации.
+        <div style="font-size: 16px; line-height: 1.8; color: #4B5563; display: flex; flex-direction: column; gap: 20px;">
+          <p>
+            В цифровом шуме мы утратили способность вглядываться. Изображение стало мимолетным импульсом в ленте, длящимся доли секунды. LUMEN задуман как пространство замедления — виртуальная музейная тишина, где каждый кадр получает право на собственное время и воздух.
           </p>
-          <button class="btn-terracotta" onclick="toggleDemoState()">Вернуться к витрине</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Curatorial Quote Banner -->
-  <section id="series" class="mobbi-container">
-    <div class="curator-quote-section">
-      <div class="quote-mark">“</div>
-      <p class="curator-text">
-        Фотография премиального уровня требует не избытка цвета, а чистоты пространства. Каждый кадр в LUMEN дышит благодаря отказу от визуального шума.
-      </p>
-      <div style="display: flex; align-items: center; gap: 16px;">
-        <div style="width: 48px; height: 48px; border-radius: 50%; background: #2C2C2C; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-          ЭК
+          <div style="border-left: 3px solid var(--gl-accent); padding-left: 24px; font-style: italic; color: #1F2937; font-size: 18px; margin: 16px 0;">
+            «Фотография премиального уровня требует не избытка цвета, а чистоты пространства. Каждый кадр в LUMEN дышит благодаря отказу от визуального шума».
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: #111827; margin-top: 12px;">
+            Серебряно-желатиновая аналоговая печать
+          </h3>
+          <p>
+            Работы выставки отпечатаны классическим оптическим методом в темной комнате на архивной баритовой бумаге двойной плотности. Этот метод обеспечивает глубокий бархатистый черный тон (D-max &gt; 2.2) и архивную стойкость отпечатков более 100 лет без потери тонального богатства.
+          </p>
         </div>
-        <div>
-          <strong style="display: block; font-size: 15px;">Эрик Клейн</strong>
-          <span style="font-size: 13px; color: var(--gl-text-muted);">Главный куратор архива современного кадра</span>
+
+        <div style="display: flex; align-items: center; gap: 16px; margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--gl-border);">
+          <div style="width: 52px; height: 52px; border-radius: 50%; background: #2C2C2C; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
+            ЭК
+          </div>
+          <div>
+            <strong style="display: block; font-size: 16px; color: #111827;">Эрик Клейн</strong>
+            <span style="font-size: 13px; color: var(--gl-text-muted);">Главный куратор архива современного кадра</span>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
-  </section>
+
+    <!-- TAB 3: FINE ART PRINT CONFIGURATOR -->
+    <div id="tab-prints" class="gallery-view-panel">
+      <section style="background: white; border-radius: 20px; padding: 40px 32px; border: 1px solid var(--gl-border); max-width: 900px; margin: 0 auto 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #1E1E24; margin-bottom: 8px;">
+          Конфигуратор тиражных отпечатков
+        </h2>
+        <p style="color: var(--gl-text-muted); font-size: 15px; margin-bottom: 32px;">
+          Каждый отпечаток нумеруется автором, заверяется тисненым штампом галереи и сопровождается сертификатом подлинности Hahnemühle Certificate of Authenticity.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 32px;">
+          <!-- Size Selector -->
+          <div>
+            <label style="font-size: 13px; font-weight: 700; color: #374151; display: block; margin-bottom: 8px;">Формат отпечатка:</label>
+            <select id="print-size" onchange="calcPrintPrice()" style="width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--gl-border); font-size: 14px; background: #FAFAFA;">
+              <option value="a3" selected>A3 (30 × 42 см) — Лимитированный тираж 25 экз.</option>
+              <option value="a2">A2 (42 × 60 см) — Лимитированный тираж 15 экз.</option>
+              <option value="a1">A1 (60 × 84 см) — Коллекционный тираж 7 экз.</option>
+            </select>
+          </div>
+
+          <!-- Glass Type -->
+          <div>
+            <label style="font-size: 13px; font-weight: 700; color: #374151; display: block; margin-bottom: 8px;">Музейное стекло:</label>
+            <select id="print-glass" onchange="calcPrintPrice()" style="width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--gl-border); font-size: 14px; background: #FAFAFA;">
+              <option value="standard" selected>Оптическое стекло с антибликом</option>
+              <option value="museum">Музейное стекло Tru Vue UltraVue UV92 (+4 500 ₽)</option>
+            </select>
+          </div>
+
+          <!-- Frame Material -->
+          <div>
+            <label style="font-size: 13px; font-weight: 700; color: #374151; display: block; margin-bottom: 8px;">Оформление в раму:</label>
+            <select id="print-frame" onchange="calcPrintPrice()" style="width: 100%; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--gl-border); font-size: 14px; background: #FAFAFA;">
+              <option value="none">Без рамы (в защитном тубусе)</option>
+              <option value="oak" selected>Массив белого ясеня с паспарту (+6 000 ₽)</option>
+              <option value="aluminum">Черный анодированный алюминий Nielsen (+7 500 ₽)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Calculated Summary Box -->
+        <div style="background: #FAFAFA; border: 1px solid var(--gl-border); border-radius: 14px; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+          <div>
+            <div style="font-size: 13px; color: var(--gl-text-muted);">Итоговая стоимость отпечатка:</div>
+            <div id="print-price-display" style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: var(--gl-accent); margin-top: 4px;">
+              24 000 ₽
+            </div>
+            <div style="font-size: 12px; color: #10B981; margin-top: 2px;">✔ Включает сертификат подлинности и бережную курьерскую доставку</div>
+          </div>
+          <button class="btn-terracotta" style="padding: 14px 28px; font-size: 14px;" onclick="orderPrintAction()">
+            Оформить заказ отпечатка
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 4: CURATOR INQUIRY & PRIVATE VIEWING -->
+    <div id="tab-contact" class="gallery-view-panel">
+      <section style="background: white; border-radius: 20px; padding: 40px 32px; border: 1px solid var(--gl-border); max-width: 800px; margin: 0 auto 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.04);">
+        <h2 style="font-family: var(--font-display); font-size: 32px; font-weight: 700; color: #1E1E24; margin-bottom: 8px;">
+          Запись на приватный просмотр
+        </h2>
+        <p style="color: var(--gl-text-muted); font-size: 15px; margin-bottom: 28px;">
+          Индивидуальный визит в выставочные залы в сопровождении куратора. Просмотр отпечатков при регулируемом музейном свете.
+        </p>
+
+        <form onsubmit="handleInquirySubmit(event)" style="display: flex; flex-direction: column; gap: 18px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+            <div>
+              <label style="font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">Ваше имя</label>
+              <input type="text" id="inq-name" required placeholder="Константин" style="width: 100%; padding: 12px 14px; border: 1px solid var(--gl-border); border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+            </div>
+            <div>
+              <label style="font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">Электронная почта</label>
+              <input type="email" id="inq-email" required placeholder="name@domain.com" style="width: 100%; padding: 12px 14px; border: 1px solid var(--gl-border); border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 13px; font-weight: 600; color: #374151; display: block; margin-bottom: 6px;">Интересующие серии или работы</label>
+            <input type="text" id="inq-notes" placeholder="Серия «Медитация бетона», отпечатки формата A2" style="width: 100%; padding: 12px 14px; border: 1px solid var(--gl-border); border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+          </div>
+
+          <button type="submit" class="btn-terracotta" style="align-self: flex-start; padding: 14px 28px; margin-top: 8px;">
+            Отправить запрос куратору
+          </button>
+        </form>
+      </section>
+    </div>
+
+  </main>
 
   <!-- Footer -->
   <footer class="mobbi-container">
     <div class="gallery-footer">
-      <div>© 2026 LUMEN Archive. Проект из портфолио Senior UI/UX разработчика.</div>
+      <div>© 2026 LUMEN Archive. Проект из портфолио Senior UI/UX разработчика Коровина Сергея.</div>
       <div style="display: flex; gap: 24px;">
-        <a href="fintech.html" style="color: var(--gl-accent); font-weight: 600;">Перейти к проекту 2: Финтех →</a>
+        <a href="index.html" style="color: var(--gl-accent); font-weight: 600;">← На главную портфолио</a>
       </div>
     </div>
   </footer>
 
   <!-- Photo Lightbox Modal with EXIF metadata -->
-  <div id="gallery-lightbox" style="position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px;">
+  <div id="gallery-lightbox" style="position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px;" onclick="closeLightbox()">
     <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 24px; background: none; border: none; color: white; font-size: 28px; cursor: pointer;">&times;</button>
-    <div style="max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div style="max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;" onclick="event.stopPropagation()">
       <img id="lightbox-img" src="" alt="Zoom" style="max-height: 70vh; max-width: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);" loading="lazy">
       <div style="margin-top: 18px; color: #CBD5E1; text-align: center; font-size: 13.5px;">
         <h4 id="lightbox-title" style="color: white; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Название работы</h4>
@@ -274,6 +399,27 @@
       showToast(`Освещение залов: ${lightingModes[lightIdx]}`);
     }
 
+    // Tab Switcher Router
+    function switchGalleryTab(tabId) {
+      document.querySelectorAll('.gallery-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+      });
+      document.querySelectorAll('.gallery-view-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === `tab-${tabId}`);
+      });
+      if (window.location.hash !== `#${tabId}`) {
+        history.replaceState(null, '', `#${tabId}`);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(`tab-${hash}`)) {
+        switchGalleryTab(hash);
+      }
+    });
+
     function openLightbox(title, imgSrc, exif) {
       const box = document.getElementById('gallery-lightbox');
       document.getElementById('lightbox-img').src = imgSrc;
@@ -287,18 +433,6 @@
       document.getElementById('gallery-lightbox').style.display = 'none';
       document.body.style.overflow = '';
     }
-
-    // Attach click to all gallery image cards
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.gallery-card').forEach(card => {
-        card.style.cursor = 'zoom-in';
-        card.addEventListener('click', () => {
-          const img = card.querySelector('img')?.src;
-          const title = card.querySelector('h3, strong')?.textContent || 'Экспонат LUMEN';
-          openLightbox(title, img, 'Leica M11 Monochrom · 50mm APO f/2 · 1/1000s · ISO 64');
-        });
-      });
-    });
 
     function toggleDemoState() {
       const grid = document.getElementById('gallery-container');
@@ -326,7 +460,37 @@
           card.style.display = 'none';
         }
       });
-      showToast(`Фильтр применен: ${btn.textContent.trim()}`);
+      showToast(`Фильтр залов: ${btn.textContent.trim()}`);
+    }
+
+    // Print Configurator
+    function calcPrintPrice() {
+      const size = document.getElementById('print-size').value;
+      const glass = document.getElementById('print-glass').value;
+      const frame = document.getElementById('print-frame').value;
+
+      let base = 18000;
+      if (size === 'a2') base = 28000;
+      if (size === 'a1') base = 44000;
+
+      if (glass === 'museum') base += 4500;
+      if (frame === 'oak') base += 6000;
+      if (frame === 'aluminum') base += 7500;
+
+      document.getElementById('print-price-display').textContent = `${base.toLocaleString('ru-RU')} ₽`;
+    }
+
+    function orderPrintAction() {
+      showToast('Заказ отпечатка сформирован! Менеджер галереи свяжется для уточнения доставки.');
+    }
+
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('inq-name').value;
+      showToast(`Запрос принят, ${name}! Куратор подтвердит время визита письмом.`);
+      document.getElementById('inq-name').value = '';
+      document.getElementById('inq-email').value = '';
+      document.getElementById('inq-notes').value = '';
     }
   </script>
 </body>
