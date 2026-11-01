@@ -527,9 +527,23 @@ body.fintech-theme {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
+  /* Elimination of Horizontal Scroll: Adaptive Bento Segmented Grid */
   .sidebar-menu {
-    flex-direction: row;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 6px;
+    padding: 10px;
+    overflow-x: visible;
+  }
+  .sidebar-menu-item a {
+    padding: 8px 10px;
+    font-size: 12.5px;
+    gap: 8px;
+    justify-content: flex-start;
+    border-radius: 8px;
+  }
+  .sidebar-menu-item.active a::before {
+    display: none;
   }
   .sidebar-bottom {
     display: none;
@@ -542,6 +556,21 @@ body.fintech-theme {
   }
   .fintech-workspace {
     padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sidebar-menu-item:last-child {
+    grid-column: span 2;
+  }
+  .sidebar-menu-item a {
+    justify-content: center;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 12px;
   }
 }
 

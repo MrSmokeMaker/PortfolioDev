@@ -72,20 +72,20 @@
     </div>
   </header>
 
-  <!-- Navigation Tabs Bar -->
+  <!-- Navigation Tabs Bar (Adaptive Segmented Grid, No Horizontal Scroll) -->
   <div class="store-container">
     <div class="store-tabs-bar" role="tablist">
       <button class="store-tab-btn active" data-tab="catalog" onclick="switchStoreTab('catalog')">
-        🛍️ Каталог товаров
+        🛍️ <span>Каталог</span>
       </button>
       <button class="store-tab-btn" data-tab="lookbook" onclick="switchStoreTab('lookbook')">
-        📖 Лукбук коллекций 2026
+        📖 <span>Лукбук 2026</span>
       </button>
       <button class="store-tab-btn" data-tab="cart" onclick="switchStoreTab('cart')">
-        🛒 Корзина и оформление
+        🛒 <span>Корзина</span>
       </button>
       <button class="store-tab-btn" data-tab="tracking" onclick="switchStoreTab('tracking')">
-        📦 Трекинг посылки
+        📦 <span>Трекинг</span>
       </button>
     </div>
   </div>
@@ -200,7 +200,7 @@
           Бесплатная застрахованная курьерская доставка при заказе от 10 000 ₽.
         </p>
 
-        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: flex-start;">
+        <div class="cart-checkout-layout">
           <!-- Cart Items Table -->
           <div style="background: var(--store-surface); border: 1px solid var(--store-border); border-radius: var(--radius-md); padding: 20px;" id="full-cart-items-container">
             <!-- Rendered by JS -->
@@ -652,19 +652,21 @@
               if (!prod) return '';
               subtotal += prod.price * item.qty;
               return `
-                <div style="display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--store-border); padding-bottom: 14px;">
-                  <img src="${prod.img}" style="width: 58px; height: 58px; border-radius: 8px; object-fit: cover;">
-                  <div style="flex: 1;">
+                <div class="full-cart-item-row">
+                  <img src="${prod.img}" class="full-cart-img" alt="${prod.title}">
+                  <div class="full-cart-info">
                     <div style="font-weight: 700; font-size: 14.5px;">${prod.title}</div>
                     <div style="font-size: 12px; color: var(--store-text-muted);">${prod.selectedColor} • ${prod.price.toLocaleString('ru-RU')} ₽ / шт</div>
                   </div>
-                  <div class="cart-qty-ctrls">
-                    <button class="qty-btn" onclick="updateCartQty(${prod.id}, -1)">−</button>
-                    <span style="font-family: var(--font-mono); font-size: 13.5px;">${item.qty}</span>
-                    <button class="qty-btn" onclick="updateCartQty(${prod.id}, 1)">+</button>
-                  </div>
-                  <div style="font-family: var(--font-mono); font-weight: 700; font-size: 14px; min-width: 90px; text-align: right;">
-                    ${(prod.price * item.qty).toLocaleString('ru-RU')} ₽
+                  <div class="full-cart-actions">
+                    <div class="cart-qty-ctrls">
+                      <button class="qty-btn" onclick="updateCartQty(${prod.id}, -1)">−</button>
+                      <span style="font-family: var(--font-mono); font-size: 13.5px;">${item.qty}</span>
+                      <button class="qty-btn" onclick="updateCartQty(${prod.id}, 1)">+</button>
+                    </div>
+                    <div class="full-cart-price">
+                      ${(prod.price * item.qty).toLocaleString('ru-RU')}&nbsp;₽
+                    </div>
                   </div>
                 </div>
               `;

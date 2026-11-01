@@ -69,13 +69,8 @@ body.audio-theme {
   padding: 6px;
   margin: 16px auto 24px;
   max-width: 840px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.audio-tabs-bar::-webkit-scrollbar {
-  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .audio-tab-btn {
@@ -375,7 +370,6 @@ body.audio-theme {
   display: flex;
   gap: 6px;
   flex: 1;
-  overflow-x: auto;
 }
 
 .seq-step-btn {
@@ -467,4 +461,55 @@ body.audio-theme {
   .synth-station-card { grid-column: span 12; }
   .vinyl-deck-card { grid-column: span 12; }
   .spatial-stage-card { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  /* Elimination of Horizontal Scroll: Adaptive 2-Column Bento Segmented Grid */
+  .audio-tabs-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+    margin: 12px 0 20px;
+    border-radius: 12px;
+  }
+
+  .audio-tab-btn {
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 13px;
+    min-height: 40px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* 16-Step Sequencer: Responsive 8-step Dual-Bar Grid (Fits all 360px+ screens without scroll) */
+  .seq-track-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--au-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+
+  .seq-track-label {
+    width: 100%;
+    font-size: 11.5px;
+  }
+
+  .seq-steps-wrap {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+    width: 100%;
+    overflow-x: visible;
+  }
+
+  .seq-step-btn {
+    width: 100%;
+    min-width: 0;
+    height: 32px;
+  }
 }

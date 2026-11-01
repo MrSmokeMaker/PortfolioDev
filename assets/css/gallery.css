@@ -54,11 +54,9 @@ body.gallery-theme {
   padding: 6px;
   margin: 16px auto 24px;
   max-width: 860px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  justify-content: center;
+  align-items: center;
 }
-.gallery-tabs-bar::-webkit-scrollbar { display: none; }
 
 .gallery-tab-btn {
   display: inline-flex;
@@ -566,5 +564,47 @@ body.gallery-theme {
   }
   .curator-quote-section {
     padding: var(--space-8) var(--space-6);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Elimination of Horizontal Scroll: Adaptive 2-Column Bento Segmented Grid */
+  .gallery-tabs-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+    margin: 12px 0 20px;
+    border-radius: 12px;
+  }
+
+  .gallery-tab-btn {
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 13px;
+    min-height: 40px;
+    text-align: center;
+    white-space: normal;
+  }
+
+  /* Catalog Controls Stack (Fix for Header & Filter Collision) */
+  .catalog-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .filter-btn {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }

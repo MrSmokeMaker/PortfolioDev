@@ -52,6 +52,8 @@ body.saas-theme {
 /* SaaS Navigation Tabs & Multi-page Views */
 .saas-tabs-bar {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
   background: rgba(30, 30, 40, 0.75);
   backdrop-filter: blur(12px);
@@ -60,11 +62,7 @@ body.saas-theme {
   padding: 6px;
   margin: 12px auto 28px;
   max-width: 860px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
-.saas-tabs-bar::-webkit-scrollbar { display: none; }
 
 .saas-tab-btn {
   display: inline-flex;
@@ -444,6 +442,27 @@ body.saas-theme {
   }
   .saas-nav-links {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Elimination of Horizontal Scroll: Adaptive 2x2 Bento Segmented Grid */
+  .saas-tabs-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+    margin: 12px 0 20px;
+    border-radius: 12px;
+  }
+
+  .saas-tab-btn {
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 13px;
+    min-height: 40px;
+    text-align: center;
+    white-space: normal;
   }
 }
 

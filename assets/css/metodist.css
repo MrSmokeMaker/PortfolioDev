@@ -73,13 +73,6 @@ body.metodist-theme {
   padding: 6px;
   margin: 24px auto 40px;
   max-width: 840px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.met-tabs-bar::-webkit-scrollbar {
-  display: none;
 }
 
 .met-tab-btn {
@@ -431,17 +424,30 @@ body.metodist-theme {
   }
 }
 
+@media (max-width: 768px) {
+  /* Elimination of Horizontal Scroll: Adaptive 2x2 Bento Segmented Grid */
+  .met-tabs-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+    margin: 16px 0 24px;
+    border-radius: 12px;
+  }
+
+  .met-tab-btn {
+    justify-content: center;
+    padding: 9px 8px;
+    font-size: 13px;
+    min-height: 40px;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
 @media (max-width: 640px) {
   .met-generator-box {
     padding: 20px 16px;
-  }
-  .met-tabs-bar {
-    justify-content: flex-start;
-    padding: 4px;
-  }
-  .met-tab-btn {
-    padding: 8px 12px;
-    font-size: 12.5px;
   }
   .btn-met-primary, .btn-met-secondary {
     width: 100%;
