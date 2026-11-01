@@ -253,6 +253,12 @@ a {
   }
 }
 
+/* Global viewport and overflow safety */
+html, body {
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
 /* ==========================================================================
    UNIVERSAL PROJECT NAVIGATION BAR (MOBILE & DESKTOP FIRST)
    ========================================================================== */
@@ -278,6 +284,7 @@ a {
   justify-content: space-between;
   gap: 12px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .site-nav-back {
@@ -305,7 +312,7 @@ a {
 
 .site-nav-project-picker {
   flex: 1;
-  max-width: 290px;
+  max-width: 320px;
   min-width: 140px;
   position: relative;
 }

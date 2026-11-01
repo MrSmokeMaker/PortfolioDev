@@ -558,8 +558,8 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
     { label: '⚡ Audio V2: AETHER Workstation (16-Step Sequencer)', category: 'Проекты V2', action: () => openDevicePreview('audio-v2.html', 'AETHER Workstation V2') },
     { label: '💎 Галерея V1: LUMEN Archive (Editorial)', category: 'Проекты V1', action: () => openDevicePreview('gallery.html', 'LUMEN Gallery V1') },
     { label: '⚡ Галерея V2: LUMEN Salon (Sotheby\'s Loupe & Bidding)', category: 'Проекты V2', action: () => openDevicePreview('gallery-v2.html', 'LUMEN Salon V2') },
-    { label: '💎 Крафт V1: CLAY & OCHRE (Mobbi Store)', category: 'Проекты V1', action: () => openDevicePreview('craft.html', 'CLAY & OCHRE V1') },
-    { label: '⚡ Крафт V2: CLAY & OCHRE Atelier (3D Canvas Lathe)', category: 'Проекты V2', action: () => openDevicePreview('craft-v2.html', 'CLAY & OCHRE Atelier V2') },
+    { label: '⭐ Флагман: Методист (Генератор уроков YandexGPT)', category: 'Проекты', action: () => openDevicePreview('metodist.html', 'Методист — AI Lesson Planner') },
+    { label: '🚀 Открыть приложение Методист (Live Web)', category: 'Внешние ссылки', action: () => window.open('https://mrsmokemaker.github.io/annmetodist/', '_blank') },
     { label: '🎨 Открыть Figma Design File (Коровин Сергей)', category: 'Figma', action: () => window.open('https://www.figma.com/design/NkmANyDIpsrxlzj6FTj2WA', '_blank') },
     { label: '📐 Открыть FigJam Architecture Board', category: 'Figma', action: () => window.open('https://www.figma.com/board/Zh0VIksvdMkhhxIm7RTABv', '_blank') },
     { label: 'Новости и хроника версий (Changelog v3.2)', category: 'Система', action: () => toggleChangelog() },
@@ -634,26 +634,32 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
   // 8. PROJECT ESTIMATOR LOGIC
   // --------------------------------------------------------------------------
   window.updateProjectEstimator = function () {
-    const screens = parseInt(document.getElementById('est-screens-range')?.value || '5', 10);
+    const screens = parseInt(document.getElementById('est-screens-range')?.value || '1', 10);
     const hasDesignSystem = document.getElementById('est-opt-ds')?.checked;
     const hasMotion = document.getElementById('est-opt-motion')?.checked;
     const hasBackend = document.getElementById('est-opt-backend')?.checked;
 
     const screensEl = document.getElementById('est-screens-val');
-    if (screensEl) screensEl.textContent = `${screens} ${screens === 1 ? 'экран' : screens < 5 ? 'экрана' : 'экранов'}`;
+    if (screensEl) {
+      if (screens === 1) {
+        screensEl.textContent = '1 экран (MVP / Лендинг)';
+      } else {
+        screensEl.textContent = `${screens} ${screens < 5 ? 'экрана' : 'экранов'}`;
+      }
+    }
 
-    // Base calculation
-    let days = Math.round(screens * 1.8);
-    let budget = screens * 25000;
+    // Base calculation centered at 50 000 ₽ for 1 screen
+    let days = 5 + (screens - 1) * 2;
+    let budget = 50000 + (screens - 1) * 15000;
 
-    if (hasDesignSystem) { days += 4; budget += 35000; }
-    if (hasMotion) { days += 3; budget += 30000; }
-    if (hasBackend) { days += 5; budget += 45000; }
+    if (hasDesignSystem) { days += 3; budget += 25000; }
+    if (hasMotion) { days += 2; budget += 20000; }
+    if (hasBackend) { days += 4; budget += 30000; }
 
-    const daysEl = document.getElementById('est-result-days');
+    const timelineEl = document.getElementById('est-result-timeline') || document.getElementById('est-result-days');
     const budgetEl = document.getElementById('est-result-budget');
 
-    if (daysEl) daysEl.textContent = `${days}–${days + 3} рабочих дней`;
+    if (timelineEl) timelineEl.textContent = `${days}–${days + 3} рабочих дней`;
     if (budgetEl) budgetEl.textContent = `от ${budget.toLocaleString('ru-RU')} ₽`;
   };
 

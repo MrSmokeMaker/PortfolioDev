@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Методист — Генерация конспектов уроков на базе YandexGPT | Коровин Сергей</title>
+  <meta name="description" content="Флагманский проект: интеллектуальная платформа генерации конспектов уроков, технологических карт и образовательных программ на базе YandexGPT. Разработчик — Коровин Сергей.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/metodist.css">
+</head>
+<body class="metodist-theme">
+
+  <!-- Ambient Light Mesh -->
+  <div class="metodist-ambient-mesh"></div>
+
+  <!-- Universal Project Navigation Bar (Clean V1 Single Edition) -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="metodist.html" selected>⭐ 1. Методист (AI EdTech Флагман)</option>
+          <option value="fintech.html">💎 2. VERTEX Capital (Финтех)</option>
+          <option value="saas.html">⚡ 3. NEXUS AI (AI-платформа)</option>
+          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Content -->
+  <main class="metodist-hero">
+    <div class="met-container" style="text-align: center;">
+
+      <div class="met-pill">
+        <span class="met-orb-pulse"></span>
+        <span>Флагманский проект в продакшене &bull; Powered by YandexGPT</span>
+      </div>
+
+      <h1 class="met-hero-title">
+        Интеллектуальный методист нового поколения <span class="met-gradient-text">для современных педагогов</span>
+      </h1>
+
+      <p class="met-hero-desc">
+        Автоматизированная генерация технологических карт, конспектов уроков и образовательных траекторий. Строгое соответствие дидактике ФГОС, таксономия Блума и мгновенный экспорт в продакшн.
+      </p>
+
+      <div class="met-cta-row">
+        <a href="https://mrsmokemaker.github.io/annmetodist/" target="_blank" rel="noopener noreferrer" class="btn-met-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Открыть живое приложение (Live App) ↗</span>
+        </a>
+        <button class="btn-met-secondary" onclick="switchMetTab('tab-sandbox')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <span>Запустить песочницу генерации</span>
+        </button>
+      </div>
+
+      <!-- Functional Multi-Page Tabs Bar -->
+      <nav class="met-tabs-bar" role="tablist" aria-label="Разделы системы Методист">
+        <button class="met-tab-btn active" onclick="switchMetTab('tab-overview', this)" role="tab" aria-selected="true" id="btn-tab-overview">
+          ⚡ 1. Обзор & Архитектура ИИ
+        </button>
+        <button class="met-tab-btn" onclick="switchMetTab('tab-sandbox', this)" role="tab" aria-selected="false" id="btn-tab-sandbox">
+          ✨ 2. Конструктор уроков (Sandbox)
+        </button>
+        <button class="met-tab-btn" onclick="switchMetTab('tab-bloom', this)" role="tab" aria-selected="false" id="btn-tab-bloom">
+          🧠 3. Таксономия Блума
+        </button>
+        <button class="met-tab-btn" onclick="switchMetTab('tab-integration', this)" role="tab" aria-selected="false" id="btn-tab-integration">
+          📱 4. PWA & Интеграции
+        </button>
+      </nav>
+
+      <!-- ==========================================
+           TAB 1: OVERVIEW & ARCHITECTURE
+           ========================================== -->
+      <section id="tab-overview" class="met-tab-panel active" role="tabpanel" aria-labelledby="btn-tab-overview">
+        <div class="met-cards-grid">
+          <div class="met-card">
+            <div class="met-card-icon">⚡</div>
+            <h3>YandexGPT Prompt Chains</h3>
+            <p>Глубокая инженерная цепочка промптов с валидацией тайминга этапов урока, формулировкой дидактических задач и автоматическим подбором вопросов на понимание.</p>
+          </div>
+          <div class="met-card">
+            <div class="met-card-icon">🎯</div>
+            <h3>Стандарты ФГОС и Блума</h3>
+            <p>Каждый сгенерированный конспект распределяет задания по 6 уровням когнитивной сложности, предотвращая поверхностное заучивание и стимулируя аналитическое мышление.</p>
+          </div>
+          <div class="met-card">
+            <div class="met-card-icon">🚀</div>
+            <h3>Кроссплатформенный Flutter & PWA</h3>
+            <p>Ультра-быстрое клиентское приложение с поддержкой офлайн-режима, моментальной установкой на iOS и Android и тактильной микро-анимацией интерфейса.</p>
+          </div>
+        </div>
+
+        <!-- Metrics Row -->
+        <div style="background: var(--met-surface); border: 1px solid var(--met-border); border-radius: 16px; padding: 28px; margin-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+          <div>
+            <div style="font-size: 32px; font-weight: 800; color: #A78BFA; font-family: var(--font-display);">12 сек</div>
+            <div style="font-size: 13px; color: var(--met-text-muted); margin-top: 4px;">Среднее время синтеза урока</div>
+          </div>
+          <div>
+            <div style="font-size: 32px; font-weight: 800; color: #38BDF8; font-family: var(--font-display);">45 000+</div>
+            <div style="font-size: 13px; color: var(--met-text-muted); margin-top: 4px;">Сформированных конспектов</div>
+          </div>
+          <div>
+            <div style="font-size: 32px; font-weight: 800; color: #34D399; font-family: var(--font-display);">100%</div>
+            <div style="font-size: 13px; color: var(--met-text-muted); margin-top: 4px;">Соответствие структуре технологической карты</div>
+          </div>
+          <div>
+            <div style="font-size: 32px; font-weight: 800; color: #FBBF24; font-family: var(--font-display);">0 ₽</div>
+            <div style="font-size: 13px; color: var(--met-text-muted); margin-top: 4px;">Бесплатный открытый доступ</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 2: INTERACTIVE LESSON BUILDER (SANDBOX)
+           ========================================== -->
+      <section id="tab-sandbox" class="met-tab-panel" role="tabpanel" aria-labelledby="btn-tab-sandbox">
+        <div class="met-generator-box">
+          <div style="text-align: left; margin-bottom: 24px;">
+            <div class="met-stage-pill" style="display: inline-block; margin-bottom: 8px;">Интерактивная песочница</div>
+            <h2 style="font-size: 24px; font-weight: 800; color: #FFFFFF; margin: 0 0 6px;">Сгенерируйте сценарий урока в реальном времени</h2>
+            <p style="font-size: 14px; color: var(--met-text-muted); margin: 0;">Выберите предмет, класс и тему урока для запуска нейросетевого пайплайна Методиста.</p>
+          </div>
+
+          <div class="met-form-grid">
+            <div class="met-field-group">
+              <label class="met-label" for="met-subject">Предмет / Дисциплина:</label>
+              <select id="met-subject" class="met-select">
+                <option value="Информатика и программирование">Информатика и программирование</option>
+                <option value="Математика и геометрия">Математика и геометрия</option>
+                <option value="Физика и механика">Физика и механика</option>
+                <option value="UX/UI дизайн и продуктоводство">UX/UI дизайн и продуктоводство</option>
+                <option value="Английский язык">Английский язык</option>
+              </select>
+            </div>
+
+            <div class="met-field-group">
+              <label class="met-label" for="met-grade">Целевая аудитория / Класс:</label>
+              <select id="met-grade" class="met-select">
+                <option value="7-8 класс (Базовый уровень)">7-8 класс (Базовый уровень)</option>
+                <option value="9-11 класс (Профильный уровень)">9-11 класс (Профильный уровень)</option>
+                <option value="Студенты вузов & Junior специалисты">Студенты вузов & Junior специалисты</option>
+              </select>
+            </div>
+
+            <div class="met-field-group" style="grid-column: span 2;">
+              <label class="met-label" for="met-topic">Тема урока / Ключевой концепт:</label>
+              <input type="text" id="met-topic" class="met-input" value="Рекурсивные алгоритмы и стек вызовов в Python" placeholder="Введите тему занятия...">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap;">
+            <button class="btn-met-primary" onclick="runAiLessonGeneration()" id="btn-generate-lesson">
+              <span>⚡ Сгенерировать конспект урока с ИИ</span>
+            </button>
+            <button class="btn-met-secondary" onclick="resetLessonDemo()">
+              <span>Сбросить параметры</span>
+            </button>
+          </div>
+
+          <!-- Live Output Preview -->
+          <div class="met-output-card" id="lesson-output-area">
+            <div class="met-output-header">
+              <div>
+                <span class="met-stage-pill" id="lesson-status-badge">Готов к генерации</span>
+                <strong id="lesson-title-display" style="margin-left: 10px; font-size: 15px; color: #FFFFFF;">Технологическая карта урока</strong>
+              </div>
+              <button class="btn-met-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="copyLessonPlan()">
+                Скопировать конспект
+              </button>
+            </div>
+
+            <div id="lesson-body-content">
+              <div class="met-lesson-stage">
+                <div class="met-stage-time">00:00 — 05:00 • ЭТАП 1</div>
+                <div class="met-stage-title">Организационный момент и проблемная провокация</div>
+                <p class="met-stage-desc">
+                  Педагог задает проблемный вопрос: «Как решить задачу о Ханойской башне в 3 строки кода без циклов while/for?». Разбор понятия базового случая рекурсии на примере матрешки.
+                </p>
+              </div>
+
+              <div class="met-lesson-stage">
+                <div class="met-stage-time">05:00 — 22:00 • ЭТАП 2</div>
+                <div class="met-stage-title">Интерактивное погружение: анатомия Call Stack</div>
+                <p class="met-stage-desc">
+                  Демонстрация переполнения стека (RecursionError) в живом терминале. Совместное написание функции факториала и чисел Фибоначчи с визуализацией каждого кадра стека памяти.
+                </p>
+              </div>
+
+              <div class="met-lesson-stage">
+                <div class="met-stage-time">22:00 — 37:00 • ЭТАП 3</div>
+                <div class="met-stage-title">Групповой парный практикум (Live Coding)</div>
+                <p class="met-stage-desc">
+                  Ученики делятся на пары «Пилот/Штурман» и реализуют бинарный поиск рекурсивным способом. Проверка граничных условий (пустой список, элемент не найден).
+                </p>
+              </div>
+
+              <div class="met-lesson-stage">
+                <div class="met-stage-time">37:00 — 45:00 • ЭТАП 4</div>
+                <div class="met-stage-title">Рефлексия и дифференцированное ДЗ</div>
+                <p class="met-stage-desc">
+                  Экспресс-квиз из 3 тестовых вопросов на определение глубины рекурсии. Домашнее задание с выбором уровня сложности: от простого подсчета суммы цифр до рекурсивного обхода файловой системы.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 3: BLOOM'S TAXONOMY VISUALIZER
+           ========================================== -->
+      <section id="tab-bloom" class="met-tab-panel" role="tabpanel" aria-labelledby="btn-tab-bloom">
+        <div class="met-generator-box" style="text-align: left;">
+          <h2 style="font-size: 24px; font-weight: 800; color: #FFFFFF; margin: 0 0 8px;">Матрица таксономии Блума в алгоритмах Методиста</h2>
+          <p style="font-size: 14px; color: var(--met-text-muted); margin: 0 0 24px;">Нажмите на любой уровень когнитивной пирамиды, чтобы изучить дидактические глаголы и формулировки вопросов, которые ИИ закладывает в конспект.</p>
+
+          <div class="bloom-pyramid-wrap">
+            <div class="bloom-tier bloom-tier-6" onclick="showBloomDetails(6)">
+              <span>6. Создание (Create)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Спроектировать, разработать, составить</span>
+            </div>
+            <div class="bloom-tier bloom-tier-5" onclick="showBloomDetails(5)">
+              <span>5. Оценка (Evaluate)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Обосновать, сравнить, верифицировать</span>
+            </div>
+            <div class="bloom-tier bloom-tier-4" onclick="showBloomDetails(4)">
+              <span>4. Анализ (Analyze)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Классифицировать, декомпозировать</span>
+            </div>
+            <div class="bloom-tier bloom-tier-3" onclick="showBloomDetails(3)">
+              <span>3. Применение (Apply)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Решить по образцу, применить на практике</span>
+            </div>
+            <div class="bloom-tier bloom-tier-2" onclick="showBloomDetails(2)">
+              <span>2. Понимание (Understand)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Объяснить своими словами, перефразировать</span>
+            </div>
+            <div class="bloom-tier bloom-tier-1" onclick="showBloomDetails(1)">
+              <span>1. Знание (Remember)</span>
+              <span style="font-size: 12px; opacity: 0.9;">Воспроизвести термин, дать определение</span>
+            </div>
+          </div>
+
+          <div id="bloom-detail-box" style="background: var(--met-surface-elevated); border: 1px solid var(--met-border); border-radius: 12px; padding: 20px; margin-top: 20px;">
+            <h4 style="margin: 0 0 6px; color: #EC4899; font-size: 16px;" id="bloom-detail-title">Уровень 6: Создание (Create)</h4>
+            <p style="margin: 0; font-size: 14px; color: var(--met-text-muted);" id="bloom-detail-desc">
+              Наивысший когнитивный уровень. Учащийся синтезирует полученные знания для создания принципиально нового продукта (программы, сценария, концепции или доказательства). Методист формирует для этого открытые проектные кейсы.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 4: PWA & INTEGRATIONS
+           ========================================== -->
+      <section id="tab-integration" class="met-tab-panel" role="tabpanel" aria-labelledby="btn-tab-integration">
+        <div class="met-cards-grid">
+          <div class="met-card">
+            <div class="met-card-icon">📥</div>
+            <h3>PWA Offline Installation</h3>
+            <p>Приложение сохраняет все сгенерированные конспекты в локальный IndexedDB кэш и открывается без подключения к сети на любом мобильном устройстве или ноутбуке.</p>
+          </div>
+          <div class="met-card">
+            <div class="met-card-icon">📄</div>
+            <h3>Экспорт в DOCX / PDF / Notion</h3>
+            <p>Готовые технологические карты экспортируются с правильным школьным/вузовским оформлением таблиц ФГОС, готовым к распечатке или отправке завучу.</p>
+          </div>
+          <div class="met-card">
+            <div class="met-card-icon">🔗</div>
+            <h3>REST API для LMS</h3>
+            <p>Легкая интеграция с корпоративными порталами, Moodle, Stepik и авторскими платформами онлайн-школ через вебхуки и JSON-схемы.</p>
+          </div>
+        </div>
+
+        <div style="background: var(--met-surface); border: 1px solid var(--met-border); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 40px;">
+          <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin: 0 0 8px;">Попробуйте продакшн-версию прямо сейчас</h3>
+          <p style="font-size: 15px; color: var(--met-text-muted); max-width: 600px; margin: 0 auto 24px;">
+            Приложение развернуто на GitHub Pages и доступно без регистрации. Разработано Коровиным Сергеем.
+          </p>
+          <a href="https://mrsmokemaker.github.io/annmetodist/" target="_blank" rel="noopener noreferrer" class="btn-met-primary" style="font-size: 16px; padding: 14px 32px;">
+            Перейти в приложение: mrsmokemaker.github.io/annmetodist ↗
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Tab switching engine with deep link support
+    function switchMetTab(tabId, btn) {
+      document.querySelectorAll('.met-tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.met-tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+
+      const targetPanel = document.getElementById(tabId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+
+      if (btn) {
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+      } else {
+        const matchingBtn = document.getElementById('btn-' + tabId);
+        if (matchingBtn) {
+          matchingBtn.classList.add('active');
+          matchingBtn.setAttribute('aria-selected', 'true');
+        }
+      }
+      history.replaceState(null, null, '#' + tabId);
+    }
+
+    // Hash check on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash && document.getElementById(hash)) {
+        switchMetTab(hash);
+      }
+    });
+
+    // Bloom pyramid interactive explorer
+    const bloomData = {
+      6: { title: "Уровень 6: Создание (Create)", color: "#EC4899", desc: "Наивысший когнитивный уровень. Учащийся синтезирует полученные знания для создания принципиально нового продукта (программы, сценария, концепции или доказательства). Методист формирует для этого открытые проектные кейсы." },
+      5: { title: "Уровень 5: Оценка (Evaluate)", color: "#8B5CF6", desc: "Критическая верификация гипотез. Ученик аргументирует выбор решения, находит уязвимости в коде или тексте, сверяет соответствие критериям качества." },
+      4: { title: "Уровень 4: Анализ (Analyze)", color: "#3B82F6", desc: "Декомпозиция сложной структуры на составные части. Определение причинно-следственных связей и скрытых зависимостей." },
+      3: { title: "Уровень 3: Применение (Apply)", color: "#06B6D4", desc: "Решение типовых и практических задач в знакомой ситуации с переносом правила на новый аналогичный контекст." },
+      2: { title: "Уровень 2: Понимание (Understand)", color: "#10B981", desc: "Интерпретация смысла, пересказ алгоритма собственными словами, графическое иллюстрирование схемы." },
+      1: { title: "Уровень 1: Знание (Remember)", color: "#F59E0B", desc: "Базовое запоминание и точное воспроизведение терминов, формул, дат и определений без искажений." }
+    };
+
+    function showBloomDetails(tier) {
+      const data = bloomData[tier];
+      if (!data) return;
+      const titleEl = document.getElementById('bloom-detail-title');
+      const descEl = document.getElementById('bloom-detail-desc');
+      if (titleEl) {
+        titleEl.textContent = data.title;
+        titleEl.style.color = data.color;
+      }
+      if (descEl) {
+        descEl.textContent = data.desc;
+      }
+    }
+
+    // AI Lesson generation simulator
+    function runAiLessonGeneration() {
+      const subject = document.getElementById('met-subject')?.value || 'Информатика';
+      const grade = document.getElementById('met-grade')?.value || '8 класс';
+      const topic = document.getElementById('met-topic')?.value || 'Алгоритмы';
+      const btn = document.getElementById('btn-generate-lesson');
+      const statusBadge = document.getElementById('lesson-status-badge');
+      const titleDisplay = document.getElementById('lesson-title-display');
+      const contentEl = document.getElementById('lesson-body-content');
+
+      if (!contentEl) return;
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Нейросеть генерирует технологическую карту...</span>';
+      statusBadge.textContent = 'Обработка YandexGPT...';
+      statusBadge.style.background = 'rgba(245, 158, 11, 0.2)';
+      statusBadge.style.color = '#F59E0B';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<span>⚡ Сгенерировать конспект урока с ИИ</span>';
+        statusBadge.textContent = 'Урок сгенерирован (ФГОС ✓)';
+        statusBadge.style.background = 'rgba(16, 185, 129, 0.2)';
+        statusBadge.style.color = '#34D399';
+        titleDisplay.textContent = `${subject} (${grade}): ${topic}`;
+
+        contentEl.innerHTML = `
+          <div class="met-lesson-stage">
+            <div class="met-stage-time">00:00 — 04:00 • АКТУАЛИЗАЦИЯ</div>
+            <div class="met-stage-title">Целеполагание и интерактивный блиц-опрос</div>
+            <p class="met-stage-desc">
+              Вводная проблемная ситуация по теме «${topic}». Фронтальный диалог с классом: сопоставление терминов с реальными жизненными задачами.
+            </p>
+          </div>
+          <div class="met-lesson-stage">
+            <div class="met-stage-time">04:00 — 20:00 • ОСНОВНОЙ ЭТАП</div>
+            <div class="met-stage-title">Теоретический конструкт и разбор кейса</div>
+            <p class="met-stage-desc">
+              Пошаговый разбор концепта с фиксацией опорного конспекта. Визуальная схема на доске, формулировка дидактических выводов и выявление типичных ошибок.
+            </p>
+          </div>
+          <div class="met-lesson-stage">
+            <div class="met-stage-time">20:00 — 38:00 • ПРАКТИКУМ</div>
+            <div class="met-stage-title">Дифференцированная практика по Блуму</div>
+            <p class="met-stage-desc">
+              Задания уровня «Применение» и «Анализ». Индивидуальная работа с карточками самопроверки и консультационная поддержка педагога.
+            </p>
+          </div>
+          <div class="met-lesson-stage">
+            <div class="met-stage-time">38:00 — 45:00 • РЕФЛЕКСИЯ</div>
+            <div class="met-stage-title">Итоги, формирующее оценивание и домашнее задание</div>
+            <p class="met-stage-desc">
+              Чек-лист ключевых понятий. Вариативное домашнее задание: базовый уровень (закрепление правила) + творческий уровень (исследовательский мини-проект).
+            </p>
+          </div>
+        `;
+      }, 700);
+    }
+
+    function resetLessonDemo() {
+      document.getElementById('met-topic').value = 'Введение в алгоритмы и структуры данных';
+      runAiLessonGeneration();
+    }
+
+    function copyLessonPlan() {
+      const text = document.getElementById('lesson-body-content')?.innerText || '';
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Конспект урока скопирован в буфер обмена!');
+      }).catch(() => {});
+    }
+
+    function toggleGlobalTheme() {
+      const isDark = document.body.classList.toggle('light-theme');
+      localStorage.setItem('hub_theme', isDark ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>

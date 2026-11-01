@@ -299,18 +299,57 @@
         <!-- Filter Category Tabs -->
         <div class="filter-pills-wrap">
           <button class="filter-pill-btn active" onclick="filterProjectsCategory('all', this)">Все (6)</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('edtech', this)">⭐ EdTech & AI</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('fintech', this)">Финтех</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('saas', this)">AI & SaaS</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('medtech', this)">MedTech</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('audio', this)">Web Audio</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('art', this)">Галерея</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('craft', this)">Крафт</button>
         </div>
       </div>
 
       <div class="projects-grid">
 
-        <!-- Project 1: VERTEX Capital (Fintech) -->
+        <!-- Project 1: METODIST (Flagship AI EdTech) -->
+        <article class="project-card-full" data-project-cat="edtech" data-tilt data-tilt-max="3" style="border: 1px solid rgba(124, 92, 255, 0.4); box-shadow: 0 10px 40px rgba(124, 92, 255, 0.12);">
+          <div class="project-visual-side" style="background: radial-gradient(circle at 30% 30%, rgba(124, 92, 255, 0.3) 0%, #0D0F14 70%);">
+            <span class="project-live-indicator-tag" style="background: rgba(124, 92, 255, 0.85); color: #FFFFFF; font-weight: 700;">
+              <span class="status-pulse-dot" style="background: #FFFFFF;"></span>
+              ⭐ ФЛАГМАНСКИЙ ПРОДУКТ
+            </span>
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Методист — AI Lesson Planner" loading="eager">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #A78BFA; font-weight: 700;">EdTech & YandexGPT Prompt Engine</div>
+              <h3 class="project-name">Методист — Генератор конспектов уроков на базе YandexGPT</h3>
+              <p class="project-summary">
+                Интеллектуальная PWA-система на Flutter Web для педагогов и методистов. Автоматизирует проектирование технологических карт занятий, распределение заданий по таксономии Блума, формулировку дидактических целей и интерактивный практикум с мгновенным экспортом.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill" style="border-color: rgba(124, 92, 255, 0.4); color: #C4B5FD;">Flutter Web & PWA</span>
+                <span class="tech-tag-pill">YandexGPT AI Chains</span>
+                <span class="tech-tag-pill">Таксономия Блума</span>
+                <span class="tech-tag-pill">ФГОС Дидактика</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="https://mrsmokemaker.github.io/annmetodist/" target="_blank" rel="noopener noreferrer" class="btn-open-site" style="background: linear-gradient(135deg, #7C5CFF, #6366F1); border-color: #A78BFA; font-weight: 700;">
+                🚀 Открыть приложение (Live) ↗
+              </a>
+              <a href="metodist.html" class="btn-quick-preview" style="text-decoration: none; border-color: rgba(124, 92, 255, 0.35);">
+                💎 Интерактивное демо →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('metodist.html', 'Методист — Генератор уроков YandexGPT')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: VERTEX Capital (Fintech) -->
         <article class="project-card-full" data-project-cat="fintech" data-tilt data-tilt-max="3">
           <div class="project-visual-side" style="background: #0B1120;">
             <span class="project-live-indicator-tag">
@@ -334,13 +373,10 @@
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="fintech.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
+              <a href="fintech.html" class="btn-open-site" style="background: linear-gradient(135deg, #0284C7, #2563EB); border-color: #38BDF8;">
+                Открыть проект →
               </a>
-              <a href="fintech-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #0284C7, #2563EB); border-color: #38BDF8;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('fintech-v2.html', 'VERTEX Terminal V2 (Figma Edition)')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('fintech.html', 'VERTEX Terminal')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>
@@ -372,13 +408,10 @@
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="saas.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
+              <a href="saas.html" class="btn-open-site" style="background: linear-gradient(135deg, #059669, #10B981); border-color: #34D399;">
+                Открыть проект →
               </a>
-              <a href="saas-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #059669, #10B981); border-color: #34D399;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('saas-v2.html', 'NEXUS Studio V2 (Figma Edition)')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('saas.html', 'NEXUS Studio')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>
@@ -386,7 +419,7 @@
           </div>
         </article>
 
-        <!-- Project 3: PULSE (MedTech Telemetry) - NEW -->
+        <!-- Project 4: PULSE (MedTech Telemetry) -->
         <article class="project-card-full" data-project-cat="medtech" data-tilt data-tilt-max="3">
           <div class="project-visual-side" style="background: #070B12;">
             <span class="project-live-indicator-tag">
@@ -410,13 +443,10 @@
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="medtech.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
+              <a href="medtech.html" class="btn-open-site" style="background: linear-gradient(135deg, #0891B2, #06B6D4); border-color: #22D3EE;">
+                Открыть проект →
               </a>
-              <a href="medtech-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #0891B2, #06B6D4); border-color: #22D3EE;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('medtech-v2.html', 'PULSE ICU V2 (Figma Edition)')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('medtech.html', 'PULSE ICU')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>
@@ -424,7 +454,7 @@
           </div>
         </article>
 
-        <!-- Project 4: AETHER (Web Audio Synth Lab) - NEW -->
+        <!-- Project 5: AETHER (Web Audio Synth Lab) -->
         <article class="project-card-full" data-project-cat="audio" data-tilt data-tilt-max="3">
           <div class="project-visual-side" style="background: #0A0A0E;">
             <span class="project-live-indicator-tag">
@@ -448,13 +478,10 @@
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="audio.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
+              <a href="audio.html" class="btn-open-site" style="background: linear-gradient(135deg, #7C3AED, #A855F7); border-color: #C084FC;">
+                Открыть проект →
               </a>
-              <a href="audio-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #7C3AED, #A855F7); border-color: #C084FC;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('audio-v2.html', 'AETHER Workstation V2 (Figma Edition)')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('audio.html', 'AETHER Workstation')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>
@@ -462,7 +489,7 @@
           </div>
         </article>
 
-        <!-- Project 5: LUMEN Gallery (Editorial Art) -->
+        <!-- Project 6: LUMEN Gallery (Editorial Art) -->
         <article class="project-card-full" data-project-cat="art" data-tilt data-tilt-max="3">
           <div class="project-visual-side" style="background: #F5F5F5;">
             <span class="project-live-indicator-tag" style="background: rgba(44, 44, 44, 0.85);">
@@ -486,51 +513,10 @@
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="gallery.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
+              <a href="gallery.html" class="btn-open-site" style="background: linear-gradient(135deg, #C2410C, #EA580C); border-color: #FB923C;">
+                Открыть проект →
               </a>
-              <a href="gallery-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #C2410C, #EA580C); border-color: #FB923C;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('gallery-v2.html', 'LUMEN Salon V2 (Figma Edition)')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 6: CLAY & OCHRE (Craft E-Commerce) -->
-        <article class="project-card-full" data-project-cat="craft" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #FDF7ED;">
-            <span class="project-live-indicator-tag" style="background: rgba(43, 30, 23, 0.85);">
-              <span class="status-pulse-dot" style="background: #D4A34D;"></span>
-              Tactile E-Commerce
-            </span>
-            <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80" alt="CLAY & OCHRE" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #D4A34D;">Органический тактильный магазин</div>
-              <h3 class="project-name">CLAY & OCHRE — Магазин авторской крафтовой керамики</h3>
-              <p class="project-summary">
-                Органическая палитра льна и песка, тактильный 3D-наклон карточек изделий, интерактивная боковая корзина (Slide-over Cart Drawer) с живым пересчетом итогов, валидацией промокодов и оформлением в 1 клик.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Interactive Cart Drawer</span>
-                <span class="tech-tag-pill">Promo Code Engine</span>
-                <span class="tech-tag-pill">Tactile Micro-Noise</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="craft.html" class="btn-quick-preview" style="text-decoration: none;">
-                💎 Mobbi V1
-              </a>
-              <a href="craft-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #B45309, #D97706); border-color: #FBBF24;">
-                ⚡ Figma V2 →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('craft-v2.html', 'CLAY & OCHRE Atelier V2 (Figma Edition)')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('gallery.html', 'LUMEN Salon')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>
@@ -606,24 +592,24 @@
           <div class="est-slider-wrap">
             <div class="est-slider-header">
               <span>Количество ключевых экранов / шаблонов:</span>
-              <strong id="est-screens-val" class="tabular-nums" style="color: var(--theme-accent);">5 экранов</strong>
+              <strong id="est-screens-val" class="tabular-nums" style="color: var(--theme-accent);">1 экран (MVP / Лендинг)</strong>
             </div>
-            <input type="range" id="est-screens-range" class="est-range-input" min="1" max="15" value="5" oninput="updateProjectEstimator()">
+            <input type="range" id="est-screens-range" class="est-range-input" min="1" max="15" value="1" oninput="updateProjectEstimator()">
           </div>
 
           <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--theme-text);">Дополнительные инженерные модули:</div>
           <div class="est-options-grid">
             <label class="est-option-label">
-              <input type="checkbox" id="est-opt-ds" checked onchange="updateProjectEstimator()">
-              <span>Дизайн-система & Токены</span>
+              <input type="checkbox" id="est-opt-ds" onchange="updateProjectEstimator()">
+              <span>Дизайн-система & Токены (+25 000 ₽)</span>
             </label>
             <label class="est-option-label">
-              <input type="checkbox" id="est-opt-motion" checked onchange="updateProjectEstimator()">
-              <span>3D Motion / Canvas</span>
+              <input type="checkbox" id="est-opt-motion" onchange="updateProjectEstimator()">
+              <span>3D Motion / Canvas (+20 000 ₽)</span>
             </label>
             <label class="est-option-label">
               <input type="checkbox" id="est-opt-backend" onchange="updateProjectEstimator()">
-              <span>Интеграция API / WebSockets</span>
+              <span>Интеграция API / WebSockets (+30 000 ₽)</span>
             </label>
           </div>
         </div>
@@ -631,9 +617,9 @@
         <div class="estimator-result-side">
           <div>
             <div class="est-result-badge">Ориентировочный бюджет</div>
-            <div id="est-result-budget" class="est-result-val tabular-nums">от 190 000 ₽</div>
+            <div id="est-result-budget" class="est-result-val tabular-nums">от 50 000 ₽</div>
             <div style="font-size: 13px; color: var(--theme-text-muted); margin-bottom: 4px;">Сроки реализации под ключ:</div>
-            <div id="est-result-timeline" class="est-result-timeline">16–19 рабочих дней</div>
+            <div id="est-result-timeline" class="est-result-timeline">5–7 рабочих дней</div>
           </div>
 
           <button class="btn-primary-action" style="width: 100%; justify-content: center;" onclick="openTelegramModal()">

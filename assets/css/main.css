@@ -5,6 +5,69 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   0. Top Concept Switcher Bar (Mobile & Desktop)
+   -------------------------------------------------------------------------- */
+.concept-switcher-bar {
+  background: rgba(8, 12, 22, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+
+.concept-switcher-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.concept-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.concept-btn {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94A3B8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.concept-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.concept-btn.active {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #3B82F6;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* --------------------------------------------------------------------------
    1. Dynamic Island / Floating Glass Dock
    -------------------------------------------------------------------------- */
 .hub-floating-dock-wrap {
@@ -1755,6 +1818,29 @@
 }
 
 @media (max-width: 640px) {
+  .hub-floating-dock-wrap {
+    padding: 0 8px;
+    top: 8px;
+  }
+  .hub-floating-dock {
+    padding: 6px 10px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+  .dock-brand span {
+    font-size: 13px;
+  }
+  .dock-version-pill {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  .dock-actions-group {
+    gap: 4px;
+  }
+  .dock-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
   .metrics-row { grid-template-columns: 1fr; }
   .skills-matrix-grid { grid-template-columns: 1fr; }
   .hero-titles h1 { font-size: 26px; }
