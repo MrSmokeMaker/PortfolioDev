@@ -47,9 +47,14 @@
 <meta name="twitter:description" content="Эксклюзивное инженерное портфолио Коровина Сергея.">
 <meta name="twitter:image" content="https://mrsmokemaker.github.io/PortfolioDev/assets/og-image.png">
   <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+  <meta name="theme-color" content="#0B0F19">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/custom.css">
@@ -65,10 +70,16 @@
       <div class="dock-brand">
         <div class="dock-brand-avatar luxury-logo-icon" title="Коровин Сергей">
           <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skDockGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F59E0B"/>
+                <stop offset="50%" stop-color="#FCD34D"/>
+                <stop offset="100%" stop-color="#D97706"/>
+              </linearGradient>
+            </defs>
             <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 4"/>
-            <rect x="20" y="20" width="60" height="60" rx="16" fill="#0B0F19" stroke="#F59E0B" stroke-width="2"/>
-            <path d="M38 34C33 34 30 37.5 30 41.5C30 46.5 39 47 40.5 51.5C41.5 55 38 58 34 58C30.5 58 28.5 55.5 28.5 55.5" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
-            <path d="M49 33V59M63 34L50 46.5L64 59" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+            <rect x="20" y="20" width="60" height="60" rx="16" fill="#0B0F19" stroke="url(#skDockGold)" stroke-width="2"/>
+            <text x="50" y="59" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="26" fill="url(#skDockGold)" letter-spacing="0.5">SK</text>
           </svg>
         </div>
         <span data-i18n="dev_name">Коровин Сергей</span>
@@ -115,6 +126,12 @@
           <span data-theme-icon="oled" style="display: none;">⚡</span>
         </button>
 
+        <!-- PWA Install Badge / Trigger -->
+        <button class="dock-btn pwa-badge-btn" id="pwa-install-btn" onclick="triggerPwaInstall()" title="Установить PWA приложение на рабочий стол">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span>PWA</span>
+        </button>
+
         <!-- Direct Telegram QR Modal -->
         <button class="dock-btn" style="background: var(--theme-accent); color: white; border-color: var(--theme-accent);" onclick="openTelegramModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -156,8 +173,7 @@
                   </defs>
                   <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="url(#skHeroHaloGrad)" stroke-width="1.2" stroke-dasharray="6 4"/>
                   <rect x="18" y="18" width="64" height="64" rx="18" fill="rgba(11, 15, 25, 0.9)" stroke="url(#skHeroGoldGrad)" stroke-width="1.5"/>
-                  <path d="M38 34C33 34 30 37.5 30 41.5C30 46.5 39 47 40.5 51.5C41.5 55 38 58 34 58C30.5 58 28.5 55.5 28.5 55.5" stroke="url(#skHeroGoldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M49 33V59M63 34L50 46.5L64 59" stroke="url(#skHeroGoldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <text x="50" y="59" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="28" fill="url(#skHeroGoldGrad)" letter-spacing="0.5">SK</text>
                   <circle cx="50" cy="50" r="2.2" fill="#FCD34D"/>
                 </svg>
               </div>
@@ -276,7 +292,7 @@
           <button class="filter-pill-btn" onclick="filterProjectsCategory('edtech', this)">⭐ EdTech & AI</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('fintech', this)">Финтех</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('saas', this)">AI & SaaS</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('medtech', this)">MedTech</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('store', this)">Интернет-магазин</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('audio', this)">Web Audio</button>
           <button class="filter-pill-btn" onclick="filterProjectsCategory('art', this)">Галерея</button>
         </div>
@@ -393,34 +409,35 @@
           </div>
         </article>
 
-        <!-- Project 4: PULSE (MedTech Telemetry) -->
-        <article class="project-card-full" data-project-cat="medtech" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #070B12;">
+        <!-- Project 4: KINETIC Concept Store (E-Commerce) -->
+        <article class="project-card-full" data-project-cat="store" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #0B0E17;">
             <span class="project-live-indicator-tag">
-              <span class="status-pulse-dot" style="background: #00F0FF;"></span>
-              60 FPS Canvas ECG
+              <span class="status-pulse-dot" style="background: #3B82F6;"></span>
+              Figma & Mobbi Store
             </span>
-            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80" alt="PULSE Telemetry" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1200&q=80" alt="KINETIC Goods Store" loading="lazy">
             <div class="project-visual-overlay"></div>
           </div>
           <div class="project-content-side">
             <div>
-              <div class="project-style-badge" style="color: #00F0FF;">Клиническая биометрия & Телеметрия</div>
-              <h3 class="project-name">PULSE Health — Высокоточная медицинская телеметрия</h3>
+              <div class="project-style-badge" style="color: #60A5FA;">E-Commerce & Figma Design System</div>
+              <h3 class="project-name">KINETIC Store — Концепт-стор акустики и сетапа</h3>
               <p class="project-summary">
-                Стерильный швейцарский неоморфизм. Непрерывная отрисовка кардиограммы на HTML5 Canvas с частотой 60 кадров/сек, регулировкой пульса (BPM), звуком пульсометра, переключателем биометрических систем и симуляцией аритмии.
+                Премиальный интернет-магазин дизайнерских гаджетов и акустических объектов. Интерактивный каталог товаров с живым поиском и сортировкой, переключение цветовых вариантов, слайд-овер корзина (Cart Drawer) с промокодами, быстрый просмотр и трекинг посылки по номеру заказа.
               </p>
               <div class="project-tech-tags">
-                <span class="tech-tag-pill">Real-time Canvas 60 FPS</span>
-                <span class="tech-tag-pill">Medical Grade A11y</span>
-                <span class="tech-tag-pill">Emergency Triage Alert</span>
+                <span class="tech-tag-pill">Slide-out Cart Drawer</span>
+                <span class="tech-tag-pill">Mobbi Design Tokens</span>
+                <span class="tech-tag-pill">Dynamic Swatches</span>
+                <span class="tech-tag-pill">Parcel Tracking</span>
               </div>
             </div>
             <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="medtech.html" class="btn-open-site" style="background: linear-gradient(135deg, #0891B2, #06B6D4); border-color: #22D3EE;">
-                Открыть проект →
+              <a href="store.html" class="btn-open-site" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); border-color: #3B82F6;">
+                Открыть магазин →
               </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('medtech.html', 'PULSE ICU')" title="Device Preview">
+              <button class="btn-quick-preview" onclick="openDevicePreview('store.html', 'KINETIC Concept Store')" title="Device Preview">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
                 Превью
               </button>

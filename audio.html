@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER — Spatial Audio & Web Audio API Synth Lab</title>
+  <title>AETHER — Web Audio API Synth Lab, 16-Step Sequencer & DSP FX</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/audio.css">
 </head>
@@ -25,7 +28,7 @@
           <option value="metodist.html">⭐ 1. Методист (AI EdTech Флагман)</option>
           <option value="fintech.html">💎 2. VERTEX Capital (Финтех)</option>
           <option value="saas.html">⚡ 3. NEXUS AI (AI-платформа)</option>
-          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="store.html">🛍️ 4. KINETIC Store (E-Commerce)</option>
           <option value="audio.html" selected>🎛️ 5. AETHER Synth (Web Audio)</option>
           <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
         </select>
@@ -39,7 +42,7 @@
     </div>
   </header>
 
-  <!-- Audio Header (Relative, never covers page content) -->
+  <!-- Audio Header (Relative, non-sticky) -->
   <header class="audio-header">
     <div class="mobbi-container">
       <nav class="audio-nav">
@@ -48,26 +51,32 @@
           <div>AETHER AUDIO LAB</div>
         </div>
         <div style="font-size: 13px; color: var(--au-text-muted);">
-          Полноценный полифонический Web Audio API движок
+          Реальный полифонический аудио-стек W3C Web Audio API
         </div>
       </nav>
     </div>
   </header>
 
-  <!-- Navigation Tabs -->
+  <!-- Navigation Tabs Bar -->
   <div class="mobbi-container">
     <div class="audio-tabs-bar" role="tablist">
       <button class="audio-tab-btn active" data-tab="synth" onclick="switchAudioTab('synth')">
         🎛️ Синтезатор & FFT
       </button>
+      <button class="audio-tab-btn" data-tab="sequencer" onclick="switchAudioTab('sequencer')">
+        🥁 16-шаговый секвенсор
+      </button>
+      <button class="audio-tab-btn" data-tab="effects" onclick="switchAudioTab('effects')">
+        🎚️ Рэк эффектов DSP
+      </button>
       <button class="audio-tab-btn" data-tab="spatial" onclick="switchAudioTab('spatial')">
         🎧 3D Бинауральный микшер
       </button>
       <button class="audio-tab-btn" data-tab="presets" onclick="switchAudioTab('presets')">
-        🎹 Банк пресетов & ADSR
+        🎹 Пресеты & ADSR
       </button>
       <button class="audio-tab-btn" data-tab="architecture" onclick="switchAudioTab('architecture')">
-        📊 Web Audio граф
+        📊 Граф нод & Теория
       </button>
     </div>
   </div>
@@ -78,7 +87,6 @@
     <!-- TAB 1: SYNTHESIZER & FFT -->
     <div id="tab-synth" class="audio-view-panel active">
       <div class="audio-workspace">
-        <!-- Synthesizer & Realtime FFT Visualizer -->
         <section class="synth-station-card">
           <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
             <div>
@@ -94,40 +102,16 @@
             <canvas id="audio-canvas"></canvas>
           </div>
 
-          <!-- Interactive Keyboard -->
+          <!-- Keyboard -->
           <div class="synth-keys-bar">
-            <div class="piano-key" data-note="261.63" data-key="a">
-              <span>C4</span>
-              <span class="key-shortcut">A</span>
-            </div>
-            <div class="piano-key" data-note="293.66" data-key="s">
-              <span>D4</span>
-              <span class="key-shortcut">S</span>
-            </div>
-            <div class="piano-key" data-note="329.63" data-key="d">
-              <span>E4</span>
-              <span class="key-shortcut">D</span>
-            </div>
-            <div class="piano-key" data-note="349.23" data-key="f">
-              <span>F4</span>
-              <span class="key-shortcut">F</span>
-            </div>
-            <div class="piano-key" data-note="392.00" data-key="g">
-              <span>G4</span>
-              <span class="key-shortcut">G</span>
-            </div>
-            <div class="piano-key" data-note="440.00" data-key="h">
-              <span>A4</span>
-              <span class="key-shortcut">H</span>
-            </div>
-            <div class="piano-key" data-note="493.88" data-key="j">
-              <span>B4</span>
-              <span class="key-shortcut">J</span>
-            </div>
-            <div class="piano-key" data-note="523.25" data-key="k">
-              <span>C5</span>
-              <span class="key-shortcut">K</span>
-            </div>
+            <div class="piano-key" data-note="261.63" data-key="a"><span>C4</span><span class="key-shortcut">A</span></div>
+            <div class="piano-key" data-note="293.66" data-key="s"><span>D4</span><span class="key-shortcut">S</span></div>
+            <div class="piano-key" data-note="329.63" data-key="d"><span>E4</span><span class="key-shortcut">D</span></div>
+            <div class="piano-key" data-note="349.23" data-key="f"><span>F4</span><span class="key-shortcut">F</span></div>
+            <div class="piano-key" data-note="392.00" data-key="g"><span>G4</span><span class="key-shortcut">G</span></div>
+            <div class="piano-key" data-note="440.00" data-key="h"><span>A4</span><span class="key-shortcut">H</span></div>
+            <div class="piano-key" data-note="493.88" data-key="j"><span>B4</span><span class="key-shortcut">J</span></div>
+            <div class="piano-key" data-note="523.25" data-key="k"><span>C5</span><span class="key-shortcut">K</span></div>
           </div>
 
           <div class="synth-controls-row">
@@ -141,15 +125,13 @@
               </div>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <button class="btn-audio-action" onclick="playDemoArpeggio()">
-                ▶ Демо-арпеджио
-              </button>
-            </div>
+            <button class="btn-audio-action" onclick="playDemoArpeggio()">
+              ▶ Демо-арпеджио
+            </button>
           </div>
         </section>
 
-        <!-- Vinyl Turntable Station -->
+        <!-- Turntable Deck -->
         <aside class="vinyl-deck-card">
           <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
             <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--au-text-muted);">Аналоговый Дэк</span>
@@ -179,14 +161,152 @@
       </div>
     </div>
 
-    <!-- TAB 2: SPATIAL BINAURAL 3D MIXER -->
+    <!-- TAB 2: 16-STEP LOOP SEQUENCER -->
+    <div id="tab-sequencer" class="audio-view-panel">
+      <section style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">16-Шаговый грувбокс и драм-машина</h2>
+            <p style="font-size: 13.5px; color: var(--au-text-muted);">
+              Нажимайте на шаги в сетке, чтобы создать свой полиритмический паттерн на базе синтезированных звуков.
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 13px; color: var(--au-text-muted);">BPM:</span>
+              <input type="range" id="seq-bpm-slider" min="70" max="150" value="120" oninput="updateSeqBpm(this.value)" style="width: 100px; accent-color: var(--au-cyan);">
+              <span id="seq-bpm-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--au-cyan); min-width: 50px;">120</span>
+            </div>
+
+            <button id="seq-play-btn" class="btn-audio-action primary" style="width: auto; padding: 10px 22px;" onclick="toggleSequencer()">
+              ▶ Запустить луп
+            </button>
+            <button class="btn-audio-action" style="width: auto; padding: 10px 16px;" onclick="loadDemoBeat()">
+              Демо-паттерн
+            </button>
+            <button class="btn-audio-action" style="width: auto; padding: 10px 16px; color: #EF4444;" onclick="clearSequencer()">
+              Очистить
+            </button>
+          </div>
+        </div>
+
+        <!-- 16-Step Grid -->
+        <div class="sequencer-grid" id="sequencer-tracks-container">
+          <!-- Track 1: Kick -->
+          <div class="seq-track-row" data-track="kick">
+            <span class="seq-track-label">💥 KICK</span>
+            <div class="seq-steps-wrap" id="track-kick-steps"></div>
+          </div>
+          <!-- Track 2: Snare -->
+          <div class="seq-track-row" data-track="snare">
+            <span class="seq-track-label">🥁 SNARE</span>
+            <div class="seq-steps-wrap" id="track-snare-steps"></div>
+          </div>
+          <!-- Track 3: Hi-Hat -->
+          <div class="seq-track-row" data-track="hihat">
+            <span class="seq-track-label">✨ HI-HAT</span>
+            <div class="seq-steps-wrap" id="track-hihat-steps"></div>
+          </div>
+          <!-- Track 4: Synth Bass -->
+          <div class="seq-track-row" data-track="bass">
+            <span class="seq-track-label">🔊 BASS</span>
+            <div class="seq-steps-wrap" id="track-bass-steps"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 3: DSP AUDIO FX RACK -->
+    <div id="tab-effects" class="audio-view-panel">
+      <section style="margin-bottom: 24px;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 4px;">Студийный рэк эффектов реального времени</h2>
+          <p style="font-size: 13.5px; color: var(--au-text-muted);">
+            Модули DSP-обработки сигналов: Biquad фильтр, дилей с обратной связью и сатурация нативного Web Audio AudioNode.
+          </p>
+        </div>
+
+        <div class="fx-rack-grid">
+          <!-- Delay Module -->
+          <div class="fx-module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 17px; font-weight: 700; color: #FFFFFF;">Echo / Delay Node</h3>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: var(--au-cyan);">DelayNode</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                  <span style="color: var(--au-text-muted);">Delay Time:</span>
+                  <span id="fx-delay-time-val" style="font-family: var(--font-mono); color: var(--au-cyan);">0.30s</span>
+                </div>
+                <input type="range" id="fx-delay-time" min="0.05" max="0.8" step="0.05" value="0.3" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('fx-delay-time-val').textContent = this.value + 's'">
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                  <span style="color: var(--au-text-muted);">Feedback:</span>
+                  <span id="fx-feedback-val" style="font-family: var(--font-mono); color: var(--au-cyan);">40%</span>
+                </div>
+                <input type="range" id="fx-feedback" min="0" max="80" value="40" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('fx-feedback-val').textContent = this.value + '%'">
+              </div>
+            </div>
+            <button class="btn-audio-action primary" style="margin-top: 18px; width: 100%;" onclick="testDelayPulse()">
+              🔊 Тестовый импульс с дилеем
+            </button>
+          </div>
+
+          <!-- Biquad Filter Module -->
+          <div class="fx-module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 17px; font-weight: 700; color: #FFFFFF;">Biquad Filter Node</h3>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: #F59E0B;">Lowpass</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                  <span style="color: var(--au-text-muted);">Cutoff Frequency:</span>
+                  <span id="fx-cutoff-val" style="font-family: var(--font-mono); color: #F59E0B;">1800 Hz</span>
+                </div>
+                <input type="range" id="fx-cutoff" min="200" max="8000" step="100" value="1800" style="width: 100%; accent-color: #F59E0B;" oninput="document.getElementById('fx-cutoff-val').textContent = this.value + ' Hz'">
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+                  <span style="color: var(--au-text-muted);">Resonance (Q):</span>
+                  <span id="fx-q-val" style="font-family: var(--font-mono); color: #F59E0B;">4.0</span>
+                </div>
+                <input type="range" id="fx-q" min="0.5" max="15" step="0.5" value="4" style="width: 100%; accent-color: #F59E0B;" oninput="document.getElementById('fx-q-val').textContent = this.value">
+              </div>
+            </div>
+            <button class="btn-audio-action" style="margin-top: 18px; width: 100%; border-color: #F59E0B; color: #F59E0B;" onclick="testFilterSweep()">
+              〰️ Частотный свип фильтра
+            </button>
+          </div>
+
+          <!-- Wave Drive Module -->
+          <div class="fx-module-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h3 style="font-size: 17px; font-weight: 700; color: #FFFFFF;">Tape Saturation</h3>
+              <span style="font-family: var(--font-mono); font-size: 11px; color: #EF4444;">WaveShaper</span>
+            </div>
+            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5; margin-bottom: 18px;">
+              Теплое аналоговое насыщение гармониками за счет мягкого клиппинга кривой Безье в WaveShaperNode.
+            </p>
+            <button class="btn-audio-action" style="width: 100%; border-color: #EF4444; color: #EF4444;" onclick="testDriveTone()">
+              ⚡ Аккорд с дисторшном
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- TAB 4: SPATIAL BINAURAL 3D MIXER -->
     <div id="tab-spatial" class="audio-view-panel">
       <section class="spatial-stage-card" style="margin-bottom: 24px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 20px;">
           <div style="max-width: 600px;">
             <h2 style="font-size: 22px; font-weight: 800; margin-bottom: 6px;">Бинауральное позиционирование звука</h2>
             <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.5;">
-              Двигайте бирюзовый маркер источника звука для моделирования панорамы и расстояния в стереонаушниках через Web Audio StereoPannerNode.
+              Двигайте бирюзовый маркер источника звука для моделирования стереопанорамы в наушниках через StereoPannerNode.
             </p>
           </div>
           <div style="background: rgba(0,0,0,0.3); padding: 12px 18px; border-radius: 12px; border: 1px solid var(--au-border);">
@@ -206,10 +326,10 @@
 
         <div style="display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; align-items: center;">
           <button class="btn-audio-action primary" onclick="startSpatialOrbit()">
-            🔄 Запустить круговое движение источника
+            🔄 Круговое вращение источника
           </button>
           <button class="btn-audio-action" onclick="playSpatialPulse()">
-            🔊 Тестовый звуковой импульс
+            🔊 Одиночный тестовый импульс
           </button>
           <button class="btn-audio-action" onclick="resetSpatialCenter()">
             Сбросить в центр
@@ -218,170 +338,67 @@
       </section>
     </div>
 
-    <!-- TAB 3: PRESETS & ADSR ENVELOPE -->
+    <!-- TAB 5: PRESETS & ADSR -->
     <div id="tab-presets" class="audio-view-panel">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
-        <!-- Preset 1 -->
-        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-cyan);">PRESET 01</span>
-              <span style="font-size: 11px; color: var(--au-text-muted);">Синусоида / Мягкий</span>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Ambient Pad</h3>
-            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
-              Воздушный теплый пад с плавным нарастанием Attack (1.2s) и затяжным затуханием. Идеален для фоновой текстуры.
-            </p>
-          </div>
-          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('ambient')">
-            ▶ Воспроизвести аккорд
-          </button>
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px;">
+          <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-cyan);">PRESET 01</span>
+          <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin: 4px 0 6px;">Ambient Pad</h3>
+          <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">Мягкий воздушный пэд с медленной атакой (1.2s) и синусоидальным теплым обертоном.</p>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%;" onclick="playPresetTone('ambient')">▶ Воспроизвести аккорд</button>
         </div>
-
-        <!-- Preset 2 -->
-        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 11px; font-family: var(--font-mono); color: #F59E0B;">PRESET 02</span>
-              <span style="font-size: 11px; color: var(--au-text-muted);">Пилообразная / Плотный</span>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Cyber Sub Bass</h3>
-            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
-              Мощный глубокий бас с мгновенным панчем и низкочастотной компрессией для саундтреков и кинематографа.
-            </p>
-          </div>
-          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('bass')">
-            ▶ Воспроизвести бас
-          </button>
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px;">
+          <span style="font-size: 11px; font-family: var(--font-mono); color: #F59E0B;">PRESET 02</span>
+          <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin: 4px 0 6px;">Cyber Sub Bass</h3>
+          <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">Плотный пилообразный саб-бас с низким фильтром среза для футуристичных тем.</p>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%;" onclick="playPresetTone('bass')">▶ Воспроизвести бас</button>
         </div>
-
-        <!-- Preset 3 -->
-        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 11px; font-family: var(--font-mono); color: #10B981;">PRESET 03</span>
-              <span style="font-size: 11px; color: var(--au-text-muted);">Меандр / Ретро</span>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">8-Bit Chiptune Lead</h3>
-            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
-              Аутентичный тембр игровых автоматов 80-х годов с ярким гармоническим спектром и резкой атакой.
-            </p>
-          </div>
-          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('retro')">
-            ▶ Воспроизвести фразу
-          </button>
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px;">
+          <span style="font-size: 11px; font-family: var(--font-mono); color: #10B981;">PRESET 03</span>
+          <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin: 4px 0 6px;">8-Bit Chiptune Lead</h3>
+          <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">Яркий меандр в стиле аркадных чипов 80-х с мгновенным панчем.</p>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%;" onclick="playPresetTone('retro')">▶ Воспроизвести фразу</button>
         </div>
-
-        <!-- Preset 4 -->
-        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-              <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-accent);">PRESET 04</span>
-              <span style="font-size: 11px; color: var(--au-text-muted);">Треугольник / Кристалл</span>
-            </div>
-            <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Cosmic Glass Pluck</h3>
-            <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
-              Чистые колокольные щипковые звуки с быстрым спадом Decay и ощущением кристальной акустической глубины.
-            </p>
-          </div>
-          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%; justify-content: center;" onclick="playPresetTone('pluck')">
-            ▶ Воспроизвести перебор
-          </button>
+        <div style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 20px;">
+          <span style="font-size: 11px; font-family: var(--font-mono); color: var(--au-accent);">PRESET 04</span>
+          <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin: 4px 0 6px;">Cosmic Glass Pluck</h3>
+          <p style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">Треугольная волна с быстрым спадом Decay и хрустальным колокольным резонансом.</p>
+          <button class="btn-audio-action primary" style="margin-top: 16px; width: 100%;" onclick="playPresetTone('pluck')">▶ Воспроизвести перебор</button>
         </div>
       </div>
-
-      <!-- ADSR Envelope Station -->
-      <section style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 24px;">
-        <h3 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Огибающая амплитуды (ADSR Envelope)</h3>
-        <p style="font-size: 13px; color: var(--au-text-muted); margin-bottom: 20px;">
-          Параметры формирования звука во времени через Web Audio AudioParam.linearRampToValueAtTime
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
-          <div>
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-              <span style="color: var(--au-text-muted);">Attack (Нарастание)</span>
-              <span id="adsr-a-val" style="color: var(--au-cyan); font-weight: 700;">0.05s</span>
-            </div>
-            <input type="range" min="0.01" max="1" step="0.01" value="0.05" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-a-val').textContent = this.value + 's'">
-          </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-              <span style="color: var(--au-text-muted);">Decay (Спад)</span>
-              <span id="adsr-d-val" style="color: var(--au-cyan); font-weight: 700;">0.20s</span>
-            </div>
-            <input type="range" min="0.05" max="1.5" step="0.05" value="0.2" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-d-val').textContent = this.value + 's'">
-          </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-              <span style="color: var(--au-text-muted);">Sustain (Удержание)</span>
-              <span id="adsr-s-val" style="color: var(--au-cyan); font-weight: 700;">60%</span>
-            </div>
-            <input type="range" min="0" max="100" value="60" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-s-val').textContent = this.value + '%'">
-          </div>
-          <div>
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-              <span style="color: var(--au-text-muted);">Release (Затухание)</span>
-              <span id="adsr-r-val" style="color: var(--au-cyan); font-weight: 700;">0.40s</span>
-            </div>
-            <input type="range" min="0.05" max="2" step="0.05" value="0.4" style="width: 100%; accent-color: var(--au-cyan);" oninput="document.getElementById('adsr-r-val').textContent = this.value + 's'">
-          </div>
-        </div>
-      </section>
     </div>
 
-    <!-- TAB 4: WEB AUDIO ARCHITECTURE GRAPH -->
+    <!-- TAB 6: ARCHITECTURE & THEORY -->
     <div id="tab-architecture" class="audio-view-panel">
       <section style="background: var(--au-surface); border: 1px solid var(--au-border); border-radius: 16px; padding: 28px; margin-bottom: 24px;">
-        <h2 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">Схема конвейера обработки сигналов</h2>
-        <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.6; max-width: 800px; margin-bottom: 28px;">
-          Архитектура аудио-стека построена на нативном стандарте W3C Web Audio API. Вся генерация, фильтрация, пространственное позиционирование и расчет БПФ (Fast Fourier Transform) выполняются в выделенном системном аудиопотоке с нулевой задержкой.
+        <h2 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">Аудио-конвейер и физические основы</h2>
+        <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.6; max-width: 800px; margin-bottom: 24px;">
+          Движок исполняется в выделенном звуковом потоке операционной системы. Все ноды взаимодействуют через направленный ациклический граф (AudioNode Directed Acyclic Graph).
         </p>
 
-        <!-- Signal Flow Chain Cards -->
-        <div style="display: flex; flex-direction: column; gap: 14px;">
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(168, 85, 247, 0.2); color: #C084FC; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">01</div>
-            <div style="flex: 1; min-width: 220px;">
-              <div style="font-weight: 700; color: #FFFFFF;">OscillatorNode (Источник частоты)</div>
-              <div style="font-size: 13px; color: var(--au-text-muted);">Генерирует периодический звуковой сигнал заданной частоты и формы (Sine, Triangle, Sawtooth, Square).</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 18px;">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan); margin-bottom: 4px;">ПСИХОАКУСТИКА</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Эффект Хааса (Precedence Effect)</div>
+            <div style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Мозг определяет направление к источнику по микрозадержке фазы первого пришедшего фронта волны (1–5 мс).
             </div>
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">f: 20Hz – 20kHz</span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(6, 182, 212, 0.2); color: #22D3EE; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">02</div>
-            <div style="flex: 1; min-width: 220px;">
-              <div style="font-weight: 700; color: #FFFFFF;">GainNode (ADSR Модулятор громкости)</div>
-              <div style="font-size: 13px; color: var(--au-text-muted);">Управляет динамикой громкости, предотвращает клиппинг (щелчки) за счет гладкой экспоненциальной интерполяции.</div>
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 18px;">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: #10B981; margin-bottom: 4px;">БЫСТРОЕ ПРЕОБРАЗОВАНИЕ</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Анализатор БПФ (Fast Fourier Transform)</div>
+            <div style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Разложение временного сигнала на 64 частотных бина с логарифмическим сглаживанием в 60 FPS на Canvas.
             </div>
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">gain: 0.0 – 1.0</span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #34D399; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">03</div>
-            <div style="flex: 1; min-width: 220px;">
-              <div style="font-weight: 700; color: #FFFFFF;">StereoPannerNode (Пространственное распределение)</div>
-              <div style="font-size: 13px; color: var(--au-text-muted);">Рассчитывает фазовый сдвиг и баланс каналов для создания трехмерного позиционирования в наушниках.</div>
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 18px;">
+            <div style="font-family: var(--font-mono); font-size: 12px; color: var(--au-accent); margin-bottom: 4px;">СИНХРОНИЗАЦИЯ</div>
+            <div style="font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">Аппаратный тайминг AudioContext</div>
+            <div style="font-size: 13px; color: var(--au-text-muted); line-height: 1.5;">
+              Тайминг событий привязан к наносекундным системным часам звуковой карты, исключая джиттер браузерного потока.
             </div>
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">pan: -1.0 ⇄ +1.0</span>
-          </div>
-
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(245, 158, 11, 0.2); color: #FBBF24; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">04</div>
-            <div style="flex: 1; min-width: 220px;">
-              <div style="font-weight: 700; color: #FFFFFF;">AnalyserNode (FFT Спектральный анализ)</div>
-              <div style="font-size: 13px; color: var(--au-text-muted);">Извлекает частотные спектрограммы для отрисовки 60 FPS эквалайзера на Canvas без просадки основного потока.</div>
-            </div>
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">fftSize: 64</span>
-          </div>
-
-          <div style="display: flex; align-items: center; gap: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--au-border); border-radius: 12px; padding: 16px; flex-wrap: wrap;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(239, 68, 68, 0.2); color: #F87171; display: flex; align-items: center; justify-content: center; font-weight: 700; font-family: var(--font-mono); font-size: 13px;">05</div>
-            <div style="flex: 1; min-width: 220px;">
-              <div style="font-weight: 700; color: #FFFFFF;">AudioDestinationNode (ЦАП и Динамики устройства)</div>
-              <div style="font-size: 13px; color: var(--au-text-muted);">Финальный выход на физическую звуковую карту слушателя через драйвер аудиосистемы ОС.</div>
-            </div>
-            <span style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">Hardware DAC</span>
           </div>
         </div>
       </section>
@@ -391,7 +408,7 @@
 
   <script>
     // ------------------------------------------------------------------------
-    // Web Audio API Synthesizer & Canvas Visualizer
+    // Web Audio Core Engine
     // ------------------------------------------------------------------------
     let audioCtx = null;
     let waveType = 'sine';
@@ -411,11 +428,7 @@
           pannerNode = null;
         }
 
-        if (pannerNode) {
-          analyserNode.connect(audioCtx.destination);
-        } else {
-          analyserNode.connect(audioCtx.destination);
-        }
+        analyserNode.connect(audioCtx.destination);
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
@@ -445,7 +458,255 @@
       osc.stop(audioCtx.currentTime + duration);
     }
 
-    // Tab Switcher Router
+    // ------------------------------------------------------------------------
+    // 16-Step Loop Sequencer
+    // ------------------------------------------------------------------------
+    const TRACKS = ['kick', 'snare', 'hihat', 'bass'];
+    const STEP_COUNT = 16;
+    let seqState = {
+      kick:  new Array(16).fill(false),
+      snare: new Array(16).fill(false),
+      hihat: new Array(16).fill(false),
+      bass:  new Array(16).fill(false)
+    };
+
+    let isSeqPlaying = false;
+    let seqStep = 0;
+    let seqBpm = 120;
+    let seqInterval = null;
+
+    function buildSequencerGrid() {
+      TRACKS.forEach(track => {
+        const wrap = document.getElementById(`track-${track}-steps`);
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        for (let i = 0; i < STEP_COUNT; i++) {
+          const btn = document.createElement('button');
+          btn.className = `seq-step-btn ${i % 4 === 0 ? 'beat-accent' : ''}`;
+          btn.setAttribute('data-step', i);
+          btn.addEventListener('click', () => {
+            seqState[track][i] = !seqState[track][i];
+            btn.classList.toggle('active', seqState[track][i]);
+            if (seqState[track][i]) triggerTrackSound(track);
+          });
+          wrap.appendChild(btn);
+        }
+      });
+    }
+
+    function triggerTrackSound(track) {
+      initAudio();
+      const now = audioCtx.currentTime;
+      if (track === 'kick') {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(35, now + 0.12);
+        g.gain.setValueAtTime(0.8, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.connect(g);
+        g.connect(analyserNode);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (track === 'snare') {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, now);
+        g.gain.setValueAtTime(0.35, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        osc.connect(g);
+        g.connect(analyserNode);
+        osc.start(now);
+        osc.stop(now + 0.15);
+      } else if (track === 'hihat') {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(8000, now);
+        g.gain.setValueAtTime(0.12, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.connect(g);
+        g.connect(analyserNode);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (track === 'bass') {
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        const bassNotes = [55, 65.41, 73.42, 82.41];
+        osc.frequency.setValueAtTime(bassNotes[seqStep % bassNotes.length], now);
+        g.gain.setValueAtTime(0.4, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.connect(g);
+        g.connect(analyserNode);
+        osc.start(now);
+        osc.stop(now + 0.18);
+      }
+    }
+
+    function toggleSequencer() {
+      initAudio();
+      isSeqPlaying = !isSeqPlaying;
+      const btn = document.getElementById('seq-play-btn');
+      if (isSeqPlaying) {
+        btn.textContent = '⏹ Остановить луп';
+        btn.style.background = '#EF4444';
+        const stepTime = (60 / seqBpm) / 4 * 1000;
+        seqInterval = setInterval(runSeqStep, stepTime);
+      } else {
+        btn.textContent = '▶ Запустить луп';
+        btn.style.background = '';
+        clearInterval(seqInterval);
+        document.querySelectorAll('.seq-step-btn.playhead').forEach(el => el.classList.remove('playhead'));
+      }
+    }
+
+    function runSeqStep() {
+      document.querySelectorAll('.seq-step-btn.playhead').forEach(el => el.classList.remove('playhead'));
+      TRACKS.forEach(track => {
+        const wrap = document.getElementById(`track-${track}-steps`);
+        if (!wrap) return;
+        const btn = wrap.children[seqStep];
+        if (btn) btn.classList.add('playhead');
+        if (seqState[track][seqStep]) {
+          triggerTrackSound(track);
+        }
+      });
+      seqStep = (seqStep + 1) % STEP_COUNT;
+    }
+
+    function updateSeqBpm(val) {
+      seqBpm = parseInt(val, 10);
+      document.getElementById('seq-bpm-val').textContent = seqBpm;
+      if (isSeqPlaying) {
+        clearInterval(seqInterval);
+        const stepTime = (60 / seqBpm) / 4 * 1000;
+        seqInterval = setInterval(runSeqStep, stepTime);
+      }
+    }
+
+    function loadDemoBeat() {
+      clearSequencer();
+      // Kick: 0, 4, 8, 12
+      [0, 4, 8, 12].forEach(i => seqState.kick[i] = true);
+      // Snare: 4, 12
+      [4, 12].forEach(i => seqState.snare[i] = true);
+      // Hi-Hat: 2, 6, 10, 14
+      [2, 6, 10, 14].forEach(i => seqState.hihat[i] = true);
+      // Bass: 0, 3, 6, 10
+      [0, 3, 6, 10].forEach(i => seqState.bass[i] = true);
+
+      TRACKS.forEach(track => {
+        const wrap = document.getElementById(`track-${track}-steps`);
+        if (!wrap) return;
+        for (let i = 0; i < STEP_COUNT; i++) {
+          wrap.children[i].classList.toggle('active', seqState[track][i]);
+        }
+      });
+      showToast('Загружен демо-грув 120 BPM!');
+      if (!isSeqPlaying) toggleSequencer();
+    }
+
+    function clearSequencer() {
+      TRACKS.forEach(t => seqState[t].fill(false));
+      document.querySelectorAll('.seq-step-btn.active').forEach(b => b.classList.remove('active'));
+    }
+
+    // ------------------------------------------------------------------------
+    // DSP FX Tests
+    // ------------------------------------------------------------------------
+    function testDelayPulse() {
+      initAudio();
+      const delayTime = parseFloat(document.getElementById('fx-delay-time').value);
+      const feedbackVal = parseFloat(document.getElementById('fx-feedback').value) / 100;
+
+      const osc = audioCtx.createOscillator();
+      const dryGain = audioCtx.createGain();
+      const delay = audioCtx.createDelay();
+      const feedback = audioCtx.createGain();
+
+      delay.delayTime.value = delayTime;
+      feedback.gain.value = feedbackVal;
+
+      osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+      dryGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      dryGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+      osc.connect(dryGain);
+      dryGain.connect(analyserNode);
+
+      dryGain.connect(delay);
+      delay.connect(feedback);
+      feedback.connect(delay);
+      delay.connect(analyserNode);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+      showToast(`Импульс 440 Hz отправлен в Delay (${delayTime}s, ${feedbackVal * 100}% feedback)`);
+    }
+
+    function testFilterSweep() {
+      initAudio();
+      const cutoff = parseFloat(document.getElementById('fx-cutoff').value);
+      const q = parseFloat(document.getElementById('fx-q').value);
+
+      const osc = audioCtx.createOscillator();
+      const filter = audioCtx.createBiquadFilter();
+      const g = audioCtx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(130.81, audioCtx.currentTime); // C3
+
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(cutoff, audioCtx.currentTime);
+      filter.Q.setValueAtTime(q, audioCtx.currentTime);
+
+      g.gain.setValueAtTime(0.25, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+
+      osc.connect(filter);
+      filter.connect(g);
+      g.connect(analyserNode);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.8);
+      showToast(`Свип фильтра: Cutoff ${cutoff}Hz, Q ${q}`);
+    }
+
+    function testDriveTone() {
+      initAudio();
+      const osc = audioCtx.createOscillator();
+      const shaper = audioCtx.createWaveShaper();
+      const g = audioCtx.createGain();
+
+      // Simple distortion curve
+      const n = 256;
+      const curve = new Float32Array(n);
+      for (let i = 0; i < n; ++i) {
+        const x = i * 2 / n - 1;
+        curve[i] = (Math.PI + 50) * x / (Math.PI + 50 * Math.abs(x));
+      }
+      shaper.curve = curve;
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+      g.gain.setValueAtTime(0.18, audioCtx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+
+      osc.connect(shaper);
+      shaper.connect(g);
+      g.connect(analyserNode);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.5);
+      showToast('Тест аналогового насыщения WaveShaperNode!');
+    }
+
+    // ------------------------------------------------------------------------
+    // Tab Router
+    // ------------------------------------------------------------------------
     function switchAudioTab(tabId) {
       document.querySelectorAll('.audio-tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
@@ -459,16 +720,18 @@
       if (tabId === 'synth') {
         setTimeout(resizeVis, 50);
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
+      buildSequencerGrid();
       const hash = window.location.hash.replace('#', '');
       if (hash && document.getElementById(`tab-${hash}`)) {
         switchAudioTab(hash);
       }
     });
 
-    // Piano Keys binding
+    // Keyboard & Piano
     const keys = document.querySelectorAll('.piano-key');
     keys.forEach(k => {
       k.addEventListener('mousedown', () => {
@@ -480,7 +743,6 @@
       k.addEventListener('mouseleave', () => k.classList.remove('is-pressed'));
     });
 
-    // Keyboard shortcuts
     const keyMap = {
       'a': 261.63, 's': 293.66, 'd': 329.63, 'f': 349.23,
       'g': 392.00, 'h': 440.00, 'j': 493.88, 'k': 523.25,
@@ -518,7 +780,6 @@
       });
     }
 
-    // Preset player
     function playPresetTone(preset) {
       initAudio();
       if (preset === 'ambient') {
@@ -568,7 +829,6 @@
     function renderVis() {
       if (cWidth && cHeight) {
         ctx.clearRect(0, 0, cWidth, cHeight);
-
         if (analyserNode) {
           analyserNode.getByteFrequencyData(dataArray);
         } else {
@@ -598,9 +858,7 @@
     }
     requestAnimationFrame(renderVis);
 
-    // ------------------------------------------------------------------------
-    // Vinyl Controls
-    // ------------------------------------------------------------------------
+    // Vinyl
     let isSpinning = false;
     let rpms = [33, 45, 78];
     let rpmIdx = 0;
@@ -629,9 +887,7 @@
       }
     }
 
-    // ------------------------------------------------------------------------
-    // Spatial Soundstage 2D Panner
-    // ------------------------------------------------------------------------
+    // Spatial Radar
     const radar = document.getElementById('spatial-radar');
     const marker = document.getElementById('spatial-marker');
     let isDraggingPuck = false;
@@ -643,11 +899,9 @@
         clearInterval(orbitInterval);
         updatePuckPos(e);
       });
-
       window.addEventListener('mousemove', (e) => {
         if (isDraggingPuck) updatePuckPos(e);
       });
-
       window.addEventListener('mouseup', () => { isDraggingPuck = false; });
     }
 
@@ -655,7 +909,6 @@
       const rect = radar.getBoundingClientRect();
       let x = e.clientX - rect.left;
       let y = e.clientY - rect.top;
-
       x = Math.max(16, Math.min(rect.width - 16, x));
       y = Math.max(16, Math.min(rect.height - 16, y));
 
@@ -694,7 +947,6 @@
         const ry = rect.height / 2 - 24;
         const cx = rect.width / 2;
         const cy = rect.height / 2;
-
         angle += 0.04;
         const x = cx + Math.cos(angle) * rx;
         const y = cy + Math.sin(angle) * ry;

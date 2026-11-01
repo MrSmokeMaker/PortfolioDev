@@ -26,7 +26,7 @@
           <option value="metodist.html">⭐ 1. Методист (AI EdTech Флагман)</option>
           <option value="fintech.html" selected>💎 2. VERTEX Capital (Финтех)</option>
           <option value="saas.html">⚡ 3. NEXUS AI (AI-платформа)</option>
-          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="store.html">🛍️ 4. KINETIC Store (E-Commerce)</option>
           <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
           <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
         </select>
@@ -201,11 +201,11 @@
 
             <input type="range" id="capital-slider" min="10000" max="1000000" step="10000" value="500000" style="width: 100%; margin-bottom: 16px;" oninput="updateYieldCalculation()">
             
-            <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--ft-text-muted); margin-bottom: 20px;">
+            <div class="slider-ticks-row">
               <span>$10,000</span>
-              <span>$250,000</span>
+              <span class="tick-opt">$250,000</span>
               <span>$500,000</span>
-              <span>$750,000</span>
+              <span class="tick-opt">$750,000</span>
               <span>$1,000,000</span>
             </div>
 
@@ -230,9 +230,9 @@
               </svg>
             </div>
 
-            <div style="margin-top: 14px; display: flex; justify-content: space-between; font-size: 12px; color: var(--ft-text-muted);">
-              <span>🛡 Страхование вкладов на сумму до $2,500,000</span>
-              <span style="color: #3B82F6; font-weight: 600;">Капитализация процентов ежедневно ✓</span>
+            <div class="simulator-guarantees-bar">
+              <span>🛡 Страхование FDIC ($2.5M)</span>
+              <span style="color: #3B82F6; font-weight: 600;">Капитализация ежедневно ✓</span>
             </div>
           </div>
         </div>

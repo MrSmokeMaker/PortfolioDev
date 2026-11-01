@@ -299,7 +299,7 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
       title: 'Mobbi Elite Portfolio Engine & 6 Live Showcase Ecosystem',
       highlights: [
         'Внедрен интерактивный Device Preview Modal: запуск сайтов в адаптивных фреймах (Desktop, Tablet, Mobile) без ухода со страницы.',
-        'Добавлены 2 новых премиальных сайта: PULSE MedTech Telemetry (60 FPS Canvas ECG) и AETHER Audio Synth Lab (Web Audio API).',
+        'Добавлены 2 новых премиальных сайта: KINETIC Concept Store (E-Commerce Mobbi) и AETHER Audio Synth Lab (Web Audio API & 16-step Sequencer).',
         'Интерактивный расчет проекта (Interactive Scope Estimator) с автокалькуляцией сроков и стоимости.',
         'Telegram QR-код модалка для мгновенной связи со смартфона (+7 939 474-89-99).',
         'Command Palette (Cmd+K / Ctrl+K) с быстрым поиском по портфолио.'
@@ -551,7 +551,7 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
     { label: '⭐ 1. Методист (AI EdTech Флагман & YandexGPT)', category: 'Проекты', action: () => openDevicePreview('metodist.html', 'Методист — AI Lesson Planner') },
     { label: '💎 2. Финтех: VERTEX Capital (Институциональный фонд)', category: 'Проекты', action: () => openDevicePreview('fintech.html', 'VERTEX Capital') },
     { label: '⚡ 3. AI SaaS: NEXUS AI (Оркестрация агентов)', category: 'Проекты', action: () => openDevicePreview('saas.html', 'NEXUS AI') },
-    { label: '❤️ 4. MedTech: PULSE Telemetry (Реанимационный монитор)', category: 'Проекты', action: () => openDevicePreview('medtech.html', 'PULSE Telemetry') },
+    { label: '🛍️ 4. E-Commerce: KINETIC Store (Концепт-стор акустики и сетапа)', category: 'Проекты', action: () => openDevicePreview('store.html', 'KINETIC Concept Store') },
     { label: '🎛️ 5. Web Audio: AETHER Synth (Синтезатор & Микшер)', category: 'Проекты', action: () => openDevicePreview('audio.html', 'AETHER Synth Lab') },
     { label: '🖼️ 6. Галерея: LUMEN Archive (Архитектурная фотография)', category: 'Проекты', action: () => openDevicePreview('gallery.html', 'LUMEN Gallery') },
     { label: '🚀 Открыть приложение Методист (Live Web)', category: 'Внешние ссылки', action: () => window.open('https://mrsmokemaker.github.io/annmetodist/', '_blank') },
@@ -797,6 +797,31 @@ import { applyTheme, getSavedTheme, cycleTheme, setTheme } from './theme.js';
       setTimeout(() => bit.remove(), 1200);
     }
   }
+
+  // --------------------------------------------------------------------------
+  // 10.1 PWA INSTALL PROMPT HANDLER
+  // --------------------------------------------------------------------------
+  let deferredPwaPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPwaPrompt = e;
+    const btn = document.getElementById('pwa-install-btn');
+    if (btn) btn.classList.add('has-prompt');
+  });
+
+  window.triggerPwaInstall = function () {
+    if (deferredPwaPrompt) {
+      deferredPwaPrompt.prompt();
+      deferredPwaPrompt.userChoice.then((choice) => {
+        if (choice.outcome === 'accepted') {
+          showToast('Приложение Portfolio OS успешно установлено!');
+        }
+        deferredPwaPrompt = null;
+      });
+    } else {
+      showToast('Для установки PWA нажмите «Поделиться» → «На экран Домой» в браузере!');
+    }
+  };
 
   // --------------------------------------------------------------------------
   // 11. INITIALIZATION ON DOM READY & PWA SERVICE WORKER

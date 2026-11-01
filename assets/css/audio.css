@@ -344,6 +344,87 @@ body.audio-theme {
   border-color: var(--au-accent);
 }
 
+/* 16-Step Loop Sequencer */
+.sequencer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--au-surface);
+  border: 1px solid var(--au-border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.seq-track-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seq-track-label {
+  width: 90px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--au-text);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.seq-steps-wrap {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.seq-step-btn {
+  width: 32px;
+  height: 40px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--au-border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex: 1;
+  min-width: 24px;
+}
+
+.seq-step-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.seq-step-btn.active {
+  background: var(--au-accent);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  border-color: #D8B4FE;
+}
+
+.seq-step-btn.playhead {
+  border-color: var(--au-cyan) !important;
+  transform: scaleY(1.08);
+}
+
+.seq-step-btn.beat-accent {
+  border-left-width: 2px;
+  border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+/* DSP FX Rack */
+.fx-rack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.fx-module-card {
+  background: var(--au-surface);
+  border: 1px solid var(--au-border);
+  border-radius: 16px;
+  padding: 20px;
+}
+
 /* Spatial Soundstage */
 .spatial-stage-card {
   grid-column: span 12;

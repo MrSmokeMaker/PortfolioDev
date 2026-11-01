@@ -1,22 +1,29 @@
 {
-  "name": "MrSmokeMaker — Senior UI/UX Portfolio OS",
-  "short_name": "Portfolio OS",
-  "description": "Elite Senior UI/UX Engineer & Lead Design Architect Interactive Showcase",
+  "name": "Коровин Сергей — Портфолио & Архитектура систем",
+  "short_name": "Коровин С.",
+  "description": "Портфолио ведущего фронтенд-разработчика и архитектора интерфейсов: веб-приложения, дизайн-системы, аудио-движки и промо-сайты.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090D16",
-  "theme_color": "#2563EB",
+  "background_color": "#0B0F19",
+  "theme_color": "#0B0F19",
   "orientation": "any",
   "icons": [
     {
       "src": "assets/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "assets/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
     }
   ]
 }
