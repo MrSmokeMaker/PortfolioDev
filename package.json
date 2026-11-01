@@ -1,0 +1,30 @@
+{
+  "name": "developer-portfolio",
+  "version": "1.0.0",
+  "description": "Static portfolio site for MrSmokeMaker",
+  "scripts": {
+    "build:css": "postcss assets/css/main.css -o dist/assets/css/bundle.css",
+    "build:js": "esbuild assets/js/main.js --bundle --minify --outfile=dist/assets/js/bundle.js",
+    "build:html": "node scripts/build-html.js",
+    "build": "npm-run-all --parallel build:css build:js build:html",
+    "lint:css": "stylelint 'assets/css/**/*.css'",
+    "lint:js": "eslint 'assets/js/**/*.js'",
+    "lint": "npm-run-all lint:css lint:js",
+    "optimize:images": "node scripts/optimize-images.js",
+    "sitemap": "node scripts/generate-sitemap.js",
+    "test": "echo \"No tests defined\""
+  },
+  "devDependencies": {
+    "sharp": "^0.33.3",
+    "sitemap": "^7.1.1",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "esbuild": "^0.21.3",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "autoprefixer": "^10.4.16",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^35.0.0",
+    "eslint": "^8.57.0",
+    "npm-run-all": "^4.1.5"
+  }
+}

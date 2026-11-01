@@ -1,0 +1,125 @@
+/* ==========================================================================
+   FIGMA EDITION: CLAY & OCHRE V2 (HERMES ARTISANAL LUXURY ATELIER)
+   Interactive 3D Pottery Lathe, Raku Crackle Glazes, Luxury Atelier Layout
+   ========================================================================== */
+
+:root {
+  --c2-bg: #14110E;
+  --c2-surface: #1C1814;
+  --c2-card: #25201B;
+  --c2-border: #383028;
+  --c2-gold: #C5A059;
+  --c2-ochre: #D4A34D;
+  --c2-text: #F7EFE6;
+  --c2-text-muted: #9E8F7F;
+  --c2-serif: 'Fraunces', Georgia, serif;
+}
+
+body.craft-v2-theme {
+  background-color: var(--c2-bg);
+  color: var(--c2-text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Topbar */
+.edition-switch-bar {
+  background: #0E0C0A;
+  border-bottom: 1px solid var(--c2-border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.edition-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--c2-border);
+  background: #1C1814;
+  color: var(--c2-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  transition: all 0.2s ease;
+}
+
+.edition-btn.active {
+  background: rgba(197, 160, 89, 0.15);
+  border-color: var(--c2-gold);
+  color: var(--c2-gold);
+}
+
+.c2-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Lathe Simulator Card */
+.lathe-studio-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 28px;
+  margin-top: 24px;
+}
+
+.lathe-canvas-frame {
+  height: 380px;
+  background: #0A0807;
+  border: 1px solid var(--c2-border);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  cursor: ew-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lathe-canvas-frame canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Glaze Swatches */
+.glaze-picker-row {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.glaze-swatch-btn {
+  flex: 1;
+  padding: 12px;
+  background: var(--c2-card);
+  border: 1px solid var(--c2-border);
+  border-radius: 10px;
+  color: var(--c2-text);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.glaze-swatch-btn.active {
+  border-color: var(--c2-gold);
+  background: rgba(197, 160, 89, 0.15);
+  color: var(--c2-gold);
+}
+
+@media (max-width: 900px) {
+  .lathe-studio-grid { grid-template-columns: 1fr; }
+}

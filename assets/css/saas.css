@@ -388,3 +388,35 @@ body.saas-theme {
     display: none;
   }
 }
+
+@media (max-width: 640px) {
+  .saas-header-wrap {
+    top: 46px;
+    padding: 0 8px;
+  }
+  .saas-floating-navbar {
+    height: 54px;
+    padding: 0 14px;
+  }
+  .saas-floating-navbar .btn-lime-glow {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .glass-card {
+    padding: 24px 16px !important;
+  }
+  .saas-cta-box {
+    padding: 28px 16px !important;
+  }
+  .saas-cta-box form {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .saas-cta-box input,
+  .saas-cta-box button {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+

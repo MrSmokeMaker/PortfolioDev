@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHER — Spatial Audio & Web Audio API Synth Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/audio.css">
+</head>
+<body class="audio-theme">
+
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html" selected>🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="audio.html" class="version-pill active" title="Mobbi V1">V1</a>
+          <a href="audio-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="audio-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Audio Header -->
+  <header class="audio-header">
+    <div class="mobbi-container">
+      <nav class="audio-nav">
+        <div class="audio-logo">
+          <div class="audio-logo-circle"></div>
+          <div>AETHER AUDIO LAB</div>
+        </div>
+        <div style="font-size: 13px; color: var(--au-text-muted);">
+          Реальный полифонический Web Audio API движок
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="mobbi-container">
+    <div class="audio-workspace">
+
+      <!-- Synthesizer & Realtime FFT Visualizer -->
+      <section class="synth-station-card">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 22px; font-weight: 800;">Аудио-визуализатор и Синтезатор</h2>
+            <p style="font-size: 14px; color: var(--au-text-muted); margin-top: 2px;">Нажимайте на клавиши или клавиатуру (A S D F G H J K)</p>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--au-accent);">
+            44.1 kHz / 32-bit Float
+          </div>
+        </div>
+
+        <div class="visualizer-canvas-frame">
+          <canvas id="audio-canvas"></canvas>
+        </div>
+
+        <!-- Interactive Keyboard -->
+        <div class="synth-keys-bar">
+          <div class="piano-key" data-note="261.63" data-key="a">
+            <span>C4</span>
+            <span class="key-shortcut">A</span>
+          </div>
+          <div class="piano-key" data-note="293.66" data-key="s">
+            <span>D4</span>
+            <span class="key-shortcut">S</span>
+          </div>
+          <div class="piano-key" data-note="329.63" data-key="d">
+            <span>E4</span>
+            <span class="key-shortcut">D</span>
+          </div>
+          <div class="piano-key" data-note="349.23" data-key="f">
+            <span>F4</span>
+            <span class="key-shortcut">F</span>
+          </div>
+          <div class="piano-key" data-note="392.00" data-key="g">
+            <span>G4</span>
+            <span class="key-shortcut">G</span>
+          </div>
+          <div class="piano-key" data-note="440.00" data-key="h">
+            <span>A4</span>
+            <span class="key-shortcut">H</span>
+          </div>
+          <div class="piano-key" data-note="493.88" data-key="j">
+            <span>B4</span>
+            <span class="key-shortcut">J</span>
+          </div>
+          <div class="piano-key" data-note="523.25" data-key="k">
+            <span>C5</span>
+            <span class="key-shortcut">K</span>
+          </div>
+        </div>
+
+        <div class="synth-controls-row">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 13px; color: var(--au-text-muted);">Форма волны:</span>
+            <div class="synth-wave-picker">
+              <button class="wave-btn active" onclick="setWaveType('sine', this)">Sine</button>
+              <button class="wave-btn" onclick="setWaveType('triangle', this)">Triangle</button>
+              <button class="wave-btn" onclick="setWaveType('sawtooth', this)">Sawtooth</button>
+              <button class="wave-btn" onclick="setWaveType('square', this)">Square</button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="btn-audio-action" onclick="playDemoArpeggio()">
+              ▶ Демо-арпеджио
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vinyl Turntable Station -->
+      <aside class="vinyl-deck-card">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--au-text-muted);">Аналоговый Дэк</span>
+          <span id="rpm-indicator" style="font-family: var(--font-mono); font-size: 12px; color: var(--au-cyan);">33 RPM</span>
+        </div>
+
+        <div class="vinyl-record-wrap">
+          <div id="vinyl-disc" class="vinyl-disc">
+            <div class="vinyl-center-label">
+              <div>
+                <div>AETHER</div>
+                <div style="font-size: 9px; opacity: 0.8;">SIDE A • 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vinyl-controls">
+          <button id="vinyl-toggle-btn" class="btn-audio-action primary" onclick="toggleVinylSpin()">
+            Запустить винил
+          </button>
+          <button class="btn-audio-action" onclick="cycleRpm()">
+            Скорость RPM
+          </button>
+        </div>
+      </aside>
+
+      <!-- Spatial Soundstage 2D Canvas -->
+      <section class="spatial-stage-card">
+        <div>
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Бинауральное позиционирование (HRTF)</h3>
+          <p style="font-size: 14px; color: var(--au-text-muted); line-height: 1.5; margin-bottom: 16px;">
+            Двигайте бирюзовый маркер источника звука для симуляции панорамирования в трехмерном акустическом пространстве.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--au-cyan);" id="pan-val-display">
+            Панорама: 0.00 (Центр)
+          </div>
+        </div>
+
+        <div class="spatial-radar-box" id="spatial-radar">
+          <div id="spatial-marker" class="spatial-puck"></div>
+          <div style="position: absolute; bottom: 8px; font-size: 11px; color: #4B5563;">Слушатель: 🎧 Центр сцены</div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // ------------------------------------------------------------------------
+    // Web Audio API Synthesizer & Canvas Visualizer
+    // ------------------------------------------------------------------------
+    let audioCtx = null;
+    let waveType = 'sine';
+    let pannerNode = null;
+    let analyserNode = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyserNode = audioCtx.createAnalyser();
+        analyserNode.fftSize = 64;
+        
+        if (audioCtx.createStereoPanner) {
+          pannerNode = audioCtx.createStereoPanner();
+          pannerNode.connect(analyserNode);
+        } else {
+          pannerNode = null;
+        }
+
+        if (pannerNode) {
+          analyserNode.connect(audioCtx.destination);
+        } else {
+          analyserNode.connect(audioCtx.destination);
+        }
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playTone(freq, duration = 0.4) {
+      initAudio();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = waveType;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      if (pannerNode) {
+        gain.connect(pannerNode);
+      } else {
+        gain.connect(analyserNode);
+      }
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // Piano Keys binding
+    const keys = document.querySelectorAll('.piano-key');
+    keys.forEach(k => {
+      k.addEventListener('mousedown', () => {
+        const freq = parseFloat(k.getAttribute('data-note'));
+        playTone(freq);
+        k.classList.add('is-pressed');
+      });
+      k.addEventListener('mouseup', () => k.classList.remove('is-pressed'));
+      k.addEventListener('mouseleave', () => k.classList.remove('is-pressed'));
+    });
+
+    // Keyboard shortcuts
+    const keyMap = {
+      'a': 261.63, 's': 293.66, 'd': 329.63, 'f': 349.23,
+      'g': 392.00, 'h': 440.00, 'j': 493.88, 'k': 523.25,
+      'ф': 261.63, 'ы': 293.66, 'в': 329.63, 'а': 349.23,
+      'п': 392.00, 'р': 440.00, 'о': 493.88, 'л': 523.25
+    };
+
+    window.addEventListener('keydown', (e) => {
+      const k = e.key.toLowerCase();
+      if (keyMap[k]) {
+        playTone(keyMap[k]);
+        const keyEl = document.querySelector(`.piano-key[data-key="${k}"]`);
+        if (keyEl) keyEl.classList.add('is-pressed');
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const k = e.key.toLowerCase();
+      const keyEl = document.querySelector(`.piano-key[data-key="${k}"]`);
+      if (keyEl) keyEl.classList.remove('is-pressed');
+    });
+
+    function setWaveType(type, btn) {
+      waveType = type;
+      document.querySelectorAll('.wave-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      playTone(440, 0.15);
+    }
+
+    function playDemoArpeggio() {
+      const notes = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 261.63];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => playTone(freq, 0.25), idx * 140);
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // Real-Time Canvas FFT Wave Visualizer
+    // ------------------------------------------------------------------------
+    const canvas = document.getElementById('audio-canvas');
+    const ctx = canvas.getContext('2d');
+    let cWidth, cHeight;
+
+    function resizeVis() {
+      cWidth = canvas.parentElement.clientWidth;
+      cHeight = canvas.parentElement.clientHeight;
+      canvas.width = cWidth * window.devicePixelRatio;
+      canvas.height = cHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resizeVis);
+    resizeVis();
+
+    const dataArray = new Uint8Array(32);
+
+    function renderVis() {
+      ctx.clearRect(0, 0, cWidth, cHeight);
+
+      if (analyserNode) {
+        analyserNode.getByteFrequencyData(dataArray);
+      } else {
+        // Subtle ambient oscillation
+        for (let i = 0; i < 32; i++) {
+          dataArray[i] = Math.max(0, 15 + Math.sin(Date.now() / 300 + i * 0.4) * 10);
+        }
+      }
+
+      const barCount = 32;
+      const barWidth = (cWidth / barCount) - 4;
+
+      for (let i = 0; i < barCount; i++) {
+        const val = dataArray[i];
+        const barHeight = (val / 255) * (cHeight * 0.85) + 4;
+        const x = i * (barWidth + 4);
+        const y = cHeight - barHeight;
+
+        const grad = ctx.createLinearGradient(0, y, 0, cHeight);
+        grad.addColorStop(0, '#A855F7');
+        grad.addColorStop(1, '#06B6D4');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x, y, barWidth, barHeight);
+      }
+
+      requestAnimationFrame(renderVis);
+    }
+    requestAnimationFrame(renderVis);
+
+    // ------------------------------------------------------------------------
+    // Vinyl Controls
+    // ------------------------------------------------------------------------
+    let isSpinning = false;
+    let rpms = [33, 45, 78];
+    let rpmIdx = 0;
+
+    function toggleVinylSpin() {
+      initAudio();
+      isSpinning = !isSpinning;
+      const disc = document.getElementById('vinyl-disc');
+      const btn = document.getElementById('vinyl-toggle-btn');
+      if (isSpinning) {
+        disc.classList.add('is-spinning');
+        btn.textContent = 'Остановить винил';
+        playTone(196, 0.8);
+      } else {
+        disc.classList.remove('is-spinning');
+        btn.textContent = 'Запустить винил';
+      }
+    }
+
+    function cycleRpm() {
+      rpmIdx = (rpmIdx + 1) % rpms.length;
+      document.getElementById('rpm-indicator').textContent = `${rpms[rpmIdx]} RPM`;
+      if (isSpinning) {
+        const disc = document.getElementById('vinyl-disc');
+        disc.style.animationDuration = `${(60 / rpms[rpmIdx]) * 1.2}s`;
+      }
+    }
+
+    // ------------------------------------------------------------------------
+    // Spatial Soundstage 2D Panner
+    // ------------------------------------------------------------------------
+    const radar = document.getElementById('spatial-radar');
+    const marker = document.getElementById('spatial-marker');
+    let isDraggingPuck = false;
+
+    radar.addEventListener('mousedown', (e) => {
+      isDraggingPuck = true;
+      updatePuckPos(e);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDraggingPuck) updatePuckPos(e);
+    });
+
+    window.addEventListener('mouseup', () => { isDraggingPuck = false; });
+
+    function updatePuckPos(e) {
+      const rect = radar.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+
+      x = Math.max(16, Math.min(rect.width - 16, x));
+      y = Math.max(16, Math.min(rect.height - 16, y));
+
+      marker.style.left = `${x}px`;
+      marker.style.top = `${y}px`;
+
+      const pan = ((x / rect.width) - 0.5) * 2;
+      document.getElementById('pan-val-display').textContent = `Панорама: ${pan.toFixed(2)} (${pan < -0.1 ? 'Левый' : pan > 0.1 ? 'Правый' : 'Центр'})`;
+
+      if (pannerNode) {
+        pannerNode.pan.setValueAtTime(pan, audioCtx.currentTime);
+      }
+    }
+  </script>
+</body>
+</html>

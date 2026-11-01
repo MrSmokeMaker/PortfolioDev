@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMEN Apex Salon V3 // Sotheby's & Guggenheim Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/apex-v3.css">
+  <link rel="stylesheet" href="assets/css/gallery-v2.css">
+  <style>
+    .loupe-view-box { position: relative; overflow: hidden; border-radius: 16px; cursor: crosshair; }
+    .loupe-lens { position: absolute; width: 140px; height: 140px; border-radius: 50%; border: 2px solid #F59E0B; pointer-events: none; display: none; box-shadow: 0 0 25px rgba(245, 158, 11, 0.4), inset 0 0 15px rgba(0,0,0,0.6); background-repeat: no-repeat; z-index: 20; }
+  </style>
+</head>
+<body class="apex-v3-theme">
+
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech-v3.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas-v3.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft-v3.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech-v3.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio-v3.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery-v3.html" selected>🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="gallery.html" class="version-pill" title="Mobbi V1">V1</a>
+          <a href="gallery-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="gallery-v3.html" class="version-pill active is-v3" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  </div>
+
+  <div class="mobbi-container" style="max-width: 1360px; margin: 40px auto; padding: 0 24px;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; border-bottom: 1px solid var(--apex-border); padding-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-family: var(--apex-font-mono); font-size: 11px; color: #F59E0B; letter-spacing: 0.1em; text-transform: uppercase;">
+          SOTHEBY'S & GUGGENHEIM PRIVATE SALON // LOT #04
+        </div>
+        <h1 style="font-family: 'Fraunces', serif; font-size: 44px; font-weight: 700; color: #FFFFFF; margin: 6px 0 0 0;">
+          «Световая геометрия тишины» — Лот № 04
+        </h1>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="squircle-pill" style="color: #F59E0B; border-color: rgba(245, 158, 11, 0.4);">
+          Leica M11 Monochrom • 1/2000s • f/1.4
+        </span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start;">
+      
+      <!-- Interactive 400% Optical Loupe Canvas/Image -->
+      <div class="border-beam-card" style="padding: 2px;">
+        <div class="border-beam-content" style="padding: 16px;">
+          <div id="loupe-container" class="loupe-view-box">
+            <img id="master-artwork" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1400&q=85" alt="Master Artwork" style="width: 100%; height: auto; display: block; border-radius: 12px;" loading="lazy">
+            <div id="lens" class="loupe-lens"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px; font-size: 12px; color: var(--apex-text-dim); font-family: var(--apex-font-mono);">
+            <span>🔍 Наведите курсор на холст для активации 400% оптической лупы</span>
+            <span>Серебряный галогенидный отпечаток 1/1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Provenance & Auction Bidding Terminal -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <div class="border-beam-card" style="padding: 2px;">
+          <div class="border-beam-content" style="padding: 28px;">
+            <div style="font-family: var(--apex-font-mono); font-size: 11px; color: #F59E0B; margin-bottom: 8px;">ТЕКУЩАЯ СТАВКА АУКЦИОНА</div>
+            <div id="current-bid-val" style="font-family: 'Fraunces', serif; font-size: 42px; font-weight: 700; color: #FFFFFF;">
+              €145,000
+            </div>
+            <div style="font-size: 13px; color: var(--apex-text-muted); margin: 6px 0 20px 0;">
+              Резервная цена пройдена. Шаг ставки: €10,000. Закрытие через 04:12 мин.
+            </div>
+
+            <button class="btn-apex-primary" style="width: 100%; justify-content: center; padding: 14px; background: linear-gradient(135deg, #F59E0B, #D97706); color: #030509;" onclick="placeBid()">
+              Поднять ставку до €155,000
+            </button>
+          </div>
+        </div>
+
+        <div class="border-beam-card" style="padding: 2px;">
+          <div class="border-beam-content" style="padding: 24px;">
+            <div style="font-family: var(--apex-font-mono); font-size: 11px; color: var(--apex-cyan); margin-bottom: 8px;">КРИПТОГРАФИЧЕСКИЙ СЕРТИФИКАТ (COA)</div>
+            <div style="font-size: 13.5px; color: var(--apex-text-muted); line-height: 1.6; margin-bottom: 16px;">
+              Подлинность работы заверена цифровым сертификатом фонда LUMEN. Хеш отпечатка жестко зафиксирован в блокчейн-реестре.
+            </div>
+            <div style="font-family: var(--apex-font-mono); font-size: 11px; color: #00F0FF; background: rgba(0, 240, 255, 0.05); padding: 10px; border-radius: 8px; border: 1px solid rgba(0, 240, 255, 0.2); word-break: break-all;">
+              SHA256: e87c04f932e652a8b9e59...71b9d032
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // 400% Optical Loupe Simulation
+    const container = document.getElementById('loupe-container');
+    const img = document.getElementById('master-artwork');
+    const lens = document.getElementById('lens');
+
+    if (container && img && lens) {
+      lens.style.backgroundImage = `url('${img.src}')`;
+      lens.style.backgroundSize = `${img.width * 2.5}px ${img.height * 2.5}px`;
+
+      container.addEventListener('mouseenter', () => {
+        lens.style.display = 'block';
+        lens.style.backgroundSize = `${img.width * 2.5}px ${img.height * 2.5}px`;
+      });
+      container.addEventListener('mouseleave', () => { lens.style.display = 'none'; });
+
+      container.addEventListener('mousemove', (e) => {
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        lens.style.left = `${x - 70}px`;
+        lens.style.top = `${y - 70}px`;
+        lens.style.backgroundPosition = `-${x * 2.5 - 70}px -${y * 2.5 - 70}px`;
+      });
+    }
+
+    let bid = 145000;
+    function placeBid() {
+      bid += 10000;
+      document.getElementById('current-bid-val').innerText = `€${bid.toLocaleString('de-DE')}`;
+      alert(`Ваша ставка в размере €${bid.toLocaleString('de-DE')} успешно зарегистрирована в аукционном реестре Sotheby's!`);
+    }
+  </script>
+</body>
+</html>

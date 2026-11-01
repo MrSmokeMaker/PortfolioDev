@@ -1,238 +1,797 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
+  <meta name="description" content="Портфолио Коровина Сергея – Senior UI/UX Engineer, Design Systems Architect. Showcase of premium interactive web projects with modern design, performance, and accessibility.">
+  <meta property="og:title" content="Коровин Сергей — Senior UI/UX Engineer">
+  <meta property="og:description" content="Эксклюзивное инженерное портфолио и дизайн-системы Коровина Сергея.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mrsmokemaker.github.io/PortfolioDev/">
+  <meta property="og:image" content="https://mrsmokemaker.github.io/PortfolioDev/assets/og-image.png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Портфолио Senior UI/UX разработчика — 4 премиальных проекта</title>
+  <title>Коровин Сергей — Senior UI/UX Engineer & Design Systems Architect</title>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Коровин Сергей",
+  "url": "https://mrsmokemaker.github.io/PortfolioDev/",
+  "sameAs": [
+    "https://github.com/MrSmokeMaker",
+    "https://www.linkedin.com/in/mrsmokemaker"
+  ],
+  "jobTitle": "Senior UI/UX Engineer & Lead Design Systems Architect",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://mrsmokemaker.github.io/PortfolioDev/",
+  "name": "Коровин Сергей — Портфолио",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://mrsmokemaker.github.io/PortfolioDev/?s={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Коровин Сергей — Senior UI/UX Engineer">
+<meta name="twitter:description" content="Эксклюзивное инженерное портфолио Коровина Сергея.">
+<meta name="twitter:image" content="https://mrsmokemaker.github.io/PortfolioDev/assets/og-image.png">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/cyber-v2.css">
 </head>
+<a href="#main-content" class="skip-link">Перейти к содержимому</a>
 <body class="hub-theme">
+  <div class="noise-overlay"></div>
 
-  <div class="mobbi-container">
-    <!-- Profile Hero Card -->
-    <header class="profile-card" data-tilt data-tilt-max="3">
-      <div class="avatar-frame">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Фото разработчика">
+  <!-- Top Design Concept Switcher Bar -->
+  <div class="concept-switcher-bar">
+    <div class="concept-pills-row">
+      <span style="font-family: var(--font-mono); font-size: 11px; color: var(--theme-text-muted); text-transform: uppercase;">Концепты хаба:</span>
+      <a href="index.html" class="concept-btn active">
+        <span>💎 V1: Slate Glass OS</span>
+      </a>
+      <a href="index-v2.html" class="concept-btn">
+        <span>⚡ V2: Cyber HUD Matrix</span>
+      </a>
+      <a href="index-v3.html" class="concept-btn" style="color: #00F0FF; border-color: rgba(0, 240, 255, 0.4);">
+        <span>👑 V3: Apex Studio</span>
+      </a>
+      <button class="concept-btn" onclick="openCompareModal()" style="color: var(--theme-accent);">
+        <span>⚖ Сравнить версии V1 vs V2</span>
+      </button>
+    </div>
+
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="https://www.figma.com/design/NkmANyDIpsrxlzj6FTj2WA" target="_blank" class="concept-btn" style="color: #A855F7;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
+        <span>Figma Проект →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 1. Floating Dynamic Island Navbar -->
+  <div class="hub-floating-dock-wrap">
+    <header class="hub-floating-dock" role="banner">
+      <div class="dock-brand">
+        <div class="dock-brand-avatar luxury-logo-icon" title="Коровин Сергей">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 4"/>
+            <rect x="20" y="20" width="60" height="60" rx="16" fill="#0B0F19" stroke="#F59E0B" stroke-width="2"/>
+            <path d="M38 34C33 34 30 37.5 30 41.5C30 46.5 39 47 40.5 51.5C41.5 55 38 58 34 58C30.5 58 28.5 55.5 28.5 55.5" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+            <path d="M49 33V59M63 34L50 46.5L64 59" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span data-i18n="dev_name">Коровин Сергей</span>
       </div>
-      <div>
-        <h1 class="profile-name">Алексей Романов</h1>
-        <div class="profile-role">Senior UI/UX Engineer & Design Systems Architect</div>
-        <p class="profile-bio">
-          Проектирую и создаю премиальные цифровые интерфейсы студийного уровня. Объединяю строгую модульную математику дизайн-систем Mobbi с живой физикой микро-анимаций, параллаксом и бескомпромиссной читаемостью данных.
-        </p>
-        <div class="skills-pills-row">
-          <span class="skill-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            Mobbi Design Engine
-          </span>
-          <span class="skill-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
-            Advanced HTML5 / CSS3 Motion
-          </span>
-          <span class="skill-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            Data-Heavy Architecture
-          </span>
-          <button onclick="toggleNdaDemo()" style="background: none; border: 1px dashed var(--hub-text-muted); padding: 4px 10px; border-radius: 6px; font-size: 12px; color: var(--hub-text-muted); cursor: pointer;">
-            Переключить NDA-демо
+
+      <!-- Version & News Button (Opens Changelog Drawer) -->
+      <button class="dock-version-pill" onclick="toggleChangelog()" title="Открыть хронику обновлений и версий проекта">
+        <span class="status-pulse-dot"></span>
+        <span>v3.1 Live</span>
+        <span id="news-unread-dot" class="unread-news-badge" style="display: none;"></span>
+      </button>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Primary navigation"><ul class="dock-nav-links">
+        <li><a href="#projects" data-i18n="nav_projects">Проекты (6)</a></li>
+        <li><a href="#skills" data-i18n="nav_skills">Компетенции</a></li>
+        <li><a href="#estimator" data-i18n="nav_estimator">Оценка проекта</a></li>
+        <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
+      </ul>
+
+      <!-- Dock Action Tools -->
+      <div class="dock-actions-group">
+        <!-- Language Switcher (RU ⇄ EN) -->
+        <button class="dock-btn" id="lang-toggle-btn" onclick="toggleLanguage()" title="Переключить язык / Switch Language">
+          <span>RU</span>
+        </button>
+
+        <!-- Search / Command Palette (Cmd+K) -->
+        <button class="dock-btn" onclick="toggleCommandPalette()" title="Командная строка (Cmd+K / Ctrl+K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <kbd>⌘K</kbd>
+        </button>
+
+        <!-- Sound FX Toggle -->
+        <button class="dock-btn icon-only" data-sound-toggle-btn onclick="toggleSound()" title="Звуки микро-взаимодействий">
+          <span class="sound-on-icon" style="display: none;">🔊</span>
+          <span class="sound-off-icon">🔇</span>
+        </button>
+
+        <!-- Theme Cycler (Light / Dark / OLED) -->
+        <button class="dock-btn icon-only" onclick="cycleTheme()" title="Сменить тему (Light / Dark / OLED)" aria-pressed="false">
+          <span data-theme-icon="light">☀️</span>
+          <span data-theme-icon="dark" style="display: none;">🌙</span>
+          <span data-theme-icon="oled" style="display: none;">⚡</span>
+        </button>
+
+        <!-- Direct Telegram QR Modal -->
+        <button class="dock-btn" style="background: var(--theme-accent); color: white; border-color: var(--theme-accent);" onclick="openTelegramModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span>Telegram</span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <main id="main-content" role="main" class="mobbi-container">
+    <!-- 2. Hero Bento Section -->
+    <section class="hero-bento-grid">
+      <!-- Main Profile Card -->
+      <div class="hero-main-card" data-tilt data-tilt-max="3">
+        <!-- 3D Interactive WebGL Cyber-Core -->
+        <div class="hero-3d-canvas-wrap" title="3D Cyber-Core: перетаскивайте мышью или кликните">
+          <canvas id="hero-3d-canvas"></canvas>
+        </div>
+
+        <div>
+          <div class="hero-header-row">
+            <div class="hero-avatar-wrap">
+              <div class="luxury-sk-logo-hero" title="Коровин Сергей — SK Architectural Brand">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Логотип SK — Коровин Сергей">
+                  <defs>
+                    <linearGradient id="skHeroGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#F59E0B">
+                        <animate attributeName="stop-color" values="#F59E0B;#FCD34D;#10B981;#00F0FF;#F59E0B" dur="10s" repeatCount="indefinite" />
+                      </stop>
+                      <stop offset="50%" stop-color="#FFFBEB" />
+                      <stop offset="100%" stop-color="#D97706">
+                        <animate attributeName="stop-color" values="#D97706;#B45309;#059669;#0891B2;#D97706" dur="10s" repeatCount="indefinite" />
+                      </stop>
+                    </linearGradient>
+                    <linearGradient id="skHeroHaloGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="rgba(245, 158, 11, 0.8)"/>
+                      <stop offset="100%" stop-color="rgba(0, 240, 255, 0.3)"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="url(#skHeroHaloGrad)" stroke-width="1.2" stroke-dasharray="6 4"/>
+                  <rect x="18" y="18" width="64" height="64" rx="18" fill="rgba(11, 15, 25, 0.9)" stroke="url(#skHeroGoldGrad)" stroke-width="1.5"/>
+                  <path d="M38 34C33 34 30 37.5 30 41.5C30 46.5 39 47 40.5 51.5C41.5 55 38 58 34 58C30.5 58 28.5 55.5 28.5 55.5" stroke="url(#skHeroGoldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M49 33V59M63 34L50 46.5L64 59" stroke="url(#skHeroGoldGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="50" cy="50" r="2.2" fill="#FCD34D"/>
+                </svg>
+              </div>
+              <span class="hero-status-tag" title="Открыт к предложениям">●</span>
+            </div>
+            <div class="hero-titles">
+              <h1 data-i18n="dev_name">Коровин Сергей</h1>
+              <div class="hero-role-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span data-i18n="hero_role">Senior UI/UX Engineer & Lead Design Systems Architect</span>
+              </div>
+              <p class="hero-bio" data-i18n="hero_bio">
+                Проектирую цифровые продукты мирового уровня (Awwwards / Mobbin Elite). Объединяю строгую модульную архитектуру дизайн-систем, 60 FPS аппаратные анимации, Web Audio API, Canvas телеметрию и бескомпромиссную скорость загрузки.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-tags-row">
+            <span class="hero-tag">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Mobbi Design Engine
+            </span>
+            <span class="hero-tag">3D WebGL & Canvas</span>
+            <span class="hero-tag">Web Audio API</span>
+            <span class="hero-tag">Zero-deps Vanilla</span>
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn-primary-action">
+            <span data-i18n="hero_explore">Исследовать 6 проектов</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <button class="btn-secondary-action" onclick="openTelegramModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/></svg>
+            <span data-i18n="hero_qr_btn">Показать QR Telegram</span>
+          </button>
+          <button class="btn-secondary-action" onclick="toggleChangelog()">
+            <span data-i18n="hero_versions_btn">Хроника версий v3.1</span>
           </button>
         </div>
       </div>
-    </header>
 
-    <!-- Key Metrics / Achievements Grid -->
-    <section class="achievement-grid">
-      <div class="achievement-card" data-tilt data-tilt-max="4">
-        <div class="achievement-num tabular-nums">99.98%</div>
-        <div class="achievement-label">Uptime в high-load сервисах с аудиторией более 2.4 млн MAU</div>
-      </div>
-      <div class="achievement-card" data-tilt data-tilt-max="4">
-        <div class="achievement-num tabular-nums" style="color: var(--hub-blue);">&lt; 0.8s</div>
-        <div class="achievement-label">Средний показатель LCP (Largest Contentful Paint) на оптимизированных проектах</div>
-      </div>
-      <div class="achievement-card" data-tilt data-tilt-max="4">
-        <div class="achievement-num tabular-nums">40+</div>
-        <div class="achievement-label">Разработанных переиспользуемых UI-токенов и компонентов дизайн-систем</div>
-      </div>
-    </section>
-
-    <!-- 4 Featured Project Case Studies -->
-    <section id="projects-section">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 32px;">
+      <!-- Hero Side Telemetry Card -->
+      <aside class="hero-telemetry-card" data-tilt data-tilt-max="4">
         <div>
-          <h2 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em;">Избранные проекты в портфолио</h2>
-          <p style="color: var(--hub-text-muted); font-size: 15px; margin-top: 4px;">4 принципиально разных архитектурных и визуальных стиля на базе Mobbi</p>
+          <div class="telemetry-card-title">
+            <span>Системная телеметрия</span>
+            <span class="status-pulse-dot"></span>
+          </div>
+
+          <div class="telemetry-items-stack">
+            <div class="telemetry-row">
+              <span class="telemetry-label">Google Lighthouse</span>
+              <span class="telemetry-val green">100 / 100</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Скорость первого кадра (LCP)</span>
+              <span class="telemetry-val accent">&lt; 0.72 s</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Частота интерфейса</span>
+              <span class="telemetry-val green">60 FPS Hardware</span>
+            </div>
+            <div class="telemetry-row">
+              <span class="telemetry-label">Сторонние библиотеки</span>
+              <span class="telemetry-val">0 KB (Pure Vanilla)</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div id="projects-feed">
-        <!-- Project 1: Art Gallery -->
-        <article class="project-card-split" data-tilt data-tilt-max="3">
-          <div class="project-preview-side">
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80" alt="LUMEN Gallery">
+        <!-- Quick Telegram Banner -->
+        <div class="telegram-quick-box" onclick="openTelegramModal()">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #2563EB; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </div>
-          <div class="project-info-side">
-            <span class="project-tag-accent" style="color: #D94E3A;">Стиль: «Воздушный минимализм + Крупные фото»</span>
-            <h3 class="project-title">LUMEN Gallery — Онлайн-экспозиция световой фотографии</h3>
-            <p class="project-desc">
-              Асимметричная 12-колоночная сетка, расширенные поля 96px, кастомный Scroll-driven параллакс первого экрана, Masonry-галерея с переменным ритмом кадрирования и терракотовый акцент.
-            </p>
-            <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-              <span class="tech-tag">Scroll-driven Parallax</span>
-              <span class="tech-tag">Editorial Layout</span>
-              <span class="tech-tag">Unsplash Curated</span>
-            </div>
-            <a href="gallery.html" class="btn-open-project">
-              Открыть сайт галереи →
-            </a>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--theme-text);">Telegram: +7 (939) 474-89-99</div>
+            <div style="font-size: 12px; color: var(--theme-text-muted);">Кликните для открытия QR-кода</div>
           </div>
-        </article>
-
-        <!-- Project 2: Fintech Dashboard -->
-        <article class="project-card-split" data-tilt data-tilt-max="3">
-          <div class="project-preview-side" style="background: #0F172A; display: flex; align-items: center; justify-content: center; padding: 24px;">
-            <div style="width: 100%; background: #1E293B; border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.1);">
-              <div style="display: flex; justify-content: space-between; color: white; font-size: 14px; font-weight: 700; margin-bottom: 12px;">
-                <span>VERTEX Institutional Portal</span>
-                <span style="color: #3B82F6;">+14.2%</span>
-              </div>
-              <div style="height: 60px; background: linear-gradient(180deg, rgba(59,130,246,0.3) 0%, transparent 100%); border-radius: 6px; border-bottom: 2px solid #3B82F6;"></div>
-            </div>
-          </div>
-          <div class="project-info-side">
-            <span class="project-tag-accent" style="color: #3B82F6;">Стиль: «Строгий корпоративный + Data-Heavy»</span>
-            <h3 class="project-title">VERTEX Capital — Личный кабинет институционального фонда</h3>
-            <p class="project-desc">
-              Плотный интерфейс с максимальной читаемостью данных. Сплит-архитектура, живой интерактивный график доходности на SVG, моноширинные таблицы клиринга и модальное окно авторизации переводов.
-            </p>
-            <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-              <span class="tech-tag">Tabular Figures</span>
-              <span class="tech-tag">SVG Dynamic Charts</span>
-              <span class="tech-tag">Data Tables</span>
-            </div>
-            <a href="fintech.html" class="btn-open-project">
-              Открыть личный кабинет →
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 3: Craft Goods Store -->
-        <article class="project-card-split" data-tilt data-tilt-max="3">
-          <div class="project-preview-side">
-            <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1000&q=80" alt="CLAY & OCHRE">
-          </div>
-          <div class="project-info-side">
-            <span class="project-tag-accent" style="color: #D4A34D;">Стиль: «Тёплый, тактильный, ручной вид»</span>
-            <h3 class="project-title">CLAY & OCHRE — Магазин авторской крафтовой керамики</h3>
-            <p class="project-desc">
-              Органическая палитра льна и песка, тактильный 3D-наклон карточек изделий, интерактивная боковая корзина (Slide-over Cart Drawer) с живым пересчетом итогов и оформлением в 1 клик.
-            </p>
-            <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-              <span class="tech-tag">Slide-over Cart Drawer</span>
-              <span class="tech-tag">Tactile 3D Tilt</span>
-              <span class="tech-tag">Warm Micro-Noise</span>
-            </div>
-            <a href="craft.html" class="btn-open-project">
-              Открыть крафт-магазин →
-            </a>
-          </div>
-        </article>
-
-        <!-- Project 4: SaaS AI Platform -->
-        <article class="project-card-split" data-tilt data-tilt-max="3">
-          <div class="project-preview-side" style="background: #18181D; padding: 24px; display: flex; align-items: center; justify-content: center;">
-            <div style="width: 100%; border: 1px solid #3B3B48; border-radius: 12px; padding: 18px; background: #202028; box-shadow: 0 0 30px rgba(134,239,107,0.15);">
-              <span style="font-size: 11px; color: #86EF6B; font-family: monospace;">$ nexus cluster --status: RUNNING</span>
-              <div style="margin-top: 10px; font-size: 18px; font-weight: 700; color: white;">Sub-millisecond Latency: 14ms</div>
-            </div>
-          </div>
-          <div class="project-info-side">
-            <span class="project-tag-accent" style="color: #86EF6B;">Стиль: «Динамичный, технологичный, яркий акцент»</span>
-            <h3 class="project-title">NEXUS AI — Лендинг платформы мультиагентных систем</h3>
-            <p class="project-desc">
-              Темная тема в антрацитовых тонах, неоновый лаймовый Mesh-градиент, трендовая сетка Bento Grid со световым спотлайтом за курсором мыши и симулятор кодовой консоли.
-            </p>
-            <div style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
-              <span class="tech-tag">Bento Grid Layout</span>
-              <span class="tech-tag">Cursor Spotlight</span>
-              <span class="tech-tag">Neon Mesh Glow</span>
-            </div>
-            <a href="saas.html" class="btn-open-project">
-              Открыть SaaS-лендинг →
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <!-- NDA Simulation State (Hidden by default) -->
-      <div id="nda-state-box" style="display: none; background: white; border: 2px dashed #CBD5E1; border-radius: 24px; padding: 60px 40px; text-align: center; margin-bottom: 40px;">
-        <div style="width: 56px; height: 56px; border-radius: 50%; background: #EFF6FF; color: var(--hub-blue); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
-        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Проекты под соглашением о неразглашении (NDA)</h3>
-        <p style="color: var(--hub-text-muted); font-size: 15px; max-width: 520px; margin: 0 auto 24px auto;">
-          Некоторые коммерческие проекты финтех-клиринга и AI-систем демонстрируются только на закрытых интервью по персональной ссылке.
-        </p>
-        <button onclick="toggleNdaDemo()" class="btn-open-project" style="margin: 0 auto;">
-          Показать публичные кейсы
-        </button>
+      </aside>
+    </section>
+
+    <!-- 3. Key Achievements Banner -->
+    <section class="metrics-row">
+      <div class="metric-pill-card" data-tilt data-tilt-max="4">
+        <div class="metric-number tabular-nums">99.98%</div>
+        <div class="metric-desc">Uptime в высоконагруженных сервисах с аудиторией более 2.4 млн MAU</div>
+      </div>
+      <div class="metric-pill-card" data-tilt data-tilt-max="4">
+        <div class="metric-number tabular-nums" style="color: var(--theme-accent);">&lt; 0.8s</div>
+        <div class="metric-desc">Средний LCP на всех промо-сайтах портфолио без сторонних бандлеров</div>
+      </div>
+      <div class="metric-pill-card" data-tilt data-tilt-max="4">
+        <div class="metric-number tabular-nums">6 кейсов</div>
+        <div class="metric-desc">Разноплановых полнофункциональных веб-приложений и промо-экосистем</div>
+      </div>
+      <div class="metric-pill-card" data-tilt data-tilt-max="4">
+        <div class="metric-number tabular-nums">40+ токенов</div>
+        <div class="metric-desc">Переиспользуемых дизайн-токенов в единой масштабируемой системе Mobbi</div>
       </div>
     </section>
 
-    <!-- Contact & Availability Section -->
-    <footer class="availability-bar">
-      <div>
-        <div class="status-beacon">
-          <span class="beacon-dot"></span>
-          Открыт для предложений: Senior Frontend / Lead UI Architect
+    <!-- 4. Projects Showcase (6 Showcase Cards + Category Tabs + Device Preview) -->
+    <section id="projects" style="margin-bottom: var(--space-16);">
+      <div class="showcase-header">
+        <div class="showcase-title-wrap">
+          <h2>Избранные проекты экосистемы</h2>
+          <p>6 архитектурных направлений: от финтеха и медтеха до Web Audio синтезаторов</p>
         </div>
-        <div style="font-size: 14px; opacity: 0.75; margin-top: 6px;">Готов к сложным интерфейсным вызовам и проектированию дизайн-систем.</div>
+
+        <!-- Filter Category Tabs -->
+        <div class="filter-pills-wrap">
+          <button class="filter-pill-btn active" onclick="filterProjectsCategory('all', this)">Все (6)</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('fintech', this)">Финтех</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('saas', this)">AI & SaaS</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('medtech', this)">MedTech</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('audio', this)">Web Audio</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('art', this)">Галерея</button>
+          <button class="filter-pill-btn" onclick="filterProjectsCategory('craft', this)">Крафт</button>
+        </div>
       </div>
 
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <button class="contact-pill-btn" onclick="copyContact('alexey.dev.romanov@gmail.com')">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Скопировать Email
-        </button>
-        <a href="https://t.me" target="_blank" class="contact-pill-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Telegram
-        </a>
-        <a href="https://github.com" target="_blank" class="contact-pill-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub
-        </a>
+      <div class="projects-grid">
+
+        <!-- Project 1: VERTEX Capital (Fintech) -->
+        <article class="project-card-full" data-project-cat="fintech" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #0B1120;">
+            <span class="project-live-indicator-tag">
+              <span class="status-pulse-dot" style="background: #3B82F6;"></span>
+              Live Data-Heavy
+            </span>
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="VERTEX Capital" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #3B82F6;">Финтех & Институциональный клиринг</div>
+              <h3 class="project-name">VERTEX Capital — Портал институционального фонда</h3>
+              <p class="project-summary">
+                Плотный интерфейс с максимальной читаемостью данных. Сплит-архитектура, живой график доходности на динамическом SVG с переключением периодов, моноширинные таблицы клиринга и интерактивное окно списания.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Tabular Figures</span>
+                <span class="tech-tag-pill">SVG Dynamic Charts</span>
+                <span class="tech-tag-pill">Wire Transfer PIN 2FA</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="fintech.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="fintech-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #0284C7, #2563EB); border-color: #38BDF8;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('fintech-v2.html', 'VERTEX Terminal V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: NEXUS AI (SaaS) -->
+        <article class="project-card-full" data-project-cat="saas" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #141418;">
+            <span class="project-live-indicator-tag">
+              <span class="status-pulse-dot" style="background: #86EF6B;"></span>
+              Dark Bento Grid
+            </span>
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="NEXUS AI" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #86EF6B;">SaaS Платформа мультиагентных систем</div>
+              <h3 class="project-name">NEXUS AI — Высоконагруженная оркестрация агентов</h3>
+              <p class="project-summary">
+                Темная тема в антрацитовых тонах с лаймовым неоном. Модульная Bento Grid сетка со спотлайтом за курсором мыши, интерактивная CLI-консоль команд (benchmark, deploy, status) и калькулятор цен.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Interactive CLI Terminal</span>
+                <span class="tech-tag-pill">Spotlight Mesh Glow</span>
+                <span class="tech-tag-pill">Sub-ms Latency</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="saas.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="saas-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #059669, #10B981); border-color: #34D399;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('saas-v2.html', 'NEXUS Studio V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: PULSE (MedTech Telemetry) - NEW -->
+        <article class="project-card-full" data-project-cat="medtech" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #070B12;">
+            <span class="project-live-indicator-tag">
+              <span class="status-pulse-dot" style="background: #00F0FF;"></span>
+              60 FPS Canvas ECG
+            </span>
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80" alt="PULSE Telemetry" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #00F0FF;">Клиническая биометрия & Телеметрия</div>
+              <h3 class="project-name">PULSE Health — Высокоточная медицинская телеметрия</h3>
+              <p class="project-summary">
+                Стерильный швейцарский неоморфизм. Непрерывная отрисовка кардиограммы на HTML5 Canvas с частотой 60 кадров/сек, регулировкой пульса (BPM), звуком пульсометра, переключателем биометрических систем и симуляцией аритмии.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Real-time Canvas 60 FPS</span>
+                <span class="tech-tag-pill">Medical Grade A11y</span>
+                <span class="tech-tag-pill">Emergency Triage Alert</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="medtech.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="medtech-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #0891B2, #06B6D4); border-color: #22D3EE;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('medtech-v2.html', 'PULSE ICU V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: AETHER (Web Audio Synth Lab) - NEW -->
+        <article class="project-card-full" data-project-cat="audio" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #0A0A0E;">
+            <span class="project-live-indicator-tag">
+              <span class="status-pulse-dot" style="background: #A855F7;"></span>
+              Web Audio API Engine
+            </span>
+            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="AETHER Synth Lab" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #A855F7;">Синтез звука & Пространственное аудио</div>
+              <h3 class="project-name">AETHER — Spatial Audio & Полифонический синтезатор</h3>
+              <p class="project-summary">
+                Реальный браузерный звуковой движок на чистом Web Audio API: 8 интерактивных клавиш, выбор форм волны (Sine, Triangle, Sawtooth, Square), живой спектрограф на Canvas, вращающийся 3D-винил и 2D-радар бинауральной стерео-панорамы.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Web Audio API Synth</span>
+                <span class="tech-tag-pill">Canvas FFT Spectrum</span>
+                <span class="tech-tag-pill">Binaural 2D Pan</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="audio.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="audio-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #7C3AED, #A855F7); border-color: #C084FC;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('audio-v2.html', 'AETHER Workstation V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: LUMEN Gallery (Editorial Art) -->
+        <article class="project-card-full" data-project-cat="art" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #F5F5F5;">
+            <span class="project-live-indicator-tag" style="background: rgba(44, 44, 44, 0.85);">
+              <span class="status-pulse-dot" style="background: #D94E3A;"></span>
+              Editorial Minimal
+            </span>
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="LUMEN Gallery" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #D94E3A;">Арт-экспозиция & Эдиториал фотография</div>
+              <h3 class="project-name">LUMEN Gallery — Онлайн-архив световой фотографии</h3>
+              <p class="project-summary">
+                Асимметричная 12-колоночная сетка, расширенные поля, кастомный Scroll-driven параллакс первого экрана, Masonry-галерея с зумом в кинематографичный Lightbox с реальными метаданными EXIF и переключателем освещения залов.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Scroll-driven Parallax</span>
+                <span class="tech-tag-pill">Lightbox EXIF Data</span>
+                <span class="tech-tag-pill">Gallery Lighting Mode</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="gallery.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="gallery-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #C2410C, #EA580C); border-color: #FB923C;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('gallery-v2.html', 'LUMEN Salon V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: CLAY & OCHRE (Craft E-Commerce) -->
+        <article class="project-card-full" data-project-cat="craft" data-tilt data-tilt-max="3">
+          <div class="project-visual-side" style="background: #FDF7ED;">
+            <span class="project-live-indicator-tag" style="background: rgba(43, 30, 23, 0.85);">
+              <span class="status-pulse-dot" style="background: #D4A34D;"></span>
+              Tactile E-Commerce
+            </span>
+            <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1200&q=80" alt="CLAY & OCHRE" loading="lazy">
+            <div class="project-visual-overlay"></div>
+          </div>
+          <div class="project-content-side">
+            <div>
+              <div class="project-style-badge" style="color: #D4A34D;">Органический тактильный магазин</div>
+              <h3 class="project-name">CLAY & OCHRE — Магазин авторской крафтовой керамики</h3>
+              <p class="project-summary">
+                Органическая палитра льна и песка, тактильный 3D-наклон карточек изделий, интерактивная боковая корзина (Slide-over Cart Drawer) с живым пересчетом итогов, валидацией промокодов и оформлением в 1 клик.
+              </p>
+              <div class="project-tech-tags">
+                <span class="tech-tag-pill">Interactive Cart Drawer</span>
+                <span class="tech-tag-pill">Promo Code Engine</span>
+                <span class="tech-tag-pill">Tactile Micro-Noise</span>
+              </div>
+            </div>
+            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
+              <a href="craft.html" class="btn-quick-preview" style="text-decoration: none;">
+                💎 Mobbi V1
+              </a>
+              <a href="craft-v2.html" class="btn-open-site" style="background: linear-gradient(135deg, #B45309, #D97706); border-color: #FBBF24;">
+                ⚡ Figma V2 →
+              </a>
+              <button class="btn-quick-preview" onclick="openDevicePreview('craft-v2.html', 'CLAY & OCHRE Atelier V2 (Figma Edition)')" title="Device Preview">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                Превью
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 5. Interactive Skills & Architecture Radar Matrix -->
+    <section id="skills" class="skills-matrix-section">
+      <div style="margin-bottom: var(--space-6);">
+        <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -0.02em;">Матрица инженерных компетенций</h2>
+        <p style="color: var(--theme-text-muted); font-size: 15px; margin-top: 4px;">Глубокая экспертиза в проектировании высоконагруженных интерфейсов</p>
+      </div>
+
+      <div class="skills-matrix-grid">
+        <div class="skills-matrix-card">
+          <div class="matrix-card-icon">⚡</div>
+          <h3 class="matrix-card-title">Core Frontend</h3>
+          <p class="matrix-card-desc">Vanilla JS ES2026, TypeScript, Web Components, DOM Diffing, Reactive Architecture.</p>
+          <div class="matrix-skills-list">
+            <div class="matrix-skill-item"><span>HTML5 / Semantic A11y</span><span class="matrix-skill-level">100%</span></div>
+            <div class="matrix-skill-item"><span>Modern JS (ESNext)</span><span class="matrix-skill-level">98%</span></div>
+            <div class="matrix-skill-item"><span>State Machines (XState)</span><span class="matrix-skill-level">94%</span></div>
+          </div>
+        </div>
+
+        <div class="skills-matrix-card">
+          <div class="matrix-card-icon">🎨</div>
+          <h3 class="matrix-card-title">Motion & Canvas</h3>
+          <p class="matrix-card-desc">CSS3 Compositor Motion, HTML5 Canvas 60 FPS, Web Audio API, SVG Data Viz.</p>
+          <div class="matrix-skills-list">
+            <div class="matrix-skill-item"><span>Scroll-driven Animations</span><span class="matrix-skill-level">99%</span></div>
+            <div class="matrix-skill-item"><span>Canvas Real-Time 60FPS</span><span class="matrix-skill-level">96%</span></div>
+            <div class="matrix-skill-item"><span>Web Audio Synthesizer</span><span class="matrix-skill-level">92%</span></div>
+          </div>
+        </div>
+
+        <div class="skills-matrix-card">
+          <div class="matrix-card-icon">📐</div>
+          <h3 class="matrix-card-title">Design Systems</h3>
+          <p class="matrix-card-desc">Mobbi 8pt Grid, Token Architecture, Multi-Theme (Dark/OLED), Component Libraries.</p>
+          <div class="matrix-skills-list">
+            <div class="matrix-skill-item"><span>CSS Custom Properties</span><span class="matrix-skill-level">100%</span></div>
+            <div class="matrix-skill-item"><span>Figma Code Connect</span><span class="matrix-skill-level">95%</span></div>
+            <div class="matrix-skill-item"><span>Design Token Pipelines</span><span class="matrix-skill-level">97%</span></div>
+          </div>
+        </div>
+
+        <div class="skills-matrix-card">
+          <div class="matrix-card-icon">🛡️</div>
+          <h3 class="matrix-card-title">Performance & CWV</h3>
+          <p class="matrix-card-desc">Sub-second LCP, zero layout shifts (CLS 0), WCAG AAA accessibility, Edge deploy.</p>
+          <div class="matrix-skills-list">
+            <div class="matrix-skill-item"><span>Core Web Vitals Audit</span><span class="matrix-skill-level">99%</span></div>
+            <div class="matrix-skill-item"><span>GitHub Actions CI/CD</span><span class="matrix-skill-level">96%</span></div>
+            <div class="matrix-skill-item"><span>Memory Profiling</span><span class="matrix-skill-level">93%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Interactive Project Scope Estimator -->
+    <section id="estimator">
+      <div class="estimator-card">
+        <div class="estimator-controls-side">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--theme-accent); margin-bottom: 4px;">Калькулятор разработки</div>
+          <h3>Интерактивная оценка скоупа проекта</h3>
+          <p>Рассчитайте примерный диапазон сроков и бюджета для создания кастомного интерфейса или дизайн-системы.</p>
+
+          <div class="est-slider-wrap">
+            <div class="est-slider-header">
+              <span>Количество ключевых экранов / шаблонов:</span>
+              <strong id="est-screens-val" class="tabular-nums" style="color: var(--theme-accent);">5 экранов</strong>
+            </div>
+            <input type="range" id="est-screens-range" class="est-range-input" min="1" max="15" value="5" oninput="updateProjectEstimator()">
+          </div>
+
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--theme-text);">Дополнительные инженерные модули:</div>
+          <div class="est-options-grid">
+            <label class="est-option-label">
+              <input type="checkbox" id="est-opt-ds" checked onchange="updateProjectEstimator()">
+              <span>Дизайн-система & Токены</span>
+            </label>
+            <label class="est-option-label">
+              <input type="checkbox" id="est-opt-motion" checked onchange="updateProjectEstimator()">
+              <span>3D Motion / Canvas</span>
+            </label>
+            <label class="est-option-label">
+              <input type="checkbox" id="est-opt-backend" onchange="updateProjectEstimator()">
+              <span>Интеграция API / WebSockets</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="estimator-result-side">
+          <div>
+            <div class="est-result-badge">Ориентировочный бюджет</div>
+            <div id="est-result-budget" class="est-result-val tabular-nums">от 190 000 ₽</div>
+            <div style="font-size: 13px; color: var(--theme-text-muted); margin-bottom: 4px;">Сроки реализации под ключ:</div>
+            <div id="est-result-timeline" class="est-result-timeline">16–19 рабочих дней</div>
+          </div>
+
+          <button class="btn-primary-action" style="width: 100%; justify-content: center;" onclick="openTelegramModal()">
+            Обсудить ТЗ в Telegram →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Interactive Guestbook & Peer Reviews -->
+    <section id="reviews" class="guestbook-section">
+      <div class="guestbook-card">
+        <div class="guestbook-header">
+          <div>
+            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--theme-accent); margin-bottom: 4px;" data-i18n="guestbook_badge">
+              Обратная связь & Репутация
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--theme-text);" data-i18n="guestbook_title">
+              Оценка проектов & Отзывы коллег
+            </h2>
+            <p style="font-size: 15px; color: var(--theme-text-muted); margin-top: 4px;" data-i18n="guestbook_desc">
+              Оцените технический уровень, архитектуру и дизайн портфолио. Ваша оценка сохраняется в реальном времени.
+            </p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 12px; color: var(--theme-text-muted);" data-i18n="guestbook_score_lbl">Средняя оценка коллег:</div>
+            <div id="reviews-avg-rating" class="tabular-nums" style="font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #F59E0B;">
+              4.98 ★
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Submission Form -->
+          <div class="review-form-box">
+            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 14px; color: var(--theme-text);">Оставить экспертную оценку</h3>
+            <form id="review-form" onsubmit="submitGuestbookReview(event)">
+              <div class="review-form-group">
+                <label>Ваше имя / Никнейм:</label>
+                <input type="text" id="review-input-name" class="review-form-input" placeholder="Например: Иван (Tech Lead)" required>
+              </div>
+              <div class="review-form-group">
+                <label>Ваша роль или компания:</label>
+                <input type="text" id="review-input-role" class="review-form-input" placeholder="Например: Senior Frontend Engineer">
+              </div>
+              <div class="review-form-group">
+                <label>Оценка портфолио:</label>
+                <select id="review-input-rating" class="review-form-select">
+                  <option value="5">★★★★★ 5.0 (Исключительный уровень)</option>
+                  <option value="4">★★★★☆ 4.0 (Отлично)</option>
+                  <option value="3">★★★☆☆ 3.0 (Хорошо)</option>
+                </select>
+              </div>
+              <div class="review-form-group">
+                <label>Ваш отзыв / Впечатления:</label>
+                <textarea id="review-input-comment" class="review-form-textarea" rows="3" placeholder="Что впечатлило больше всего (MedTech 60FPS Canvas, Web Audio API, Device Preview, Bento Grid)..." required></textarea>
+              </div>
+              <button type="submit" class="btn-primary-action" style="width: 100%; justify-content: center;" data-i18n="guestbook_submit_btn">
+                Оставить отзыв
+              </button>
+            </form>
+          </div>
+
+          <!-- Reviews Live Feed -->
+          <div class="reviews-feed-column" id="reviews-feed-container">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Footer Availability & Contacts -->
+    <footer id="contact" class="hub-footer">
+      <main id="main-content" role="main" class="mobbi-container">
+        <div class="hub-footer-content">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--theme-text);">
+              <span class="status-pulse-dot"></span>
+              <span data-i18n="footer_status">Статус: Открыт к интересным предложениям</span>
+            </div>
+            <div style="font-size: 13px; color: var(--theme-text-muted); margin-top: 4px;">
+              Senior UI/UX Engineer · Lead Frontend Architect · <strong>Коровин Сергей</strong>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="contact-pill-btn" onclick="openTelegramModal()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Telegram (+7 939 474-89-99)
+            </button>
+            <button class="contact-pill-btn" onclick="copyContact('alexey.dev.romanov@gmail.com')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span data-i18n="footer_copy_email">Скопировать Email</span>
+            </button>
+            <a href="https://github.com/MrSmokeMaker/PortfolioDev" target="_blank" class="contact-pill-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              <span data-i18n="footer_repo">GitHub Репозиторий</span>
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
 
+  <!-- Side-by-Side Comparison Modal (V1 vs V2) -->
+  <div id="compare-modal" class="compare-modal">
+    <div class="compare-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF;">Сравнение дизайн-концептов: V1 vs V2</h3>
+        <button onclick="closeCompareModal()" class="close-icon-btn">&times;</button>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col" style="border-color: var(--theme-accent); box-shadow: 0 0 20px var(--theme-accent-glow);">
+          <div style="color: #3B82F6; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Концепт 1 (Текущий)</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 12px;">Slate Glassmorphism OS</h4>
+          <ul style="font-size: 13.5px; color: var(--theme-text-muted); line-height: 1.6; list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            <li>✔ Стеклянный остров Dynamic Island (Apple/macOS стиль)</li>
+            <li>✔ 3D вращающийся икосаэдр с созвездием частиц</li>
+            <li>✔ Bento Grid и раздельные сплит-карточки кейсов</li>
+            <li>✔ Мягкая палитра Charcoal & Slate 950</li>
+          </ul>
+          <button class="btn-primary-action" style="margin-top: 18px; width: 100%; justify-content: center;" onclick="closeCompareModal()">
+            Остаться в концепте V1
+          </button>
+        </div>
+
+        <div class="compare-col">
+          <div style="color: #00F0FF; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Концепт 2</div>
+          <h4 style="font-size: 18px; font-weight: 700; color: #FFFFFF; margin-bottom: 12px;">Cyber-Architect HUD Matrix</h4>
+          <ul style="font-size: 13.5px; color: var(--theme-text-muted); line-height: 1.6; list-style: none; display: flex; flex-direction: column; gap: 8px;">
+            <li>✔ Футуристичный командный HUD-центр и лазерные линии</li>
+            <li>✔ Интерактивный 60 FPS круговой сканирующий радар</li>
+            <li>✔ Моноширинные метки и индикаторы кибер-готовности</li>
+            <li>✔ Неоновые градиенты Cyan, Emerald, Purple</li>
+          </ul>
+          <a href="index-v2.html" class="btn-cyber-primary" style="margin-top: 18px; width: 100%; justify-content: center;">
+            Перейти к концепту V2 →
+          </a>
+        </div>
+      </div>
+
+      <div style="text-align: center; font-size: 12px; color: var(--theme-text-muted);">
+        Обе версии дизайна полностью поддерживают быстрый просмотр всех 6 сайтов-примеров без ухода со страницы.
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/tilt.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/webgl-core.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    function copyContact(email) {
-      navigator.clipboard.writeText(email).then(() => {
-        showToast(`Email ${email} скопирован в буфер обмена!`);
-      }).catch(() => {
-        showToast(`Email: ${email}`);
-      });
+    function openCompareModal() {
+      document.getElementById('compare-modal').classList.add('is-active');
     }
-
-    function toggleNdaDemo() {
-      const feed = document.getElementById('projects-feed');
-      const ndaBox = document.getElementById('nda-state-box');
-      if (feed.style.display === 'none') {
-        feed.style.display = 'block';
-        ndaBox.style.display = 'none';
-        showToast('Отображены публичные кейсы');
-      } else {
-        feed.style.display = 'none';
-        ndaBox.style.display = 'block';
-        showToast('Активирован режим скрытия по NDA');
-      }
+    function closeCompareModal() {
+      document.getElementById('compare-modal').classList.remove('is-active');
     }
   </script>
 </body>

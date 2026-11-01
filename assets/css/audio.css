@@ -1,0 +1,331 @@
+/* ==========================================================================
+   SITE 6: AETHER SPATIAL AUDIO & SYNTH LAB (CYBER-EDITORIAL & WEB AUDIO API)
+   ========================================================================== */
+
+:root {
+  --au-bg: #0A0A0E;
+  --au-surface: #121218;
+  --au-card: #181822;
+  --au-border: #262635;
+  --au-accent: #A855F7;
+  --au-accent-glow: rgba(168, 85, 247, 0.35);
+  --au-cyan: #06B6D4;
+  --au-text: #F3F4F6;
+  --au-text-muted: #9CA3AF;
+  --font-music: 'Space Grotesk', sans-serif;
+}
+
+body.audio-theme {
+  background-color: var(--au-bg);
+  color: var(--au-text);
+  font-family: var(--font-music);
+  background-image: 
+    radial-gradient(circle at 80% 10%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
+  min-height: 100vh;
+}
+
+/* Hub Quick Nav Bar */
+.hub-back-banner {
+  background-color: #07070A;
+  color: #94A3B8;
+  font-size: 13px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--au-border);
+}
+
+.hub-back-banner a {
+  color: #F8FAFC;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.hub-back-banner a:hover {
+  color: var(--au-accent);
+}
+
+/* Audio Header */
+.audio-header {
+  border-bottom: 1px solid var(--au-border);
+  background: rgba(18, 18, 24, 0.85);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px 0;
+}
+
+.audio-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audio-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-logo-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--au-accent), var(--au-cyan));
+  box-shadow: 0 0 15px var(--au-accent-glow);
+}
+
+/* Workspace Grid */
+.audio-workspace {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-8) 0;
+}
+
+/* Synthesizer & Canvas Visualizer Card */
+.synth-station-card {
+  grid-column: span 8;
+  background: var(--au-surface);
+  border: 1px solid var(--au-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.visualizer-canvas-frame {
+  width: 100%;
+  height: 220px;
+  background: #060608;
+  border: 1px solid var(--au-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
+}
+
+.visualizer-canvas-frame canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Synth Keyboard Keys */
+.synth-keys-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.piano-key {
+  flex: 1;
+  height: 120px;
+  background: #FFFFFF;
+  color: #111827;
+  border: 1px solid #D1D5DB;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.08s ease, background-color 0.08s ease;
+}
+
+.piano-key:active, .piano-key.is-pressed {
+  background: #A855F7;
+  color: #FFFFFF;
+  transform: translateY(4px);
+  box-shadow: 0 0 15px var(--au-accent-glow);
+}
+
+.key-shortcut {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+/* Synth Controls Row */
+.synth-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--au-border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.synth-wave-picker {
+  display: flex;
+  gap: 8px;
+}
+
+.wave-btn {
+  background: var(--au-card);
+  border: 1px solid var(--au-border);
+  color: var(--au-text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wave-btn:hover {
+  color: var(--au-text);
+  border-color: var(--au-accent);
+}
+
+.wave-btn.active {
+  background: var(--au-accent);
+  color: #FFFFFF;
+  border-color: var(--au-accent);
+}
+
+/* Vinyl & Spatial Audio Card */
+.vinyl-deck-card {
+  grid-column: span 4;
+  background: var(--au-surface);
+  border: 1px solid var(--au-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vinyl-record-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 16px 0;
+}
+
+.vinyl-disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #262635 15%, #0B0B0F 16%, #1F1F2A 40%, #08080C 70%, #15151E 100%);
+  border: 3px solid #333344;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.vinyl-disc.is-spinning {
+  animation: spin-vinyl 2.2s linear infinite;
+}
+
+@keyframes spin-vinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.vinyl-center-label {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--au-accent), var(--au-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A0A0E;
+  font-weight: 800;
+  font-size: 11px;
+  text-align: center;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.vinyl-controls {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-audio-action {
+  flex: 1;
+  background: var(--au-card);
+  border: 1px solid var(--au-border);
+  color: var(--au-text);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-audio-action:hover {
+  border-color: var(--au-accent);
+}
+
+.btn-audio-action.primary {
+  background: var(--au-accent);
+  color: #FFFFFF;
+  border-color: var(--au-accent);
+}
+
+/* Spatial Soundstage */
+.spatial-stage-card {
+  grid-column: span 12;
+  background: var(--au-surface);
+  border: 1px solid var(--au-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.spatial-radar-box {
+  position: relative;
+  height: 180px;
+  background: #060608;
+  border: 1px solid var(--au-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.spatial-puck {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--au-cyan);
+  box-shadow: 0 0 20px var(--au-cyan);
+  cursor: grab;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 900px) {
+  .synth-station-card { grid-column: span 12; }
+  .vinyl-deck-card { grid-column: span 12; }
+  .spatial-stage-card { grid-template-columns: 1fr; }
+}

@@ -12,17 +12,37 @@
 </head>
 <body class="gallery-theme">
 
-  <!-- Quick Hub Navigation Bar -->
-  <div class="hub-back-banner">
-    <a href="index.html">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      К портфолио разработчика
-    </a>
-    <span>Проект 1 из 4: Арт-галерея (Mobbi Editorial Pattern)</span>
-    <div style="display: flex; gap: 12px;">
-      <a href="fintech.html">След: Финтех →</a>
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html" selected>🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="gallery.html" class="version-pill active" title="Mobbi V1">V1</a>
+          <a href="gallery-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="gallery-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- Shrinking Sticky Header -->
   <header class="gallery-header" data-shrinking-header>
@@ -39,6 +59,9 @@
           <li><a href="#about">О галерее</a></li>
         </ul>
         <div style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn-outline-minimal" onclick="cycleGalleryLighting()">
+            <span id="lighting-mode-label">💡 Свет: Дневной</span>
+          </button>
           <button class="btn-outline-minimal" onclick="toggleDemoState()">Демо состояний</button>
           <button class="btn-terracotta" onclick="showToast('Запрос на получение каталога отпечатков отправлен куратору')">
             Заказать отпечаток
@@ -106,7 +129,7 @@
         <!-- Card 1: Vertical Portrait 3:4 -->
         <div class="gallery-card col-portrait" data-tilt data-category="architecture" onclick="showToast('Открыт детальный просмотр: «Пассаж теней»')">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Пассаж теней">
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" alt="Пассаж теней" loading="lazy">
           </div>
           <div class="card-content">
             <div>
@@ -120,7 +143,7 @@
         <!-- Card 2: Landscape Pan 16:10 -->
         <div class="gallery-card col-landscape" data-tilt data-category="nature" onclick="showToast('Открыт детальный просмотр: «Линия горизонта в дымке»')">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Горизонт">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Горизонт" loading="lazy">
           </div>
           <div class="card-content">
             <div>
@@ -134,7 +157,7 @@
         <!-- Card 3: Square Detail 1:1 -->
         <div class="gallery-card col-square" data-tilt data-category="portrait" onclick="showToast('Открыт детальный просмотр: «Взгляд сквозь дождь»')">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Взгляд">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Взгляд" loading="lazy">
           </div>
           <div class="card-content">
             <div>
@@ -148,7 +171,7 @@
         <!-- Card 4: Landscape 16:10 -->
         <div class="gallery-card col-landscape" data-tilt data-category="architecture" onclick="showToast('Открыт детальный просмотр: «Фрагмент фасада Баухаус»')">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Баухаус">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Баухаус" loading="lazy">
           </div>
           <div class="card-content">
             <div>
@@ -162,7 +185,7 @@
         <!-- Card 5: Vertical Portrait -->
         <div class="gallery-card col-portrait" data-tilt data-category="nature" onclick="showToast('Открыт детальный просмотр: «Монолит на закате»')">
           <div class="card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Монолит">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Монолит" loading="lazy">
           </div>
           <div class="card-content">
             <div>
@@ -219,9 +242,69 @@
     </div>
   </footer>
 
+  <!-- Photo Lightbox Modal with EXIF metadata -->
+  <div id="gallery-lightbox" style="position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 24px;">
+    <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 24px; background: none; border: none; color: white; font-size: 28px; cursor: pointer;">&times;</button>
+    <div style="max-width: 900px; width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <img id="lightbox-img" src="" alt="Zoom" style="max-height: 70vh; max-width: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);" loading="lazy">
+      <div style="margin-top: 18px; color: #CBD5E1; text-align: center; font-size: 13.5px;">
+        <h4 id="lightbox-title" style="color: white; font-size: 18px; font-weight: 700; margin-bottom: 6px;">Название работы</h4>
+        <div id="lightbox-exif" style="font-family: var(--font-mono); color: var(--gl-accent); font-size: 12.5px;">
+          Leica M11 · Summilux-M 35mm f/1.4 · 1/500s · ISO 100
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/tilt.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
+    let lightingModes = ['Дневной', 'Музейный спот', 'Темная комната'];
+    let lightIdx = 0;
+
+    function cycleGalleryLighting() {
+      lightIdx = (lightIdx + 1) % lightingModes.length;
+      document.getElementById('lighting-mode-label').textContent = `💡 Свет: ${lightingModes[lightIdx]}`;
+      const body = document.body;
+      if (lightIdx === 1) {
+        body.style.backgroundColor = '#18181A';
+        body.style.color = '#F3F4F6';
+      } else if (lightIdx === 2) {
+        body.style.backgroundColor = '#0B0B0C';
+        body.style.color = '#E5E7EB';
+      } else {
+        body.style.backgroundColor = '';
+        body.style.color = '';
+      }
+      showToast(`Освещение залов: ${lightingModes[lightIdx]}`);
+    }
+
+    function openLightbox(title, imgSrc, exif) {
+      const box = document.getElementById('gallery-lightbox');
+      document.getElementById('lightbox-img').src = imgSrc;
+      document.getElementById('lightbox-title').textContent = title;
+      document.getElementById('lightbox-exif').textContent = exif || 'Leica M11 · Summilux-M 35mm f/1.4 · 1/500s · ISO 100';
+      box.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('gallery-lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Attach click to all gallery image cards
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.gallery-card').forEach(card => {
+        card.style.cursor = 'zoom-in';
+        card.addEventListener('click', () => {
+          const img = card.querySelector('img')?.src;
+          const title = card.querySelector('h3, strong')?.textContent || 'Экспонат LUMEN';
+          openLightbox(title, img, 'Leica M11 Monochrom · 50mm APO f/2 · 1/1000s · ISO 64');
+        });
+      });
+    });
+
     function toggleDemoState() {
       const grid = document.getElementById('gallery-container');
       const demo = document.getElementById('demo-state-container');

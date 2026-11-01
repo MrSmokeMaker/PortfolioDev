@@ -1,0 +1,78 @@
+{
+  "$schema": "https://tokens.studio/schemas/tokens.json",
+  "version": "3.3.0",
+  "name": "MrSmokeMaker Apex Design Tokens",
+  "global": {
+    "color": {
+      "slate": {
+        "950": { "value": "#020408", "type": "color", "description": "Void pitch black canvas" },
+        "900": { "value": "#070C18", "type": "color", "description": "Dark titanium surface" },
+        "850": { "value": "#0C1426", "type": "color", "description": "Card surface" },
+        "800": { "value": "#131F38", "type": "color", "description": "Card elevated border" },
+        "700": { "value": "#1E2E50", "type": "color", "description": "Divider subtle" },
+        "400": { "value": "#94A3B8", "type": "color", "description": "Muted body typography" },
+        "100": { "value": "#F1F5F9", "type": "color", "description": "Primary high-contrast text" }
+      },
+      "brand": {
+        "cyan": { "value": "#00F0FF", "type": "color", "description": "Apex Cyber Cyan" },
+        "cyan-glow": { "value": "rgba(0, 240, 255, 0.35)", "type": "color" },
+        "purple": { "value": "#A855F7", "type": "color", "description": "Raycast Electric Purple" },
+        "lime": { "value": "#10B981", "type": "color", "description": "Linear Precision Emerald" },
+        "gold": { "value": "#F59E0B", "type": "color", "description": "Sotheby's Imperial Gold" },
+        "rose": { "value": "#F43F5E", "type": "color", "description": "Critical Alert Red" }
+      }
+    },
+    "spacing": {
+      "2xs": { "value": "4px", "type": "spacing" },
+      "xs": { "value": "8px", "type": "spacing" },
+      "sm": { "value": "12px", "type": "spacing" },
+      "md": { "value": "16px", "type": "spacing" },
+      "lg": { "value": "24px", "type": "spacing" },
+      "xl": { "value": "32px", "type": "spacing" },
+      "2xl": { "value": "48px", "type": "spacing" },
+      "3xl": { "value": "64px", "type": "spacing" },
+      "4xl": { "value": "96px", "type": "spacing" }
+    },
+    "borderRadius": {
+      "xs": { "value": "6px", "type": "borderRadius" },
+      "sm": { "value": "10px", "type": "borderRadius" },
+      "md": { "value": "14px", "type": "borderRadius" },
+      "lg": { "value": "20px", "type": "borderRadius" },
+      "xl": { "value": "28px", "type": "borderRadius" },
+      "full": { "value": "9999px", "type": "borderRadius" },
+      "squircle": { "value": "24px", "type": "borderRadius", "description": "Continuous curve curvature" }
+    },
+    "boxShadow": {
+      "apexCard": {
+        "value": {
+          "x": "0",
+          "y": "8px",
+          "blur": "32px",
+          "spread": "-4px",
+          "color": "rgba(0, 240, 255, 0.08)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow"
+      },
+      "beamGlow": {
+        "value": {
+          "x": "0",
+          "y": "0",
+          "blur": "24px",
+          "spread": "2px",
+          "color": "rgba(0, 240, 255, 0.4)",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow"
+      }
+    },
+    "typography": {
+      "fontFamilies": {
+        "display": { "value": "Plus Jakarta Sans, sans-serif", "type": "fontFamilies" },
+        "mono": { "value": "JetBrains Mono, monospace", "type": "fontFamilies" },
+        "serif": { "value": "Fraunces, serif", "type": "fontFamilies" },
+        "body": { "value": "Inter, sans-serif", "type": "fontFamilies" }
+      }
+    }
+  }
+}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSE — Медицинская телеметрия и нейро-диагностика</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/medtech.css">
+</head>
+<body class="medtech-theme">
+
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech.html" selected>❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="medtech.html" class="version-pill active" title="Mobbi V1">V1</a>
+          <a href="medtech-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="medtech-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Clinical App Header -->
+  <header class="med-header">
+    <div class="mobbi-container">
+      <nav class="med-nav">
+        <div class="med-brand">
+          <div class="med-brand-icon">P</div>
+          <div>
+            <div>PULSE NEURO-TELEMETRY</div>
+            <div style="font-size: 11px; color: var(--med-text-muted); font-weight: 500;">Clinical Intensive Care OS v4.2</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="med-patient-badge">
+            <span class="status-pulse-dot" style="background: var(--med-cyan); box-shadow: 0 0 6px var(--med-cyan);"></span>
+            <span>Пациент: ICU-8492 (Стабилен)</span>
+          </div>
+          <button class="btn-med-alert-toggle" id="triage-alert-btn" onclick="toggleEmergencyAlert()">
+            Симуляция Аритмии
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Telemetry Workspace -->
+  <main class="mobbi-container">
+    <div class="med-telemetry-grid">
+
+      <!-- 60 FPS Real-time ECG Monitor -->
+      <section class="ecg-monitor-card">
+        <div class="ecg-card-header">
+          <div>
+            <div class="ecg-channel-tag">
+              <span style="color: var(--med-cyan); font-weight: 700;">LEAD II</span>
+              <span>• Электрокардиограмма высокой частоты (25 мм/с)</span>
+            </div>
+            <h2 style="font-size: 20px; font-weight: 800; margin-top: 4px;">Мониторинг сердечного ритма в реальном времени</h2>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 11px; color: var(--med-text-muted);">ЧСС ТЕКУЩИЙ</div>
+            <div id="live-bpm-display" class="vital-metric-val" style="color: var(--med-cyan);">72 <span class="vital-metric-unit">BPM</span></div>
+          </div>
+        </div>
+
+        <div class="ecg-canvas-wrap">
+          <div class="ecg-grid-overlay"></div>
+          <canvas id="ecg-canvas"></canvas>
+        </div>
+
+        <div class="ecg-controls-bar">
+          <div class="bpm-slider-box">
+            <span style="color: var(--med-text-muted);">Частота пульса:</span>
+            <input type="range" id="bpm-slider" min="45" max="150" value="72" oninput="updateBpm(this.value)">
+            <span id="bpm-slider-val" style="font-family: var(--font-mono); font-weight: 700; color: var(--med-cyan);">72 BPM</span>
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-med-action" onclick="resetEcg()">Сброс калибровки</button>
+            <button class="btn-med-action" style="background: rgba(255,255,255,0.1); color: white;" onclick="toggleAudioPulse()">
+              <span id="audio-pulse-label">Звук пульсометра (Выкл)</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Vitals Stack -->
+      <aside class="vitals-summary-card">
+        <div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--med-text-muted); text-transform: uppercase; margin-bottom: 12px;">
+            Жизненно важные показатели
+          </div>
+          <div class="vitals-stack">
+            <div class="vital-metric-card">
+              <div>
+                <div class="vital-metric-name">Сатурация кислорода SpO₂</div>
+                <div style="font-size: 11px; color: var(--med-emerald);">В пределах нормы</div>
+              </div>
+              <div class="vital-metric-val" style="color: var(--med-emerald);">98.4 <span class="vital-metric-unit">%</span></div>
+            </div>
+
+            <div class="vital-metric-card">
+              <div>
+                <div class="vital-metric-name">Артериальное давление (НИАД)</div>
+                <div style="font-size: 11px; color: var(--med-text-muted);">Систола / Диастола</div>
+              </div>
+              <div class="vital-metric-val">118/76 <span class="vital-metric-unit">mmHg</span></div>
+            </div>
+
+            <div class="vital-metric-card">
+              <div>
+                <div class="vital-metric-name">Нейро-синхронный индекс</div>
+                <div style="font-size: 11px; color: var(--med-cyan);">Высокая активность коры</div>
+              </div>
+              <div class="vital-metric-val" style="color: var(--med-cyan);">94.1 <span class="vital-metric-unit">NSI</span></div>
+            </div>
+
+            <div class="vital-metric-card">
+              <div>
+                <div class="vital-metric-name">Температура тела</div>
+                <div style="font-size: 11px; color: var(--med-text-muted);">Датчик плечевой артерии</div>
+              </div>
+              <div class="vital-metric-val">36.7 <span class="vital-metric-unit">°C</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding-top: 16px; border-top: 1px solid var(--med-border); font-size: 12px; color: var(--med-text-muted);">
+          Телеметрия передается по стандарту DICOM/HL7 в реальном времени. Задержка шины: &lt; 2 мс.
+        </div>
+      </aside>
+
+      <!-- Organ & Clinical Systems Selector -->
+      <section class="systems-selector-card">
+        <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 14px;">Системный диагностический анализ</h3>
+        
+        <div class="systems-tabs-row">
+          <button class="system-tab-btn active" onclick="switchSystem('cardio', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Кардиоваскулярный контур
+          </button>
+          <button class="system-tab-btn" onclick="switchSystem('neuro', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+            ЦНС и Мозговая активность
+          </button>
+          <button class="system-tab-btn" onclick="switchSystem('respiratory', this)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Респираторный газообмен
+          </button>
+        </div>
+
+        <div id="system-details-grid" class="system-data-grid">
+          <div class="sys-info-box">
+            <div class="sys-info-title">Ударный объем левого желудочка</div>
+            <div class="sys-info-val">74.2 мл / удар</div>
+          </div>
+          <div class="sys-info-box">
+            <div class="sys-info-title">Фракция выброса (EF)</div>
+            <div class="sys-info-val" style="color: var(--med-emerald);">62.8% (Оптимально)</div>
+          </div>
+          <div class="sys-info-box">
+            <div class="sys-info-title">Вариабельность сердечного ритма (HRV)</div>
+            <div class="sys-info-val">68 мс (SDNN)</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // ------------------------------------------------------------------------
+    // 60 FPS HTML5 Canvas Real-Time ECG Generator
+    // ------------------------------------------------------------------------
+    const canvas = document.getElementById('ecg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let bpm = 72;
+    let isAlert = false;
+    let audioPulseActive = false;
+    let audioCtx = null;
+
+    function resizeCanvas() {
+      width = canvas.parentElement.clientWidth;
+      height = canvas.parentElement.clientHeight;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let points = [];
+    const maxPoints = 300;
+    let phase = 0;
+
+    function getEcgY(t) {
+      // Normal P-Q-R-S-T wave model
+      const cycle = t % 1;
+      let y = 0;
+      if (cycle > 0.15 && cycle < 0.25) {
+        // P-wave
+        y = Math.sin((cycle - 0.15) * Math.PI / 0.1) * 8;
+      } else if (cycle >= 0.28 && cycle < 0.30) {
+        // Q-drop
+        y = -6;
+      } else if (cycle >= 0.30 && cycle < 0.34) {
+        // R-spike
+        y = (1 - Math.abs((cycle - 0.32) / 0.02)) * (isAlert ? 65 : 45);
+        if (cycle >= 0.31 && cycle <= 0.33 && audioPulseActive) {
+          beepPulse();
+        }
+      } else if (cycle >= 0.34 && cycle < 0.37) {
+        // S-drop
+        y = -12;
+      } else if (cycle > 0.48 && cycle < 0.65) {
+        // T-wave
+        y = Math.sin((cycle - 0.48) * Math.PI / 0.17) * 14;
+      }
+      return y;
+    }
+
+    let lastTime = performance.now();
+    let beepCool = 0;
+
+    function beepPulse() {
+      if (performance.now() - beepCool < 300) return;
+      beepCool = performance.now();
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.frequency.setValueAtTime(isAlert ? 880 : 660, audioCtx.currentTime);
+        g.gain.setValueAtTime(0.04, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(g);
+        g.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } catch(e) {}
+    }
+
+    function animate(time) {
+      const dt = (time - lastTime) / 1000;
+      lastTime = time;
+
+      const cyclesPerSec = bpm / 60;
+      phase += dt * cyclesPerSec;
+
+      const yVal = getEcgY(phase);
+      points.push(yVal);
+      if (points.length > maxPoints) {
+        points.shift();
+      }
+
+      ctx.clearRect(0, 0, width, height);
+
+      const midY = height / 2;
+      const stepX = width / maxPoints;
+
+      // Draw trace line with glow
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = isAlert ? '#EF4444' : '#00F0FF';
+      ctx.shadowColor = isAlert ? 'rgba(239, 68, 68, 0.8)' : 'rgba(0, 240, 255, 0.8)';
+      ctx.shadowBlur = 10;
+
+      ctx.beginPath();
+      for (let i = 0; i < points.length; i++) {
+        const x = i * stepX;
+        const y = midY - points[i];
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Lead cursor point
+      if (points.length > 0) {
+        const headX = (points.length - 1) * stepX;
+        const headY = midY - points[points.length - 1];
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(headX, headY, 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // Controls
+    function updateBpm(val) {
+      bpm = parseInt(val, 10);
+      document.getElementById('bpm-slider-val').textContent = `${bpm} BPM`;
+      document.getElementById('live-bpm-display').innerHTML = `${bpm} <span class="vital-metric-unit">BPM</span>`;
+    }
+
+    function resetEcg() {
+      updateBpm(72);
+      document.getElementById('bpm-slider').value = 72;
+      isAlert = false;
+      document.getElementById('triage-alert-btn').classList.remove('is-alerting');
+      document.getElementById('triage-alert-btn').textContent = 'Симуляция Аритмии';
+    }
+
+    function toggleEmergencyAlert() {
+      isAlert = !isAlert;
+      const btn = document.getElementById('triage-alert-btn');
+      if (isAlert) {
+        btn.classList.add('is-alerting');
+        btn.textContent = 'КРИТИЧЕСКИЙ АЛЕРТ: ВЫКЛ';
+        updateBpm(138);
+        document.getElementById('bpm-slider').value = 138;
+      } else {
+        btn.classList.remove('is-alerting');
+        btn.textContent = 'Симуляция Аритмии';
+        updateBpm(72);
+        document.getElementById('bpm-slider').value = 72;
+      }
+    }
+
+    function toggleAudioPulse() {
+      audioPulseActive = !audioPulseActive;
+      document.getElementById('audio-pulse-label').textContent = audioPulseActive ? 'Звук пульсометра (Вкл 🔊)' : 'Звук пульсометра (Выкл 🔇)';
+      if (audioPulseActive) beepPulse();
+    }
+
+    const SYSTEMS_DATA = {
+      cardio: [
+        { title: 'Ударный объем левого желудочка', val: '74.2 мл / удар' },
+        { title: 'Фракция выброса (EF)', val: '62.8% (Оптимально)' },
+        { title: 'Вариабельность сердечного ритма (HRV)', val: '68 мс (SDNN)' }
+      ],
+      neuro: [
+        { title: 'Альфа-ритм (8-12 Гц)', val: 'Синхронизирован (92%)' },
+        { title: 'Внутричерепное давление (ICP)', val: '11.4 mmHg (Норма)' },
+        { title: 'Индекс седации / BIS', val: '96 / 100 (Бодрствование)' }
+      ],
+      respiratory: [
+        { title: 'Минутный объем вентиляции', val: '6.4 л / мин' },
+        { title: 'Парциальное давление etCO₂', val: '38 mmHg (Норма)' },
+        { title: 'Частота дыхательных движений', val: '14 циклов / мин' }
+      ]
+    };
+
+    function switchSystem(sysKey, btn) {
+      document.querySelectorAll('.system-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const data = SYSTEMS_DATA[sysKey] || SYSTEMS_DATA.cardio;
+      const grid = document.getElementById('system-details-grid');
+      grid.innerHTML = data.map(item => `
+        <div class="sys-info-box">
+          <div class="sys-info-title">${item.title}</div>
+          <div class="sys-info-val">${item.val}</div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

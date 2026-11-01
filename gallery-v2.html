@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMEN Private Salon — Sotheby's Edition V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/gallery-v2.css">
+</head>
+<body class="gallery-v2-theme">
+
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech-v2.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas-v2.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft-v2.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech-v2.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio-v2.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery-v2.html" selected>🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="gallery.html" class="version-pill" title="Mobbi V1">V1</a>
+          <a href="gallery-v2.html" class="version-pill active" title="Figma V2">V2</a>
+          <a href="gallery-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="g2-container">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--g2-gold); text-transform: uppercase; letter-spacing: 0.08em;">
+          SOTHEBY'S & GUGGENHEIM DIGITAL SALON // LOT #04
+        </div>
+        <h1 style="font-family: var(--g2-serif); font-size: 40px; font-weight: 700; color: #FFFFFF; margin-top: 4px;">
+          «Световая геометрия тишины» — Коллекционный лот № 04
+        </h1>
+        <p style="font-size: 15px; color: var(--g2-text-muted); margin-top: 6px;">
+          Наведите курсор на полотно для активации 400% оптической лупы (исследование серебряно-желатиновой текстуры).
+        </p>
+      </div>
+
+      <div style="text-align: right;">
+        <span style="font-family: var(--font-mono); font-size: 12px; color: var(--g2-gold); border: 1px solid rgba(212, 175, 55, 0.4); padding: 6px 14px; border-radius: 9999px;">
+          Тираж: 1 из 3 отпечатков
+        </span>
+      </div>
+    </div>
+
+    <!-- 400% Zoom Loupe Frame -->
+    <div class="loupe-inspect-stage" id="loupe-container">
+      <img id="main-artwork-img" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=95" alt="Лот 04" loading="lazy">
+      <div id="magnifier-circle" class="magnifier-loupe"></div>
+    </div>
+
+    <!-- Live Auction Bidding Panel -->
+    <div class="bidding-auction-card">
+      <div>
+        <div style="font-size: 12px; color: var(--g2-text-muted);">Текущая аукционная ставка:</div>
+        <div id="current-bid-display" style="font-family: var(--font-mono); font-size: 32px; font-weight: 800; color: #FFFFFF;">
+          $14,500 USD
+        </div>
+        <div style="font-size: 12px; color: #10B981; margin-top: 2px;">Резервная цена пройдена · 4 участника в торгах</div>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button onclick="placeBid(15000)" style="background: var(--g2-gold); color: #121214; font-weight: 800; font-size: 14px; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);">
+          Поднять ставку до $15,000 USD →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // ------------------------------------------------------------------------
+    // 400% Optical Loupe Magnifier Engine
+    // ------------------------------------------------------------------------
+    const container = document.getElementById('loupe-container');
+    const img = document.getElementById('main-artwork-img');
+    const loupe = document.getElementById('magnifier-circle');
+    const zoomLevel = 3.5;
+
+    container.addEventListener('mouseenter', () => {
+      loupe.style.display = 'block';
+      loupe.style.backgroundImage = `url('${img.src}')`;
+      loupe.style.backgroundSize = `${container.clientWidth * zoomLevel}px ${container.clientHeight * zoomLevel}px`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      loupe.style.display = 'none';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      loupe.style.left = `${x - loupe.offsetWidth / 2}px`;
+      loupe.style.top = `${y - loupe.offsetHeight / 2}px`;
+
+      const bgX = -x * zoomLevel + loupe.offsetWidth / 2;
+      const bgY = -y * zoomLevel + loupe.offsetHeight / 2;
+      loupe.style.backgroundPosition = `${bgX}px ${bgY}px`;
+    });
+
+    function placeBid(amount) {
+      document.getElementById('current-bid-display').textContent = `$${amount.toLocaleString('en-US')} USD`;
+      if (window.showToast) {
+        window.showToast(`✔ Ваша ставка $${amount.toLocaleString('en-US')} принята аукционным домом Sotheby's!`);
+      }
+    }
+  </script>
+</body>
+</html>

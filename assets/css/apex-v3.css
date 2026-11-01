@@ -1,0 +1,225 @@
+/* ==========================================================================
+   APEX EDITION V3: ULTRA-PREMIUM WORLD-CLASS LUXURY DESIGN SYSTEM
+   Linear Pro & Apple Squircle Aesthetic, Border Beam Shader, Magnetic HUD
+   ========================================================================== */
+
+:root {
+  --apex-void: #030509;
+  --apex-surface: #070B14;
+  --apex-card: #0D1322;
+  --apex-card-hover: #121A2F;
+  --apex-border: rgba(255, 255, 255, 0.09);
+  --apex-border-focus: rgba(0, 240, 255, 0.6);
+  --apex-cyan: #00F0FF;
+  --apex-cyan-glow: rgba(0, 240, 255, 0.35);
+  --apex-purple: #A855F7;
+  --apex-purple-glow: rgba(168, 85, 247, 0.35);
+  --apex-gold: #F59E0B;
+  --apex-emerald: #10B981;
+  --apex-text: #F8FAFC;
+  --apex-text-muted: #94A3B8;
+  --apex-text-dim: #64748B;
+  --apex-font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --apex-font-mono: 'JetBrains Mono', monospace;
+  --apex-font-serif: 'Fraunces', serif;
+}
+
+body.apex-v3-theme {
+  background-color: var(--apex-void);
+  color: var(--apex-text);
+  font-family: var(--apex-font-sans);
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+}
+
+/* 3-Way Edition Switcher Topbar (Mobbi V1 / Figma V2 / Apex V3) */
+.edition-switch-bar {
+  background: rgba(3, 5, 9, 0.92) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid var(--apex-border) !important;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.edition-btn {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(13, 19, 34, 0.6);
+  color: var(--apex-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.edition-btn:hover:not(.active) {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.edition-btn.v1-active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: #3B82F6;
+  color: #60A5FA;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+.edition-btn.v2-active {
+  background: rgba(168, 85, 247, 0.18);
+  border-color: #A855F7;
+  color: #C084FC;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+.edition-btn.v3-active {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.22), rgba(168, 85, 247, 0.22));
+  border-color: var(--apex-cyan);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px var(--apex-cyan-glow);
+}
+
+/* Border Beam Shader Animation */
+@keyframes borderBeamRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.border-beam-card {
+  position: relative;
+  background: var(--apex-card);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--apex-border);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.border-beam-card::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 0deg 300deg, var(--apex-cyan) 340deg, var(--apex-purple) 360deg);
+  animation: borderBeamRotate 6s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.border-beam-card:hover::before {
+  opacity: 1;
+}
+
+.border-beam-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--apex-card);
+  border-radius: 19px;
+  z-index: 1;
+}
+
+.border-beam-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Specular Sheen Highlight */
+.specular-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.specular-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.specular-sheen:hover::after {
+  left: 150%;
+}
+
+/* Apple Squircle Pill */
+.squircle-pill {
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--apex-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Apex Buttons */
+.btn-apex-primary {
+  background: linear-gradient(135deg, #00F0FF, #0077FE);
+  color: #030509;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  box-shadow: 0 4px 18px rgba(0, 240, 255, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-apex-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(0, 240, 255, 0.45);
+}
+
+.btn-apex-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--apex-border);
+  color: #F8FAFC;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-apex-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}

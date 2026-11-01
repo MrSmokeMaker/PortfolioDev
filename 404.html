@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Страница не найдена | Портфолио</title>
+  <title>404 — Страница не найдена | Портфолио MrSmokeMaker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
@@ -19,21 +19,21 @@
       text-align: center;
     }
     .error-card {
-      background: white;
-      border: 1px solid var(--hub-border);
-      border-radius: 24px;
+      background: var(--theme-surface);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-xl);
       padding: 60px 40px;
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      box-shadow: var(--theme-card-shadow);
     }
     .error-code {
-      font-size: 72px;
+      font-size: 80px;
       font-weight: 800;
-      color: var(--hub-blue);
+      color: var(--theme-accent);
       line-height: 1;
       margin-bottom: 12px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-display);
     }
   </style>
 </head>
@@ -41,11 +41,11 @@
   <div class="error-wrapper">
     <div class="error-card">
       <div class="error-code">404</div>
-      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--hub-navy);">Страница не найдена</h1>
-      <p style="color: var(--hub-text-muted); font-size: 15px; margin-bottom: 28px; line-height: 1.6;">
-        Запрашиваемый раздел портфолио был перемещен или адрес указан неверно. Все 4 промо-сайта доступны на главной странице.
+      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--theme-text);">Страница не найдена</h1>
+      <p style="color: var(--theme-text-muted); font-size: 15px; margin-bottom: 28px; line-height: 1.6;">
+        Запрашиваемый раздел портфолио был перемещен или адрес указан неверно. Все 6 промо-сайтов экосистемы MrSmokeMaker доступны на главной странице.
       </p>
-      <a href="index.html" class="btn-open-project" style="margin: 0 auto;">
+      <a href="index.html" class="btn-primary-action" style="display: inline-flex; margin: 0 auto;">
         ← Вернуться на главную портфолио
       </a>
     </div>

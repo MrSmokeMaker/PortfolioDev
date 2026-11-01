@@ -16,18 +16,37 @@
   <div class="saas-ambient-glow-1"></div>
   <div class="saas-ambient-glow-2"></div>
 
-  <!-- Quick Hub Navigation Bar -->
-  <div class="hub-back-banner">
-    <a href="index.html">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      К портфолио разработчика
-    </a>
-    <span>Проект 4 из 4: SaaS AI-платформа (Mobbi Bento Dark Pattern)</span>
-    <div style="display: flex; gap: 12px;">
-      <a href="craft.html">← Крафт-магазин</a>
-      <a href="index.html">Все 4 проекта →</a>
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas.html" selected>⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="saas.html" class="version-pill active" title="Mobbi V1">V1</a>
+          <a href="saas-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="saas-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </header>
 
   <!-- Floating Glass Navbar -->
   <div class="saas-header-wrap">
@@ -86,18 +105,18 @@
           </div>
           <div style="font-family: var(--font-mono); font-size: 12px; color: #94A3B8;">nexus-agent-runner — terminal@cluster-01 (latency: 14ms)</div>
         </div>
-        <div class="code-console-body">
+        <div class="code-console-body" id="terminal-screen">
           <div><span class="code-keyword">import</span> { AgentCluster, NeuralRouter } <span class="code-keyword">from</span> <span class="code-str">'@nexus-ai/runtime'</span>;</div>
           <br>
           <div class="code-comment">// Инициализация отказоустойчивого ансамбля агентов</div>
-          <div><span class="code-keyword">const</span> cluster = <span class="code-keyword">new</span> <span class="code-fn">AgentCluster</span>({</div>
-          <div>&nbsp;&nbsp;models: [<span class="code-str">'gemini-3.8-flash'</span>, <span class="code-str">'claude-3.5-sonnet'</span>],</div>
-          <div>&nbsp;&nbsp;consensusStrategy: <span class="code-str">'majority-vote-weighted'</span>,</div>
-          <div>&nbsp;&nbsp;verificationLoop: <span class="code-keyword">true</span></div>
-          <div>});</div>
-          <br>
-          <div><span class="code-keyword">const</span> result = <span class="code-keyword">await</span> cluster.<span class="code-fn">execute</span>({ goal: <span class="code-str">'Audit Smart Contract & Fix Gas Leaks'</span> });</div>
-          <div><span class="code-lime">✔ [Nexus Engine] Status: 0 vulnerabilities found · 42% Gas Optimized in 312ms.</span></div>
+          <div><span class="code-keyword">const</span> cluster = <span class="code-keyword">new</span> <span class="code-fn">AgentCluster</span>({ models: [<span class="code-str">'gemini-3.8-flash'</span>, <span class="code-str">'claude-3.5-sonnet'</span>] });</div>
+          <div id="terminal-log-output" style="margin-top: 10px;">
+            <div class="code-lime">✔ [Nexus Engine] Cluster ready: 0 vulnerabilities found · 42% Gas Optimized in 312ms.</div>
+          </div>
+          <form onsubmit="handleTerminalCommand(event)" style="display: flex; align-items: center; gap: 8px; margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px;">
+            <span style="color: var(--saas-lime); font-family: var(--font-mono); font-size: 13px;">dev@nexus-cli:~$</span>
+            <input type="text" id="terminal-input" placeholder="Введите команду: benchmark, status, deploy, clear..." autocomplete="off" style="flex: 1; background: transparent; border: none; outline: none; color: #FFFFFF; font-family: var(--font-mono); font-size: 13px;">
+          </form>
         </div>
       </div>
     </div>
@@ -239,7 +258,7 @@
   <!-- Interactive Access Form & Footer -->
   <footer style="border-top: 1px solid var(--saas-border); padding: 60px 0 40px 0; background: #141418;">
     <div class="mobbi-container">
-      <div style="background: var(--saas-card); border-radius: 24px; padding: 48px; border: 1px solid var(--saas-border); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; margin-bottom: 48px;">
+      <div class="saas-cta-box" style="background: var(--saas-card); border-radius: 24px; padding: 48px; border: 1px solid var(--saas-border); display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; margin-bottom: 48px;">
         <div style="max-width: 500px;">
           <h3 style="font-family: var(--font-tech); font-size: 26px; font-weight: 700; color: #FFFFFF; margin-bottom: 8px;">
             Получите ранний доступ к Nexus v3.0
@@ -248,9 +267,9 @@
             Присоединяйтесь к 4 500+ ведущих инженеров. Приглашения высылаются еженедельно.
           </p>
         </div>
-        <form onsubmit="handleEmailSubmit(event)" style="display: flex; gap: 12px; flex-grow: 1; max-width: 440px;">
-          <input type="email" id="invite-email" placeholder="dev@company.com" required style="flex-grow: 1; background: #1A1A20; border: 1px solid var(--saas-border); color: white; padding: 12px 18px; border-radius: 10px; font-size: 14px;">
-          <button type="submit" class="btn-lime-glow">Request Invite</button>
+        <form onsubmit="handleEmailSubmit(event)" class="saas-invite-form" style="display: flex; gap: 12px; flex-grow: 1; max-width: 440px; width: 100%;">
+          <input type="email" id="invite-email" placeholder="dev@company.com" required style="flex-grow: 1; background: #1A1A20; border: 1px solid var(--saas-border); color: white; padding: 12px 18px; border-radius: 10px; font-size: 14px; min-width: 0;">
+          <button type="submit" class="btn-lime-glow" style="flex-shrink: 0;">Request Invite</button>
         </form>
       </div>
 
@@ -266,10 +285,50 @@
   <script>
     // Live ping simulation
     setInterval(() => {
-      const ping = Math.floor(12 + Math.random() * 5);
+      const ping = Math.floor(12 + Math.random() * 4);
       const el = document.getElementById('live-ping-counter');
       if (el) el.textContent = `${ping} ms`;
     }, 2500);
+
+    function handleTerminalCommand(e) {
+      e.preventDefault();
+      const input = document.getElementById('terminal-input');
+      const log = document.getElementById('terminal-log-output');
+      const cmd = (input.value || '').trim().toLowerCase();
+      input.value = '';
+
+      if (!cmd) return;
+
+      const cmdEcho = document.createElement('div');
+      cmdEcho.style.color = '#94A3B8';
+      cmdEcho.style.marginTop = '6px';
+      cmdEcho.textContent = `$ ${cmd}`;
+      log.appendChild(cmdEcho);
+
+      const resp = document.createElement('div');
+      resp.style.marginTop = '4px';
+
+      if (cmd === 'help') {
+        resp.innerHTML = '<span style="color: #60A5FA;">Доступные команды:</span> status, benchmark, deploy, latency, clear';
+      } else if (cmd === 'status') {
+        resp.innerHTML = '<span class="code-lime">✔ 320 Edge PoPs online. Active Workers: 14,280. Consensus: 99.98% OK.</span>';
+      } else if (cmd === 'benchmark') {
+        resp.innerHTML = '<span style="color: #FBBF24;">⚡ Benchmark: 48,200 tokens/sec · TTFT: 14.2ms · P99: 18.1ms</span>';
+      } else if (cmd === 'deploy') {
+        resp.innerHTML = '<span class="code-lime">🚀 Deployed cluster to production edge. Revision #8492 active!</span>';
+      } else if (cmd === 'latency') {
+        resp.innerHTML = '<span style="color: #38BDF8;">🌐 Frankfurt: 8ms | Tokyo: 21ms | San Francisco: 12ms | Singapore: 16ms</span>';
+      } else if (cmd === 'clear') {
+        log.innerHTML = '';
+        return;
+      } else {
+        resp.innerHTML = `<span style="color: #EF4444;">Команда не распознана: "${cmd}". Введите "help" для справки.</span>`;
+      }
+
+      log.appendChild(resp);
+      const screen = document.getElementById('terminal-screen');
+      if (screen) screen.scrollTop = screen.scrollHeight;
+    }
 
     function handleEmailSubmit(e) {
       e.preventDefault();

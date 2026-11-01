@@ -1,0 +1,127 @@
+/* ==========================================================================
+   FIGMA EDITION: NEXUS AI V2 (LINEAR PRO WORKFLOW DAG STUDIO)
+   Deep OLED, Holographic Glass Bevels, Live Multi-Agent Canvas DAG
+   ========================================================================== */
+
+:root {
+  --s2-bg: #030305;
+  --s2-surface: #0A0A0F;
+  --s2-card: #101018;
+  --s2-border: #1F1F2E;
+  --s2-lime: #10B981;
+  --s2-purple: #A855F7;
+  --s2-cyan: #06B6D4;
+  --s2-text: #F8FAFC;
+  --s2-text-muted: #8E8EA0;
+  --s2-mono: 'JetBrains Mono', monospace;
+  --s2-font: 'Space Grotesk', sans-serif;
+}
+
+body.saas-v2-theme {
+  background-color: var(--s2-bg);
+  color: var(--s2-text);
+  font-family: var(--s2-font);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Version Comparison Topbar */
+.edition-switch-bar {
+  background: #06060A;
+  border-bottom: 1px solid var(--s2-border);
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.edition-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid var(--s2-border);
+  background: #0E0E16;
+  color: var(--s2-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  transition: all 0.2s ease;
+}
+
+.edition-btn.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--s2-lime);
+  color: var(--s2-lime);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.edition-btn:hover:not(.active) {
+  color: #FFFFFF;
+  border-color: #3B3B4E;
+}
+
+/* Linear-style DAG Studio Shell */
+.dag-studio-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.dag-canvas-card {
+  background: var(--s2-surface);
+  border: 1px solid var(--s2-border);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  margin-bottom: 32px;
+}
+
+.dag-canvas-wrap {
+  width: 100%;
+  height: 380px;
+  background: #050508;
+  border-radius: 12px;
+  border: 1px solid var(--s2-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.dag-canvas-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Speedometer & Metric Panels */
+.s2-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.s2-metric-card {
+  background: var(--s2-card);
+  border: 1px solid var(--s2-border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.s2-metric-num {
+  font-family: var(--s2-mono);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--s2-lime);
+  margin-top: 6px;
+}
+
+@media (max-width: 900px) {
+  .s2-metrics-grid { grid-template-columns: 1fr; }
+}

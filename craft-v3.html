@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLAY & OCHRE Apex Atelier V3 // Hermès & Loewe Craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/apex-v3.css">
+  <link rel="stylesheet" href="assets/css/craft-v2.css">
+</head>
+<body class="apex-v3-theme">
+
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech-v3.html">💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas-v3.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft-v3.html" selected>🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech-v3.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio-v3.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery-v3.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="craft.html" class="version-pill" title="Mobbi V1">V1</a>
+          <a href="craft-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="craft-v3.html" class="version-pill active is-v3" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobbi-container" style="max-width: 1360px; margin: 40px auto; padding: 0 24px;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; border-bottom: 1px solid var(--apex-border); padding-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-family: var(--apex-font-mono); font-size: 11px; color: #D4A34D; letter-spacing: 0.1em; text-transform: uppercase;">
+          HERMÈS & LOEWE ARTISANAL ATELIERS // APEX BESPOKE
+        </div>
+        <h1 style="font-family: 'Fraunces', serif; font-size: 44px; font-weight: 700; color: #FFFFFF; margin: 6px 0 0 0;">
+          Мастерская 3D гончарного круга
+        </h1>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <span class="squircle-pill" style="color: #D4A34D; border-color: rgba(212, 163, 77, 0.4);">
+          Шамотная глина • Обжиг 1280°C
+        </span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: start;">
+      
+      <!-- Interactive 3D Lathe Canvas -->
+      <div class="border-beam-card" style="padding: 2px;">
+        <div class="border-beam-content" style="padding: 24px; background: #0A0D14;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div style="font-family: var(--apex-font-mono); font-size: 11px; color: var(--apex-text-dim);">
+              ГОНЧАРНЫЙ КРУГ // ВОДИТЕ КУРСОРОМ ПО ХОЛСТУ ДЛЯ ПЛАСТИЧНОЙ ЛЕПКИ ВАЗЫ
+            </div>
+            <span class="squircle-pill" style="color: #D4A34D; font-size: 11px;">60 FPS Lathe Physics</span>
+          </div>
+
+          <canvas id="lathe-canvas" height="340" style="width: 100%; border-radius: 12px; background: rgba(0, 0, 0, 0.4); cursor: ew-resize;"></canvas>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+            <div style="font-size: 13px; color: var(--apex-text-muted);">
+              Выберите оттенок натуральной глазури:
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="edition-btn active" onclick="setGlaze('#C28B53', 'Песчаник')" style="color: #C28B53;">● Песчаник</button>
+              <button class="edition-btn" onclick="setGlaze('#A85038', 'Терракота')" style="color: #A85038;">● Терракота</button>
+              <button class="edition-btn" onclick="setGlaze('#3D5A73', 'Кобальт')" style="color: #3D5A73;">● Кобальт</button>
+              <button class="edition-btn" onclick="setGlaze('#1C2028', 'Обсидиан')" style="color: #94A3B8;">● Обсидиан</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atelier Bespoke Details & Order Inquiry -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <div class="border-beam-card" style="padding: 2px;">
+          <div class="border-beam-content" style="padding: 28px;">
+            <div style="font-family: var(--apex-font-mono); font-size: 11px; color: #D4A34D; margin-bottom: 8px;">АТЕЛЬЕ РУЧНОГО ИЗГОТОВЛЕНИЯ</div>
+            <h3 style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: #FFFFFF; margin: 0 0 10px 0;">
+              Ваза серийного лота «Vase de Sèvres»
+            </h3>
+            <p style="font-size: 14px; color: var(--apex-text-muted); line-height: 1.6; margin: 0 0 20px 0;">
+              Каждый сосуд формуется вручную на медленном гончарном круге с добавлением кварцевого песка Нормандии. Тройной восстановительный обжиг в дровяной печи.
+            </p>
+
+            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--apex-border); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;">
+                <span style="color: var(--apex-text-muted);">Выбранная глазурь:</span>
+                <span id="glaze-name" style="font-family: var(--apex-font-mono); color: #D4A34D; font-weight: 700;">Песчаник</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                <span style="color: var(--apex-text-muted);">Срок создания:</span>
+                <span style="font-family: var(--apex-font-mono); color: #10B981; font-weight: 700;">14 рабочих дней</span>
+              </div>
+            </div>
+
+            <button class="btn-apex-primary" style="width: 100%; justify-content: center; padding: 14px; background: linear-gradient(135deg, #D4A34D, #B45309); color: #030509;" onclick="orderVase()">
+              Оформить индивидуальный заказ ателье
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // 3D Lathe Clay Shaping Simulation
+    const canvas = document.getElementById('lathe-canvas');
+    let clayColor = '#C28B53';
+    let waistRadius = 45;
+    let shoulderRadius = 75;
+    let rotationAngle = 0;
+
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      function resizeLathe() {
+        canvas.width = canvas.parentElement.clientWidth;
+      }
+      resizeLathe();
+      window.addEventListener('resize', resizeLathe);
+
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const xRel = (e.clientX - rect.left) / canvas.width;
+        waistRadius = 30 + xRel * 50;
+        shoulderRadius = 55 + (1 - xRel) * 45;
+      });
+
+      function drawLathe() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const midX = canvas.width / 2;
+        const baseY = 280;
+
+        // Lathe metallic wheel plate
+        ctx.fillStyle = '#1A202C';
+        ctx.beginPath();
+        ctx.ellipse(midX, baseY + 20, 110, 24, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3D Slices of Vase
+        const slices = 28;
+        for (let i = slices; i >= 0; i--) {
+          const t = i / slices;
+          const y = baseY - t * 200;
+          let r = 50;
+          if (t < 0.3) r = 40 + (t / 0.3) * (shoulderRadius - 40);
+          else if (t < 0.7) r = shoulderRadius - ((t - 0.3) / 0.4) * (shoulderRadius - waistRadius);
+          else r = waistRadius + ((t - 0.7) / 0.3) * (shoulderRadius * 0.7 - waistRadius);
+
+          ctx.fillStyle = clayColor;
+          ctx.beginPath();
+          ctx.ellipse(midX, y, r, r * 0.3, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.25)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        rotationAngle += 0.05;
+        requestAnimationFrame(drawLathe);
+      }
+      drawLathe();
+    }
+
+    function setGlaze(color, name) {
+      clayColor = color;
+      document.getElementById('glaze-name').innerText = name;
+    }
+
+    function orderVase() {
+      alert('Индивидуальная форма вазы зафиксирована в спецификации. Менеджер ателье свяжется с вами.');
+    }
+  </script>
+</body>
+</html>

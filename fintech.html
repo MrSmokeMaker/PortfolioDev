@@ -12,18 +12,37 @@
 </head>
 <body class="fintech-theme">
 
-  <!-- Quick Hub Navigation Bar -->
-  <div class="hub-back-banner">
-    <a href="index.html">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      К портфолио разработчика
-    </a>
-    <span>Проект 2 из 4: Финтех-сервис (Mobbi Data-heavy Pattern)</span>
-    <div style="display: flex; gap: 12px;">
-      <a href="gallery.html">← Галерея</a>
-      <a href="craft.html">След: Крафт-магазин →</a>
+  <!-- Universal Project Navigation Bar -->
+  <header class="universal-project-nav" role="navigation" aria-label="Навигация по экосистеме портфолио">
+    <div class="site-nav-inner">
+      <a href="index.html" class="site-nav-back" title="Вернуться в главное портфолио">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        <span>Коровин Сергей</span>
+      </a>
+
+      <div class="site-nav-project-picker">
+        <select class="site-nav-select" onchange="window.location.href=this.value" aria-label="Выбор проекта портфолио">
+          <option value="fintech.html" selected>💎 1. VERTEX Capital (Финтех)</option>
+          <option value="saas.html">⚡ 2. NEXUS AI (AI-платформа)</option>
+          <option value="craft.html">🏺 3. CLAY & OCHRE (Керамика)</option>
+          <option value="medtech.html">❤️ 4. PULSE Telemetry (MedTech)</option>
+          <option value="audio.html">🎛️ 5. AETHER Synth (Web Audio)</option>
+          <option value="gallery.html">🖼️ 6. LUMEN Gallery (Галерея)</option>
+        </select>
+      </div>
+
+      <div class="site-nav-controls">
+        <div class="site-nav-version-pills">
+          <a href="fintech.html" class="version-pill active" title="Mobbi V1">V1</a>
+          <a href="fintech-v2.html" class="version-pill" title="Figma V2">V2</a>
+          <a href="fintech-v3.html" class="version-pill" title="Apex V3">V3</a>
+        </div>
+        <button class="site-nav-theme-btn" onclick="toggleGlobalTheme()" title="Переключить тему (Light/Dark/OLED)" aria-label="Переключить тему">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </header>
 
   <div class="fintech-app-shell">
     <!-- Sidebar Navigation -->
@@ -94,245 +113,281 @@
       <!-- Top Workspace Bar -->
       <div class="fintech-header-bar">
         <div>
-          <h1 class="workspace-title">Инвестиционный портфель</h1>
-          <p style="font-size: 14px; color: var(--ft-text-muted);">Обновлено 2 секунды назад · Сессия защищена 2FA</p>
+          <h1 class="workspace-title">Приватный Клиринг & Инвестиции</h1>
+          <p style="font-size: 14px; color: var(--ft-text-muted);">
+            Институциональный терминал Tier-1 · Uptime 99.99% · Сессия защищена 2FA FaceID
+          </p>
         </div>
 
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <div class="segmented-control">
-            <button class="segment-btn" onclick="selectSegment(this)">1D</button>
-            <button class="segment-btn" onclick="selectSegment(this)">1W</button>
-            <button class="segment-btn active" onclick="selectSegment(this)">1M</button>
-            <button class="segment-btn" onclick="selectSegment(this)">1Y</button>
-            <button class="segment-btn" onclick="selectSegment(this)">ALL</button>
-          </div>
-
-          <button onclick="toggleErrorBanner()" style="background: white; border: 1px solid var(--ft-border); padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--ft-text);">
-            Симуляция сбоя
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <button onclick="openFaceIdModal()" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.4); color: #059669; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2M9 9h.01M15 9h.01M9 15c.5.8 1.8 1.5 3 1.5s2.5-.7 3-1.5"/></svg>
+            2FA FaceID
           </button>
 
-          <button onclick="openModal()" style="background: var(--ft-blue); color: white; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);">
+          <button onclick="openModal()" style="background: var(--ft-blue); color: white; border: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            Новый перевод
+            Быстрый перевод
           </button>
         </div>
       </div>
 
-      <!-- 3 Key KPI Widgets -->
-      <div class="kpi-grid">
-        <div class="kpi-card" data-tilt data-tilt-max="4">
-          <div class="kpi-top">
-            <span class="kpi-label">Совокупный баланс</span>
-            <div class="kpi-icon-badge" style="background: rgba(59, 130, 246, 0.1); color: var(--ft-blue);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><circle cx="18" cy="12" r="2"/></svg>
-            </div>
+      <!-- HIGHLIGHT 1: Interactive Hero Grid (3D Metal Card Studio + Instant Swap Engine) -->
+      <div class="fintech-hero-interactive-grid">
+        
+        <!-- Interactive 3D Metal Card Studio -->
+        <div class="metal-card-studio">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #94A3B8;">
+              3D Metal Card Studio
+            </span>
+            <span id="card-status-badge" style="background: rgba(16, 185, 129, 0.2); color: #34D399; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px;">
+              ● АКТИВНА
+            </span>
           </div>
-          <div class="kpi-val-row">
-            <div class="kpi-value tabular-nums">$3,842,910.40</div>
-            <span class="trend-badge trend-up">+14.2%</span>
-          </div>
-          <svg class="sparkline-svg" viewBox="0 0 100 25">
-            <path d="M0,20 Q20,5 40,15 T70,8 T100,2" />
-          </svg>
-        </div>
 
-        <div class="kpi-card" data-tilt data-tilt-max="4">
-          <div class="kpi-top">
-            <span class="kpi-label">Дневной торговый объём</span>
-            <div class="kpi-icon-badge" style="background: rgba(16, 185, 129, 0.1); color: var(--ft-green);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <div id="interactive-fintech-card" class="fintech-metal-card card-theme-obsidian" data-tilt data-tilt-max="10" title="Интерактивная карта: двигайте курсор для 3D бликов">
+            <div class="card-chip-row">
+              <div class="metal-card-chip"></div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity: 0.8;"><path d="M12 2a10 10 0 0 1 10 10c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2z"/><path d="M12 6v12M6 12h12"/></svg>
             </div>
-          </div>
-          <div class="kpi-val-row">
-            <div class="kpi-value tabular-nums">$418,250.00</div>
-            <span class="trend-badge trend-up">+8.7%</span>
-          </div>
-          <svg class="sparkline-svg" style="stroke: var(--ft-green);" viewBox="0 0 100 25">
-            <path d="M0,18 Q25,22 50,12 T75,9 T100,3" />
-          </svg>
-        </div>
 
-        <div class="kpi-card" data-tilt data-tilt-max="4">
-          <div class="kpi-top">
-            <span class="kpi-label">Чистая прибыль (YTD)</span>
-            <div class="kpi-icon-badge" style="background: rgba(245, 158, 11, 0.1); color: var(--ft-amber);">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            </div>
-          </div>
-          <div class="kpi-val-row">
-            <div class="kpi-value tabular-nums">+$524,190.15</div>
-            <span class="trend-badge trend-up">+23.1%</span>
-          </div>
-          <svg class="sparkline-svg" style="stroke: var(--ft-amber);" viewBox="0 0 100 25">
-            <path d="M0,22 Q30,10 60,14 T80,6 T100,1" />
-          </svg>
-        </div>
-      </div>
-
-      <!-- Analytics Section (Chart + Allocation) -->
-      <div class="analytics-row">
-        <!-- Interactive Area Chart -->
-        <div class="chart-card">
-          <div class="chart-header">
             <div>
-              <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700;">Кривая совокупной доходности фонда</h3>
-              <p style="font-size: 13px; color: var(--ft-text-muted);">Сравнение с эталонным индексом S&P 500 (+8.4% Alpha)</p>
+              <div id="card-number-val" class="card-number-display">•••• •••• •••• 8492</div>
+              <div style="font-size: 10px; color: #94A3B8; margin-top: 4px; font-family: monospace;">EXP: 09/31 · CVV: <span id="card-cvv-val">•••</span></div>
             </div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--ft-blue); display: flex; align-items: center; gap: 6px;">
-              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ft-blue);"></span>
-              Live Feed
+
+            <div class="card-holder-row">
+              <div>
+                <div style="font-size: 9px; color: #94A3B8;">ДЕРЖАТЕЛЬ</div>
+                <div style="font-weight: 700; font-size: 13px;">КОРОВИН СЕРГЕЙ</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 9px; color: #94A3B8;">ЛИМИТ</div>
+                <div style="font-weight: 700; font-size: 13px;">$500,000 / ДЕНЬ</div>
+              </div>
             </div>
           </div>
 
-          <div class="interactive-chart-container">
-            <svg class="chart-svg" viewBox="0 0 600 200" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="blueGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.35"/>
-                  <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.0"/>
-                </linearGradient>
-              </defs>
-              <path class="chart-area" d="M0,170 C100,140 180,160 260,90 C340,30 440,70 520,30 L600,15 L600,200 L0,200 Z" />
-              <path class="chart-line" d="M0,170 C100,140 180,160 260,90 C340,30 440,70 520,30 L600,15" />
-            </svg>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--ft-text-muted); margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--ft-border);">
-            <span>01 Окт</span>
-            <span>08 Окт</span>
-            <span>15 Окт</span>
-            <span>22 Окт</span>
-            <span>Сегодня (31 Окт)</span>
+          <!-- Card Customizer Controls -->
+          <div class="card-studio-controls">
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span style="font-size: 11px; color: #94A3B8;">Металл:</span>
+              <button class="theme-pill-btn active" onclick="setCardTheme('card-theme-obsidian', this)">Obsidian</button>
+              <button class="theme-pill-btn" onclick="setCardTheme('card-theme-emerald', this)">Emerald</button>
+              <button class="theme-pill-btn" onclick="setCardTheme('card-theme-gold', this)">Imperial Gold</button>
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button class="theme-pill-btn" onclick="toggleCardCvv()">CVV</button>
+              <button class="theme-pill-btn" id="freeze-card-btn" onclick="toggleCardFreeze()">Заморозить</button>
+            </div>
           </div>
         </div>
 
-        <!-- Asset Allocation Widget -->
-        <div class="chart-card">
-          <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 4px;">Структура активов</h3>
-          <p style="font-size: 13px; color: var(--ft-text-muted);">Диверсификация портфеля</p>
+        <!-- Instant Multi-Currency Swap & Liquidity Engine -->
+        <div class="fintech-swap-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin: 0;">Мгновенный обмен активов</h3>
+              <p style="font-size: 12px; color: var(--ft-text-muted); margin: 2px 0 0 0;">Ликвидность Tier-1 без комиссии платформы</p>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: #2563EB; background: rgba(37, 99, 235, 0.1); padding: 4px 8px; border-radius: 6px;">
+              0% Slippage
+            </span>
+          </div>
 
-          <div class="donut-container">
-            <!-- Simulated CSS SVG Donut -->
-            <svg width="140" height="140" viewBox="0 0 42 42">
-              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#E2E8F0" stroke-width="4"></circle>
-              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#3B82F6" stroke-width="5" stroke-dasharray="45 55" stroke-dashoffset="25"></circle>
-              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#10B981" stroke-width="5" stroke-dasharray="30 70" stroke-dashoffset="80"></circle>
-              <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#F59E0B" stroke-width="5" stroke-dasharray="25 75" stroke-dashoffset="50"></circle>
-              <text x="50%" y="54%" text-anchor="middle" font-size="6" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" fill="#0F172A">Tier-1</text>
-            </svg>
+          <!-- Send row -->
+          <div class="swap-row">
+            <div>
+              <div style="font-size: 11px; color: var(--ft-text-muted); font-weight: 600;">ВЫ ОТДАЕТЕ</div>
+              <input type="number" id="swap-input-from" value="5000" class="swap-input" oninput="calculateSwap()">
+            </div>
+            <select id="swap-currency-from" class="currency-badge-select" onchange="calculateSwap()">
+              <option value="USD">💵 USD</option>
+              <option value="EUR">💶 EUR</option>
+              <option value="BTC">₿ BTC</option>
+              <option value="SOL">◎ SOL</option>
+            </select>
+          </div>
 
-            <div class="donut-legend">
-              <div class="legend-item">
-                <span><span class="legend-color-dot" style="background: #3B82F6;"></span>US Tech Equities</span>
-                <strong class="tabular-nums">45%</strong>
-              </div>
-              <div class="legend-item">
-                <span><span class="legend-color-dot" style="background: #10B981;"></span>Treasuries (TBills)</span>
-                <strong class="tabular-nums">30%</strong>
-              </div>
-              <div class="legend-item">
-                <span><span class="legend-color-dot" style="background: #F59E0B;"></span>Liquid Hedge Cash</span>
-                <strong class="tabular-nums">25%</strong>
-              </div>
+          <!-- Preset chips -->
+          <div style="display: flex; gap: 6px; margin-bottom: 12px;">
+            <button class="theme-pill-btn" style="color: var(--ft-text);" onclick="setSwapAmount(1000)">+$1,000</button>
+            <button class="theme-pill-btn" style="color: var(--ft-text);" onclick="setSwapAmount(5000)">+$5,000</button>
+            <button class="theme-pill-btn" style="color: var(--ft-text);" onclick="setSwapAmount(25000)">+$25,000</button>
+            <button class="theme-pill-btn" style="color: var(--ft-text);" onclick="setSwapAmount(100000)">MAX</button>
+          </div>
+
+          <!-- Receive row -->
+          <div class="swap-row">
+            <div>
+              <div style="font-size: 11px; color: var(--ft-text-muted); font-weight: 600;">ВЫ ПОЛУЧАЕТЕ (РАСЧЕТ)</div>
+              <div id="swap-result-val" class="swap-input tabular-nums" style="display: flex; align-items: center;">0.0732</div>
+            </div>
+            <select id="swap-currency-to" class="currency-badge-select" onchange="calculateSwap()">
+              <option value="BTC" selected>₿ BTC</option>
+              <option value="SOL">◎ SOL</option>
+              <option value="EUR">💶 EUR</option>
+              <option value="USD">💵 USD</option>
+            </select>
+          </div>
+
+          <button onclick="executeInstantSwap()" style="width: 100%; background: #2563EB; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35); transition: all 0.2s ease;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            Мгновенный обмен в 1 клик
+          </button>
+        </div>
+
+      </div>
+
+      <!-- HIGHLIGHT 2: Interactive Yield & Capital Growth Simulator -->
+      <div class="fintech-yield-box">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span style="font-size: 11px; font-weight: 700; color: #10B981; letter-spacing: 0.08em; text-transform: uppercase;">
+              Калькулятор сложного процента
+            </span>
+            <h2 style="font-family: var(--font-heading); font-size: 24px; font-weight: 800; margin: 4px 0 0 0;">
+              Прогноз доходности инвестиционного портфеля
+            </h2>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 12px; color: var(--ft-text-muted);">Расчётная чистая доходность (APY)</div>
+            <div id="yield-apy-badge" style="font-family: var(--font-heading); font-size: 28px; font-weight: 800; color: #10B981;">
+              +$184,200.00 <span style="font-size: 14px; font-weight: 600;">(+18.4%)</span>
             </div>
           </div>
+        </div>
+
+        <div style="margin: 24px 0 12px 0;">
+          <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 600;">
+            <span>Депозитный капитал:</span>
+            <span id="slider-capital-display" style="color: #2563EB; font-weight: 800;">$500,000</span>
+          </div>
+          <input type="range" id="capital-slider" min="10000" max="1000000" step="10000" value="500000" class="yield-range-slider" oninput="updateYieldCalculation()">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--ft-text-muted);">
+            <span>$10,000</span>
+            <span>$250,000</span>
+            <span>$500,000</span>
+            <span>$750,000</span>
+            <span>$1,000,000</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Animated SVG Curve -->
+        <div style="position: relative; height: 120px; width: 100%; margin-top: 16px;">
+          <svg id="yield-dynamic-svg" viewBox="0 0 800 120" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+            <defs>
+              <linearGradient id="yieldCurveGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <path id="yield-fill-path" d="M 0 100 Q 400 60 800 20 L 800 120 L 0 120 Z" fill="url(#yieldCurveGrad)"/>
+            <path id="yield-stroke-path" d="M 0 100 Q 400 60 800 20" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px; color: var(--ft-text-muted); border-top: 1px solid var(--ft-border); padding-top: 12px;">
+          <div>🛡️ Покрытие FDIC застраховано на $2,500,000 · Ежедневная капитализация процентов</div>
+          <div style="font-weight: 600; color: #2563EB;">Авто-реинвестирование активно ✔</div>
         </div>
       </div>
 
-      <!-- Recent Transactions Table -->
+      <!-- HIGHLIGHT 3: High-Frequency Live Trade Stream (Replaces dull static table) -->
       <div class="table-card">
         <div class="table-header-bar">
           <div>
-            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700;">Последние транзакции и клиринг</h3>
-            <p style="font-size: 13px; color: var(--ft-text-muted);">Реестр авторизованных операций в системе</p>
+            <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 700; margin: 0;">
+              Живая лента высокочастотного клиринга
+            </h3>
+            <p style="font-size: 13px; color: var(--ft-text-muted); margin: 3px 0 0 0;">
+              Поток транзакций в реальном времени с подтверждением в блокчейне
+            </p>
           </div>
-          <button onclick="showToast('Экспорт реестра транзакций в формате CSV начат...')" style="background: white; border: 1px solid var(--ft-border); padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">
-            Экспорт в CSV
-          </button>
+          <div style="display: flex; gap: 8px;">
+            <button class="theme-pill-btn active" onclick="filterStream('all', this)">Все (Live)</button>
+            <button class="theme-pill-btn" onclick="filterStream('in', this)">Прибыль (+)</button>
+            <button class="theme-pill-btn" onclick="filterStream('out', this)">Списания (-)</button>
+          </div>
         </div>
 
-        <table class="fintech-table">
-          <thead>
-            <tr>
-              <th style="width: 40px;"><input type="checkbox"></th>
-              <th>Контрагент / Мерчант</th>
-              <th>Категория</th>
-              <th>Дата и время</th>
-              <th>Сумма (USD)</th>
-              <th>Статус</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>
-                <div style="font-weight: 600;">Stripe Liquidity Pool</div>
-                <div style="font-size: 12px; color: var(--ft-text-muted);">TX-9842104-US</div>
-              </td>
-              <td><span style="font-size: 12px; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; font-weight: 500;">Провайдер</span></td>
-              <td class="tabular-nums">Сегодня, 14:32:05</td>
-              <td class="tabular-nums" style="font-weight: 700; color: var(--ft-green);">+$124,500.00</td>
-              <td><span class="status-pill success"><span class="status-dot"></span>Проведено</span></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>
-                <div style="font-weight: 600;">Amazon Web Services EMEA</div>
-                <div style="font-size: 12px; color: var(--ft-text-muted);">Инфраструктура Cloud</div>
-              </td>
-              <td><span style="font-size: 12px; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; font-weight: 500;">Серверы</span></td>
-              <td class="tabular-nums">Вчера, 19:15:20</td>
-              <td class="tabular-nums" style="font-weight: 700; color: var(--ft-red);">-$12,480.50</td>
-              <td><span class="status-pill success"><span class="status-dot"></span>Проведено</span></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>
-                <div style="font-weight: 600;">J.P. Morgan Clearing Corp</div>
-                <div style="font-size: 12px; color: var(--ft-text-muted);">Дивидендный купон</div>
-              </td>
-              <td><span style="font-size: 12px; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; font-weight: 500;">Дивиденды</span></td>
-              <td class="tabular-nums">29 Окт, 10:00:12</td>
-              <td class="tabular-nums" style="font-weight: 700; color: var(--ft-green);">+$48,120.00</td>
-              <td><span class="status-pill success"><span class="status-dot"></span>Проведено</span></td>
-            </tr>
-            <tr>
-              <td><input type="checkbox"></td>
-              <td>
-                <div style="font-weight: 600;">Goldman Sachs Brokerage</div>
-                <div style="font-size: 12px; color: var(--ft-text-muted);">Опционный контракт № 44</div>
-              </td>
-              <td><span style="font-size: 12px; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; font-weight: 500;">Хеджирование</span></td>
-              <td class="tabular-nums">28 Окт, 16:45:00</td>
-              <td class="tabular-nums" style="font-weight: 700; color: var(--ft-text);">-$250,000.00</td>
-              <td><span class="status-pill pending"><span class="status-dot"></span>В клиринге</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="live-trade-stream" class="live-stream-feed" style="margin-top: 16px;">
+          <!-- Live Items -->
+          <div class="stream-item" data-type="in">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+              <div>
+                <strong style="color: var(--ft-text);">Arbitrage Liquidity Hub (Frankfurt)</strong>
+                <div style="font-size: 11px; color: var(--ft-text-muted);">ETH/USDC Flash Swap · Задержка 4ms</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <strong style="color: #10B981;">+$42,850.00</strong>
+              <div style="font-size: 11px; color: var(--ft-text-muted);">Только что</div>
+            </div>
+          </div>
+
+          <div class="stream-item" data-type="in">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981;"></span>
+              <div>
+                <strong style="color: var(--ft-text);">Stripe Tier-1 Enterprise Settlement</strong>
+                <div style="font-size: 11px; color: var(--ft-text-muted);">Мерчант-клиринг SaaS подписок</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <strong style="color: #10B981;">+$118,400.00</strong>
+              <div style="font-size: 11px; color: var(--ft-text-muted);">14 сек назад</div>
+            </div>
+          </div>
+
+          <div class="stream-item" data-type="out">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #EF4444;"></span>
+              <div>
+                <strong style="color: var(--ft-text);">US Treasury 3-Month Bill Purchase</strong>
+                <div style="font-size: 11px; color: var(--ft-text-muted);">Хеджирование ликвидности 5.3% Yield</div>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <strong style="color: #EF4444;">-$250,000.00</strong>
+              <div style="font-size: 11px; color: var(--ft-text-muted);">1 мин назад</div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
 
   <!-- Interactive Modal Dialog (Transfer Confirmation) -->
-  <div id="transfer-modal" class="modal-overlay">
+  <div id="transfer-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="transfer-modal-title" aria-describedby="transfer-modal-description">>
     <div class="modal-box">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700;">Авторизация перевода</h3>
+        <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700;">Новый перевод в клиринг</h3>
         <button onclick="closeModal()" style="background: none; border: none; font-size: 20px; cursor: pointer; color: var(--ft-text-muted);">&times;</button>
       </div>
-      <p style="font-size: 14px; color: var(--ft-text-muted); margin-bottom: 20px;">
-        Подтвердите отправку средств на авторизованный расчетный счет клиринговой палаты.
+      <p style="font-size: 14px; color: var(--ft-text-muted); margin-bottom: 16px;">
+        Мгновенный межбанковский перевод через шлюз Apex Institutional Wire.
       </p>
 
-      <div style="background: #F8FAFC; border: 1px solid var(--ft-border); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
-        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-          <span style="color: var(--ft-text-muted);">Сумма списания:</span>
-          <strong class="tabular-nums" style="font-size: 16px; color: var(--ft-text);">$25,000.00 USD</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+      <div style="margin-bottom: 16px;">
+        <label style="display: block; font-size: 12px; font-weight: 600; color: var(--ft-text-muted); margin-bottom: 6px;">Сумма перевода ($ USD):</label>
+        <input type="number" id="transfer-amount-input" value="25000" style="width: 100%; padding: 10px 14px; border: 1px solid var(--ft-border); border-radius: 8px; font-size: 16px; font-weight: 700;">
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; font-size: 12px; font-weight: 600; color: var(--ft-text-muted); margin-bottom: 6px;">PIN подтверждения (2FA):</label>
+        <input type="password" id="transfer-pin-input" placeholder="Введите 4 цифры (тест: 1234)" maxlength="4" style="width: 100%; padding: 10px 14px; border: 1px solid var(--ft-border); border-radius: 8px; font-size: 16px; letter-spacing: 4px;">
+      </div>
+
+      <div style="background: #F8FAFC; border: 1px solid var(--ft-border); border-radius: 12px; padding: 14px; margin-bottom: 24px; font-size: 13px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
           <span style="color: var(--ft-text-muted);">Получатель:</span>
-          <span>Apex Clearing Global LLC</span>
+          <strong>Apex Clearing Global LLC</strong>
         </div>
-        <div style="display: flex; justify-content: space-between; font-size: 13px;">
+        <div style="display: flex; justify-content: space-between;">
           <span style="color: var(--ft-text-muted);">Комиссия шлюза:</span>
           <span style="color: var(--ft-green); font-weight: 600;">$0.00 (Tier-1 VIP)</span>
         </div>
@@ -343,31 +398,182 @@
           Отмена
         </button>
         <button onclick="confirmTransfer()" style="flex: 1; padding: 12px; border-radius: 8px; border: none; background: var(--ft-blue); color: white; font-weight: 600; cursor: pointer;">
-          Подтвердить
+          Выполнить списание
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Biometric 2FA FaceID Security Modal -->
+  <div id="faceid-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="faceid-title">
+    <div class="modal-box" style="text-align: center; max-width: 380px;">
+      <div style="width: 72px; height: 72px; margin: 0 auto 16px auto; border-radius: 50%; background: rgba(16, 185, 129, 0.1); border: 2px solid #10B981; display: flex; align-items: center; justify-content: center; position: relative;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2M9 9h.01M15 9h.01M9 15c.5.8 1.8 1.5 3 1.5s2.5-.7 3-1.5"/></svg>
+      </div>
+      <h3 id="faceid-title" style="font-family: var(--font-heading); font-size: 20px; font-weight: 800; margin: 0 0 6px 0;">
+        Biometric FaceID 2FA
+      </h3>
+      <p style="font-size: 13px; color: var(--ft-text-muted); margin: 0 0 20px 0;">
+        Проверка биометрических ключей криптографического анклава Secure Enclave...
+      </p>
+      <div id="faceid-progress-bar" style="height: 6px; border-radius: 3px; background: #E2E8F0; overflow: hidden; margin-bottom: 20px;">
+        <div id="faceid-progress-fill" style="width: 0%; height: 100%; background: #10B981; transition: width 0.8s ease;"></div>
+      </div>
+      <button onclick="simulateFaceIdScan()" style="width: 100%; background: #10B981; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer;">
+        Подтвердить биометрию
+      </button>
+      <button onclick="closeFaceIdModal()" style="width: 100%; background: transparent; border: none; color: var(--ft-text-muted); padding: 8px; font-size: 13px; margin-top: 8px; cursor: pointer;">
+        Отмена
+      </button>
     </div>
   </div>
 
   <script src="assets/js/tilt.js"></script>
   <script src="assets/js/main.js"></script>
   <script>
-    function selectSegment(btn) {
-      document.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+    let currentBalance = 3842910.40;
+    let isCardFrozen = false;
+    let isCvvVisible = false;
+
+    // Card Theme Switcher
+    function setCardTheme(themeClass, btn) {
+      const card = document.getElementById('interactive-fintech-card');
+      if (!card) return;
+      card.className = `fintech-metal-card ${themeClass}`;
+      document.querySelectorAll('.card-studio-controls .theme-pill-btn').forEach(b => {
+        if (b.textContent.includes('Obsidian') || b.textContent.includes('Emerald') || b.textContent.includes('Gold')) {
+          b.classList.remove('active');
+        }
+      });
       btn.classList.add('active');
-      showToast(`Период графика обновлен: ${btn.textContent.trim()}`);
+      showToast(`Стиль металлической карты изменен: ${btn.textContent}`);
     }
 
-    function toggleErrorBanner() {
-      const banner = document.getElementById('fintech-error-banner');
-      if (banner.style.display === 'none') {
-        banner.style.display = 'flex';
-        showToast('Активировано состояние ошибки синхронизации');
+    // Toggle CVV
+    function toggleCardCvv() {
+      isCvvVisible = !isCvvVisible;
+      const el = document.getElementById('card-cvv-val');
+      if (el) el.textContent = isCvvVisible ? '742' : '•••';
+      showToast(isCvvVisible ? 'CVV код отображен (действителен 30 сек)' : 'CVV скрыт');
+    }
+
+    // Toggle Card Freeze
+    function toggleCardFreeze() {
+      isCardFrozen = !isCardFrozen;
+      const card = document.getElementById('interactive-fintech-card');
+      const badge = document.getElementById('card-status-badge');
+      const btn = document.getElementById('freeze-card-btn');
+      if (isCardFrozen) {
+        card.style.filter = 'grayscale(1) opacity(0.6)';
+        badge.textContent = '● ЗАМОРОЖЕНА';
+        badge.style.background = 'rgba(239, 68, 68, 0.2)';
+        badge.style.color = '#EF4444';
+        btn.textContent = 'Разморозить';
+        btn.style.color = '#EF4444';
+        showToast('Карта временно заморожена. Авторизация операций заблокирована.');
       } else {
-        banner.style.display = 'none';
-        showToast('Нормальное состояние восстановлено');
+        card.style.filter = 'none';
+        badge.textContent = '● АКТИВНА';
+        badge.style.background = 'rgba(16, 185, 129, 0.2)';
+        badge.style.color = '#34D399';
+        btn.textContent = 'Заморозить';
+        btn.style.color = '#94A3B8';
+        showToast('Карта разморожена. Лимит $500,000/день восстановлен.');
       }
     }
+
+    // Instant Swap Engine
+    const RATES = {
+      'USD_BTC': 0.0000146,
+      'USD_SOL': 0.00542,
+      'USD_EUR': 0.924,
+      'USD_USD': 1.0,
+      'EUR_USD': 1.082,
+      'EUR_BTC': 0.0000158,
+      'EUR_SOL': 0.00586,
+      'BTC_USD': 68420.0,
+      'SOL_USD': 184.2
+    };
+
+    function calculateSwap() {
+      const fromCurr = document.getElementById('swap-currency-from').value;
+      const toCurr = document.getElementById('swap-currency-to').value;
+      const amt = parseFloat(document.getElementById('swap-input-from').value) || 0;
+      const key = `${fromCurr}_${toCurr}`;
+      const rate = RATES[key] || 1.0;
+      const result = (amt * rate).toFixed(toCurr === 'BTC' ? 4 : (toCurr === 'SOL' ? 2 : 2));
+      const el = document.getElementById('swap-result-val');
+      if (el) el.textContent = result;
+    }
+
+    function setSwapAmount(val) {
+      document.getElementById('swap-input-from').value = val;
+      calculateSwap();
+    }
+
+    function executeInstantSwap() {
+      const fromCurr = document.getElementById('swap-currency-from').value;
+      const toCurr = document.getElementById('swap-currency-to').value;
+      const amt = document.getElementById('swap-input-from').value;
+      const res = document.getElementById('swap-result-val').textContent;
+      showToast(`✔ Успех: Обмен ${amt} ${fromCurr} на ${res} ${toCurr} выполнен мгновенно!`);
+    }
+
+    // Yield Slider & Curve
+    function updateYieldCalculation() {
+      const slider = document.getElementById('capital-slider');
+      const val = parseInt(slider.value, 10);
+      document.getElementById('slider-capital-display').textContent = `$${val.toLocaleString('en-US')}`;
+
+      const apyRate = 0.184;
+      const gain = val * apyRate;
+      document.getElementById('yield-apy-badge').innerHTML = `+$${gain.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} <span style="font-size: 14px; font-weight: 600;">(+18.4%)</span>`;
+
+      // Morph SVG curve based on capital
+      const norm = val / 1000000;
+      const endY = 80 - Math.round(norm * 65);
+      const midY = 95 - Math.round(norm * 45);
+      const fillD = `M 0 100 Q 400 ${midY} 800 ${endY} L 800 120 L 0 120 Z`;
+      const strokeD = `M 0 100 Q 400 ${midY} 800 ${endY}`;
+      document.getElementById('yield-fill-path').setAttribute('d', fillD);
+      document.getElementById('yield-stroke-path').setAttribute('d', strokeD);
+    }
+
+    // Live Stream Filters
+    function filterStream(type, btn) {
+      document.querySelectorAll('.table-header-bar .theme-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#live-trade-stream .stream-item').forEach(item => {
+        if (type === 'all' || item.getAttribute('data-type') === type) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    // FaceID Modal
+    function openFaceIdModal() {
+      document.getElementById('faceid-modal').classList.add('is-open');
+    }
+
+    function closeFaceIdModal() {
+      document.getElementById('faceid-modal').classList.remove('is-open');
+    }
+
+    function simulateFaceIdScan() {
+      const fill = document.getElementById('faceid-progress-fill');
+      fill.style.width = '100%';
+      setTimeout(() => {
+        closeFaceIdModal();
+        fill.style.width = '0%';
+        showToast('✔ Биометрия FaceID подтверждена: Доступ к институциональному пулу разблокирован');
+      }, 900);
+    }
+
+    // Initialize
+    calculateSwap();
+    updateYieldCalculation();
 
     function openModal() {
       document.getElementById('transfer-modal').classList.add('is-open');
@@ -378,8 +584,15 @@
     }
 
     function confirmTransfer() {
+      const amtInput = document.getElementById('transfer-amount-input');
+      const amt = parseFloat(amtInput?.value || '0');
+      if (isNaN(amt) || amt <= 0) {
+        showToast('Введите корректную сумму');
+        return;
+      }
+      currentBalance -= amt;
       closeModal();
-      showToast('Успех: Перевод $25,000.00 успешно отправлен в клиринг!');
+      showToast(`Успех: Перевод $${amt.toLocaleString('en-US')} отправлен в клиринг!`);
     }
   </script>
 </body>
