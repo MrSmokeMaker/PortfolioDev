@@ -1,723 +1,602 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru" class="scroll-smooth">
 <head>
-  <meta name="description" content="Портфолио Коровина Сергея – Senior UI/UX Engineer, Design Systems Architect. Showcase of premium interactive web projects with modern design, performance, and accessibility.">
-  <meta property="og:title" content="Коровин Сергей — Senior UI/UX Engineer">
-  <meta property="og:description" content="Эксклюзивное инженерное портфолио и дизайн-системы Коровина Сергея.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mrsmokemaker.github.io/PortfolioDev/">
-  <meta property="og:image" content="https://mrsmokemaker.github.io/PortfolioDev/assets/og-image.png">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Коровин Сергей — Senior UI/UX Engineer & Design Systems Architect</title>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Коровин Сергей",
-  "url": "https://mrsmokemaker.github.io/PortfolioDev/",
-  "sameAs": [
-    "https://github.com/MrSmokeMaker",
-    "https://www.linkedin.com/in/mrsmokemaker"
-  ],
-  "jobTitle": "Senior UI/UX Engineer & Lead Design Systems Architect",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Freelance"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "url": "https://mrsmokemaker.github.io/PortfolioDev/",
-  "name": "Коровин Сергей — Портфолио",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://mrsmokemaker.github.io/PortfolioDev/?s={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Коровин Сергей — Senior UI/UX Engineer">
-<meta name="twitter:description" content="Эксклюзивное инженерное портфолио Коровина Сергея.">
-<meta name="twitter:image" content="https://mrsmokemaker.github.io/PortfolioDev/assets/og-image.png">
-  <link rel="manifest" href="manifest.json">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
-  <meta name="theme-color" content="#0B0F19">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Alex Rivera // Developer & AI Vibe Coder Portfolio</title>
+  <meta name="description" content="Премиальное портфолио Full-Stack разработчика, AI-оркестратора и вайбкодера. Next.js, Supabase, TypeScript, Godot, LLM Agents.">
+  <meta name="keywords" content="вайбкодер, разработчик, portfolio, vibe coder, ai orchestration, next.js, supabase, godot, webgl, typescript">
+  <meta name="theme-color" content="#060911">
+  <meta property="og:title" content="Alex Rivera // Developer & AI Vibe Coder">
+  <meta property="og:description" content="Премиальное портфолио Full-Stack инженера и вайбкодера нового поколения.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Inter, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/tokens.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <link rel="stylesheet" href="assets/css/cyber-v2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
-<a href="#main-content" class="skip-link">Перейти к содержимому</a>
-<body class="hub-theme">
-  <div class="noise-overlay"></div>
+<body>
+  <!-- Ambient background glow layers -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+  
+  <!-- Interactive Canvas Constellation (Desktop only for 60fps & battery saving) -->
+  <canvas id="bg-canvas" class="bg-canvas" aria-hidden="true"></canvas>
 
-  <!-- 1. Floating Dynamic Island Navbar -->
-  <div class="hub-floating-dock-wrap">
-    <header class="hub-floating-dock" role="banner">
-      <div class="dock-brand">
-        <div class="dock-brand-avatar luxury-logo-icon" title="Коровин Сергей">
-          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="skDockGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#F59E0B"/>
-                <stop offset="50%" stop-color="#FCD34D"/>
-                <stop offset="100%" stop-color="#D97706"/>
-              </linearGradient>
-            </defs>
-            <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="#F59E0B" stroke-width="2" stroke-dasharray="6 4"/>
-            <rect x="20" y="20" width="60" height="60" rx="16" fill="#0B0F19" stroke="url(#skDockGold)" stroke-width="2"/>
-            <text x="50" y="59" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="26" fill="url(#skDockGold)" letter-spacing="0.5">SK</text>
-          </svg>
+  <!-- Desktop Header -->
+  <header class="desktop-header">
+    <div class="header-container glass-panel">
+      <a href="#home" class="brand-logo" data-nav="home">
+        <span class="logo-symbol">&lt;/&gt;</span>
+        <span class="logo-text">AR<span class="accent-dot">.</span>dev</span>
+        <span class="vibe-tag">vibe mode</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#home" class="nav-item active" data-nav="home">Главная</a>
+        <a href="#projects" class="nav-item" data-nav="projects">Проекты</a>
+        <a href="#stack" class="nav-item" data-nav="stack">Стек</a>
+        <a href="#about" class="nav-item" data-nav="about">Обо мне</a>
+        <a href="#contact" class="nav-item" data-nav="contact">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="status-indicator" title="Текущий статус разработчика">
+          <span class="status-dot pulse"></span>
+          <span class="status-text">Online &amp; Building</span>
         </div>
-        <span data-i18n="dev_name">Коровин Сергей</span>
+        <a href="#contact" class="btn btn-sm btn-primary" data-nav="contact">Связаться</a>
       </div>
+    </div>
+  </header>
 
-      <!-- Version & News Button (Opens Changelog Drawer) -->
-      <button class="dock-version-pill" onclick="toggleChangelog()" title="Открыть хронику обновлений и версий проекта">
-        <span class="status-pulse-dot"></span>
-        <span>v3.1 Live</span>
-        <span id="news-unread-dot" class="unread-news-badge" style="display: none;"></span>
-      </button>
+  <!-- Main View Container for SPA Pages -->
+  <main class="main-container">
 
-      <!-- Desktop Nav Links -->
-      <nav aria-label="Primary navigation"><ul class="dock-nav-links">
-        <li><a href="#projects" data-i18n="nav_projects">Проекты (6)</a></li>
-        <li><a href="#skills" data-i18n="nav_skills">Компетенции</a></li>
-        <li><a href="#estimator" data-i18n="nav_estimator">Оценка проекта</a></li>
-        <li><a href="#reviews" data-i18n="nav_reviews">Отзывы</a></li>
-      </ul>
-
-      <!-- Dock Action Tools -->
-      <div class="dock-actions-group">
-        <!-- Language Switcher (RU ⇄ EN) -->
-        <button class="dock-btn" id="lang-toggle-btn" onclick="toggleLanguage()" title="Переключить язык / Switch Language">
-          <span>RU</span>
-        </button>
-
-        <!-- Search / Command Palette (Cmd+K) -->
-        <button class="dock-btn" onclick="toggleCommandPalette()" title="Командная строка (Cmd+K / Ctrl+K)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <kbd>⌘K</kbd>
-        </button>
-
-        <!-- Sound FX Toggle -->
-        <button class="dock-btn icon-only" data-sound-toggle-btn onclick="toggleSound()" title="Звуки микро-взаимодействий">
-          <span class="sound-on-icon" style="display: none;">🔊</span>
-          <span class="sound-off-icon">🔇</span>
-        </button>
-
-        <!-- Theme Cycler (Light / Dark / OLED) -->
-        <button class="dock-btn icon-only" onclick="cycleTheme()" title="Сменить тему (Light / Dark / OLED)" aria-pressed="false">
-          <span data-theme-icon="light">☀️</span>
-          <span data-theme-icon="dark" style="display: none;">🌙</span>
-          <span data-theme-icon="oled" style="display: none;">⚡</span>
-        </button>
-
-        <!-- PWA Install Badge / Trigger -->
-        <button class="dock-btn pwa-badge-btn" id="pwa-install-btn" onclick="triggerPwaInstall()" title="Установить PWA приложение на рабочий стол">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          <span>PWA</span>
-        </button>
-
-        <!-- Direct Telegram QR Modal -->
-        <button class="dock-btn" style="background: var(--theme-accent); color: white; border-color: var(--theme-accent);" onclick="openTelegramModal()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          <span>Telegram</span>
-        </button>
-      </div>
-    </header>
-  </div>
-
-  <main id="main-content" role="main" class="mobbi-container">
-    <!-- 2. Hero Bento Section -->
-    <section class="hero-bento-grid">
-      <!-- Main Profile Card -->
-      <div class="hero-main-card" data-tilt data-tilt-max="3">
-        <!-- 3D Interactive WebGL Cyber-Core -->
-        <div class="hero-3d-canvas-wrap" title="3D Cyber-Core: перетаскивайте мышью или кликните">
-          <canvas id="hero-3d-canvas"></canvas>
-        </div>
-
-        <div>
-          <div class="hero-header-row">
-            <div class="hero-avatar-wrap">
-              <div class="luxury-sk-logo-hero" title="Коровин Сергей — SK Architectural Brand">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Логотип SK — Коровин Сергей">
-                  <defs>
-                    <linearGradient id="skHeroGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#F59E0B">
-                        <animate attributeName="stop-color" values="#F59E0B;#FCD34D;#10B981;#00F0FF;#F59E0B" dur="10s" repeatCount="indefinite" />
-                      </stop>
-                      <stop offset="50%" stop-color="#FFFBEB" />
-                      <stop offset="100%" stop-color="#D97706">
-                        <animate attributeName="stop-color" values="#D97706;#B45309;#059669;#0891B2;#D97706" dur="10s" repeatCount="indefinite" />
-                      </stop>
-                    </linearGradient>
-                    <linearGradient id="skHeroHaloGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="rgba(245, 158, 11, 0.8)"/>
-                      <stop offset="100%" stop-color="rgba(0, 240, 255, 0.3)"/>
-                    </linearGradient>
-                  </defs>
-                  <circle class="sk-orbit-halo" cx="50" cy="50" r="44" stroke="url(#skHeroHaloGrad)" stroke-width="1.2" stroke-dasharray="6 4"/>
-                  <rect x="18" y="18" width="64" height="64" rx="18" fill="rgba(11, 15, 25, 0.9)" stroke="url(#skHeroGoldGrad)" stroke-width="1.5"/>
-                  <text x="50" y="59" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="28" fill="url(#skHeroGoldGrad)" letter-spacing="0.5">SK</text>
-                  <circle cx="50" cy="50" r="2.2" fill="#FCD34D"/>
-                </svg>
-              </div>
-              <span class="hero-status-tag" title="Открыт к предложениям">●</span>
-            </div>
-            <div class="hero-titles">
-              <h1 data-i18n="dev_name">Коровин Сергей</h1>
-              <div class="hero-role-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-                <span data-i18n="hero_role">Фронтенд-разработчик & Инженер интерфейсов</span>
-              </div>
-              <p class="hero-bio" data-i18n="hero_bio">
-                Разрабатываю современные веб-приложения и дизайн-системы. Создаю удобные интерфейсы с понятной логикой, плавной работой на 60 FPS, чистым кодом и быстрой загрузкой без лишних зависимостей.
-              </p>
-            </div>
+    <!-- ==================== SECTION: HOME ==================== -->
+    <section id="section-home" class="page-section active">
+      <div class="hero-wrapper">
+        <div class="hero-content">
+          <div class="hero-badge glass-panel">
+            <span class="badge-icon">⚡</span>
+            <span>AI-Driven Software Architecture &amp; Creative Tech</span>
           </div>
 
-          <div class="hero-tags-row">
-            <span class="hero-tag">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              Mobbi Design Engine
-            </span>
-            <span class="hero-tag">3D WebGL & Canvas</span>
-            <span class="hero-tag">Web Audio API</span>
-            <span class="hero-tag">Zero-deps Vanilla</span>
-          </div>
-        </div>
+          <h1 class="hero-title">
+            Архитектура кода.<br>
+            <span class="gradient-text">Вайб созидания.</span><br>
+            Сила ИИ-агентов.
+          </h1>
 
-        <div class="hero-cta-group">
-          <a href="#projects" class="btn-primary-action">
-            <span data-i18n="hero_explore">Исследовать 6 проектов</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <button class="btn-secondary-action" onclick="openTelegramModal()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="3" height="3"/><rect x="14" y="7" width="3" height="3"/><rect x="7" y="14" width="3" height="3"/></svg>
-            <span data-i18n="hero_qr_btn">Показать QR Telegram</span>
-          </button>
-          <button class="btn-secondary-action" onclick="toggleChangelog()">
-            <span data-i18n="hero_versions_btn">Хроника версий v3.1</span>
-          </button>
-        </div>
-      </div>
+          <p class="hero-description">
+            Создаю сверхбыстрые веб-сервисы, иммерсивные игры и мультиагентные ИИ-пайплайны. Объединяю глубокую инженерную дисциплину и современный вайбкодинг для запуска продуктов за дни, а не месяцы.
+          </p>
 
-      <!-- Hero Side Telemetry Card -->
-      <aside class="hero-telemetry-card" data-tilt data-tilt-max="4">
-        <div>
-          <div class="telemetry-card-title">
-            <span>Системная телеметрия</span>
-            <span class="status-pulse-dot"></span>
-          </div>
-
-          <div class="telemetry-items-stack">
-            <div class="telemetry-row">
-              <span class="telemetry-label">Google Lighthouse</span>
-              <span class="telemetry-val green">100 / 100</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="telemetry-label">Скорость первого кадра (LCP)</span>
-              <span class="telemetry-val accent">&lt; 0.72 s</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="telemetry-label">Частота интерфейса</span>
-              <span class="telemetry-val green">60 FPS Hardware</span>
-            </div>
-            <div class="telemetry-row">
-              <span class="telemetry-label">Сторонние библиотеки</span>
-              <span class="telemetry-val">0 KB (Pure Vanilla)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick Telegram Banner -->
-        <div class="telegram-quick-box" onclick="openTelegramModal()">
-          <div style="width: 36px; height: 36px; border-radius: 50%; background: #2563EB; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </div>
-          <div>
-            <div style="font-size: 13px; font-weight: 700; color: var(--theme-text);">Telegram: +7 (939) 474-89-99</div>
-            <div style="font-size: 12px; color: var(--theme-text-muted);">Кликните для открытия QR-кода</div>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <!-- 3. Key Achievements Banner -->
-    <section class="metrics-row">
-      <div class="metric-pill-card" data-tilt data-tilt-max="4">
-        <div class="metric-number tabular-nums">99.98%</div>
-        <div class="metric-desc">Uptime в высоконагруженных сервисах с аудиторией более 2.4 млн MAU</div>
-      </div>
-      <div class="metric-pill-card" data-tilt data-tilt-max="4">
-        <div class="metric-number tabular-nums" style="color: var(--theme-accent);">&lt; 0.8s</div>
-        <div class="metric-desc">Средний LCP на всех промо-сайтах портфолио без сторонних бандлеров</div>
-      </div>
-      <div class="metric-pill-card" data-tilt data-tilt-max="4">
-        <div class="metric-number tabular-nums">6 кейсов</div>
-        <div class="metric-desc">Разноплановых полнофункциональных веб-приложений и промо-экосистем</div>
-      </div>
-      <div class="metric-pill-card" data-tilt data-tilt-max="4">
-        <div class="metric-number tabular-nums">40+ токенов</div>
-        <div class="metric-desc">Переиспользуемых дизайн-токенов в единой масштабируемой системе Mobbi</div>
-      </div>
-    </section>
-
-    <!-- 4. Projects Showcase (6 Showcase Cards + Category Tabs + Device Preview) -->
-    <section id="projects" style="margin-bottom: var(--space-16);">
-      <div class="showcase-header">
-        <div class="showcase-title-wrap">
-          <h2>Избранные проекты экосистемы</h2>
-          <p>6 архитектурных направлений: от финтеха и медтеха до Web Audio синтезаторов</p>
-        </div>
-
-        <!-- Filter Category Tabs -->
-        <div class="filter-pills-wrap">
-          <button class="filter-pill-btn active" onclick="filterProjectsCategory('all', this)">Все (6)</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('edtech', this)">⭐ EdTech & AI</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('fintech', this)">Финтех</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('saas', this)">AI & SaaS</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('store', this)">Интернет-магазин</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('audio', this)">Web Audio</button>
-          <button class="filter-pill-btn" onclick="filterProjectsCategory('art', this)">Галерея</button>
-        </div>
-      </div>
-
-      <div class="projects-grid">
-
-        <!-- Project 1: METODIST (Flagship AI EdTech) -->
-        <article class="project-card-full" data-project-cat="edtech" data-tilt data-tilt-max="3" style="border: 1px solid rgba(124, 92, 255, 0.4); box-shadow: 0 10px 40px rgba(124, 92, 255, 0.12);">
-          <div class="project-visual-side" style="background: radial-gradient(circle at 30% 30%, rgba(124, 92, 255, 0.3) 0%, #0D0F14 70%);">
-            <span class="project-live-indicator-tag" style="background: rgba(124, 92, 255, 0.85); color: #FFFFFF; font-weight: 700;">
-              <span class="status-pulse-dot" style="background: #FFFFFF;"></span>
-              ⭐ ФЛАГМАНСКИЙ ПРОДУКТ
-            </span>
-            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Методист — AI Lesson Planner" loading="eager">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #A78BFA; font-weight: 700;">EdTech & YandexGPT Prompt Engine</div>
-              <h3 class="project-name">Методист — Генератор конспектов уроков на базе YandexGPT</h3>
-              <p class="project-summary">
-                Интеллектуальная PWA-система на Flutter Web для педагогов и методистов. Автоматизирует проектирование технологических карт занятий, распределение заданий по таксономии Блума, формулировку дидактических целей и интерактивный практикум с мгновенным экспортом.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill" style="border-color: rgba(124, 92, 255, 0.4); color: #C4B5FD;">Flutter Web & PWA</span>
-                <span class="tech-tag-pill">YandexGPT AI Chains</span>
-                <span class="tech-tag-pill">Таксономия Блума</span>
-                <span class="tech-tag-pill">ФГОС Дидактика</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="https://mrsmokemaker.github.io/annmetodist/" target="_blank" rel="noopener noreferrer" class="btn-open-site" style="background: linear-gradient(135deg, #7C5CFF, #6366F1); border-color: #A78BFA; font-weight: 700;">
-                🚀 Открыть приложение (Live) ↗
-              </a>
-              <a href="metodist.html" class="btn-quick-preview" style="text-decoration: none; border-color: rgba(124, 92, 255, 0.35);">
-                💎 Интерактивное демо →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('metodist.html', 'Методист — Генератор уроков YandexGPT')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: VERTEX Capital (Fintech) -->
-        <article class="project-card-full" data-project-cat="fintech" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #0B1120;">
-            <span class="project-live-indicator-tag">
-              <span class="status-pulse-dot" style="background: #3B82F6;"></span>
-              Live Data-Heavy
-            </span>
-            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="VERTEX Capital" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #3B82F6;">Финтех & Институциональный клиринг</div>
-              <h3 class="project-name">VERTEX Capital — Портал институционального фонда</h3>
-              <p class="project-summary">
-                Плотный интерфейс с максимальной читаемостью данных. Сплит-архитектура, живой график доходности на динамическом SVG с переключением периодов, моноширинные таблицы клиринга и интерактивное окно списания.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Tabular Figures</span>
-                <span class="tech-tag-pill">SVG Dynamic Charts</span>
-                <span class="tech-tag-pill">Wire Transfer PIN 2FA</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="fintech.html" class="btn-open-site" style="background: linear-gradient(135deg, #0284C7, #2563EB); border-color: #38BDF8;">
-                Открыть проект →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('fintech.html', 'VERTEX Terminal')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: NEXUS AI (SaaS) -->
-        <article class="project-card-full" data-project-cat="saas" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #141418;">
-            <span class="project-live-indicator-tag">
-              <span class="status-pulse-dot" style="background: #86EF6B;"></span>
-              Dark Bento Grid
-            </span>
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="NEXUS AI" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #86EF6B;">SaaS Платформа мультиагентных систем</div>
-              <h3 class="project-name">NEXUS AI — Высоконагруженная оркестрация агентов</h3>
-              <p class="project-summary">
-                Темная тема в антрацитовых тонах с лаймовым неоном. Модульная Bento Grid сетка со спотлайтом за курсором мыши, интерактивная CLI-консоль команд (benchmark, deploy, status) и калькулятор цен.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Interactive CLI Terminal</span>
-                <span class="tech-tag-pill">Spotlight Mesh Glow</span>
-                <span class="tech-tag-pill">Sub-ms Latency</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="saas.html" class="btn-open-site" style="background: linear-gradient(135deg, #059669, #10B981); border-color: #34D399;">
-                Открыть проект →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('saas.html', 'NEXUS Studio')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: KINETIC Concept Store (E-Commerce) -->
-        <article class="project-card-full" data-project-cat="store" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #0B0E17;">
-            <span class="project-live-indicator-tag">
-              <span class="status-pulse-dot" style="background: #3B82F6;"></span>
-              Figma & Mobbi Store
-            </span>
-            <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=1200&q=80" alt="KINETIC Goods Store" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #60A5FA;">E-Commerce & Figma Design System</div>
-              <h3 class="project-name">KINETIC Store — Концепт-стор акустики и сетапа</h3>
-              <p class="project-summary">
-                Премиальный интернет-магазин дизайнерских гаджетов и акустических объектов. Интерактивный каталог товаров с живым поиском и сортировкой, переключение цветовых вариантов, слайд-овер корзина (Cart Drawer) с промокодами, быстрый просмотр и трекинг посылки по номеру заказа.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Slide-out Cart Drawer</span>
-                <span class="tech-tag-pill">Mobbi Design Tokens</span>
-                <span class="tech-tag-pill">Dynamic Swatches</span>
-                <span class="tech-tag-pill">Parcel Tracking</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="store.html" class="btn-open-site" style="background: linear-gradient(135deg, #2563EB, #1D4ED8); border-color: #3B82F6;">
-                Открыть магазин →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('store.html', 'KINETIC Concept Store')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 5: AETHER (Web Audio Synth Lab) -->
-        <article class="project-card-full" data-project-cat="audio" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #0A0A0E;">
-            <span class="project-live-indicator-tag">
-              <span class="status-pulse-dot" style="background: #A855F7;"></span>
-              Web Audio API Engine
-            </span>
-            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=80" alt="AETHER Synth Lab" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #A855F7;">Синтез звука & Пространственное аудио</div>
-              <h3 class="project-name">AETHER — Spatial Audio & Полифонический синтезатор</h3>
-              <p class="project-summary">
-                Реальный браузерный звуковой движок на чистом Web Audio API: 8 интерактивных клавиш, выбор форм волны (Sine, Triangle, Sawtooth, Square), живой спектрограф на Canvas, вращающийся 3D-винил и 2D-радар бинауральной стерео-панорамы.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Web Audio API Synth</span>
-                <span class="tech-tag-pill">Canvas FFT Spectrum</span>
-                <span class="tech-tag-pill">Binaural 2D Pan</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="audio.html" class="btn-open-site" style="background: linear-gradient(135deg, #7C3AED, #A855F7); border-color: #C084FC;">
-                Открыть проект →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('audio.html', 'AETHER Workstation')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 6: LUMEN Gallery (Editorial Art) -->
-        <article class="project-card-full" data-project-cat="art" data-tilt data-tilt-max="3">
-          <div class="project-visual-side" style="background: #F5F5F5;">
-            <span class="project-live-indicator-tag" style="background: rgba(44, 44, 44, 0.85);">
-              <span class="status-pulse-dot" style="background: #D94E3A;"></span>
-              Editorial Minimal
-            </span>
-            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="LUMEN Gallery" loading="lazy">
-            <div class="project-visual-overlay"></div>
-          </div>
-          <div class="project-content-side">
-            <div>
-              <div class="project-style-badge" style="color: #D94E3A;">Арт-экспозиция & Эдиториал фотография</div>
-              <h3 class="project-name">LUMEN Gallery — Онлайн-архив световой фотографии</h3>
-              <p class="project-summary">
-                Асимметричная 12-колоночная сетка, расширенные поля, кастомный Scroll-driven параллакс первого экрана, Masonry-галерея с зумом в кинематографичный Lightbox с реальными метаданными EXIF и переключателем освещения залов.
-              </p>
-              <div class="project-tech-tags">
-                <span class="tech-tag-pill">Scroll-driven Parallax</span>
-                <span class="tech-tag-pill">Lightbox EXIF Data</span>
-                <span class="tech-tag-pill">Gallery Lighting Mode</span>
-              </div>
-            </div>
-            <div class="project-actions-row" style="flex-wrap: wrap; gap: 8px;">
-              <a href="gallery.html" class="btn-open-site" style="background: linear-gradient(135deg, #C2410C, #EA580C); border-color: #FB923C;">
-                Открыть проект →
-              </a>
-              <button class="btn-quick-preview" onclick="openDevicePreview('gallery.html', 'LUMEN Salon')" title="Device Preview">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                Превью
-              </button>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- 5. Interactive Skills & Architecture Radar Matrix -->
-    <section id="skills" class="skills-matrix-section">
-      <div style="margin-bottom: var(--space-6);">
-        <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -0.02em;">Матрица инженерных компетенций</h2>
-        <p style="color: var(--theme-text-muted); font-size: 15px; margin-top: 4px;">Глубокая экспертиза в проектировании высоконагруженных интерфейсов</p>
-      </div>
-
-      <div class="skills-matrix-grid">
-        <div class="skills-matrix-card">
-          <div class="matrix-card-icon">⚡</div>
-          <h3 class="matrix-card-title">Core Frontend</h3>
-          <p class="matrix-card-desc">Vanilla JS ES2026, TypeScript, Web Components, DOM Diffing, Reactive Architecture.</p>
-          <div class="matrix-skills-list">
-            <div class="matrix-skill-item"><span>HTML5 / Semantic A11y</span><span class="matrix-skill-level">100%</span></div>
-            <div class="matrix-skill-item"><span>Modern JS (ESNext)</span><span class="matrix-skill-level">98%</span></div>
-            <div class="matrix-skill-item"><span>State Machines (XState)</span><span class="matrix-skill-level">94%</span></div>
-          </div>
-        </div>
-
-        <div class="skills-matrix-card">
-          <div class="matrix-card-icon">🎨</div>
-          <h3 class="matrix-card-title">Motion & Canvas</h3>
-          <p class="matrix-card-desc">CSS3 Compositor Motion, HTML5 Canvas 60 FPS, Web Audio API, SVG Data Viz.</p>
-          <div class="matrix-skills-list">
-            <div class="matrix-skill-item"><span>Scroll-driven Animations</span><span class="matrix-skill-level">99%</span></div>
-            <div class="matrix-skill-item"><span>Canvas Real-Time 60FPS</span><span class="matrix-skill-level">96%</span></div>
-            <div class="matrix-skill-item"><span>Web Audio Synthesizer</span><span class="matrix-skill-level">92%</span></div>
-          </div>
-        </div>
-
-        <div class="skills-matrix-card">
-          <div class="matrix-card-icon">📐</div>
-          <h3 class="matrix-card-title">Design Systems</h3>
-          <p class="matrix-card-desc">Mobbi 8pt Grid, Token Architecture, Multi-Theme (Dark/OLED), Component Libraries.</p>
-          <div class="matrix-skills-list">
-            <div class="matrix-skill-item"><span>CSS Custom Properties</span><span class="matrix-skill-level">100%</span></div>
-            <div class="matrix-skill-item"><span>Figma Code Connect</span><span class="matrix-skill-level">95%</span></div>
-            <div class="matrix-skill-item"><span>Design Token Pipelines</span><span class="matrix-skill-level">97%</span></div>
-          </div>
-        </div>
-
-        <div class="skills-matrix-card">
-          <div class="matrix-card-icon">🛡️</div>
-          <h3 class="matrix-card-title">Performance & CWV</h3>
-          <p class="matrix-card-desc">Sub-second LCP, zero layout shifts (CLS 0), WCAG AAA accessibility, Edge deploy.</p>
-          <div class="matrix-skills-list">
-            <div class="matrix-skill-item"><span>Core Web Vitals Audit</span><span class="matrix-skill-level">99%</span></div>
-            <div class="matrix-skill-item"><span>GitHub Actions CI/CD</span><span class="matrix-skill-level">96%</span></div>
-            <div class="matrix-skill-item"><span>Memory Profiling</span><span class="matrix-skill-level">93%</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Interactive Project Scope Estimator -->
-    <section id="estimator">
-      <div class="estimator-card">
-        <div class="estimator-controls-side">
-          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--theme-accent); margin-bottom: 4px;">Калькулятор разработки</div>
-          <h3>Интерактивная оценка скоупа проекта</h3>
-          <p>Рассчитайте примерный диапазон сроков и бюджета для создания кастомного интерфейса или дизайн-системы.</p>
-
-          <div class="est-slider-wrap">
-            <div class="est-slider-header">
-              <span>Количество ключевых экранов / шаблонов:</span>
-              <strong id="est-screens-val" class="tabular-nums" style="color: var(--theme-accent);">1 экран (MVP / Лендинг)</strong>
-            </div>
-            <input type="range" id="est-screens-range" class="est-range-input" min="1" max="15" value="1" oninput="updateProjectEstimator()">
-          </div>
-
-          <div style="font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--theme-text);">Дополнительные инженерные модули:</div>
-          <div class="est-options-grid">
-            <label class="est-option-label">
-              <input type="checkbox" id="est-opt-ds" onchange="updateProjectEstimator()">
-              <span>Дизайн-система & Токены (+25 000 ₽)</span>
-            </label>
-            <label class="est-option-label">
-              <input type="checkbox" id="est-opt-motion" onchange="updateProjectEstimator()">
-              <span>3D Motion / Canvas (+20 000 ₽)</span>
-            </label>
-            <label class="est-option-label">
-              <input type="checkbox" id="est-opt-backend" onchange="updateProjectEstimator()">
-              <span>Интеграция API / WebSockets (+30 000 ₽)</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="estimator-result-side">
-          <div>
-            <div class="est-result-badge">Ориентировочный бюджет</div>
-            <div id="est-result-budget" class="est-result-val tabular-nums">от 50 000 ₽</div>
-            <div style="font-size: 13px; color: var(--theme-text-muted); margin-bottom: 4px;">Сроки реализации под ключ:</div>
-            <div id="est-result-timeline" class="est-result-timeline">5–7 рабочих дней</div>
-          </div>
-
-          <button class="btn-primary-action" style="width: 100%; justify-content: center;" onclick="openTelegramModal()">
-            Обсудить ТЗ в Telegram →
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. Interactive Guestbook & Peer Reviews -->
-    <section id="reviews" class="guestbook-section">
-      <div class="guestbook-card">
-        <div class="guestbook-header">
-          <div>
-            <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--theme-accent); margin-bottom: 4px;" data-i18n="guestbook_badge">
-              Обратная связь & Репутация
-            </div>
-            <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--theme-text);" data-i18n="guestbook_title">
-              Оценка проектов & Отзывы коллег
-            </h2>
-            <p style="font-size: 15px; color: var(--theme-text-muted); margin-top: 4px;" data-i18n="guestbook_desc">
-              Оцените технический уровень, архитектуру и дизайн портфолио. Ваша оценка сохраняется в реальном времени.
-            </p>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 12px; color: var(--theme-text-muted);" data-i18n="guestbook_score_lbl">Средняя оценка коллег:</div>
-            <div id="reviews-avg-rating" class="tabular-nums" style="font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #F59E0B;">
-              4.98 ★
-            </div>
-          </div>
-        </div>
-
-        <div class="reviews-grid">
-          <!-- Submission Form -->
-          <div class="review-form-box">
-            <h3 style="font-size: 17px; font-weight: 700; margin-bottom: 14px; color: var(--theme-text);">Оставить экспертную оценку</h3>
-            <form id="review-form" onsubmit="submitGuestbookReview(event)">
-              <div class="review-form-group">
-                <label>Ваше имя / Никнейм:</label>
-                <input type="text" id="review-input-name" class="review-form-input" placeholder="Например: Иван (Tech Lead)" required>
-              </div>
-              <div class="review-form-group">
-                <label>Ваша роль или компания:</label>
-                <input type="text" id="review-input-role" class="review-form-input" placeholder="Например: Senior Frontend Engineer">
-              </div>
-              <div class="review-form-group">
-                <label>Оценка портфолио:</label>
-                <select id="review-input-rating" class="review-form-select">
-                  <option value="5">★★★★★ 5.0 (Исключительный уровень)</option>
-                  <option value="4">★★★★☆ 4.0 (Отлично)</option>
-                  <option value="3">★★★☆☆ 3.0 (Хорошо)</option>
-                </select>
-              </div>
-              <div class="review-form-group">
-                <label>Ваш отзыв / Впечатления:</label>
-                <textarea id="review-input-comment" class="review-form-textarea" rows="3" placeholder="Что впечатлило больше всего (MedTech 60FPS Canvas, Web Audio API, Device Preview, Bento Grid)..." required></textarea>
-              </div>
-              <button type="submit" class="btn-primary-action" style="width: 100%; justify-content: center;" data-i18n="guestbook_submit_btn">
-                Оставить отзыв
-              </button>
-            </form>
-          </div>
-
-          <!-- Reviews Live Feed -->
-          <div class="reviews-feed-column" id="reviews-feed-container">
-            <!-- Rendered by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 8. Footer Availability & Contacts -->
-    <footer id="contact" class="hub-footer">
-      <main id="main-content" role="main" class="mobbi-container">
-        <div class="hub-footer-content">
-          <div>
-            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; color: var(--theme-text);">
-              <span class="status-pulse-dot"></span>
-              <span data-i18n="footer_status">Статус: Открыт к интересным предложениям</span>
-            </div>
-            <div style="font-size: 13px; color: var(--theme-text-muted); margin-top: 4px;">
-              Senior UI/UX Engineer · Lead Frontend Architect · <strong>Коровин Сергей</strong>
-            </div>
-          </div>
-
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="contact-pill-btn" onclick="openTelegramModal()">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Telegram (+7 939 474-89-99)
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-primary" data-nav="projects">
+              <span>Смотреть проекты</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary glass-panel" data-nav="contact">
+              <span>Обсудить задачу</span>
+            </a>
+            <button class="btn btn-ghost copy-email-btn" data-email="alex.rivera.dev@gmail.com" title="Скопировать email">
+              <span class="btn-icon">📋</span>
+              <span class="copy-text">alex.rivera.dev@gmail.com</span>
             </button>
-            <button class="contact-pill-btn" onclick="copyContact('alexey.dev.romanov@gmail.com')">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <span data-i18n="footer_copy_email">Скопировать Email</span>
+          </div>
+
+          <!-- Current Live Status Card -->
+          <div class="current-status-card glass-panel">
+            <div class="status-header">
+              <div class="live-pulse-container">
+                <span class="live-dot"></span>
+                <span class="status-title">Live Activity</span>
+              </div>
+              <span class="mono-tag">UTC+3 · Active</span>
+            </div>
+            <div class="status-body">
+              <div class="status-row">
+                <span class="status-label">🛠 Текущий спринт:</span>
+                <span class="status-value highlight">Автономный оркестратор задач на базе Gemini 3.8 &amp; Supabase Vector</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">🎧 Вайб-треклист:</span>
+                <span class="status-value">Synthwave &amp; Ambient Lo-Fi (Coding Flow 128 BPM)</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">🚀 Доступность:</span>
+                <span class="status-value text-emerald">Открыт к амбициозным проектам и консалтингу</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Interactive Object: Desktop Terminal vs Mobile Visual Card -->
+        <div class="hero-interactive">
+          <!-- Desktop Interactive Terminal -->
+          <div class="terminal-container glass-panel desktop-only" id="interactive-terminal">
+            <div class="terminal-header">
+              <div class="window-controls">
+                <span class="ctrl-dot red"></span>
+                <span class="ctrl-dot yellow"></span>
+                <span class="ctrl-dot green"></span>
+              </div>
+              <div class="terminal-title">bash — rivera@quantum-macbook:~</div>
+              <div class="terminal-badge">interactive v2.4</div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+              <div class="term-line info-text">Добро пожаловать в командную консоль разработчика.</div>
+              <div class="term-line info-dim">Введите <span class="term-cmd-hint" data-cmd="help">help</span> для списка доступных команд или кликайте по подсказкам ниже.</div>
+              <div class="term-quick-chips">
+                <button class="quick-chip" data-cmd="help">help</button>
+                <button class="quick-chip" data-cmd="skills">skills</button>
+                <button class="quick-chip" data-cmd="projects">projects</button>
+                <button class="quick-chip" data-cmd="whoami">whoami</button>
+                <button class="quick-chip" data-cmd="clear">clear</button>
+              </div>
+            </div>
+            <div class="terminal-input-row">
+              <span class="term-prompt">user@portfolio:~$</span>
+              <input type="text" id="terminal-input" class="term-input" placeholder="Type command..." autocomplete="off" spellcheck="false">
+            </div>
+          </div>
+
+          <!-- Mobile Hero Visual Object (Ultra-light, responsive & battery friendly) -->
+          <div class="mobile-visual-card glass-panel mobile-only">
+            <div class="mobile-card-header">
+              <div class="window-controls">
+                <span class="ctrl-dot red"></span>
+                <span class="ctrl-dot yellow"></span>
+                <span class="ctrl-dot green"></span>
+              </div>
+              <div class="mobile-card-title">vibe-stream // active</div>
+            </div>
+            <div class="mobile-simulated-terminal">
+              <div class="code-stream">
+                <span class="code-keyword">const</span> <span class="code-var">developer</span> = {<br>
+                &nbsp;&nbsp;role: <span class="code-str">"AI Vibe Coder &amp; Architect"</span>,<br>
+                &nbsp;&nbsp;stack: [<span class="code-str">"Next.js"</span>, <span class="code-str">"Supabase"</span>, <span class="code-str">"Godot"</span>],<br>
+                &nbsp;&nbsp;mindset: <span class="code-str">"Ship high quality, move at lightspeed"</span>,<br>
+                &nbsp;&nbsp;status: <span class="code-num">200_OK</span><br>
+                };<br>
+                <span class="code-comment">// 🚀 15+ коммерческих проектов запущены</span>
+              </div>
+              <div class="mobile-action-bar">
+                <a href="#projects" class="btn btn-sm btn-primary w-full" data-nav="projects">Исследовать Bento-проекты</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Ribbon -->
+      <div class="metrics-grid">
+        <div class="metric-card glass-panel">
+          <div class="metric-number gradient-text">8+</div>
+          <div class="metric-label">Лет в коммерческой разработке</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-number gradient-text">35+</div>
+          <div class="metric-label">Запущенных Web &amp; AI проектов</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-number gradient-text">99.9%</div>
+          <div class="metric-label">Uptime &amp; High-load архитектуры</div>
+        </div>
+        <div class="metric-card glass-panel">
+          <div class="metric-number gradient-text">10x</div>
+          <div class="metric-label">Ускорение разработки через Вайбкодинг</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: PROJECTS ==================== -->
+    <section id="section-projects" class="page-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Избранные кейсы</div>
+        <h2 class="section-title">Инновационные проекты &amp; Bento Grid</h2>
+        <p class="section-subtitle">
+          Реальные цифровые продукты с продуманной бизнес-логикой, масштабируемой архитектурой и безупречным интерфейсом.
+        </p>
+
+        <!-- Category Filters -->
+        <div class="filters-bar glass-panel">
+          <button class="filter-btn active" data-filter="all">Все проекты <span class="filter-count">(6)</span></button>
+          <button class="filter-btn" data-filter="web">Web &amp; SaaS <span class="filter-count">(3)</span></button>
+          <button class="filter-btn" data-filter="ai">AI &amp; Agents <span class="filter-count">(2)</span></button>
+          <button class="filter-btn" data-filter="gamedev">GameDev &amp; 3D <span class="filter-count">(1)</span></button>
+        </div>
+      </div>
+
+      <!-- Bento Grid of Projects -->
+      <div class="bento-grid" id="projects-bento-grid">
+        <!-- Dynamically rendered or statically augmented cards with rich data attributes -->
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: STACK ==================== -->
+    <section id="section-stack" class="page-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Технологический арсенал</div>
+        <h2 class="section-title">Стек технологий &amp; Экспертиза</h2>
+        <p class="section-subtitle">
+          Сочетание передовых web-технологий, облачной инфраструктуры и нейросетевых агентов для реализации задач любой сложности.
+        </p>
+      </div>
+
+      <div class="stack-categories-grid">
+        <!-- Category 1: AI & LLM Orchestration -->
+        <div class="stack-card glass-panel">
+          <div class="stack-card-header">
+            <span class="category-icon">🧠</span>
+            <div>
+              <h3 class="category-title">AI &amp; Мультиагентные системы</h3>
+              <p class="category-desc">Оркестрация LLM, контекстный RAG и автономные агенты</p>
+            </div>
+          </div>
+          <div class="skill-chips-list">
+            <div class="skill-item">
+              <span class="skill-name">Gemini API &amp; SDK (3.8 Live)</span>
+              <span class="skill-badge badge-master">Expert</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">LangChain / LlamaIndex</span>
+              <span class="skill-badge badge-master">Advanced</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Supabase pgvector (RAG)</span>
+              <span class="skill-badge badge-master">Production</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">MCP Protocol &amp; Custom Tooling</span>
+              <span class="skill-badge badge-master">Active</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Prompt Engineering &amp; Fine-Tuning</span>
+              <span class="skill-badge badge-master">Specialist</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 2: Modern Frontend & UI -->
+        <div class="stack-card glass-panel">
+          <div class="stack-card-header">
+            <span class="category-icon">⚡</span>
+            <div>
+              <h3 class="category-title">Frontend &amp; Creative Web</h3>
+              <p class="category-desc">Реактивные интерфейсы, дизайн-системы и 60 FPS графика</p>
+            </div>
+          </div>
+          <div class="skill-chips-list">
+            <div class="skill-item">
+              <span class="skill-name">Next.js 15 &amp; React Server Components</span>
+              <span class="skill-badge badge-master">Core</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">TypeScript (Strict Mode)</span>
+              <span class="skill-badge badge-master">Daily</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Tailwind CSS &amp; Modern CSS/PostCSS</span>
+              <span class="skill-badge badge-master">Pro</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Canvas API, Three.js &amp; Shaders</span>
+              <span class="skill-badge badge-master">Visuals</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Framer Motion &amp; Micro-animations</span>
+              <span class="skill-badge badge-master">UX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 3: Backend & Database -->
+        <div class="stack-card glass-panel">
+          <div class="stack-card-header">
+            <span class="category-icon">🛡</span>
+            <div>
+              <h3 class="category-title">Backend, Data &amp; Cloud</h3>
+              <p class="category-desc">Масштабируемые базы данных, Serverless и API шлюзы</p>
+            </div>
+          </div>
+          <div class="skill-chips-list">
+            <div class="skill-item">
+              <span class="skill-name">Node.js / Bun runtime</span>
+              <span class="skill-badge badge-master">Fast</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Supabase (PostgreSQL, Auth, Edge Functions)</span>
+              <span class="skill-badge badge-master">Production</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">RESTful &amp; GraphQL API Architecture</span>
+              <span class="skill-badge badge-master">Design</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Redis Caching &amp; Upstash</span>
+              <span class="skill-badge badge-master">Low Latency</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Docker, CI/CD, GitHub Actions</span>
+              <span class="skill-badge badge-master">DevOps</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category 4: GameDev & Creative Tech -->
+        <div class="stack-card glass-panel">
+          <div class="stack-card-header">
+            <span class="category-icon">🎮</span>
+            <div>
+              <h3 class="category-title">GameDev &amp; Interactive Media</h3>
+              <p class="category-desc">Создание 2D/3D механик, прототипов и интерактивных симуляций</p>
+            </div>
+          </div>
+          <div class="skill-chips-list">
+            <div class="skill-item">
+              <span class="skill-name">Godot 4 Engine (GDScript / C#)</span>
+              <span class="skill-badge badge-master">2D / 3D</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">WebAudio API &amp; Procedural Sound</span>
+              <span class="skill-badge badge-master">Sound</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Physics Simulation &amp; Particle Systems</span>
+              <span class="skill-badge badge-master">Visual</span>
+            </div>
+            <div class="skill-item">
+              <span class="skill-name">Game Loop Optimization (Mobile/Web)</span>
+              <span class="skill-badge badge-master">60 FPS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: ABOUT ==================== -->
+    <section id="section-about" class="page-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Философия &amp; Путь</div>
+        <h2 class="section-title">Обо мне: Инженер + Вайбкодер</h2>
+        <p class="section-subtitle">
+          Как классическая школа разработки соединяется с революцией генеративного интеллекта.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card glass-panel highlight-box">
+          <div class="about-tag">Концепция Vibe Coding</div>
+          <h3 class="about-h3">Что такое современный вайбкодинг в моем исполнении?</h3>
+          <p class="about-text">
+            Это не отказ от понимания кода, а <strong>радикальная максимизация рычага мысли</strong>. Я управляю армией ИИ-агентов как дирижер оркестра: задаю архитектурные ограничения, проектирую схемы баз данных и логику безопасности, в то время как монотонную рутину берут на себя контекстные модели.
+          </p>
+          <p class="about-text">
+            Результат: продуктовые фичи, которые раньше требовали команды из трёх человек на месяц, релизятся за считанные дни с 100% покрытием тестами и чистейшей архитектурой.
+          </p>
+        </div>
+
+        <div class="about-card glass-panel">
+          <h3 class="about-h3">Ключевые принципы работы</h3>
+          <ul class="principles-list">
+            <li>
+              <span class="list-bullet">✦</span>
+              <div>
+                <strong>Zero Bloat, High Performance:</strong> Никаких избыточных тяжелых библиотек без необходимости. Каждая миллисекунда загрузки имеет значение.
+              </div>
+            </li>
+            <li>
+              <span class="list-bullet">✦</span>
+              <div>
+                <strong>Человеко-центричный UI/UX:</strong> Анимации должны ощущаться физически осязаемыми, кликабельные элементы быть предсказуемыми, а визуальный стиль — вызывать эмоцию.
+              </div>
+            </li>
+            <li>
+              <span class="list-bullet">✦</span>
+              <div>
+                <strong>Продуктовое мышление:</strong> Код пишется не ради кода, а ради решения бизнес-задач заказчика и восторга конечных пользователей.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Timeline of Milestones -->
+      <div class="milestones-section glass-panel">
+        <h3 class="milestones-title">Хроника ключевых этапов</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2026</div>
+            <div class="timeline-content">
+              <h4>Мультиагентные системы &amp; Автономные продукты</h4>
+              <p>Создание автономных RAG-решений, кастомных MCP серверов и интеграция LLM в высоконагруженные веб-приложения.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2024–2025</div>
+            <div class="timeline-content">
+              <h4>Full-Stack &amp; Next.js 14/15 Архитектура</h4>
+              <p>Разработка SaaS-платформ, дашбордов для аналитики и FinTech сервисов с микросервисной инфраструктурой Supabase.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2022–2023</div>
+            <div class="timeline-content">
+              <h4>Интерактивный Web &amp; GameDev</h4>
+              <p>Запуск игровых проектов на Godot Engine, эксперименты с WebGL, Three.js и оптимизация рендеринга на мобильных устройствах.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION: CONTACT ==================== -->
+    <section id="section-contact" class="page-section">
+      <div class="section-header">
+        <div class="section-eyebrow">Давайте создавать будущее</div>
+        <h2 class="section-title">Связаться со мной</h2>
+        <p class="section-subtitle">
+          Есть идея для стартапа, требуется архитектурный аудит или хотите запустить мощный AI-продукт? Напишите мне сообщение.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Direct Contact Cards -->
+        <div class="contact-info-col">
+          <div class="contact-card glass-panel">
+            <div class="contact-channel-icon">✉️</div>
+            <div class="contact-channel-meta">
+              <span class="channel-label">Email для связи</span>
+              <div class="channel-value">alex.rivera.dev@gmail.com</div>
+            </div>
+            <button class="btn btn-sm btn-secondary copy-email-btn" data-email="alex.rivera.dev@gmail.com">
+              Копировать
             </button>
-            <a href="https://github.com/MrSmokeMaker/PortfolioDev" target="_blank" class="contact-pill-btn">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              <span data-i18n="footer_repo">GitHub Репозиторий</span>
+          </div>
+
+          <div class="contact-card glass-panel">
+            <div class="contact-channel-icon">💬</div>
+            <div class="contact-channel-meta">
+              <span class="channel-label">Telegram (быстрый ответ)</span>
+              <div class="channel-value">@alex_rivera_dev</div>
+            </div>
+            <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+              Написать
             </a>
           </div>
+
+          <div class="contact-card glass-panel">
+            <div class="contact-channel-icon">🐙</div>
+            <div class="contact-channel-meta">
+              <span class="channel-label">GitHub репозитории</span>
+              <div class="channel-value">github.com/MrSmokeMaker</div>
+            </div>
+            <a href="https://github.com/MrSmokeMaker" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-secondary">
+              Профиль
+            </a>
+          </div>
+
+          <div class="availability-card glass-panel">
+            <div class="avail-indicator">
+              <span class="status-dot pulse"></span>
+              <strong>Приём заказов открыт</strong>
+            </div>
+            <p class="avail-note">
+              Отвечаю обычно в течение 2-4 часов в рабочее время (UTC+3). Готов к обсуждению NDA и запуску MVP под ключ.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Contact Form -->
+        <div class="contact-form-col">
+          <form id="contact-form" class="contact-form glass-panel">
+            <h3 class="form-title">Отправить сообщение</h3>
+            
+            <div class="form-group">
+              <label for="form-name" class="form-label">Ваше имя или компания</label>
+              <input type="text" id="form-name" class="form-input" placeholder="Иван Петров" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-email" class="form-label">Контактный Email / Telegram</label>
+              <input type="text" id="form-email" class="form-input" placeholder="ivan@company.com или @username" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-type" class="form-label">Тип задачи</label>
+              <select id="form-type" class="form-select">
+                <option value="saas">Разработка веб-приложения / SaaS</option>
+                <option value="ai">Интеграция ИИ-агентов / RAG</option>
+                <option value="gamedev">GameDev / Интерактивный 3D-проект</option>
+                <option value="consulting">Архитектурный консалтинг / Вайбкодинг</option>
+                <option value="other">Другое</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="form-message" class="form-label">Описание задачи</label>
+              <textarea id="form-message" class="form-textarea" rows="4" placeholder="Расскажите о вашей идее, сроках и ожиданиях..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full" id="submit-btn">
+              <span>Отправить заявку</span>
+              <span class="btn-spinner hidden">⏳</span>
+            </button>
+
+            <div id="form-status" class="form-status-msg hidden"></div>
+          </form>
         </div>
       </div>
-    </footer>
+    </section>
+
+  </main>
+
+  <!-- Project Detail Modal -->
+  <div class="modal-backdrop" id="project-modal" aria-hidden="true">
+    <div class="modal-dialog glass-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close-btn" id="modal-close" aria-label="Закрыть окно">&times;</button>
+      
+      <div class="modal-body" id="modal-content">
+        <!-- Content injected dynamically via app.js -->
+      </div>
+    </div>
   </div>
 
-  <script src="assets/js/tilt.js"></script>
-  <script src="assets/js/i18n.js"></script>
-  <script src="assets/js/webgl-core.js"></script>
-  <script src="assets/js/main.js"></script>
+  <!-- Toast Notification System -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- Mobile Floating Bottom Dock (Touch-friendly Navigation) -->
+  <nav class="mobile-dock mobile-only" aria-label="Мобильная навигация">
+    <div class="dock-container glass-panel">
+      <a href="#home" class="dock-item active" data-nav="home">
+        <span class="dock-icon">⚡</span>
+        <span class="dock-label">Главная</span>
+      </a>
+      <a href="#projects" class="dock-item" data-nav="projects">
+        <span class="dock-icon">📂</span>
+        <span class="dock-label">Проекты</span>
+      </a>
+      <a href="#stack" class="dock-item" data-nav="stack">
+        <span class="dock-icon">🛠</span>
+        <span class="dock-label">Стек</span>
+      </a>
+      <a href="#about" class="dock-item" data-nav="about">
+        <span class="dock-icon">👤</span>
+        <span class="dock-label">Обо мне</span>
+      </a>
+      <a href="#contact" class="dock-item" data-nav="contact">
+        <span class="dock-icon">✉️</span>
+        <span class="dock-label">Связь</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">&lt;/&gt; AR.dev</span>
+        <p class="footer-desc">Crafted with precision &amp; AI orchestration. 2026. All rights reserved.</p>
+      </div>
+      <div class="footer-status">
+        <span class="mono-text">Status: 100% Jamming // 60 FPS Optimized</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
