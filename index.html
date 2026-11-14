@@ -199,15 +199,74 @@
     <!-- ==================== SECTION: PROJECTS ==================== -->
     <section id="section-projects" class="page-section">
       <div class="section-header">
-        <div class="section-eyebrow">Избранные кейсы</div>
-        <h2 class="section-title">Инновационные проекты &amp; Bento Grid</h2>
+        <div class="section-eyebrow">Awwwards Design Lab // 2026</div>
+        <h2 class="section-title">Интерактивный визор арт-дирекшна &amp; Проекты</h2>
         <p class="section-subtitle">
-          Реальные цифровые продукты с продуманной бизнес-логикой, масштабируемой архитектурой и безупречным интерфейсом.
+          Исследуйте три авторские дизайн-системы мирового уровня в живом масштабируемом фрейме с симуляцией устройств.
         </p>
+      </div>
 
+      <!-- Live Studio Stage & Device Viewport -->
+      <div class="studio-stage-wrap glass-panel">
+        <div class="stage-top-bar">
+          <!-- Concept Selector -->
+          <div class="concept-tabs">
+            <button class="stage-concept-btn active" data-concept="editorial.html" title="Elena Vogt — Fashion Editorial">
+              <span class="btn-dot dot-red"></span>
+              <span>01. Editorial</span>
+            </button>
+            <button class="stage-concept-btn" data-concept="dark-tech.html" title="Kai Chen — Dark Tech Systems">
+              <span class="btn-dot dot-indigo"></span>
+              <span>02. Dark Tech</span>
+            </button>
+            <button class="stage-concept-btn" data-concept="soft-minimal.html" title="Mira Sørensen — Soft Tactile Minimal">
+              <span class="btn-dot dot-sage"></span>
+              <span>03. Soft Minimal</span>
+            </button>
+          </div>
+
+          <!-- Device Mode Switcher -->
+          <div class="device-switcher">
+            <button class="device-btn active" data-device="macbook" title="MacBook Pro 16">
+              <span class="device-icon">💻</span>
+              <span class="device-label">MacBook</span>
+            </button>
+            <button class="device-btn" data-device="ipad" title="iPad Pro 13">
+              <span class="device-icon">📐</span>
+              <span class="device-label">iPad</span>
+            </button>
+            <button class="device-btn" data-device="iphone" title="iPhone 16 Pro">
+              <span class="device-icon">📱</span>
+              <span class="device-label">iPhone</span>
+            </button>
+            <a href="editorial.html" target="_blank" rel="noopener" class="stage-action-link" id="stageExternalLink" title="Открыть автономно">
+              <span>Fullscreen ↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- The Interactive Viewport Container -->
+        <div class="viewport-stage-body">
+          <div class="device-frame-wrapper macbook-mode" id="deviceFrameWrap">
+            <!-- Simulated Device Notch / Top bar -->
+            <div class="device-bezel-top">
+              <span class="camera-lens"></span>
+            </div>
+            
+            <!-- Live Active Iframe -->
+            <iframe id="stageIframe" class="stage-iframe" src="editorial.html" title="Live Concept Interactive Preview" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bento Grid Section Title -->
+      <div class="section-header" style="margin-top: 80px; margin-bottom: 30px;">
+        <div class="section-eyebrow">Production Stack</div>
+        <h3 class="section-title" style="font-size: 2rem;">Флагманские инженерные продукты</h3>
+        
         <!-- Category Filters -->
         <div class="filters-bar glass-panel">
-          <button class="filter-btn active" data-filter="all">Все проекты <span class="filter-count">(6)</span></button>
+          <button class="filter-btn active" data-filter="all">Все продукты <span class="filter-count">(6)</span></button>
           <button class="filter-btn" data-filter="web">Web &amp; SaaS <span class="filter-count">(3)</span></button>
           <button class="filter-btn" data-filter="ai">AI &amp; Agents <span class="filter-count">(2)</span></button>
           <button class="filter-btn" data-filter="gamedev">GameDev &amp; 3D <span class="filter-count">(1)</span></button>

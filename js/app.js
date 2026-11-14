@@ -486,11 +486,67 @@ function initFormsAndActions() {
 }
 
 // ==========================================================================
-// 7. BOOTSTRAP APPLICATION
+// 7. STUDIO STAGE CONTROLLER (Awwwards Live Showcase)
+// ==========================================================================
+class StudioStageController {
+  constructor() {
+    this.conceptBtns = document.querySelectorAll('.stage-concept-btn');
+    this.deviceBtns = document.querySelectorAll('.device-btn');
+    this.frameWrap = document.getElementById('deviceFrameWrap');
+    this.iframe = document.getElementById('stageIframe');
+    this.externalLink = document.getElementById('stageExternalLink');
+
+    this.init();
+  }
+
+  init() {
+    // 1. Concept Switching
+    this.conceptBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.conceptBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const conceptUrl = btn.getAttribute('data-concept');
+        if (this.iframe && conceptUrl) {
+          this.iframe.style.opacity = '0.3';
+          this.iframe.style.transition = 'opacity 0.25s ease';
+          this.iframe.src = conceptUrl;
+          this.iframe.onload = () => {
+            this.iframe.style.opacity = '1';
+          };
+        }
+
+        if (this.externalLink && conceptUrl) {
+          this.externalLink.href = conceptUrl;
+        }
+
+        showToast(`Загрузка концепции: ${btn.textContent.trim()}`);
+      });
+    });
+
+    // 2. Device Mode Switching
+    this.deviceBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.deviceBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const device = btn.getAttribute('data-device');
+        if (this.frameWrap) {
+          this.frameWrap.classList.remove('macbook-mode', 'ipad-mode', 'iphone-mode');
+          this.frameWrap.classList.add(`${device}-mode`);
+        }
+      });
+    });
+  }
+}
+
+// ==========================================================================
+// 8. BOOTSTRAP APPLICATION
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   window.appRouter = new AppRouter();
   window.bentoGrid = new BentoGridController();
   window.modalManager = new ModalManager();
+  window.studioStage = new StudioStageController();
   initFormsAndActions();
 });

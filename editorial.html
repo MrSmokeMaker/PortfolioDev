@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>ELENA VOGT — Editorial Art Direction & Spatial Identity</title>
+  <meta name="description" content="Portfolio of Elena Vogt — Independent Art Director & Editorial Graphic Designer. Based in Moscow & Paris.">
+  
+  <!-- Fonts: Cormorant Garamond (High-fashion Antiqua) + Inter (Swiss Grotesque) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ========================================================================== */
+    :root {
+      --bg: #F5F3ED;
+      --bg-card: #ECEAE3;
+      --text: #121212;
+      --text-muted: #5E5C57;
+      --text-dim: #98968F;
+      --accent: #C83226; /* Vermilion Editorial Red */
+      --line: rgba(18, 18, 18, 0.12);
+      --line-dark: rgba(18, 18, 18, 0.35);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+
+      --pad-x: clamp(18px, 4vw, 72px);
+      --pad-y: clamp(50px, 7vw, 120px);
+    }
+
+    /* CSS Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+      position: relative;
+      cursor: default;
+    }
+
+    ::selection {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* ==========================================================================
+       2. TYPOGRAPHIC HIERARCHY
+       ========================================================================== */
+    h1, h2, h3, .font-serif {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    em, .italic {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .display-title {
+      font-size: clamp(42px, 8.5vw, 132px);
+      text-transform: uppercase;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+    }
+
+    .section-num {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .meta-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ==========================================================================
+       3. EDITORIAL RUNNING HEADER & READING PROGRESS
+       ========================================================================== */
+    .reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    .running-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 900;
+      padding: 14px var(--pad-x);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 243, 237, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .header-left, .header-center, .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-center {
+      color: var(--text-muted);
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      animation: pulse 2.2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    /* ==========================================================================
+       4. INTERACTIVE CUSTOM CURSOR & FLOATING PREVIEW (Desktop)
+       ========================================================================== */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease-editorial), height 0.3s var(--ease-editorial), background-color 0.3s ease;
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .custom-cursor {
+        display: block;
+      }
+    }
+
+    .custom-cursor.active {
+      width: 68px;
+      height: 68px;
+      background: var(--accent);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .custom-cursor.active::after {
+      content: 'VIEW';
+    }
+
+    /* Floating Image Preview on Desktop */
+    .floating-preview-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 340px;
+      height: 440px;
+      pointer-events: none;
+      z-index: 800;
+      transform: translate(-50%, -50%) scale(0.85);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s var(--ease-editorial), transform 0.4s var(--ease-editorial), visibility 0.4s;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      display: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .floating-preview-wrap {
+        display: block;
+      }
+    }
+
+    .floating-preview-wrap.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .floating-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ==========================================================================
+       5. LAYOUT & SECTIONS
+       ========================================================================== */
+    .main-wrap {
+      padding-top: 50px;
+    }
+
+    section {
+      padding: var(--pad-y) var(--pad-x);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: clamp(60px, 10vh, 140px);
+    }
+
+    .hero-meta-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-meta-top p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 440px;
+    }
+
+    .hero-title-wrap {
+      margin: 32px 0;
+    }
+
+    .hero-title-line {
+      overflow: hidden;
+      display: block;
+    }
+
+    .hero-title-line span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 1.2s var(--ease-editorial);
+    }
+
+    .hero-title-line.is-inview span {
+      transform: translateY(0);
+    }
+
+    .hero-meta-bottom {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 0.85rem;
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(32px, 5vw, 80px);
+      align-items: start;
+    }
+
+    .about-manifesto {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.8vw, 54px);
+      line-height: 1.15;
+      color: var(--text);
+    }
+
+    .about-details {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 580px;
+    }
+
+    .about-meta-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* Selected Works Section */
+    .works-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .works-table {
+      width: 100%;
+    }
+
+    .work-item {
+      display: block;
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .work-item:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-item-row {
+      display: grid;
+      grid-template-columns: 70px 1.4fr 1fr 100px;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .work-idx {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .work-title {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.2vw, 50px);
+      transition: transform 0.4s var(--ease-editorial), color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .work-scope {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .work-year {
+      font-size: 0.85rem;
+      text-align: right;
+      color: var(--text-dim);
+    }
+
+    /* Mobile In-flow Project Card (Visible only on touch/mobile) */
+    .mobile-project-thumb {
+      display: none;
+      width: 100%;
+      height: 240px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .mobile-project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Desktop Hover on Work Item */
+    @media (hover: hover) and (pointer: fine) {
+      .work-item:hover {
+        border-color: var(--text);
+      }
+      .work-item:hover .work-title {
+        transform: translateX(12px);
+        color: var(--accent);
+      }
+    }
+
+    /* Services / Expertise */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(24px, 4vw, 48px);
+      margin-top: 40px;
+    }
+
+    .service-card {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .service-idx {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .service-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Contact Section & Big CTA */
+    .contact-section {
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #EFECE3;
+    }
+
+    .contact-cta-wrap {
+      margin: 40px 0;
+      word-break: break-word;
+    }
+
+    .big-mail-link {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 6.5vw, 104px);
+      text-decoration: none;
+      color: var(--text);
+      line-height: 0.95;
+      display: inline-block;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .big-mail-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.5s var(--ease-editorial);
+    }
+
+    .big-mail-link:hover {
+      color: var(--accent);
+    }
+
+    .big-mail-link:hover::after {
+      background: var(--accent);
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .contact-footer-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 0.85rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .social-links a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       6. REVEAL ANIMATIONS (Intersection Observer)
+       ========================================================================== */
+    .reveal-elem {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s var(--ease-editorial), transform 0.9s var(--ease-editorial);
+    }
+
+    .reveal-elem.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       7. RESPONSIVE BREAKPOINTS (Mobile & Tablet)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .hero-meta-top, .about-grid, .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .work-item-row {
+        grid-template-columns: 40px 1fr auto;
+      }
+      .work-scope {
+        grid-column: 2 / -1;
+        font-size: 0.85rem;
+        margin-top: -6px;
+      }
+      .work-year {
+        font-size: 0.75rem;
+      }
+      .contact-footer-bar {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      /* Mobile touch presentation: display rich project photos in flow */
+      .mobile-project-thumb {
+        display: block;
+      }
+      .running-header .header-center {
+        display: none;
+      }
+      .hero-meta-bottom {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .about-meta-list {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .running-header {
+        font-size: 0.72rem;
+        padding: 12px var(--pad-x);
+      }
+      .work-item-row {
+        grid-template-columns: 28px 1fr;
+        gap: 8px;
+      }
+      .work-year {
+        display: none;
+      }
+      .social-links {
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress-bar" id="progressBar"></div>
+
+  <!-- Editorial Running Head -->
+  <header class="running-header">
+    <div class="header-left">
+      <span>ELENA VOGT</span>
+      <span class="live-dot" title="Available for Select Commissions"></span>
+    </div>
+    <div class="header-center">
+      <span>VOL. 26 // ISSUE 04</span>
+    </div>
+    <div class="header-right">
+      <span id="moscowClock">MOSCOW 00:00:00</span>
+    </div>
+  </header>
+
+  <!-- Interactive Custom Cursor (Desktop) -->
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- Floating Image Preview for Works (Desktop Inertial Follower) -->
+  <div class="floating-preview-wrap" id="previewWrap">
+    <img class="floating-preview-img" id="previewImg" src="" alt="Project Visual Preview">
+  </div>
+
+  <main class="main-wrap">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-section">
+      <div class="hero-meta-top reveal-elem">
+        <div>
+          <span class="meta-label">DISCIPLINE</span>
+          <p>Art Direction, Editorial Publishing &amp; Spatial Visual Culture.</p>
+        </div>
+        <div>
+          <span class="meta-label">COMMISSIONS</span>
+          <p>International luxury maisons, independent publishing houses &amp; cultural architecture.</p>
+        </div>
+      </div>
+
+      <div class="hero-title-wrap">
+        <h1 class="display-title">
+          <span class="hero-title-line"><span>POETRY OF</span></span>
+          <span class="hero-title-line"><span><em>FORM &amp; SILENCE.</em></span></span>
+          <span class="hero-title-line"><span>CURATED DESIGN.</span></span>
+        </h1>
+      </div>
+
+      <div class="hero-meta-bottom reveal-elem">
+        <div>
+          <span class="meta-label">CURRENT BASE</span>
+          <p>Moscow &amp; Paris (Operating Worldwide)</p>
+        </div>
+        <div>
+          <span class="meta-label">AVAILABILITY</span>
+          <p>Open for Q1–Q2 / 2027</p>
+        </div>
+        <div>
+          <span class="meta-label">SELECTION</span>
+          <p>Selected Works (04)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="about-section">
+      <span class="section-num">01 / PHILOSOPHY</span>
+      
+      <div class="about-grid">
+        <div class="about-manifesto reveal-elem">
+          «Мы создаем пространства между словами, где типографика обретает тактильный вес физического объекта».
+        </div>
+
+        <div class="about-details reveal-elem">
+          <p>
+            Мой подход коренится в традициях строгой модернистской сетки и эмоциональной драматургии парижских фэшн-изданий. Каждое решение отсекает визуальный шум, оставляя лишь кристальную ясность смыслов, ритма и фактуры.
+          </p>
+          <p>
+            Сотрудничаю с брендами, для которых полиграфия, пространственные инсталляции и цифровые платформы являются единым эстетическим манифестом.
+          </p>
+
+          <div class="about-meta-list">
+            <div>
+              <span class="meta-label">ACCOLADES</span>
+              <p>TDC New York, Awwwards Site of the Day, International Design Awards.</p>
+            </div>
+            <div>
+              <span class="meta-label">FOCUS</span>
+              <p>Brand Strategy, Monographic Books, Exhibition Architecture.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SELECTED WORKS SECTION ==================== -->
+    <section class="works-section">
+      <div class="works-header reveal-elem">
+        <div>
+          <span class="section-num">02 / INDEX OF WORKS</span>
+          <h2>ИЗБРАННЫЕ ПРОЕКТЫ</h2>
+        </div>
+        <div class="meta-label">PERIOD: 2024 — 2026</div>
+      </div>
+
+      <div class="works-table">
+        <!-- Project 1: Haute Couture Lookbook -->
+        <article class="work-item reveal-elem" 
+           data-preview="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85">
+          <div class="work-item-row">
+            <span class="work-idx">№ 01</span>
+            <span class="work-title">L’Ombre Blanche <em>Maison</em></span>
+            <span class="work-scope">Visual Identity, Monograph Book</span>
+            <span class="work-year">2026</span>
+          </div>
+          <!-- Mobile in-flow preview -->
+          <div class="mobile-project-thumb">
+            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="L'Ombre Blanche Maison" loading="lazy">
+          </div>
+        </article>
+
+        <!-- Project 2: Architectural Monograph -->
+        <article class="work-item reveal-elem" 
+           data-preview="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85">
+          <div class="work-item-row">
+            <span class="work-idx">№ 02</span>
+            <span class="work-title">Revue d'Architecture <em>Vol. IX</em></span>
+            <span class="work-scope">Editorial Grid, Spatial Monograph</span>
+            <span class="work-year">2025</span>
+          </div>
+          <!-- Mobile in-flow preview -->
+          <div class="mobile-project-thumb">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Revue d'Architecture" loading="lazy">
+          </div>
+        </article>
+
+        <!-- Project 3: Ceramic Atelier & Exhibition -->
+        <article class="work-item reveal-elem" 
+           data-preview="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=85">
+          <div class="work-item-row">
+            <span class="work-idx">№ 03</span>
+            <span class="work-title">Atelier Céramique <em>Solo Show</em></span>
+            <span class="work-scope">Exhibition Scenography, Poster System</span>
+            <span class="work-year">2025</span>
+          </div>
+          <!-- Mobile in-flow preview -->
+          <div class="mobile-project-thumb">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Atelier Céramique" loading="lazy">
+          </div>
+        </article>
+
+        <!-- Project 4: High Perfumery -->
+        <article class="work-item reveal-elem" 
+           data-preview="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=85">
+          <div class="work-item-row">
+            <span class="work-idx">№ 04</span>
+            <span class="work-title">Scent of Alpine <em>Parfums</em></span>
+            <span class="work-scope">Packaging, Materiality Direction</span>
+            <span class="work-year">2024</span>
+          </div>
+          <!-- Mobile in-flow preview -->
+          <div class="mobile-project-thumb">
+            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80" alt="Scent of Alpine Parfums" loading="lazy">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services-section">
+      <span class="section-num">03 / CAPABILITIES</span>
+      <h2 class="reveal-elem">ЭКСПЕРТИЗА &amp; СЕРВИС</h2>
+
+      <div class="services-grid">
+        <div class="service-card reveal-elem">
+          <span class="service-idx">01</span>
+          <h3 class="service-name">Art Direction</h3>
+          <p class="service-desc">
+            Формирование целостного визуального языка коллекций, кастинги, курирование фото-сессий и кинематографических кампейнов.
+          </p>
+        </div>
+
+        <div class="service-card reveal-elem">
+          <span class="service-idx">02</span>
+          <h3 class="service-name">Editorial &amp; Print</h3>
+          <p class="service-desc">
+            Проектирование книг, каталогов и периодики: выбор редких сортов бумаги, переплетных техник, тиснения и контроль печати.
+          </p>
+        </div>
+
+        <div class="service-card reveal-elem">
+          <span class="service-idx">03</span>
+          <h3 class="service-name">Digital Identity</h3>
+          <p class="service-desc">
+            Перенос тактильной эстетики в интерактивную среду: Awwwards-уровень микроанимаций, бескомпромиссная верстка и типографика.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact-section" id="contact">
+      <div>
+        <span class="section-num">04 / DIALOGUE</span>
+        <h2 class="meta-label">INITIATE COLLABORATION</h2>
+      </div>
+
+      <div class="contact-cta-wrap reveal-elem">
+        <a href="mailto:elena@vogt-studio.com" class="big-mail-link">
+          elena@vogt-studio.com
+        </a>
+      </div>
+
+      <div class="contact-footer-bar reveal-elem">
+        <div>
+          <span class="meta-label">STUDIO ADDRESS</span>
+          <p>Moscow &amp; Paris</p>
+        </div>
+        <div class="social-links">
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">ReadCV</a>
+          <a href="#" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <div style="text-align: right;">
+          <span class="meta-label">© 2026 ELENA VOGT</span>
+          <p>All Rights Reserved</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       SCRIPTS: Moscow Clock, Desktop Cursor, Preview & Scroll Triggers
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Live Moscow Clock (MSK / UTC+3)
+      const clockElem = document.getElementById('moscowClock');
+      function updateClock() {
+        const now = new Date();
+        const options = { timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+        if (clockElem) {
+          clockElem.textContent = 'MOSCOW ' + new Intl.DateTimeFormat('en-GB', options).format(now);
+        }
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // 2. Reading Progress Indicator
+      const progressBar = document.getElementById('progressBar');
+      window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        if (progressBar) progressBar.style.width = scrolled + '%';
+      }, { passive: true });
+
+      // 3. Custom Cursor & Inertial Floating Preview (Desktop only)
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      if (!isTouch) {
+        const cursor = document.getElementById('cursor');
+        const previewWrap = document.getElementById('previewWrap');
+        const previewImg = document.getElementById('previewImg');
+        const workItems = document.querySelectorAll('.work-item');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let previewX = mouseX;
+        let previewY = mouseY;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          if (cursor) {
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+          }
+        });
+
+        // Smooth RAF Loop for Floating Image Inertia
+        function renderLoop() {
+          previewX += (mouseX - previewX) * 0.12;
+          previewY += (mouseY - previewY) * 0.12;
+
+          if (previewWrap) {
+            previewWrap.style.left = previewX + 'px';
+            previewWrap.style.top = previewY + 'px';
+          }
+
+          requestAnimationFrame(renderLoop);
+        }
+        renderLoop();
+
+        // Hover Bindings on Work Items
+        workItems.forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            const imgSrc = item.getAttribute('data-preview');
+            if (previewImg && imgSrc) {
+              previewImg.src = imgSrc;
+            }
+            if (previewWrap) previewWrap.classList.add('visible');
+            if (cursor) cursor.classList.add('active');
+          });
+
+          item.addEventListener('mouseleave', () => {
+            if (previewWrap) previewWrap.classList.remove('visible');
+            if (cursor) cursor.classList.remove('active');
+          });
+        });
+      }
+
+      // 4. Hero Title Stagger Inview
+      setTimeout(() => {
+        document.querySelectorAll('.hero-title-line').forEach((line, idx) => {
+          setTimeout(() => line.classList.add('is-inview'), idx * 180);
+        });
+      }, 150);
+
+      // 5. Intersection Observer for Smooth Reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal-elem').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>

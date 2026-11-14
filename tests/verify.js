@@ -19,6 +19,9 @@ console.log('--- Запуск верификационных тестов ---');
 // 1. Проверка существования ключевых файлов
 const requiredFiles = [
   'index.html',
+  'editorial.html',
+  'dark-tech.html',
+  'soft-minimal.html',
   'css/style.css',
   'js/app.js',
   'js/terminal.js',
@@ -48,6 +51,11 @@ const requiredElements = [
   'id="section-stack"',
   'id="section-about"',
   'id="section-contact"',
+  'class="studio-stage-wrap',
+  'id="stageIframe"',
+  'editorial.html',
+  'dark-tech.html',
+  'soft-minimal.html',
   'id="interactive-terminal"',
   'id="projects-bento-grid"',
   'id="project-modal"',

@@ -1557,3 +1557,219 @@ button, input, select, textarea {
     left: 16px;
   }
 }
+
+/* ==========================================================================
+   STUDIO STAGE & DEVICE VIEWPORT (Awwwards Live Showcase)
+   ========================================================================== */
+.studio-stage-wrap {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  margin-top: 32px;
+  background: rgba(11, 15, 25, 0.75);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(99, 102, 241, 0.12);
+}
+
+.stage-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.concept-tabs {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stage-concept-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+}
+
+.stage-concept-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stage-concept-btn.active {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.35);
+}
+
+.btn-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.dot-red { background: #C83226; box-shadow: 0 0 6px #C83226; }
+.dot-indigo { background: #6366F1; box-shadow: 0 0 6px #6366F1; }
+.dot-sage { background: #506C5D; box-shadow: 0 0 6px #506C5D; }
+
+.device-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.device-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-fast);
+}
+
+.device-btn:hover {
+  color: #FFFFFF;
+}
+
+.device-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.stage-action-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  padding: 6px 14px;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+}
+
+.stage-action-link:hover {
+  color: #FFFFFF;
+  background: rgba(0, 245, 255, 0.1);
+}
+
+/* Viewport Stage Body */
+.viewport-stage-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  min-height: 500px;
+}
+
+.device-frame-wrapper {
+  background: #080A11;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.15);
+  position: relative;
+  overflow: hidden;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.5s ease;
+}
+
+.device-bezel-top {
+  height: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.camera-lens {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.stage-iframe {
+  width: 100%;
+  height: calc(100% - 24px);
+  border: none;
+  background: #FFFFFF;
+  display: block;
+}
+
+/* Device Modes */
+.macbook-mode {
+  width: 100%;
+  max-width: 1100px;
+  height: 680px;
+  border-radius: 14px;
+}
+
+.ipad-mode {
+  width: 768px;
+  height: 720px;
+  border-radius: 24px;
+}
+
+.iphone-mode {
+  width: 390px;
+  height: 740px;
+  border-radius: 44px;
+  border-width: 2px;
+}
+
+.iphone-mode .device-bezel-top {
+  height: 30px;
+}
+
+.iphone-mode .camera-lens {
+  width: 70px;
+  height: 18px;
+  border-radius: 12px;
+  background: #000000;
+}
+
+@media (max-width: 900px) {
+  .stage-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .device-switcher {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .macbook-mode, .ipad-mode {
+    width: 100%;
+    height: 520px;
+  }
+}
+
+@media (max-width: 480px) {
+  .device-label {
+    display: none;
+  }
+  .iphone-mode {
+    width: 100%;
+    height: 540px;
+    border-radius: 20px;
+  }
+}
