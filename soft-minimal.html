@@ -131,7 +131,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 22px;
-      background: rgba(250, 248, 245, 0.88);
+      background: rgba(250, 248, 245, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--line);
@@ -175,6 +175,12 @@
       background: var(--bg-card);
     }
 
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .header-status {
       display: flex;
       align-items: center;
@@ -187,57 +193,86 @@
       border-radius: var(--radius-pill);
     }
 
+    .sfx-pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .sfx-pill-btn.active {
+      background: var(--text-main);
+      color: var(--bg-canvas);
+    }
+
     /* ==========================================================================
-       4. INTERACTIVE PHYSICS STICKERS (Draggable Badges)
+       4. INTERACTIVE PHYSICS STICKERS (Verlet Physics Engine)
        ========================================================================== */
     .stickers-playground {
       position: relative;
       width: 100%;
-      height: 180px;
-      margin-top: 20px;
+      height: 220px;
+      margin-top: 24px;
       border-radius: var(--radius-md);
       overflow: hidden;
       touch-action: none;
+      border: 1px dashed var(--line);
+      background: rgba(242, 239, 233, 0.4);
     }
 
-    .draggable-sticker {
+    .playground-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .physics-sticker {
       position: absolute;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: var(--radius-pill);
       font-size: 0.88rem;
       font-weight: 600;
       cursor: grab;
       user-select: none;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-      transition: box-shadow 0.2s ease, transform 0.1s ease;
+      transform: translate(-50%, -50%);
+      will-change: left, top, transform;
     }
 
-    .draggable-sticker:active {
+    .physics-sticker:active {
       cursor: grabbing;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      transform: scale(1.06);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
       z-index: 100;
     }
 
     .sticker-terracotta {
       background: #F8E8E3;
       color: var(--accent-terracotta);
-      border: 1px solid rgba(217, 101, 72, 0.2);
+      border: 1px solid rgba(217, 101, 72, 0.25);
     }
 
     .sticker-sage {
       background: #E8EFEA;
       color: var(--accent-sage);
-      border: 1px solid rgba(80, 108, 93, 0.2);
+      border: 1px solid rgba(80, 108, 93, 0.25);
     }
 
     .sticker-sand {
       background: #FDF3E7;
       color: #A96825;
-      border: 1px solid rgba(230, 161, 92, 0.25);
+      border: 1px solid rgba(230, 161, 92, 0.3);
     }
 
     .sticker-dark {
@@ -571,7 +606,6 @@
       color: var(--accent-terracotta);
     }
 
-    /* Reveal Animation Class */
     .reveal-elem {
       opacity: 0;
       transform: translateY(24px);
@@ -583,9 +617,6 @@
       transform: translateY(0);
     }
 
-    /* ==========================================================================
-       6. RESPONSIVE BREAKPOINTS (Mobile to 4K)
-       ========================================================================== */
     @media (max-width: 900px) {
       .about-grid, .services-grid {
         grid-template-columns: 1fr;
@@ -608,7 +639,7 @@
         text-align: center;
       }
       .stickers-playground {
-        height: 140px;
+        height: 200px;
       }
     }
   </style>
@@ -633,8 +664,13 @@
         <a href="#contact" class="nav-pill">Контакты</a>
       </nav>
 
-      <div class="header-status">
-        <span id="mskClock">MOSCOW 00:00:00</span>
+      <div class="header-right">
+        <div class="header-status">
+          <span id="mskClock">MOSCOW 00:00:00</span>
+        </div>
+        <button class="sfx-pill-btn active" id="soundToggle" title="Звуковой отклик интерфейса">
+          <span>SFX: ON</span>
+        </button>
       </div>
     </div>
   </header>
@@ -661,18 +697,20 @@
         <a href="#contact" class="btn btn-warm">Познакомиться</a>
       </div>
 
-      <!-- Interactive Draggable Physics Stickers -->
-      <div class="stickers-playground" id="stickersZone" title="Перетаскивайте стикеры!">
-        <div class="draggable-sticker sticker-terracotta" style="top: 20px; left: 10px; transform: rotate(-3deg);">
+      <!-- Interactive Verlet Physics Stickers Playground -->
+      <div class="stickers-playground" id="stickersZone">
+        <span class="playground-hint">✦ Встряхните или перетаскивайте стикеры</span>
+
+        <div class="physics-sticker sticker-terracotta" id="stk1" style="left: 120px; top: 70px;">
           <span>✦ Design Systems</span>
         </div>
-        <div class="draggable-sticker sticker-sage" style="top: 25px; left: 240px; transform: rotate(4deg);">
+        <div class="physics-sticker sticker-sage" id="stk2" style="left: 320px; top: 60px;">
           <span>🍃 Sustainable UX</span>
         </div>
-        <div class="draggable-sticker sticker-sand" style="top: 85px; left: 110px; transform: rotate(-2deg);">
+        <div class="physics-sticker sticker-sand" id="stk3" style="left: 200px; top: 140px;">
           <span>☕ Calm Computing</span>
         </div>
-        <div class="draggable-sticker sticker-dark" style="top: 75px; left: 360px; transform: rotate(5deg);">
+        <div class="physics-sticker sticker-dark" id="stk4" style="left: 480px; top: 110px;">
           <span>99% Organic Feel</span>
         </div>
       </div>
@@ -707,7 +745,7 @@
 
           <div class="feature-card reveal-elem">
             <span class="feature-num">№ 02</span>
-            <h3 class="feature-title">Тактильный микровзаимодействия</h3>
+            <h3 class="feature-title">Тактильные микровзаимодействия</h3>
             <p style="color: var(--text-muted); font-size: 0.95rem;">
               Плавная инерция скролла, адаптивные цветовые отклики и естественные физические пружины.
             </p>
@@ -849,7 +887,7 @@
   </main>
 
   <!-- ==========================================================================
-       SCRIPTS: Draggable Stickers, Dynamic Palette & MSK Clock
+       SCRIPTS: Verlet Physics Engine, Gyroscope & Organic Audio
        ========================================================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -863,46 +901,186 @@
       setInterval(updateClock, 1000);
       updateClock();
 
-      // 2. Interactive Draggable Stickers (Physics Drag & Drop)
-      const stickers = document.querySelectorAll('.draggable-sticker');
-      stickers.forEach(sticker => {
-        let isDragging = false;
-        let startX, startY, origLeft, origTop;
+      // 2. Procedural Organic Audio: Ceramic & Wood Tap SFX
+      let audioCtx = null;
+      let soundEnabled = true;
 
-        const onStart = (e) => {
-          isDragging = true;
-          const point = e.touches ? e.touches[0] : e;
-          startX = point.clientX;
-          startY = point.clientY;
-          origLeft = sticker.offsetLeft;
-          origTop = sticker.offsetTop;
-          document.body.style.userSelect = 'none';
+      function getAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playCeramicTap(freq = 420) {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.06);
+
+          gain.gain.setValueAtTime(0.05, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.06);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+
+          osc.start();
+          osc.stop(ctx.currentTime + 0.06);
+        } catch (e) {}
+      }
+
+      // Unlock on first gesture
+      const unlockAudio = () => { getAudioContext(); window.removeEventListener('click', unlockAudio); };
+      window.addEventListener('click', unlockAudio);
+
+      const sfxBtn = document.getElementById('soundToggle');
+      if (sfxBtn) {
+        sfxBtn.addEventListener('click', () => {
+          soundEnabled = !soundEnabled;
+          sfxBtn.classList.toggle('active', soundEnabled);
+          sfxBtn.querySelector('span').textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
+          if (soundEnabled) playCeramicTap(540);
+        });
+      }
+
+      // 3. 2D Verlet Physics Engine with Gyroscope & Drag & Collisions
+      const zone = document.getElementById('stickersZone');
+      const elements = Array.from(document.querySelectorAll('.physics-sticker'));
+
+      const particles = elements.map(el => {
+        const rect = el.getBoundingClientRect();
+        return {
+          el,
+          x: el.offsetLeft || 100,
+          y: el.offsetTop || 60,
+          oldX: el.offsetLeft || 100,
+          oldY: el.offsetTop || 60,
+          radius: Math.max(rect.width, 100) / 2,
+          isDragging: false
         };
-
-        const onMove = (e) => {
-          if (!isDragging) return;
-          const point = e.touches ? e.touches[0] : e;
-          const dx = point.clientX - startX;
-          const dy = point.clientY - startY;
-          sticker.style.left = (origLeft + dx) + 'px';
-          sticker.style.top = (origTop + dy) + 'px';
-        };
-
-        const onEnd = () => {
-          isDragging = false;
-          document.body.style.userSelect = '';
-        };
-
-        sticker.addEventListener('mousedown', onStart);
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onEnd);
-
-        sticker.addEventListener('touchstart', onStart, { passive: true });
-        window.addEventListener('touchmove', onMove, { passive: true });
-        window.addEventListener('touchend', onEnd);
       });
 
-      // 3. Dynamic Ambient Palette on Carousel Scroll
+      let gravityX = 0;
+      let gravityY = 0.28;
+
+      // Mobile Device Gyroscope Support
+      if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', (e) => {
+          if (e.gamma !== null && e.beta !== null) {
+            gravityX = Math.max(-1.5, Math.min(1.5, e.gamma / 20));
+            gravityY = Math.max(-1.5, Math.min(1.5, e.beta / 25));
+          }
+        }, { passive: true });
+      }
+
+      // Drag interaction
+      let activeParticle = null;
+      let dragOffsetX = 0;
+      let dragOffsetY = 0;
+
+      function onPointerDown(e, p) {
+        activeParticle = p;
+        p.isDragging = true;
+        const pt = e.touches ? e.touches[0] : e;
+        const zRect = zone.getBoundingClientRect();
+        dragOffsetX = (pt.clientX - zRect.left) - p.x;
+        dragOffsetY = (pt.clientY - zRect.top) - p.y;
+        playCeramicTap(560);
+      }
+
+      function onPointerMove(e) {
+        if (!activeParticle) return;
+        const pt = e.touches ? e.touches[0] : e;
+        const zRect = zone.getBoundingClientRect();
+        activeParticle.x = (pt.clientX - zRect.left) - dragOffsetX;
+        activeParticle.y = (pt.clientY - zRect.top) - dragOffsetY;
+      }
+
+      function onPointerUp() {
+        if (activeParticle) {
+          activeParticle.isDragging = false;
+          activeParticle = null;
+          playCeramicTap(380);
+        }
+      }
+
+      particles.forEach(p => {
+        p.el.addEventListener('mousedown', (e) => onPointerDown(e, p));
+        p.el.addEventListener('touchstart', (e) => onPointerDown(e, p), { passive: true });
+      });
+
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('mouseup', onPointerUp);
+      window.addEventListener('touchend', onPointerUp);
+
+      // Verlet Physics Loop
+      function updatePhysics() {
+        if (!zone) return;
+        const bounds = zone.getBoundingClientRect();
+        const W = bounds.width;
+        const H = bounds.height;
+
+        particles.forEach(p => {
+          if (!p.isDragging) {
+            const vx = (p.x - p.oldX) * 0.96;
+            const vy = (p.y - p.oldY) * 0.96;
+
+            p.oldX = p.x;
+            p.oldY = p.y;
+
+            p.x += vx + gravityX;
+            p.y += vy + gravityY;
+
+            // Boundary collision
+            const padding = 40;
+            if (p.x < padding) { p.x = padding; p.oldX = p.x + vx * 0.5; }
+            if (p.x > W - padding) { p.x = W - padding; p.oldX = p.x + vx * 0.5; }
+            if (p.y < padding) { p.y = padding; p.oldY = p.y + vy * 0.5; }
+            if (p.y > H - padding) { p.y = H - padding; p.oldY = p.y + vy * 0.5; }
+          } else {
+            p.oldX = p.x;
+            p.oldY = p.y;
+          }
+
+          p.el.style.left = `${p.x}px`;
+          p.el.style.top = `${p.y}px`;
+        });
+
+        // Inter-particle elastic repulsion
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const p1 = particles[i];
+            const p2 = particles[j];
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+            const dist = Math.hypot(dx, dy);
+            const minDist = (p1.radius + p2.radius) * 0.75;
+
+            if (dist < minDist && dist > 0.001) {
+              const overlap = (minDist - dist) * 0.5;
+              const nx = (dx / dist) * overlap;
+              const ny = (dy / dist) * overlap;
+
+              if (!p1.isDragging) { p1.x -= nx; p1.y -= ny; }
+              if (!p2.isDragging) { p2.x += nx; p2.y += ny; }
+            }
+          }
+        }
+
+        requestAnimationFrame(updatePhysics);
+      }
+      requestAnimationFrame(updatePhysics);
+
+      // 4. Dynamic Ambient Palette on Carousel Scroll
       const track = document.getElementById('elasticTrack');
       const panels = document.querySelectorAll('.work-panel');
 
@@ -920,12 +1098,10 @@
         }, { passive: true });
       }
 
-      // 4. Scroll Reveal Observer
+      // 5. Scroll Reveal Observer
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
         });
       }, { threshold: 0.12 });
 

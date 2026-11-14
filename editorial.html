@@ -35,7 +35,6 @@
       --pad-y: clamp(50px, 7vw, 120px);
     }
 
-    /* CSS Reset */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -106,7 +105,7 @@
     }
 
     /* ==========================================================================
-       3. EDITORIAL RUNNING HEADER & READING PROGRESS
+       3. EDITORIAL RUNNING HEADER & SFX CONTROL
        ========================================================================== */
     .reading-progress-bar {
       position: fixed;
@@ -125,13 +124,13 @@
       left: 0;
       width: 100%;
       z-index: 900;
-      padding: 14px var(--pad-x);
+      padding: 12px var(--pad-x);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(245, 243, 237, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(245, 243, 237, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
       font-size: 0.78rem;
       letter-spacing: 0.08em;
@@ -141,7 +140,7 @@
     .header-left, .header-center, .header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .header-center {
@@ -160,6 +159,32 @@
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.3; transform: scale(0.8); }
+    }
+
+    /* Editorial Audio Switcher */
+    .sfx-btn {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .sfx-btn:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .sfx-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
     }
 
     /* ==========================================================================
@@ -187,8 +212,8 @@
     }
 
     .custom-cursor.active {
-      width: 68px;
-      height: 68px;
+      width: 72px;
+      height: 72px;
       background: var(--accent);
       color: #FFFFFF;
       display: flex;
@@ -201,7 +226,7 @@
     }
 
     .custom-cursor.active::after {
-      content: 'VIEW';
+      content: 'EXPLORE';
     }
 
     /* Floating Image Preview on Desktop */
@@ -243,7 +268,98 @@
     }
 
     /* ==========================================================================
-       5. LAYOUT & SECTIONS
+       5. FULL-SCREEN CURTAIN CASE REVEAL
+       ========================================================================== */
+    .case-curtain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg);
+      z-index: 2000;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(24px, 5vw, 64px);
+      transform: translateY(100%);
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .case-curtain-overlay.open {
+      transform: translateY(0);
+    }
+
+    .curtain-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    .curtain-close-btn {
+      background: transparent;
+      border: 1px solid var(--text);
+      color: var(--text);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .curtain-close-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .curtain-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(32px, 6vw, 80px);
+      margin: 40px 0;
+      align-items: center;
+    }
+
+    .curtain-image-frame {
+      width: 100%;
+      height: clamp(340px, 60vh, 650px);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .curtain-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .curtain-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .curtain-title {
+      font-size: clamp(36px, 5.5vw, 76px);
+      line-height: 1;
+    }
+
+    .curtain-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ==========================================================================
+       6. LAYOUT & SECTIONS
        ========================================================================== */
     .main-wrap {
       padding-top: 50px;
@@ -398,7 +514,6 @@
       color: var(--text-dim);
     }
 
-    /* Mobile In-flow Project Card (Visible only on touch/mobile) */
     .mobile-project-thumb {
       display: none;
       width: 100%;
@@ -415,7 +530,6 @@
       object-fit: cover;
     }
 
-    /* Desktop Hover on Work Item */
     @media (hover: hover) and (pointer: fine) {
       .work-item:hover {
         border-color: var(--text);
@@ -530,9 +644,7 @@
       color: var(--accent);
     }
 
-    /* ==========================================================================
-       6. REVEAL ANIMATIONS (Intersection Observer)
-       ========================================================================== */
+    /* Reveal Animations */
     .reveal-elem {
       opacity: 0;
       transform: translateY(28px);
@@ -544,11 +656,9 @@
       transform: translateY(0);
     }
 
-    /* ==========================================================================
-       7. RESPONSIVE BREAKPOINTS (Mobile & Tablet)
-       ========================================================================== */
+    /* Responsive Breakpoints */
     @media (max-width: 900px) {
-      .hero-meta-top, .about-grid, .services-grid {
+      .hero-meta-top, .about-grid, .services-grid, .curtain-content-grid {
         grid-template-columns: 1fr;
       }
       .work-item-row {
@@ -569,7 +679,6 @@
     }
 
     @media (max-width: 768px) {
-      /* Mobile touch presentation: display rich project photos in flow */
       .mobile-project-thumb {
         display: block;
       }
@@ -589,7 +698,7 @@
     @media (max-width: 480px) {
       .running-header {
         font-size: 0.72rem;
-        padding: 12px var(--pad-x);
+        padding: 10px var(--pad-x);
       }
       .work-item-row {
         grid-template-columns: 28px 1fr;
@@ -597,9 +706,6 @@
       }
       .work-year {
         display: none;
-      }
-      .social-links {
-        gap: 16px;
       }
     }
   </style>
@@ -620,6 +726,9 @@
     </div>
     <div class="header-right">
       <span id="moscowClock">MOSCOW 00:00:00</span>
+      <button class="sfx-btn active" id="sfxToggle" title="Звук перелистывания и шелеста бумаги">
+        <span>SFX: ON</span>
+      </button>
     </div>
   </header>
 
@@ -629,6 +738,40 @@
   <!-- Floating Image Preview for Works (Desktop Inertial Follower) -->
   <div class="floating-preview-wrap" id="previewWrap">
     <img class="floating-preview-img" id="previewImg" src="" alt="Project Visual Preview">
+  </div>
+
+  <!-- Fullscreen Curtain Modal for Case Exploration -->
+  <div class="case-curtain-overlay" id="curtainOverlay" aria-hidden="true">
+    <div class="curtain-top-bar">
+      <div>
+        <span class="meta-label">CURATED CASE STUDY</span>
+        <span id="curtainIdx" style="font-family: var(--font-body); font-size: 0.8rem; color: var(--accent);">№ 01</span>
+      </div>
+      <button class="curtain-close-btn" id="curtainClose">✕ ЗАКРЫТЬ [ESC]</button>
+    </div>
+
+    <div class="curtain-content-grid">
+      <div class="curtain-image-frame">
+        <img id="curtainImg" src="" alt="Case Study Image">
+      </div>
+      <div class="curtain-text-col">
+        <h2 class="curtain-title" id="curtainTitle">Project Title</h2>
+        <span class="meta-label" id="curtainScope">Visual Identity &amp; Editorial</span>
+        <p class="curtain-desc" id="curtainDesc">
+          Исследование баланса формы, материальности и свободного пространства. Проект реализован с акцентом на тактильные полиграфические техники, авторскую типографику и пространственную геометрию.
+        </p>
+        <div style="display: flex; gap: 16px; margin-top: 10px;">
+          <a href="#contact" class="curtain-close-btn" style="background: var(--text); color: var(--bg);" onclick="document.getElementById('curtainClose').click();">
+            Обсудить аналогичный кейс
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid var(--line); padding-top: 16px; font-size: 0.8rem; color: var(--text-dim); display: flex; justify-content: space-between;">
+      <span>STUDIO ARCHIVE // 2026</span>
+      <span>PRESS ESCAPE TO CLOSE</span>
+    </div>
   </div>
 
   <main class="main-wrap">
@@ -708,12 +851,16 @@
           <span class="section-num">02 / INDEX OF WORKS</span>
           <h2>ИЗБРАННЫЕ ПРОЕКТЫ</h2>
         </div>
-        <div class="meta-label">PERIOD: 2024 — 2026</div>
+        <div class="meta-label">PERIOD: 2024 — 2026 // CLICK TO EXPLORE</div>
       </div>
 
       <div class="works-table">
-        <!-- Project 1: Haute Couture Lookbook -->
+        <!-- Project 1 -->
         <article class="work-item reveal-elem" 
+           data-idx="№ 01"
+           data-title="L’Ombre Blanche Maison"
+           data-scope="Visual Identity, Monograph Book"
+           data-desc="Кураторская монография высокой моды: бесшовный синтез редких сортов бумаги Fedrigoni, глубокого блинтового тиснения и минималистичной швейцарской сетки."
            data-preview="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1200&q=85">
           <div class="work-item-row">
             <span class="work-idx">№ 01</span>
@@ -721,14 +868,17 @@
             <span class="work-scope">Visual Identity, Monograph Book</span>
             <span class="work-year">2026</span>
           </div>
-          <!-- Mobile in-flow preview -->
           <div class="mobile-project-thumb">
             <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="L'Ombre Blanche Maison" loading="lazy">
           </div>
         </article>
 
-        <!-- Project 2: Architectural Monograph -->
+        <!-- Project 2 -->
         <article class="work-item reveal-elem" 
+           data-idx="№ 02"
+           data-title="Revue d'Architecture Vol. IX"
+           data-scope="Editorial Grid, Spatial Monograph"
+           data-desc="Архитектурное периодическое издание, посвященное бруталистским формам и монолитному бетону. Жесткая асимметричная колонка с негативным пространством."
            data-preview="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85">
           <div class="work-item-row">
             <span class="work-idx">№ 02</span>
@@ -736,14 +886,17 @@
             <span class="work-scope">Editorial Grid, Spatial Monograph</span>
             <span class="work-year">2025</span>
           </div>
-          <!-- Mobile in-flow preview -->
           <div class="mobile-project-thumb">
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Revue d'Architecture" loading="lazy">
           </div>
         </article>
 
-        <!-- Project 3: Ceramic Atelier & Exhibition -->
+        <!-- Project 3 -->
         <article class="work-item reveal-elem" 
+           data-idx="№ 03"
+           data-title="Atelier Céramique Solo Show"
+           data-scope="Exhibition Scenography, Poster System"
+           data-desc="Айдентика персональной выставки скандинавской керамики: плакатная система шелкографии на крафтовом картоне и пространственная навигация."
            data-preview="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=85">
           <div class="work-item-row">
             <span class="work-idx">№ 03</span>
@@ -751,14 +904,17 @@
             <span class="work-scope">Exhibition Scenography, Poster System</span>
             <span class="work-year">2025</span>
           </div>
-          <!-- Mobile in-flow preview -->
           <div class="mobile-project-thumb">
             <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Atelier Céramique" loading="lazy">
           </div>
         </article>
 
-        <!-- Project 4: High Perfumery -->
+        <!-- Project 4 -->
         <article class="work-item reveal-elem" 
+           data-idx="№ 04"
+           data-title="Scent of Alpine Parfums"
+           data-scope="Packaging, Materiality Direction"
+           data-desc="Концепция селективного парфюма: тяжелые стеклянные флаконы с матовой алюминиевой крышкой и упаковка из неочищенной хлопковой бумаги."
            data-preview="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200&q=85">
           <div class="work-item-row">
             <span class="work-idx">№ 04</span>
@@ -766,7 +922,6 @@
             <span class="work-scope">Packaging, Materiality Direction</span>
             <span class="work-year">2024</span>
           </div>
-          <!-- Mobile in-flow preview -->
           <div class="mobile-project-thumb">
             <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80" alt="Scent of Alpine Parfums" loading="lazy">
           </div>
@@ -839,7 +994,7 @@
   </main>
 
   <!-- ==========================================================================
-       SCRIPTS: Moscow Clock, Desktop Cursor, Preview & Scroll Triggers
+       SCRIPTS: Live Clock, Web Audio Paper SFX, Curtain Modal & Parallax
        ========================================================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -864,14 +1019,78 @@
         if (progressBar) progressBar.style.width = scrolled + '%';
       }, { passive: true });
 
-      // 3. Custom Cursor & Inertial Floating Preview (Desktop only)
-      const isTouch = window.matchMedia('(hover: none)').matches;
-      if (!isTouch) {
-        const cursor = document.getElementById('cursor');
-        const previewWrap = document.getElementById('previewWrap');
-        const previewImg = document.getElementById('previewImg');
-        const workItems = document.querySelectorAll('.work-item');
+      // 3. Procedural Web Audio: Paper Rustle & Turn SFX (Enabled by default)
+      let audioCtx = null;
+      let soundEnabled = true;
 
+      function getAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playPaperRustle() {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          const bufferSize = ctx.sampleRate * 0.09;
+          const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.35));
+          }
+          const noise = ctx.createBufferSource();
+          noise.buffer = buffer;
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(1400, ctx.currentTime);
+          filter.Q.setValueAtTime(1.5, ctx.currentTime);
+
+          const gain = ctx.createGain();
+          gain.gain.setValueAtTime(0.045, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.09);
+
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(ctx.destination);
+
+          noise.start();
+        } catch (e) {}
+      }
+
+      // Unlock AudioContext on first user gesture
+      const unlockAudio = () => {
+        getAudioContext();
+        window.removeEventListener('click', unlockAudio);
+        window.removeEventListener('touchstart', unlockAudio);
+      };
+      window.addEventListener('click', unlockAudio);
+      window.addEventListener('touchstart', unlockAudio);
+
+      // SFX Toggle Button
+      const sfxBtn = document.getElementById('sfxToggle');
+      if (sfxBtn) {
+        sfxBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          soundEnabled = !soundEnabled;
+          sfxBtn.classList.toggle('active', soundEnabled);
+          sfxBtn.querySelector('span').textContent = soundEnabled ? 'SFX: ON' : 'SFX: OFF';
+          if (soundEnabled) playPaperRustle();
+        });
+      }
+
+      // 4. Custom Cursor & Inertial Floating Preview (Desktop only)
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      const cursor = document.getElementById('cursor');
+      const previewWrap = document.getElementById('previewWrap');
+      const previewImg = document.getElementById('previewImg');
+      const workItems = document.querySelectorAll('.work-item');
+
+      if (!isTouch) {
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let previewX = mouseX;
@@ -887,7 +1106,6 @@
           }
         });
 
-        // Smooth RAF Loop for Floating Image Inertia
         function renderLoop() {
           previewX += (mouseX - previewX) * 0.12;
           previewY += (mouseY - previewY) * 0.12;
@@ -901,15 +1119,13 @@
         }
         renderLoop();
 
-        // Hover Bindings on Work Items
         workItems.forEach(item => {
           item.addEventListener('mouseenter', () => {
             const imgSrc = item.getAttribute('data-preview');
-            if (previewImg && imgSrc) {
-              previewImg.src = imgSrc;
-            }
+            if (previewImg && imgSrc) previewImg.src = imgSrc;
             if (previewWrap) previewWrap.classList.add('visible');
             if (cursor) cursor.classList.add('active');
+            playPaperRustle();
           });
 
           item.addEventListener('mouseleave', () => {
@@ -919,14 +1135,64 @@
         });
       }
 
-      // 4. Hero Title Stagger Inview
+      // 5. Fullscreen Curtain Case Reveal
+      const curtain = document.getElementById('curtainOverlay');
+      const curtainClose = document.getElementById('curtainClose');
+      const curtainTitle = document.getElementById('curtainTitle');
+      const curtainScope = document.getElementById('curtainScope');
+      const curtainDesc = document.getElementById('curtainDesc');
+      const curtainImg = document.getElementById('curtainImg');
+      const curtainIdx = document.getElementById('curtainIdx');
+
+      workItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const title = item.getAttribute('data-title');
+          const scope = item.getAttribute('data-scope');
+          const desc = item.getAttribute('data-desc');
+          const img = item.getAttribute('data-preview');
+          const idx = item.getAttribute('data-idx');
+
+          if (curtainTitle) curtainTitle.textContent = title;
+          if (curtainScope) curtainScope.textContent = scope;
+          if (curtainDesc) curtainDesc.textContent = desc;
+          if (curtainImg) curtainImg.src = img;
+          if (curtainIdx) curtainIdx.textContent = idx;
+
+          if (curtain) {
+            curtain.classList.add('open');
+            curtain.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+          }
+          playPaperRustle();
+        });
+      });
+
+      if (curtainClose) {
+        curtainClose.addEventListener('click', () => {
+          if (curtain) {
+            curtain.classList.remove('open');
+            curtain.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+          }
+          playPaperRustle();
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && curtain && curtain.classList.contains('open')) {
+          curtainClose.click();
+        }
+      });
+
+      // 6. Hero Title Stagger Inview
       setTimeout(() => {
         document.querySelectorAll('.hero-title-line').forEach((line, idx) => {
           setTimeout(() => line.classList.add('is-inview'), idx * 180);
         });
       }, 150);
 
-      // 5. Intersection Observer for Smooth Reveal
+      // 7. Intersection Observer for Smooth Reveal
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {

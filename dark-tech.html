@@ -24,8 +24,9 @@
       --text-muted: #8E96AA;
       --text-dim: #545E75;
 
-      --accent-indigo: #6366F1;
-      --accent-purple: #A855F7;
+      /* Active Dynamic Theme Accent (default Indigo) */
+      --accent-primary: #6366F1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
       --accent-cyan: #00F5FF;
       --accent-emerald: #10B981;
 
@@ -39,6 +40,19 @@
       --ease-tech: cubic-bezier(0.16, 1, 0.3, 1);
       --pad-x: clamp(16px, 4vw, 72px);
       --pad-y: clamp(50px, 7vw, 120px);
+    }
+
+    /* THEME PALETTES */
+    body.theme-emerald {
+      --accent-primary: #10B981;
+      --accent-glow: rgba(16, 185, 129, 0.4);
+      --glass-border-bright: rgba(16, 185, 129, 0.45);
+    }
+
+    body.theme-crimson {
+      --accent-primary: #F43F5E;
+      --accent-glow: rgba(244, 63, 94, 0.4);
+      --glass-border-bright: rgba(244, 63, 94, 0.45);
     }
 
     *, *::before, *::after {
@@ -60,13 +74,26 @@
     body {
       overflow-x: hidden;
       position: relative;
-      background: radial-gradient(circle at 50% 0%, #111827 0%, #06080F 60%);
+      background: #06080F;
       min-height: 100vh;
+      transition: background-color 0.4s ease;
     }
 
     ::selection {
-      background: var(--accent-indigo);
+      background: var(--accent-primary);
       color: #FFFFFF;
+    }
+
+    /* Interactive Spline Wave Canvas */
+    .tech-canvas-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
     }
 
     /* Ambient Background Glow */
@@ -76,22 +103,23 @@
       filter: blur(140px);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.28;
+      opacity: 0.25;
       animation: floatGlow 14s infinite alternate ease-in-out;
     }
 
     .glow-1 {
       width: 550px;
       height: 550px;
-      background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
+      background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
       top: -120px;
       left: 15%;
+      transition: background 0.4s ease;
     }
 
     .glow-2 {
       width: 480px;
       height: 480px;
-      background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+      background: radial-gradient(circle, #A855F7 0%, transparent 70%);
       top: 45%;
       right: -80px;
       animation-delay: -5s;
@@ -100,23 +128,6 @@
     @keyframes floatGlow {
       0% { transform: translate(0, 0) scale(1); }
       100% { transform: translate(40px, -30px) scale(1.1); }
-    }
-
-    /* Subtle Cyber Grid Layer */
-    .cyber-grid-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 64px 64px;
-      pointer-events: none;
-      z-index: 0;
-      mask-image: radial-gradient(circle at 50% 40%, black 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(circle at 50% 40%, black 30%, transparent 80%);
     }
 
     /* ==========================================================================
@@ -138,13 +149,13 @@
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #FFFFFF 20%, #C7D2FE 55%, var(--accent-indigo) 100%);
+      background: linear-gradient(135deg, #FFFFFF 20%, #C7D2FE 55%, var(--accent-primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     /* ==========================================================================
-       3. TOP HUD & COMMAND LAUNCHER
+       3. TOP HUD WITH METRICS & THEME SWITCHER
        ========================================================================== */
     .top-hud {
       position: fixed;
@@ -159,12 +170,12 @@
 
     .hud-bar {
       width: 100%;
-      max-width: 1280px;
+      max-width: 1300px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
-      background: rgba(11, 15, 25, 0.82);
+      background: rgba(11, 15, 25, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
@@ -175,10 +186,9 @@
     .hud-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-weight: 700;
       font-size: 0.95rem;
-      letter-spacing: -0.01em;
     }
 
     .hud-logo-icon {
@@ -186,6 +196,58 @@
       font-family: var(--font-mono);
       font-weight: 800;
     }
+
+    /* Live Telemetry Meters */
+    .telemetry-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      border: 1px solid var(--glass-border);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    .telemetry-val {
+      color: var(--accent-emerald);
+      font-weight: 600;
+    }
+
+    /* Theme Switcher Dots */
+    .theme-dots-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 9999px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .theme-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-dot:hover {
+      transform: scale(1.2);
+    }
+
+    .theme-dot.active {
+      border-color: #FFFFFF;
+      transform: scale(1.15);
+    }
+
+    .dot-indigo { background: #6366F1; }
+    .dot-emerald { background: #10B981; }
+    .dot-crimson { background: #F43F5E; }
 
     .hud-nav {
       display: flex;
@@ -214,10 +276,9 @@
       gap: 12px;
     }
 
-    /* Command Palette Trigger Button */
     .cmd-trigger-btn {
       background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      border: 1px solid var(--accent-primary);
       color: #A5B4FC;
       padding: 6px 12px;
       border-radius: 9999px;
@@ -231,9 +292,8 @@
     }
 
     .cmd-trigger-btn:hover {
-      background: rgba(99, 102, 241, 0.25);
+      background: var(--accent-primary);
       color: #FFFFFF;
-      border-color: var(--accent-indigo);
     }
 
     .status-badge {
@@ -268,7 +328,7 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--glass-border);
       color: var(--text-muted);
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 9999px;
       font-family: var(--font-mono);
       font-size: 0.72rem;
@@ -294,9 +354,9 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(6, 8, 15, 0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(6, 8, 15, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 2000;
       display: flex;
       align-items: center;
@@ -316,9 +376,9 @@
       width: 100%;
       max-width: 560px;
       background: #0D121F;
-      border: 1px solid rgba(99, 102, 241, 0.35);
+      border: 1px solid var(--accent-primary);
       border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
       overflow: hidden;
       transform: scale(0.96);
       transition: transform 0.25s var(--ease-tech);
@@ -370,7 +430,7 @@
     }
 
     .cmd-item:hover {
-      background: rgba(99, 102, 241, 0.15);
+      background: rgba(255, 255, 255, 0.08);
       color: #FFFFFF;
     }
 
@@ -408,7 +468,7 @@
       bottom: 0;
       background: radial-gradient(
         500px circle at var(--mouse-x) var(--mouse-y),
-        rgba(99, 102, 241, 0.14),
+        var(--accent-glow),
         transparent 70%
       );
       opacity: 0;
@@ -468,9 +528,9 @@
     .hero-tag {
       font-family: var(--font-mono);
       font-size: 0.78rem;
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      color: #A5B4FC;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--accent-primary);
+      color: #FFFFFF;
       padding: 4px 12px;
       border-radius: 9999px;
     }
@@ -510,13 +570,13 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+      background: linear-gradient(135deg, var(--accent-primary) 0%, #3B82F6 100%);
       color: #FFFFFF;
-      box-shadow: 0 4px 24px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 4px 24px var(--accent-glow);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 8px 32px rgba(99, 102, 241, 0.65);
+      box-shadow: 0 8px 32px var(--accent-glow);
       transform: translateY(-2px);
     }
 
@@ -527,7 +587,7 @@
     }
 
     .btn-ghost:hover {
-      border-color: var(--accent-indigo);
+      border-color: var(--accent-primary);
       background: rgba(255, 255, 255, 0.08);
       transform: translateY(-2px);
     }
@@ -619,9 +679,9 @@
     }
 
     .filter-btn.active {
-      background: var(--accent-indigo);
+      background: var(--accent-primary);
       color: #FFFFFF;
-      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 2px 10px var(--accent-glow);
     }
 
     .works-grid {
@@ -755,7 +815,7 @@
 
     .stack-list li::before {
       content: '>';
-      color: var(--accent-indigo);
+      color: var(--accent-primary);
       font-weight: bold;
     }
 
@@ -827,7 +887,6 @@
       color: var(--accent-cyan);
     }
 
-    /* Toast Notification */
     .toast-hud {
       position: fixed;
       bottom: 24px;
@@ -852,7 +911,6 @@
       transform: translateY(0);
     }
 
-    /* Reveal Animation Class */
     .reveal-elem {
       opacity: 0;
       transform: translateY(28px);
@@ -864,14 +922,11 @@
       transform: translateY(0);
     }
 
-    /* ==========================================================================
-       7. ULTRA RESPONSIVE BREAKPOINTS (Mobile to 4K)
-       ========================================================================== */
     @media (max-width: 992px) {
       .about-grid, .works-grid, .stack-grid {
         grid-template-columns: 1fr;
       }
-      .hud-nav {
+      .hud-nav, .telemetry-group {
         display: none;
       }
     }
@@ -902,12 +957,12 @@
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 440px) {
       .hud-bar {
-        padding: 8px 14px;
+        padding: 8px 12px;
       }
       .status-badge {
-        display: none; /* Hide on smallest screens to avoid squeeze */
+        display: none;
       }
       .cmd-trigger-btn span {
         display: none;
@@ -917,9 +972,11 @@
 </head>
 <body>
 
-  <!-- Cyber Grid & Ambient Glow -->
-  <div class="cyber-grid-overlay" aria-hidden="true"></div>
-  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <!-- Interactive Canvas Spline Grid -->
+  <canvas id="splineCanvas" class="tech-canvas-bg"></canvas>
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow glow-1" id="glowOrb1" aria-hidden="true"></div>
   <div class="ambient-glow glow-2" aria-hidden="true"></div>
 
   <!-- Top Glass HUD -->
@@ -928,7 +985,22 @@
       <div class="hud-left">
         <span class="hud-logo-icon">&lt;/&gt;</span>
         <span>KAI CHEN</span>
-        <span class="mono-tag" style="color: var(--text-dim);">// v3.8</span>
+
+        <!-- Telemetry Meters -->
+        <div class="telemetry-group">
+          <span>FPS:</span>
+          <span class="telemetry-val" id="fpsDisplay">60</span>
+          <span style="opacity:0.4;">|</span>
+          <span>LAT:</span>
+          <span class="telemetry-val">&lt;14ms</span>
+        </div>
+
+        <!-- Theme Color Selector -->
+        <div class="theme-dots-wrap" title="Переключение темы интерфейса">
+          <button class="theme-dot dot-indigo active" data-theme="indigo" title="Cyber Indigo"></button>
+          <button class="theme-dot dot-emerald" data-theme="emerald" title="Matrix Emerald"></button>
+          <button class="theme-dot dot-crimson" data-theme="crimson" title="Crimson Core"></button>
+        </div>
       </div>
 
       <nav class="hud-nav">
@@ -950,7 +1022,7 @@
           <kbd class="cmd-key-hint">⌘K</kbd>
         </button>
 
-        <!-- Sound Toggle -->
+        <!-- Sound Toggle (Active by default) -->
         <button class="sound-toggle-btn active" id="soundToggle" title="Звуковой отклик интерфейса">
           <span>SFX</span>
           <span id="soundStatus">ON</span>
@@ -963,7 +1035,7 @@
   <div class="cmd-modal-backdrop" id="cmdModal" aria-hidden="true">
     <div class="cmd-window">
       <div class="cmd-header">
-        <input type="text" id="cmdSearch" class="cmd-search-input" placeholder="Введите команду или нажмите клавишу..." autocomplete="off">
+        <input type="text" id="cmdSearch" class="cmd-search-input" placeholder="Введите команду или нажмите цифру..." autocomplete="off">
         <kbd class="cmd-key-hint">ESC</kbd>
       </div>
       <div class="cmd-list">
@@ -983,6 +1055,10 @@
           <span>04. Связаться с Kai Chen</span>
           <kbd class="cmd-key-hint">4</kbd>
         </button>
+        <button class="cmd-item" data-action="theme" data-theme="emerald">
+          <span>🟢 Переключить тему: Matrix Emerald</span>
+          <kbd class="cmd-key-hint">T</kbd>
+        </button>
         <button class="cmd-item" data-action="copy-email">
           <span>📋 Скопировать email в буфер</span>
           <kbd class="cmd-key-hint">C</kbd>
@@ -1001,7 +1077,7 @@
     <section class="hero-section">
       <div class="hero-eyebrow reveal-elem">
         <span class="hero-tag">COMPUTATIONAL DESIGN &amp; AI INTERFACES</span>
-        <span class="mono-tag">LATENCY &lt; 16MS</span>
+        <span class="mono-tag">LATENCY &lt; 14MS</span>
       </div>
 
       <h1 class="display-title hero-title reveal-elem">
@@ -1253,7 +1329,7 @@
   <div class="toast-hud" id="hudToast">EMAIL COPIED TO CLIPBOARD</div>
 
   <!-- ==========================================================================
-       SCRIPTS: Spotlight, Sound, Command Palette, Filter & MSK Clock
+       SCRIPTS: Spline Wave Grid, FPS Meter, Theme Switcher & Audio
        ========================================================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -1267,36 +1343,111 @@
       setInterval(updateMsk, 1000);
       updateMsk();
 
-      // 2. Web Audio API Haptic Synthesizer
+      // 2. Real-time FPS Telemetry Counter
+      const fpsDisplay = document.getElementById('fpsDisplay');
+      let frameCount = 0;
+      let lastFpsTime = performance.now();
+
+      function updateFps() {
+        frameCount++;
+        const now = performance.now();
+        if (now - lastFpsTime >= 1000) {
+          const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+          if (fpsDisplay) fpsDisplay.textContent = Math.min(fps, 120);
+          frameCount = 0;
+          lastFpsTime = now;
+        }
+        requestAnimationFrame(updateFps);
+      }
+      requestAnimationFrame(updateFps);
+
+      // 3. Interactive Procedural Spline Wave Grid
+      const canvas = document.getElementById('splineCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        let mouseX = width / 2;
+        let mouseY = height / 2;
+
+        window.addEventListener('resize', () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = window.innerHeight;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+
+        let phase = 0;
+        function drawSplines() {
+          ctx.clearRect(0, 0, width, height);
+          phase += 0.02;
+
+          const lines = 7;
+          for (let i = 0; i < lines; i++) {
+            ctx.beginPath();
+            const yOffset = height * (0.3 + i * 0.08);
+            ctx.moveTo(0, yOffset);
+
+            for (let x = 0; x < width; x += 25) {
+              const distToMouse = Math.hypot(x - mouseX, yOffset - mouseY);
+              const mouseDeform = Math.max(0, 1 - distToMouse / 300) * 45;
+              const y = yOffset + Math.sin(x * 0.005 + phase + i * 0.6) * 35 + mouseDeform;
+              ctx.lineTo(x, y);
+            }
+
+            const alpha = 0.12 - i * 0.012;
+            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+
+          requestAnimationFrame(drawSplines);
+        }
+        drawSplines();
+      }
+
+      // 4. Web Audio API Haptic Synthesizer (Enabled by default)
       let audioCtx = null;
       let soundEnabled = true;
+
+      function getAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
 
       function playHapticTick(freq = 600, duration = 0.035) {
         if (!soundEnabled) return;
         try {
-          if (!audioCtx) {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-          }
-          if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-          }
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
+          const ctx = getAudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
 
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + duration);
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + duration);
 
-          gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+          gain.gain.setValueAtTime(0.04, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
 
           osc.connect(gain);
-          gain.connect(audioCtx.destination);
+          gain.connect(ctx.destination);
 
           osc.start();
-          osc.stop(audioCtx.currentTime + duration);
+          osc.stop(ctx.currentTime + duration);
         } catch (err) {}
       }
+
+      // Unlock on first gesture
+      const unlock = () => { getAudioContext(); window.removeEventListener('click', unlock); };
+      window.addEventListener('click', unlock);
 
       // Sound Toggle Button
       const soundBtn = document.getElementById('soundToggle');
@@ -1312,13 +1463,36 @@
 
       if (soundBtn) soundBtn.addEventListener('click', toggleSound);
 
-      // Trigger tick on interactive elements
+      // Interactive ticks
       document.querySelectorAll('.sound-trigger, .btn, .spotlight-card').forEach(el => {
         el.addEventListener('mouseenter', () => playHapticTick(720, 0.025));
         el.addEventListener('click', () => playHapticTick(940, 0.04));
       });
 
-      // 3. Spotlight Coordinates Tracker (Desktop)
+      // 5. Theme Palette Switcher
+      const themeDots = document.querySelectorAll('.theme-dot');
+      function setTheme(themeName) {
+        document.body.classList.remove('theme-emerald', 'theme-crimson');
+        if (themeName !== 'indigo') {
+          document.body.classList.add(`theme-${themeName}`);
+        }
+
+        themeDots.forEach(d => {
+          d.classList.toggle('active', d.getAttribute('data-theme') === themeName);
+        });
+
+        playHapticTick(1020, 0.05);
+        showToast(`THEME APPLIED: ${themeName.toUpperCase()}`);
+      }
+
+      themeDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const theme = dot.getAttribute('data-theme');
+          setTheme(theme);
+        });
+      });
+
+      // 6. Spotlight Coordinates Tracker
       const spotlightCards = document.querySelectorAll('.spotlight-card');
       const isTouch = window.matchMedia('(hover: none)').matches;
 
@@ -1334,7 +1508,7 @@
         });
       }
 
-      // 4. Command Palette (CMD + K)
+      // 7. Command Palette (CMD + K)
       const cmdModal = document.getElementById('cmdModal');
       const cmdOpenBtn = document.getElementById('cmdOpenBtn');
       const cmdSearch = document.getElementById('cmdSearch');
@@ -1343,10 +1517,7 @@
         if (!cmdModal) return;
         cmdModal.classList.add('open');
         cmdModal.setAttribute('aria-hidden', 'false');
-        if (cmdSearch) {
-          cmdSearch.value = '';
-          cmdSearch.focus();
-        }
+        if (cmdSearch) { cmdSearch.value = ''; cmdSearch.focus(); }
         playHapticTick(840, 0.04);
       }
 
@@ -1358,7 +1529,6 @@
       }
 
       if (cmdOpenBtn) cmdOpenBtn.addEventListener('click', openCmd);
-
       if (cmdModal) {
         cmdModal.addEventListener('click', (e) => {
           if (e.target === cmdModal) closeCmd();
@@ -1368,31 +1538,30 @@
       window.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
           e.preventDefault();
-          if (cmdModal && cmdModal.classList.contains('open')) {
-            closeCmd();
-          } else {
-            openCmd();
-          }
+          if (cmdModal && cmdModal.classList.contains('open')) closeCmd();
+          else openCmd();
         } else if (e.key === 'Escape' && cmdModal && cmdModal.classList.contains('open')) {
           closeCmd();
         } else if (cmdModal && cmdModal.classList.contains('open')) {
-          // Hotkeys 1..4, C, M
           if (e.key === '1') { document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); closeCmd(); }
           if (e.key === '2') { document.querySelector('#works')?.scrollIntoView({ behavior: 'smooth' }); closeCmd(); }
           if (e.key === '3') { document.querySelector('#stack')?.scrollIntoView({ behavior: 'smooth' }); closeCmd(); }
           if (e.key === '4') { document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }); closeCmd(); }
+          if (e.key.toLowerCase() === 't') { setTheme(document.body.classList.contains('theme-emerald') ? 'crimson' : 'emerald'); closeCmd(); }
           if (e.key.toLowerCase() === 'c') { copyEmail(); closeCmd(); }
           if (e.key.toLowerCase() === 'm') { toggleSound(); closeCmd(); }
         }
       });
 
-      // Command Palette Actions
       document.querySelectorAll('.cmd-item').forEach(item => {
         item.addEventListener('click', () => {
           const action = item.getAttribute('data-action');
           if (action === 'nav') {
             const target = item.getAttribute('data-target');
             document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+            closeCmd();
+          } else if (action === 'theme') {
+            setTheme(item.getAttribute('data-theme'));
             closeCmd();
           } else if (action === 'copy-email') {
             copyEmail();
@@ -1404,7 +1573,7 @@
         });
       });
 
-      // 5. Filter Tabs for Works
+      // 8. Filter Tabs
       const filterBtns = document.querySelectorAll('.filter-btn');
       const workCards = document.querySelectorAll('.work-card');
 
@@ -1424,7 +1593,7 @@
         });
       });
 
-      // 6. Copy Email & Toast System
+      // 9. Toast System
       const toast = document.getElementById('hudToast');
       function showToast(text) {
         if (!toast) return;
@@ -1448,12 +1617,10 @@
       const copyBtn = document.getElementById('copyMailBtn');
       if (copyBtn) copyBtn.addEventListener('click', copyEmail);
 
-      // 7. Scroll Reveal Observer
+      // 10. Scroll Reveal
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
         });
       }, { threshold: 0.12 });
 
